@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-21",
+  "slug": "sales-per-labor-hour",
+  "hook": "How much does one labor hour sell?",
+  "result": {
+    "label": "Sales per labor hour",
+    "value": "$63.08"
+  },
+  "thumbOffsetMs": 12500,
+  "durationSec": 22.417,
+  "frames": 538,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "resultSize": 210,
+    "scale": 1,
+    "contentBottom": 1519,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-17T00:41:53.682Z",
+  "chromium": "141.0.7390.37"
+}

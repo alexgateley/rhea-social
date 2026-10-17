@@ -1,0 +1,104 @@
+name: Post Owner math
+
+on:
+  schedule:
+    # 7:00 AM America/Los_Angeles is 14:00 UTC in summer (PDT) and 15:00 UTC in winter (PST), so
+    # both are scheduled and the script itself posts only at or after 7 AM Pacific; 16:07 UTC is a
+    # retry. GitHub runs these hours late or not at all on a quiet repo, so a launch agent on Alex's
+    # Mac also kicks the workflow at 7:05 and 9:05 AM Pacific (see README). The marker in published/
+    # stops the later runs from posting again. Weekdays only (1-5): Owner math does not post on
+    # weekends.
+    - cron: '7 14 * * 1-5'
+    - cron: '7 15 * * 1-5'
+    - cron: '7 16 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      date:
+        description: 'Post a specific date (YYYY-MM-DD) now, skipping the 7 AM and weekday checks'
+        required: false
+      dry_run:
+        description: 'Only log what would be posted'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: post-owner-math
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # One account per repository: IG_ACCESS_TOKEN and IG_USER_ID are @RunonRhea's. Until they are
+      # stored (scripts/setup-secrets.sh) the job skips with a notice instead of failing.
+      - name: Check the account's credentials
+        id: creds
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+        run: |
+          if [ -z "$IG_ACCESS_TOKEN" ] || [ -z "$IG_USER_ID" ]; then
+            echo "::notice::No Instagram credentials stored yet (run sh scripts/setup-secrets.sh); skipping"
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check API access (dry run only)
+        if: inputs.dry_run && steps.creds.outputs.ready == 'true'
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+        run: node scripts/publish.mjs check
+
+      # PAGES_BASE_URL, the time zone and the posting hour come from brand.json
+      - name: Publish today's Reel
+        if: steps.creds.outputs.ready == 'true'
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          POST_DATE: ${{ inputs.date }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: node scripts/publish.mjs
+
+      # Runs even when the post failed partway: a marker already written must be saved or the next
+      # run would post the day again
+      - name: Record what was posted
+        if: always() && steps.creds.outputs.ready == 'true'
+        run: |
+          git config user.name "rhea-social-bot"
+          git config user.email "rhea-social-bot@users.noreply.github.com"
+          git add published 2>/dev/null || true
+          git commit -m "Posted $(date -u +%F)" || { echo "Nothing new to record"; exit 0; }
+          for i in 1 2 3 4 5; do
+            git pull --rebase -q origin main && git push -q && exit 0
+            sleep $((i * 5))
+          done
+          echo "::error::Could not push the marker after 5 attempts"; exit 1
+
+      # Long-lived tokens last 60 days. Refresh weekly (Mondays, the first scheduled run of the
+      # week) and store the new one, which needs a fine-grained personal access token (GH_PAT) with
+      # "Secrets: write" on this repo.
+      - name: Refresh the Instagram token (Mondays)
+        if: github.event_name == 'schedule' && steps.creds.outputs.ready == 'true'
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          if [ "$(date -u +%u)" != "1" ]; then echo "Not Monday; skipping refresh"; exit 0; fi
+          node scripts/publish.mjs refresh
+          if [ -s new-token.txt ] && [ -n "$GH_TOKEN" ]; then
+            gh secret set IG_ACCESS_TOKEN --repo "$GITHUB_REPOSITORY" < new-token.txt
+            echo "Stored the refreshed token"
+          elif [ -s new-token.txt ]; then
+            echo "::warning::Token refreshed but GH_PAT is not set, so it could not be stored. Add GH_PAT or regenerate the token before it expires."
+          fi
+          rm -f new-token.txt

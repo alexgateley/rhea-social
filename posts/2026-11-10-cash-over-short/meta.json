@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-10",
+  "slug": "cash-over-short",
+  "hook": "Short $75.60 a month: normal or a problem?",
+  "result": {
+    "label": "A month of ordinary over/short",
+    "value": "$75.60"
+  },
+  "thumbOffsetMs": 12500,
+  "durationSec": 22.417,
+  "frames": 538,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "resultSize": 210,
+    "scale": 1,
+    "contentBottom": 1578,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-17T01:03:47.293Z",
+  "chromium": "141.0.7390.37"
+}

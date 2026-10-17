@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-20",
+  "slug": "loaded-labor",
+  "hook": "Your labor number is missing 7.65%.",
+  "result": {
+    "label": "Fully loaded labor %",
+    "value": "31.5%"
+  },
+  "thumbOffsetMs": 14100,
+  "durationSec": 24,
+  "frames": 576,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "resultSize": 210,
+    "scale": 1,
+    "contentBottom": 1687,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-17T00:40:55.391Z",
+  "chromium": "141.0.7390.37"
+}

@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-19",
+  "slug": "labor-percent",
+  "hook": "Is 29.3% labor good or bad?",
+  "result": {
+    "label": "Labor % this week",
+    "value": "29.3%"
+  },
+  "thumbOffsetMs": 12500,
+  "durationSec": 22.417,
+  "frames": 538,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "resultSize": 210,
+    "scale": 1,
+    "contentBottom": 1519,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-17T00:39:48.404Z",
+  "chromium": "141.0.7390.37"
+}

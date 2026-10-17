@@ -1,0 +1,733 @@
+{
+  "month": "2026-10",
+  "notes": "Owner math, first run: Friday 2026-10-16 (posted on demand the day the pipeline went live), then every weekday from 2026-10-19 to 2026-11-12. Themes in order: labor (one labor point, labor %, loaded labor, SPLH, overtime), cost structure (food cost vs COGS, prime cost, rent, royalty, break-even), money that is not yours (sales tax, tips, gift cards, card fees, blended rate), cash and profit (in transit, missing deposit, over/short, ticket × transactions, four-wall profit). Every number is arithmetic on the inputs listed with the post and is recomputed by scripts/verify.mjs; rules of thumb are labeled as such.",
+  "posts": [
+    {
+      "date": "2026-10-16",
+      "slug": "one-labor-point",
+      "hook": "What is one labor point actually worth?",
+      "term": "One labor point",
+      "formula": "1% × annual net sales",
+      "inputs": {
+        "Annual net sales": "$1,600,000",
+        "One point": "1%",
+        "Average wage": "$20 an hour",
+        "Stores": "10",
+        "Days in a year": "365"
+      },
+      "steps": [
+        {
+          "label": "Annual net sales",
+          "value": "$1,600,000"
+        },
+        {
+          "label": "One labor point",
+          "value": "1% of sales"
+        },
+        {
+          "label": "Per day: 1% × $1,600,000 ÷ 365",
+          "value": "$43.84"
+        },
+        {
+          "label": "At $20 an hour",
+          "value": "2.2 hours a day"
+        }
+      ],
+      "result": {
+        "label": "One labor point, per store, per year",
+        "value": "$16,000"
+      },
+      "takeaway": "Across 10 stores: $160,000 a year. Two scheduled hours a day per store is the whole point.",
+      "caption": "1% of $1,600,000 = $16,000 a year per store.\nThat is $43.84 a day, or 2.2 hours at $20 an hour.\nAcross 10 stores, one labor point is $160,000.",
+      "hashtags": ["#laborcost", "#ownermath", "#multiunit", "#franchiseowner", "#restaurantowner", "#restaurantmath", "#smallbusinessfinance"],
+      "thumbOffsetMs": 14100
+    },
+    {
+      "date": "2026-10-19",
+      "slug": "labor-percent",
+      "hook": "Is 29.3% labor good or bad?",
+      "term": "Labor %",
+      "formula": "Wages ÷ net sales",
+      "inputs": {
+        "Wages this week": "$9,610",
+        "Net sales this week": "$32,800"
+      },
+      "steps": [
+        {
+          "label": "Wages this week",
+          "value": "$9,610"
+        },
+        {
+          "label": "Net sales this week, not gross",
+          "value": "$32,800"
+        },
+        {
+          "label": "$9,610 ÷ $32,800",
+          "value": "0.293"
+        }
+      ],
+      "result": {
+        "label": "Labor % this week",
+        "value": "29.3%"
+      },
+      "takeaway": "Track it weekly per store on net sales; here one point is $328 a week.",
+      "caption": "Wages $9,610 ÷ net sales $32,800 = 29.3% labor.\nOne labor point at this store is $328 a week.\nNet sales, not gross, is the bottom of the fraction.",
+      "hashtags": ["#laborcost", "#ownermath", "#restaurantmath", "#franchiseowner", "#multiunit", "#coffeeshopowner", "#salonowner"],
+      "thumbOffsetMs": 12500
+    },
+    {
+      "date": "2026-10-20",
+      "slug": "loaded-labor",
+      "hook": "Your labor number is missing 7.65%.",
+      "term": "Fully loaded labor %",
+      "formula": "(Wages + employer payroll tax) ÷ net sales",
+      "inputs": {
+        "Wages this week": "$9,600",
+        "Employer payroll tax": "7.65%",
+        "Net sales this week": "$32,800"
+      },
+      "steps": [
+        {
+          "label": "Wages this week",
+          "value": "$9,600"
+        },
+        {
+          "label": "Employer payroll tax, 7.65%",
+          "value": "$734.40"
+        },
+        {
+          "label": "Fully loaded labor",
+          "value": "$10,334.40"
+        },
+        {
+          "label": "Labor % on wages alone",
+          "value": "29.3%"
+        }
+      ],
+      "result": {
+        "label": "Fully loaded labor %",
+        "value": "31.5%"
+      },
+      "takeaway": "Compare targets on loaded labor: the 7.65% is Social Security and Medicare; benefits add more.",
+      "caption": "Wages $9,600 + 7.65% employer payroll tax = $10,334.40.\nOn $32,800 of net sales that is 31.5% labor, not 29.3%.\nBenefits and workers' comp come on top.",
+      "hashtags": ["#laborcost", "#ownermath", "#bookkeeping", "#restaurantowner", "#franchiseowner", "#multiunit", "#smallbusinessfinance"],
+      "thumbOffsetMs": 14100
+    },
+    {
+      "date": "2026-10-21",
+      "slug": "sales-per-labor-hour",
+      "hook": "How much does one labor hour sell?",
+      "term": "Sales per labor hour (SPLH)",
+      "formula": "Net sales ÷ hours worked",
+      "inputs": {
+        "Net sales this week": "$32,800",
+        "Hours worked this week": "520 h",
+        "Wages this week": "$9,600"
+      },
+      "steps": [
+        {
+          "label": "Net sales this week",
+          "value": "$32,800"
+        },
+        {
+          "label": "Hours worked this week",
+          "value": "520 h"
+        },
+        {
+          "label": "Average wage: $9,600 ÷ 520 h",
+          "value": "$18.46"
+        }
+      ],
+      "result": {
+        "label": "Sales per labor hour",
+        "value": "$63.08"
+      },
+      "takeaway": "Labor % is wage ÷ SPLH: $18.46 ÷ $63.08 = 29.3%. Schedule to an SPLH floor.",
+      "caption": "$32,800 of net sales ÷ 520 hours worked = $63.08 per labor hour.\nAverage wage $18.46 ÷ $63.08 = 29.3% labor.\nSPLH compares stores fairly even when wages differ.",
+      "hashtags": ["#laborcost", "#ownermath", "#restaurantmath", "#multiunit", "#franchiseowner", "#coffeeshopowner"],
+      "thumbOffsetMs": 12500
+    },
+    {
+      "date": "2026-10-22",
+      "slug": "overtime-week",
+      "hook": "Ten overtime hours. $322.95. Here's the math.",
+      "term": "Overtime premium",
+      "formula": "Hours × wage × 1.5, plus employer payroll tax",
+      "inputs": {
+        "Hourly wage": "$20",
+        "Overtime hours this week": "10 h",
+        "Overtime rate": "1.5×",
+        "Employer payroll tax": "7.65%",
+        "Weeks in a year": "52"
+      },
+      "steps": [
+        {
+          "label": "Overtime pay: 10 h × $20 × 1.5",
+          "value": "$300.00"
+        },
+        {
+          "label": "Same 10 hours at straight time",
+          "value": "$200.00"
+        },
+        {
+          "label": "Premium before tax",
+          "value": "$100.00"
+        },
+        {
+          "label": "Premium with 7.65% employer tax",
+          "value": "$107.65"
+        }
+      ],
+      "result": {
+        "label": "What those 10 hours cost, fully loaded",
+        "value": "$322.95"
+      },
+      "takeaway": "The premium alone is $5,597.80 a year if it repeats weekly. Flag anyone past 32 hours by Thursday.",
+      "caption": "10 overtime hours × $20 × 1.5 = $300, or $322.95 with 7.65% employer tax.\nThe same hours at straight time cost $215.30. The premium is $107.65 a week.\nEvery week for a year: $5,597.80 from one person.",
+      "hashtags": ["#laborcost", "#ownermath", "#restaurantowner", "#coffeeshopowner", "#salonowner", "#multiunit", "#franchiseowner"],
+      "thumbOffsetMs": 14100
+    },
+    {
+      "date": "2026-10-23",
+      "slug": "food-cost-vs-cogs",
+      "hook": "Food cost 28%? Your COGS is 31.5%.",
+      "term": "COGS % vs food cost %",
+      "formula": "(Food + paper and packaging) ÷ net sales",
+      "inputs": {
+        "Net sales this month": "$140,000",
+        "Food used": "$39,200",
+        "Paper and packaging used": "$4,900"
+      },
+      "steps": [
+        {
+          "label": "Food cost: $39,200 ÷ $140,000",
+          "value": "28.0%"
+        },
+        {
+          "label": "Paper and packaging: $4,900",
+          "value": "3.5%"
+        },
+        {
+          "label": "COGS = food + paper",
+          "value": "$44,100"
+        }
+      ],
+      "result": {
+        "label": "COGS %, the number to price on",
+        "value": "31.5%"
+      },
+      "takeaway": "Price and target on COGS, not food cost: 3.5 points is $4,900 a month in cups and bags.",
+      "caption": "Food $39,200 ÷ net sales $140,000 = 28.0% food cost.\nAdd $4,900 of paper and packaging: COGS is $44,100, or 31.5%.\nPrice and set targets on COGS.",
+      "hashtags": ["#primecost", "#ownermath", "#restaurantmath", "#restaurantowner", "#coffeeshopowner", "#franchiseowner", "#multiunit"],
+      "thumbOffsetMs": 12500
+    },
+    {
+      "date": "2026-10-26",
+      "slug": "prime-cost",
+      "hook": "63.5¢ of every dollar is gone before rent.",
+      "term": "Prime cost",
+      "formula": "(COGS + fully loaded labor) ÷ net sales",
+      "inputs": {
+        "Net sales this month": "$140,000",
+        "COGS": "$44,100",
+        "Fully loaded labor": "$44,800",
+        "Rule of thumb": "60%"
+      },
+      "steps": [
+        {
+          "label": "COGS: $44,100 ÷ $140,000",
+          "value": "31.5%"
+        },
+        {
+          "label": "Loaded labor: $44,800 ÷ $140,000",
+          "value": "32.0%"
+        },
+        {
+          "label": "Prime cost = COGS + labor",
+          "value": "$88,900"
+        }
+      ],
+      "result": {
+        "label": "Prime cost %",
+        "value": "63.5%"
+      },
+      "takeaway": "Rule of thumb: prime cost under 60%. These 3.5 points are $4,900 a month, every month.",
+      "caption": "COGS $44,100 + fully loaded labor $44,800 = $88,900 prime cost.\nOn $140,000 of net sales that is 63.5%.\nRule of thumb: keep it under 60%. The gap here is $4,900 a month.",
+      "hashtags": ["#primecost", "#ownermath", "#restaurantmath", "#restaurantowner", "#franchiseowner", "#multiunit", "#laborcost", "#smallbusinessfinance"],
+      "thumbOffsetMs": 12500
+    },
+    {
+      "date": "2026-10-27",
+      "slug": "rent-percent",
+      "hook": "Rent is fixed. Rent % isn't.",
+      "term": "Occupancy %",
+      "formula": "Rent, including CAM ÷ net sales",
+      "inputs": {
+        "Monthly rent with CAM": "$11,900",
+        "Net sales this month": "$140,000",
+        "A slower month": "$100,000",
+        "Rule of thumb": "10%"
+      },
+      "steps": [
+        {
+          "label": "Monthly rent with CAM",
+          "value": "$11,900"
+        },
+        {
+          "label": "Net sales this month",
+          "value": "$140,000"
+        },
+        {
+          "label": "Same rent on a $100,000 month",
+          "value": "11.9%"
+        },
+        {
+          "label": "Sales where rent hits 10%",
+          "value": "$119,000"
+        }
+      ],
+      "result": {
+        "label": "Occupancy % this month",
+        "value": "8.5%"
+      },
+      "takeaway": "Rule of thumb: occupancy under 10% of sales. Below $119,000 a month this lease breaks it.",
+      "caption": "Rent and CAM $11,900 ÷ net sales $140,000 = 8.5%.\nThe same rent on a $100,000 month is 11.9%.\nRule of thumb: keep occupancy under 10%. That line sits at $119,000 a month here.",
+      "hashtags": ["#ownermath", "#restaurantmath", "#smallbusinessfinance", "#restaurantowner", "#coffeeshopowner", "#salonowner", "#franchiseowner"],
+      "thumbOffsetMs": 14100
+    },
+    {
+      "date": "2026-10-28",
+      "slug": "royalty-ad-fund",
+      "hook": "8% off the top is $115,200 a year.",
+      "term": "Royalty and ad fund",
+      "formula": "(Royalty % + ad fund %) × sales",
+      "inputs": {
+        "Sales this month": "$120,000",
+        "Royalty": "6%",
+        "Ad fund": "2%",
+        "Days in the month": "30"
+      },
+      "steps": [
+        {
+          "label": "Royalty: 6% × $120,000",
+          "value": "$7,200"
+        },
+        {
+          "label": "Ad fund: 2% × $120,000",
+          "value": "$2,400"
+        },
+        {
+          "label": "Per day (÷ 30)",
+          "value": "$320"
+        },
+        {
+          "label": "Twelve months like this",
+          "value": "$115,200"
+        }
+      ],
+      "result": {
+        "label": "To the franchisor this month",
+        "value": "$9,600"
+      },
+      "takeaway": "Fees are figured on sales before any cost. Budget labor and COGS on the 92% you keep.",
+      "caption": "6% royalty + 2% ad fund on a $120,000 month = $9,600.\nThat is $320 a day, and $115,200 over twelve months like this.\nFranchise fees come off sales before any cost.",
+      "hashtags": ["#franchiseowner", "#multiunit", "#ownermath", "#restaurantmath", "#smallbusinessfinance", "#bookkeeping"],
+      "thumbOffsetMs": 14100
+    },
+    {
+      "date": "2026-10-29",
+      "slug": "break-even",
+      "hook": "Your store starts earning on the 22nd.",
+      "term": "Break-even per day",
+      "formula": "Fixed costs ÷ contribution margin ÷ days",
+      "inputs": {
+        "Fixed costs per month": "$38,500",
+        "Variable costs": "62% of sales",
+        "Sales this month": "$140,000",
+        "Days in the month": "30"
+      },
+      "steps": [
+        {
+          "label": "Contribution margin: 100% − 62%",
+          "value": "38.0%"
+        },
+        {
+          "label": "Break-even month: $38,500 ÷ 0.38",
+          "value": "$101,316"
+        },
+        {
+          "label": "An average day: $140,000 ÷ 30",
+          "value": "$4,667"
+        },
+        {
+          "label": "Break-even day: $101,316 ÷ $4,667",
+          "value": "day 22"
+        }
+      ],
+      "result": {
+        "label": "Break-even sales per day",
+        "value": "$3,377"
+      },
+      "takeaway": "Know each store's break-even day. After it, 38¢ of every dollar is profit.",
+      "caption": "Fixed costs $38,500 ÷ 38% contribution margin = $101,316 a month to break even.\nThat is $3,377 a day. At $4,667 a day, the store breaks even on day 22.\nAfter that, 38¢ of every sales dollar is profit.",
+      "hashtags": ["#ownermath", "#restaurantmath", "#smallbusinessfinance", "#restaurantowner", "#coffeeshopowner", "#salonowner", "#franchiseowner", "#multiunit"],
+      "thumbOffsetMs": 14100
+    },
+    {
+      "date": "2026-10-30",
+      "slug": "sales-tax-not-revenue",
+      "hook": "$8,250 of your deposits aren't yours.",
+      "term": "Sales tax payable",
+      "formula": "Register totals ÷ (1 + tax rate) = net sales",
+      "inputs": {
+        "Register totals this month": "$108,250",
+        "Sales tax rate": "8.25%",
+        "Days in the month": "30"
+      },
+      "steps": [
+        {
+          "label": "Register totals this month",
+          "value": "$108,250"
+        },
+        {
+          "label": "Net sales: $108,250 ÷ 1.0825",
+          "value": "$100,000"
+        },
+        {
+          "label": "Owed to the state per day (÷ 30)",
+          "value": "$275"
+        }
+      ],
+      "result": {
+        "label": "Sales tax collected: not revenue",
+        "value": "$8,250"
+      },
+      "takeaway": "Book tax to a liability the day it's collected; the deposit looks 8.25% bigger than your sales.",
+      "caption": "$108,250 rang through the registers at 8.25% tax.\nNet sales are $100,000; the other $8,250 belongs to the state.\nBook it as a liability on the day, not as sales.",
+      "hashtags": ["#bookkeeping", "#ownermath", "#smallbusinessfinance", "#restaurantowner", "#coffeeshopowner", "#salonowner", "#franchiseowner"],
+      "thumbOffsetMs": 12500
+    },
+    {
+      "date": "2026-11-02",
+      "slug": "tips-not-sales",
+      "hook": "A $9,000 tip month costs you $922.50.",
+      "term": "Tips payable",
+      "formula": "Tips in = tips out; only tax and fees are yours",
+      "inputs": {
+        "Card tips this month": "$9,000",
+        "Net sales this month": "$140,000",
+        "Employer payroll tax on tips": "7.65%",
+        "Card fee": "2.6%"
+      },
+      "steps": [
+        {
+          "label": "Tips collected on cards",
+          "value": "$9,000"
+        },
+        {
+          "label": "As sales they'd overstate sales by",
+          "value": "6.4%"
+        },
+        {
+          "label": "Employer payroll tax on tips: 7.65%",
+          "value": "$688.50"
+        },
+        {
+          "label": "Card fee on the tips: 2.6%",
+          "value": "$234.00"
+        }
+      ],
+      "result": {
+        "label": "Your cost to pass $9,000 through",
+        "value": "$922.50"
+      },
+      "takeaway": "Tips go to a payable account the day they're collected; only the taxes and fees hit your P&L.",
+      "caption": "$9,000 in card tips is $0 of revenue: it is owed to the team.\nWhat it costs you: 7.65% employer tax ($688.50) and the 2.6% card fee ($234.00).\nThat is $922.50 to pass $9,000 through.",
+      "hashtags": ["#bookkeeping", "#ownermath", "#laborcost", "#restaurantowner", "#coffeeshopowner", "#salonowner", "#multiunit"],
+      "thumbOffsetMs": 14100
+    },
+    {
+      "date": "2026-11-03",
+      "slug": "gift-card-liability",
+      "hook": "$14,000 of gift cards sold isn't sales.",
+      "term": "Gift card liability",
+      "formula": "Sold − redeemed = owed to customers",
+      "inputs": {
+        "Gift cards sold in December": "$14,000",
+        "Redeemed in December": "$3,100",
+        "Redeemed in January": "$6,200",
+        "Opening balance": "$0"
+      },
+      "steps": [
+        {
+          "label": "Sold in December: not sales yet",
+          "value": "$14,000"
+        },
+        {
+          "label": "Redeemed in December: this is sales",
+          "value": "$3,100"
+        },
+        {
+          "label": "Redeemed in January: sales then",
+          "value": "$6,200"
+        }
+      ],
+      "result": {
+        "label": "Owed to customers on December 31",
+        "value": "$10,900"
+      },
+      "takeaway": "Still owed after January: $4,700. December looks rich and January poor unless the liability is booked.",
+      "caption": "$14,000 of gift cards sold in December, $3,100 redeemed.\nOn December 31 you owe customers $10,900; after January's $6,200, still $4,700.\nSales happen when the card is used, not when it is sold.",
+      "hashtags": ["#bookkeeping", "#ownermath", "#smallbusinessfinance", "#coffeeshopowner", "#salonowner", "#restaurantowner", "#franchiseowner"],
+      "thumbOffsetMs": 12500
+    },
+    {
+      "date": "2026-11-04",
+      "slug": "card-fees",
+      "hook": "Your 2.6% card rate is really 3.1%.",
+      "term": "Effective card rate",
+      "formula": "(Rate × card sales + fee × transactions) ÷ card sales",
+      "inputs": {
+        "Card sales this month": "$40,000",
+        "Percentage rate": "2.6%",
+        "Per-transaction fee": "10¢",
+        "Card transactions": "1,900"
+      },
+      "steps": [
+        {
+          "label": "2.6% × $40,000",
+          "value": "$1,040"
+        },
+        {
+          "label": "10¢ × 1,900 transactions",
+          "value": "$190"
+        },
+        {
+          "label": "Total fees this month",
+          "value": "$1,230"
+        },
+        {
+          "label": "Average ticket: $40,000 ÷ 1,900",
+          "value": "$21.05"
+        }
+      ],
+      "result": {
+        "label": "Effective card rate",
+        "value": "3.1%"
+      },
+      "takeaway": "Small tickets make the 10¢ matter: check the effective rate on the statement, not the quoted one.",
+      "caption": "2.6% of $40,000 = $1,040, plus 10¢ × 1,900 transactions = $190.\n$1,230 in fees on $40,000 is an effective rate of 3.1%.\nAt a $21.05 average ticket, the dime is 15.4% of the fee.",
+      "hashtags": ["#ownermath", "#restaurantmath", "#smallbusinessfinance", "#coffeeshopowner", "#restaurantowner", "#salonowner", "#bookkeeping"],
+      "thumbOffsetMs": 14100
+    },
+    {
+      "date": "2026-11-05",
+      "slug": "blended-card-rate",
+      "hook": "0.6% sounds small. It's $43,200.",
+      "term": "Blended card rate",
+      "formula": "(Rate A − rate B) × card sales",
+      "inputs": {
+        "Card sales per store per year": "$600,000",
+        "Current blended rate": "2.9%",
+        "Negotiated rate": "2.3%",
+        "Stores": "12"
+      },
+      "steps": [
+        {
+          "label": "2.9% × $600,000",
+          "value": "$17,400"
+        },
+        {
+          "label": "2.3% × $600,000",
+          "value": "$13,800"
+        },
+        {
+          "label": "Difference per store per month",
+          "value": "$300"
+        }
+      ],
+      "result": {
+        "label": "Saved per store, per year",
+        "value": "$3,600"
+      },
+      "takeaway": "Across 12 stores: $43,200 a year. Pull each statement's effective rate quarterly and negotiate on group volume.",
+      "caption": "2.9% of $600,000 = $17,400. 2.3% = $13,800.\nSix tenths of a point is $3,600 per store per year, $300 a month.\nAcross 12 stores: $43,200.",
+      "hashtags": ["#ownermath", "#multiunit", "#franchiseowner", "#smallbusinessfinance", "#restaurantowner", "#coffeeshopowner"],
+      "thumbOffsetMs": 12500
+    },
+    {
+      "date": "2026-11-06",
+      "slug": "card-sales-in-transit",
+      "hook": "Where is Saturday's money on Sunday night?",
+      "term": "Card sales in transit",
+      "formula": "Card sales per day × days until funding",
+      "inputs": {
+        "Card sales per day": "$3,800",
+        "Funding": "next business day",
+        "Stores": "12"
+      },
+      "steps": [
+        {
+          "label": "Card sales per day",
+          "value": "$3,800"
+        },
+        {
+          "label": "Fri, Sat and Sun all fund on Monday",
+          "value": "3 days"
+        },
+        {
+          "label": "Average wait over a week: 10 ÷ 7",
+          "value": "1.4 days"
+        }
+      ],
+      "result": {
+        "label": "In transit on Sunday night, per store",
+        "value": "$11,400"
+      },
+      "takeaway": "Across 12 stores that's $136,800 not yet in the bank. Reconcile card sales to payouts by day.",
+      "caption": "With next-business-day funding, Friday, Saturday and Sunday card sales all land on Monday (Tuesday after a holiday).\nAt $3,800 a day that is $11,400 in transit on Sunday night, per store; $136,800 across 12.\nAveraged over the week, every card sale waits 1.4 days.",
+      "hashtags": ["#bookkeeping", "#ownermath", "#multiunit", "#franchiseowner", "#restaurantowner", "#coffeeshopowner", "#smallbusinessfinance"],
+      "thumbOffsetMs": 12500
+    },
+    {
+      "date": "2026-11-09",
+      "slug": "missing-deposit",
+      "hook": "One missing deposit = $28,750 of sales.",
+      "term": "Cost of a missing deposit",
+      "formula": "Loss ÷ net margin = sales to earn it back",
+      "inputs": {
+        "Missing deposit": "$2,875",
+        "Line of credit rate": "9%",
+        "Days until found": "30",
+        "Net margin": "10%"
+      },
+      "steps": [
+        {
+          "label": "Interest for 30 days at 9%",
+          "value": "$21.27"
+        },
+        {
+          "label": "If it never turns up",
+          "value": "$2,875"
+        },
+        {
+          "label": "Net margin at this store",
+          "value": "10.0%"
+        }
+      ],
+      "result": {
+        "label": "Sales needed to earn back $2,875",
+        "value": "$28,750"
+      },
+      "takeaway": "Match every deposit to its sales day within the week, while the drawer and the shift are fresh.",
+      "caption": "A $2,875 deposit that shows up 30 days late costs $21.27 of interest at 9%.\nOne that never shows up costs $2,875, which at a 10% margin takes $28,750 of sales to earn back.\nMatch deposits to sales days every week.",
+      "hashtags": ["#bookkeeping", "#ownermath", "#smallbusinessfinance", "#restaurantowner", "#coffeeshopowner", "#salonowner", "#multiunit"],
+      "thumbOffsetMs": 12500
+    },
+    {
+      "date": "2026-11-10",
+      "slug": "cash-over-short",
+      "hook": "Short $75.60 a month: normal or a problem?",
+      "term": "Cash over/short",
+      "formula": "0.3% × cash sales (a rule of thumb)",
+      "inputs": {
+        "Net sales this month": "$140,000",
+        "Cash share of sales": "18%",
+        "Rule of thumb": "0.3% of cash sales",
+        "Days in the month": "30"
+      },
+      "steps": [
+        {
+          "label": "Cash sales: 18% × $140,000",
+          "value": "$25,200"
+        },
+        {
+          "label": "Cash per day (÷ 30)",
+          "value": "$840"
+        },
+        {
+          "label": "0.3% of a day's cash",
+          "value": "$2.52"
+        }
+      ],
+      "result": {
+        "label": "A month of ordinary over/short",
+        "value": "$75.60"
+      },
+      "takeaway": "Rule of thumb: under 0.3%, drifting both ways, is counting. The same shift always short is a conversation.",
+      "caption": "Cash sales 18% × $140,000 = $25,200 a month, $840 a day.\n0.3% of that is $2.52 a day, $75.60 a month.\nRule of thumb: that much, drifting over and short, is counting noise. One shift always short is not.",
+      "hashtags": ["#ownermath", "#bookkeeping", "#restaurantowner", "#coffeeshopowner", "#salonowner", "#franchiseowner", "#multiunit"],
+      "thumbOffsetMs": 12500
+    },
+    {
+      "date": "2026-11-11",
+      "slug": "ticket-times-transactions",
+      "hook": "Fifty cents a ticket is $69,350 a year.",
+      "term": "Average ticket × transactions",
+      "formula": "Average ticket × transactions = sales",
+      "inputs": {
+        "Average ticket": "$12.40",
+        "Transactions per day": "380",
+        "Ticket lift": "50¢",
+        "Traffic lift": "15 a day",
+        "Days in a year": "365"
+      },
+      "steps": [
+        {
+          "label": "$12.40 × 380",
+          "value": "$4,712 a day"
+        },
+        {
+          "label": "+50¢ a ticket: $12.90 × 380",
+          "value": "+$190 a day"
+        },
+        {
+          "label": "+15 transactions: $12.40 × 395",
+          "value": "+$186 a day"
+        }
+      ],
+      "result": {
+        "label": "A year of 50¢ more per ticket",
+        "value": "$69,350"
+      },
+      "takeaway": "Ticket size moves with a question at the register; traffic needs a marketing budget. Start cheap.",
+      "caption": "$12.40 × 380 transactions = $4,712 a day.\n50¢ more per ticket adds $190 a day; 15 more transactions add $186.\nThe 50¢ is $69,350 a year, and it costs a question at the register.",
+      "hashtags": ["#ownermath", "#restaurantmath", "#coffeeshopowner", "#restaurantowner", "#salonowner", "#franchiseowner", "#smallbusinessfinance"],
+      "thumbOffsetMs": 12500
+    },
+    {
+      "date": "2026-11-12",
+      "slug": "four-wall-profit",
+      "hook": "One labor point is 4% more profit.",
+      "term": "Four-wall profit",
+      "formula": "Sales × four-wall margin",
+      "inputs": {
+        "Annual net sales": "$1,400,000",
+        "Four-wall margin": "24.8%",
+        "Labor improvement": "1 point"
+      },
+      "steps": [
+        {
+          "label": "24.8% × $1,400,000",
+          "value": "$347,200"
+        },
+        {
+          "label": "One labor point: 1% × $1,400,000",
+          "value": "$14,000"
+        },
+        {
+          "label": "New four-wall profit",
+          "value": "$361,200"
+        }
+      ],
+      "result": {
+        "label": "More profit, from one labor point",
+        "value": "+4.0%"
+      },
+      "takeaway": "At a 24.8% margin, one labor point moves profit 4%. Watch labor weekly, not when the P&L lands.",
+      "caption": "$1,400,000 × 24.8% = $347,200 of four-wall profit.\nOne labor point is $14,000, taking profit to $361,200: 4.0% more.\nAt this margin, profit moves about four times faster than labor.",
+      "hashtags": ["#ownermath", "#laborcost", "#multiunit", "#franchiseowner", "#restaurantowner", "#primecost", "#smallbusinessfinance"],
+      "thumbOffsetMs": 12500
+    }
+  ]
+}

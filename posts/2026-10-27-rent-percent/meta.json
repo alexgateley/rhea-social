@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-27",
+  "slug": "rent-percent",
+  "hook": "Rent is fixed. Rent % isn't.",
+  "result": {
+    "label": "Occupancy % this month",
+    "value": "8.5%"
+  },
+  "thumbOffsetMs": 14100,
+  "durationSec": 24,
+  "frames": 576,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "resultSize": 210,
+    "scale": 1,
+    "contentBottom": 1687,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-17T00:47:37.225Z",
+  "chromium": "141.0.7390.37"
+}

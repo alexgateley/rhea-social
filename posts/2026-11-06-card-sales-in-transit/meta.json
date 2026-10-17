@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-06",
+  "slug": "card-sales-in-transit",
+  "hook": "Where is Saturday's money on Sunday night?",
+  "result": {
+    "label": "In transit on Sunday night, per store",
+    "value": "$11,400"
+  },
+  "thumbOffsetMs": 12500,
+  "durationSec": 22.417,
+  "frames": 538,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "resultSize": 210,
+    "scale": 1,
+    "contentBottom": 1673,
+    "hookLines": 3
+  },
+  "renderedAt": "2026-10-17T01:00:24.797Z",
+  "chromium": "141.0.7390.37"
+}

@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Owner math</title>
+<!--
+  One Owner math Reel, 1080×1920. render/render.mjs loads this file, calls window.setPost(post,
+  timing, brand) once, then steps the CSS custom property --t (seconds) on <html> and screenshots
+  each frame. Every bit of motion below is a pure function of --t: no transitions, no keyframes, no
+  timers, so a frame renders the same every time.
+
+  Fonts: Inter Tight from node_modules/@fontsource/inter-tight (installed by npm; no network).
+-->
+<style>
+  @font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 400; font-display: block; src: url("../node_modules/@fontsource/inter-tight/files/inter-tight-latin-400-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 500; font-display: block; src: url("../node_modules/@fontsource/inter-tight/files/inter-tight-latin-500-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 600; font-display: block; src: url("../node_modules/@fontsource/inter-tight/files/inter-tight-latin-600-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 700; font-display: block; src: url("../node_modules/@fontsource/inter-tight/files/inter-tight-latin-700-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 800; font-display: block; src: url("../node_modules/@fontsource/inter-tight/files/inter-tight-latin-800-normal.woff2") format("woff2"); }
+
+  :root {
+    --paper: #f5f2ed;
+    --ink: #0e1116;
+    --muted: #545961;
+    --sage: #7f9886;
+    --sage-ink: #3f5c4a;
+    --sage-wash: #e9efe9;
+    --line: #e4dfd7;
+
+    --t: 0;            /* seconds, set from outside */
+    --dur: 24;         /* total seconds, set by setPost */
+    --fade: 0.5;       /* how long one element takes to appear */
+    --scale: 1;        /* shrinks the type a little when the longest post would not fit */
+    --hook-shift: 0px; /* how far the hook sits below its resting place while it is alone on screen */
+    --hook-move-at: 2.6;
+    --hook-move-for: 0.6;
+    --result-size: 210px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Inter Tight", system-ui, sans-serif;
+    font-feature-settings: "tnum" 1, "cv11" 1;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: geometricPrecision;
+  }
+
+  /* An element that appears at --in seconds: fades up over --fade seconds with an ease-out curve */
+  .in {
+    --p: clamp(0, calc((var(--t) - var(--in)) / var(--fade)), 1);
+    --e: calc(1 - (1 - var(--p)) * (1 - var(--p)));
+    opacity: var(--e);
+    transform: translateY(calc((1 - var(--e)) * 34px));
+  }
+
+  .frame {
+    position: relative;
+    width: 1080px; height: 1920px;
+    padding: 84px 72px 0;
+  }
+
+  /* Kicker and mark, visible from the first frame */
+  .top {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 88px;
+  }
+  .kicker {
+    font-size: 30px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--sage-ink);
+  }
+  .mark { width: 88px; height: 88px; display: block; }
+
+  /* The hook: alone and centered until --hook-move-at, then it slides up to rest under the kicker */
+  .hook-wrap {
+    --hp: clamp(0, calc((var(--t) - var(--hook-move-at)) / var(--hook-move-for)), 1);
+    --he: calc(1 - (1 - var(--hp)) * (1 - var(--hp)));
+    margin-top: 64px;
+    transform: translateY(calc((1 - var(--he)) * var(--hook-shift))) scale(calc(1 + 0.08 * (1 - var(--he))));
+    transform-origin: 0 50%;
+  }
+  .hook {
+    font-size: calc(88px * var(--scale));
+    font-weight: 700;
+    line-height: 1.07;
+    letter-spacing: -0.022em;
+    text-wrap: balance;
+  }
+  .hook-rule {
+    width: 120px; height: 8px; background: var(--sage); border-radius: 4px;
+    margin-top: 36px;
+  }
+
+  /* Term and formula */
+  .term-block { margin-top: 44px; }
+  .term {
+    font-size: 32px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--sage-ink);
+  }
+  .formula {
+    margin-top: 12px;
+    font-size: calc(46px * var(--scale));
+    font-weight: 500;
+    line-height: 1.22;
+    color: var(--muted);
+    letter-spacing: -0.01em;
+  }
+
+  /* Worked steps */
+  .steps { margin-top: 40px; }
+  .step {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 40px;
+    padding: 22px 0;
+    border-top: 2px solid var(--line); /* on the step itself, so it appears with the step */
+  }
+  .step:last-child { border-bottom: 2px solid var(--line); }
+  .step-label {
+    flex: 1 1 auto;
+    font-size: calc(44px * var(--scale));
+    font-weight: 500;
+    line-height: 1.22;
+    color: var(--muted);
+    letter-spacing: -0.01em;
+  }
+  .step-value {
+    flex: 0 0 auto;
+    font-size: calc(52px * var(--scale));
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    text-align: right;
+    color: var(--ink);
+    max-width: 560px;
+  }
+
+  /* The result */
+  .result { margin-top: 48px; }
+  .result-label {
+    font-size: 32px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--sage-ink);
+    line-height: 1.2;
+  }
+  .result-value {
+    margin-top: 6px;
+    font-size: var(--result-size);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+    white-space: nowrap;
+    color: var(--ink);
+    /* a touch of scale as it lands, on top of the shared fade */
+    transform: translateY(calc((1 - var(--e)) * 34px)) scale(calc(0.94 + 0.06 * var(--e)));
+    transform-origin: 0 100%;
+  }
+
+  /* The takeaway */
+  .takeaway {
+    margin-top: 44px;
+    padding: 30px 36px 30px 40px;
+    background: var(--sage-wash);
+    border-left: 8px solid var(--sage);
+    border-radius: 0 20px 20px 0;
+    font-size: calc(46px * var(--scale));
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: -0.012em;
+    color: var(--ink);
+  }
+
+  /* Progress bar along the bottom, in sage */
+  .bar-track { position: absolute; left: 0; right: 0; bottom: 0; height: 14px; background: var(--line); }
+  .bar { height: 100%; background: var(--sage); width: calc(var(--t) / var(--dur) * 100%); }
+
+  /* End card */
+  .end {
+    position: absolute; inset: 0 0 14px 0;
+    background: var(--paper);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 44px;
+    transform: none;
+  }
+  .end .mark { width: 220px; height: 220px; }
+  .end-handle { font-size: 56px; font-weight: 700; letter-spacing: -0.02em; }
+  .end-handle span { color: var(--muted); font-weight: 500; }
+  .end-sub { font-size: 34px; font-weight: 500; color: var(--sage-ink); letter-spacing: 0.1em; text-transform: uppercase; }
+</style>
+</head>
+<body>
+<div class="frame" id="frame">
+  <div class="top">
+    <div class="kicker" id="kicker">RUNONRHEA · OWNER MATH</div>
+    <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
+      <rect width="64" height="64" rx="15" fill="#0e1116"/>
+      <rect x="17" y="17" width="30" height="5" rx="0.75" fill="#fff"/>
+      <rect x="21" y="29.5" width="22" height="5" rx="0.75" fill="#fff"/>
+      <rect x="17" y="42" width="30" height="5" rx="0.75" fill="#fff"/>
+    </svg>
+  </div>
+
+  <div class="hook-wrap" id="hook-wrap">
+    <div class="in" id="hook-in">
+      <h1 class="hook" id="hook"></h1>
+      <div class="hook-rule"></div>
+    </div>
+  </div>
+
+  <div class="term-block in" id="term-block">
+    <div class="term" id="term"></div>
+    <div class="formula" id="formula"></div>
+  </div>
+
+  <div class="steps" id="steps"></div>
+
+  <div class="result" id="result">
+    <div class="result-label in" id="result-label"></div>
+    <div class="result-value in" id="result-value"></div>
+  </div>
+
+  <div class="takeaway in" id="takeaway"></div>
+
+  <div class="end in" id="end">
+    <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
+      <rect width="64" height="64" rx="15" fill="#0e1116"/>
+      <rect x="17" y="17" width="30" height="5" rx="0.75" fill="#fff"/>
+      <rect x="21" y="29.5" width="22" height="5" rx="0.75" fill="#fff"/>
+      <rect x="17" y="42" width="30" height="5" rx="0.75" fill="#fff"/>
+    </svg>
+    <div class="end-handle" id="end-handle">RunonRhea <span>· rheafi.com</span></div>
+    <div class="end-sub" id="end-sub">Owner math, every weekday</div>
+  </div>
+
+  <div class="bar-track"><div class="bar"></div></div>
+</div>
+
+<script>
+  const FRAME_H = 1920;
+  const BOTTOM_LIMIT = FRAME_H - 14 - 96; // progress bar plus breathing room
+  const RESULT_MAX = 210, RESULT_MIN = 180;
+  const SCALE_MIN = 0.955; // keeps 44px body type at or above 42px; the result never shrinks below 180px
+
+  const $ = (id) => document.getElementById(id);
+  const root = document.documentElement;
+  const setVar = (el, name, v) => el.style.setProperty(name, String(v));
+
+  /** Sets the clock. render.mjs calls this (or sets --t itself) once per frame. */
+  window.setT = (t) => setVar(root, '--t', t);
+
+  /**
+   * Fills the card with one post and its timeline, then fits the type to the frame. Returns a
+   * layout report the renderer checks before it starts taking frames.
+   */
+  window.setPost = async function setPost(post, timing, brand) {
+    if (brand?.colors) {
+      const c = brand.colors;
+      const map = { paper: '--paper', ink: '--ink', muted: '--muted', sage: '--sage', sageInk: '--sage-ink', sageWash: '--sage-wash', line: '--line' };
+      for (const [k, v] of Object.entries(map)) if (c[k]) setVar(root, v, c[k]);
+    }
+    if (brand?.handle) {
+      $('kicker').textContent = `${brand.handle.toUpperCase()} · ${(brand.series || 'Owner math').toUpperCase()}`;
+      $('end-handle').innerHTML = '';
+      $('end-handle').append(brand.handle, ' ');
+      const s = document.createElement('span'); s.textContent = `· ${brand.site || 'rheafi.com'}`;
+      $('end-handle').append(s);
+    }
+
+    $('hook').textContent = post.hook;
+    $('term').textContent = post.term;
+    $('formula').textContent = post.formula;
+    $('result-label').textContent = post.result.label;
+    $('result-value').textContent = post.result.value;
+    $('takeaway').textContent = post.takeaway;
+
+    const steps = $('steps');
+    steps.innerHTML = '';
+    post.steps.forEach((s, k) => {
+      const row = document.createElement('div');
+      row.className = 'step in';
+      setVar(row, '--in', timing.stepsAt[k]);
+      const label = document.createElement('div'); label.className = 'step-label'; label.textContent = s.label;
+      const value = document.createElement('div'); value.className = 'step-value'; value.textContent = s.value;
+      row.append(label, value);
+      steps.append(row);
+    });
+
+    setVar(root, '--dur', timing.duration);
+    setVar($('hook-in'), '--in', timing.hookAt);
+    setVar($('term-block'), '--in', timing.termAt);
+    setVar($('result-label'), '--in', timing.resultAt);
+    setVar($('result-value'), '--in', timing.resultAt);
+    setVar($('result-value'), '--fade', 0.6);
+    setVar($('takeaway'), '--in', timing.takeawayAt);
+    setVar($('end'), '--in', timing.endAt);
+    setVar(root, '--hook-move-at', timing.termAt - 0.4);
+
+    // Fonts first, so measurements below are final
+    await Promise.all(['400', '500', '600', '700', '800'].map((w) => document.fonts.load(`${w} 40px "Inter Tight"`)));
+    await document.fonts.ready;
+
+    // Fit the result to the column width (never below RESULT_MIN), then the whole column to the frame
+    const column = $('frame').clientWidth - 144;
+    const rv = $('result-value');
+    let resultSize = RESULT_MAX;
+    setVar(root, '--result-size', `${resultSize}px`);
+    while (rv.scrollWidth > column && resultSize > RESULT_MIN) {
+      resultSize -= 2;
+      setVar(root, '--result-size', `${resultSize}px`);
+    }
+    let scale = 1;
+    const bottom = () => $('takeaway').getBoundingClientRect().bottom;
+    setVar(root, '--t', 1000); // everything laid out at its final place
+    while (bottom() > BOTTOM_LIMIT && scale > SCALE_MIN) {
+      scale = Math.round((scale - 0.005) * 1000) / 1000;
+      setVar(root, '--scale', scale);
+    }
+    const contentBottom = bottom();
+    const overflow = contentBottom > BOTTOM_LIMIT || rv.scrollWidth > column
+      || [...document.querySelectorAll('.step-value')].some((v) => v.scrollWidth > v.clientWidth + 1);
+
+    // While the hook is alone, it sits in the middle of the frame: measure how far that is
+    const hookBox = $('hook-in').getBoundingClientRect();
+    const hookCenter = hookBox.top + hookBox.height / 2;
+    setVar(root, '--hook-shift', `${Math.round(FRAME_H * 0.46 - hookCenter)}px`);
+
+    setVar(root, '--t', 0);
+    return {
+      resultSize, scale, contentBottom: Math.round(contentBottom), bottomLimit: BOTTOM_LIMIT, overflow,
+      hookLines: Math.round($('hook').getBoundingClientRect().height / (88 * scale * 1.07)),
+    };
+  };
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-23",
+  "slug": "food-cost-vs-cogs",
+  "hook": "Food cost 28%? Your COGS is 31.5%.",
+  "result": {
+    "label": "COGS %, the number to price on",
+    "value": "31.5%"
+  },
+  "thumbOffsetMs": 12500,
+  "durationSec": 22.417,
+  "frames": 538,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "resultSize": 210,
+    "scale": 1,
+    "contentBottom": 1578,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-17T00:45:25.203Z",
+  "chromium": "141.0.7390.37"
+}

@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-09",
+  "slug": "missing-deposit",
+  "hook": "One missing deposit = $28,750 of sales.",
+  "result": {
+    "label": "Sales needed to earn back $2,875",
+    "value": "$28,750"
+  },
+  "thumbOffsetMs": 12500,
+  "durationSec": 22.417,
+  "frames": 538,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "resultSize": 210,
+    "scale": 1,
+    "contentBottom": 1578,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-17T01:02:01.002Z",
+  "chromium": "141.0.7390.37"
+}

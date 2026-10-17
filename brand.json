@@ -1,0 +1,35 @@
+{
+  "handle": "RunonRhea",
+  "name": "Rhea",
+  "site": "rheafi.com",
+  "series": "Owner math",
+  "colors": {
+    "paper": "#f5f2ed",
+    "ink": "#0e1116",
+    "muted": "#545961",
+    "sage": "#7f9886",
+    "sageInk": "#3f5c4a",
+    "sageWash": "#e9efe9",
+    "line": "#e4dfd7"
+  },
+  "timezone": "America/Los_Angeles",
+  "postHour": 7,
+  "weekdaysOnly": true,
+  "pagesBaseUrl": "https://alexgateley.github.io/rhea-social",
+  "postsDir": "posts",
+  "publishedDir": "published",
+  "captionFooter": "Rhea: automated books, labor and per-store profit for multi-store owners. rheafi.com (link in bio)",
+  "hashtags": [
+    "#franchiseowner",
+    "#multiunit",
+    "#restaurantowner",
+    "#coffeeshopowner",
+    "#salonowner",
+    "#smallbusinessfinance",
+    "#bookkeeping",
+    "#laborcost",
+    "#primecost",
+    "#restaurantmath",
+    "#ownermath"
+  ]
+}

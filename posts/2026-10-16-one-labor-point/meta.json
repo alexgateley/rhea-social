@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-16",
+  "slug": "one-labor-point",
+  "hook": "What is one labor point actually worth?",
+  "result": {
+    "label": "One labor point, per store, per year",
+    "value": "$16,000"
+  },
+  "thumbOffsetMs": 14100,
+  "durationSec": 24,
+  "frames": 576,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "resultSize": 210,
+    "scale": 1,
+    "contentBottom": 1687,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-17T00:43:00.177Z",
+  "chromium": "141.0.7390.37"
+}

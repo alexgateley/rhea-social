@@ -1,0 +1,17 @@
+{
+  "name": "rhea-social",
+  "private": true,
+  "type": "module",
+  "description": "Owner math Reels for @RunonRhea: rendered here, served from GitHub Pages, published by GitHub Actions",
+  "scripts": {
+    "verify": "node scripts/verify.mjs",
+    "render": "node render/render.mjs",
+    "relink": "node render/relink.mjs",
+    "publish:dry": "DRY_RUN=true node scripts/publish.mjs",
+    "check": "node scripts/publish.mjs check"
+  },
+  "devDependencies": {
+    "@fontsource/inter-tight": "^5.3.0",
+    "playwright-core": "^1.56.0"
+  }
+}

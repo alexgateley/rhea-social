@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-02",
+  "slug": "tips-not-sales",
+  "hook": "A $9,000 tip month costs you $922.50.",
+  "result": {
+    "label": "Your cost to pass $9,000 through",
+    "value": "$922.50"
+  },
+  "thumbOffsetMs": 14100,
+  "durationSec": 24,
+  "frames": 576,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "resultSize": 210,
+    "scale": 1,
+    "contentBottom": 1687,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-17T00:53:56.254Z",
+  "chromium": "141.0.7390.37"
+}

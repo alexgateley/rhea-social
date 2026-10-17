@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-04",
+  "slug": "card-fees",
+  "hook": "Your 2.6% card rate is really 3.1%.",
+  "result": {
+    "label": "Effective card rate",
+    "value": "3.1%"
+  },
+  "thumbOffsetMs": 14100,
+  "durationSec": 24,
+  "frames": 576,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "resultSize": 210,
+    "scale": 1,
+    "contentBottom": 1744,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-17T00:57:18.836Z",
+  "chromium": "141.0.7390.37"
+}

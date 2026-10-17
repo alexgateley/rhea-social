@@ -1,6 +1,7 @@
 {
   "date": "2026-11-12",
   "slug": "four-wall-profit",
+  "theme": "sage",
   "hook": "One labor point is 4% more profit.",
   "result": {
     "label": "More profit, from one labor point",
@@ -18,6 +19,6 @@
     "contentBottom": 1578,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-17T01:07:09.570Z",
+  "renderedAt": "2026-10-17T01:51:10.356Z",
   "chromium": "141.0.7390.37"
 }

@@ -7,15 +7,18 @@
 // For every post it recomputes each worked step and the result from the post's inputs, using the
 // per-slug formulas below (`COMPUTE`), and compares the formatted strings to the content file
 // character for character. It also checks the numbers quoted in the takeaway and caption, the
-// schedule (weekdays only, in order, no duplicates), the hook and takeaway lengths, the hashtags
-// (6 to 8, all from brand.json), the cover frame offset against render/timing.mjs, and that the
-// word "AI" appears nowhere. A content file is named for the month its first post falls in
+// schedule (weekdays only, in order, no duplicates), the hook and takeaway lengths, the theme
+// (one of brand.json's, all of which must meet WCAG AA), the caption's first line (a plain-English
+// keyword sentence naming the audience, no hashtags), the hashtags (3 to 5 from the post's set,
+// A on even-numbered posts and B on odd, plus the brand tag), the cover frame offset against
+// render/timing.mjs, and that the word "AI" appears nowhere. A content file is named for the month its first post falls in
 // (content/2026-10.json); its run may continue into the next month. Exits non-zero when any file
 // has a problem.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { usd, pct1, num, parseInput, round } from './format.mjs';
+import { checkThemes } from './contrast.mjs';
 import { timing } from '../render/timing.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -311,17 +314,41 @@ function verifyMonth(file) {
   if (posts.length && posts[0].date && posts[0].date.slice(0, 7) !== fileMonth) say(null, `the first post is dated ${posts[0].date}; the file is named for ${fileMonth}`);
 
   for (const p of posts) {
-    for (const key of ['date', 'slug', 'hook', 'term', 'formula', 'inputs', 'steps', 'result', 'takeaway', 'caption', 'hashtags', 'thumbOffsetMs']) {
+    for (const key of ['date', 'slug', 'theme', 'hook', 'term', 'formula', 'inputs', 'steps', 'result', 'takeaway', 'caption', 'hashtags', 'thumbOffsetMs']) {
       if (p[key] === undefined || p[key] === '') say(p, `missing ${key}`);
     }
     if (words(p.hook ?? '') > MAX_HOOK_WORDS) say(p, `hook has ${words(p.hook)} words (max ${MAX_HOOK_WORDS})`);
     if (!/[?.!]$/.test(p.hook ?? '')) say(p, 'hook should end with ?, . or !');
     if (words(p.takeaway ?? '') > MAX_TAKEAWAY_WORDS) say(p, `takeaway has ${words(p.takeaway)} words (max ${MAX_TAKEAWAY_WORDS})`);
+    if (!brand.themes[p.theme]) say(p, `theme "${p.theme}" is not one of ${Object.keys(brand.themes).join(', ')}`);
+
+    // Caption: a keyword sentence first (what people search: the topic and the audience, no
+    // hashtags), then 2 to 4 short lines restating the number
     const captionLines = (p.caption ?? '').split('\n').filter((l) => l.trim());
-    if (captionLines.length < 2 || captionLines.length > 4) say(p, `caption has ${captionLines.length} lines (2 to 4)`);
-    if (!Array.isArray(p.hashtags) || p.hashtags.length < 6 || p.hashtags.length > 8) say(p, `has ${p.hashtags?.length ?? 0} hashtags (6 to 8)`);
-    for (const h of p.hashtags ?? []) if (!brand.hashtags.includes(h)) say(p, `hashtag ${h} is not in brand.json`);
-    if (new Set(p.hashtags ?? []).size !== (p.hashtags ?? []).length) say(p, 'repeated hashtag');
+    if (captionLines.length < 3 || captionLines.length > 5) say(p, `caption has ${captionLines.length} lines (a keyword line plus 2 to 4)`);
+    const first = captionLines[0] ?? '';
+    if (first.includes('#')) say(p, 'the caption\'s first line must be plain English, no hashtags');
+    if (words(first) < 8) say(p, 'the caption\'s first line should be a full keyword sentence (8+ words)');
+    if (!brand.captionKeywords.some((k) => first.toLowerCase().includes(k))) say(p, `the caption's first line should name the audience (${brand.captionKeywords.join(', ')})`);
+    if (!/\b(owners?|operators?)\b/i.test(first)) say(p, 'the caption\'s first line should say who it is for (owners / operators)');
+    if (!/[.!?]$/.test(first.trim())) say(p, 'the caption\'s first line should end with a period');
+
+    // Hashtags: 3 to 5 from the post's set (A on even-numbered posts, B on odd) plus the brand tag
+    const n = posts.indexOf(p) + 1;
+    const setName = n % 2 === 0 ? 'A' : 'B';
+    const set = brand.hashtagSets[setName];
+    const otherSet = brand.hashtagSets[setName === 'A' ? 'B' : 'A'];
+    const tags = Array.isArray(p.hashtags) ? p.hashtags : [];
+    const brandTags = tags.filter((h) => h.toLowerCase() === brand.brandHashtag.toLowerCase());
+    const topicTags = tags.filter((h) => h.toLowerCase() !== brand.brandHashtag.toLowerCase());
+    if (brandTags.length !== 1) say(p, `needs the brand tag ${brand.brandHashtag} exactly once`);
+    if (topicTags.length < 3 || topicTags.length > 5) say(p, `has ${topicTags.length} topic hashtags (3 to 5, from set ${setName})`);
+    for (const h of topicTags) {
+      if (otherSet.includes(h)) say(p, `hashtag ${h} is from set ${setName === 'A' ? 'B' : 'A'}; post ${n} uses set ${setName}`);
+      else if (!set.includes(h)) say(p, `hashtag ${h} is not in set ${setName} (brand.json hashtagSets)`);
+    }
+    if (new Set(tags.map((h) => h.toLowerCase())).size !== tags.length) say(p, 'repeated hashtag');
+    if (/#(ownermath|restaurantmath)\b/i.test(tags.join(' '))) say(p, '#ownermath and #restaurantmath are retired (no audience)');
     if (!Array.isArray(p.steps) || p.steps.length < 3 || p.steps.length > 5) say(p, `has ${p.steps?.length ?? 0} steps (3 to 5)`);
 
     // Never the word "AI", anywhere in the post
@@ -374,6 +401,14 @@ for (const f of ['README.md', 'render/template.html', 'brand.json']) {
   const file = path.join(root, f);
   if (fs.existsSync(file) && /\bAI\b/.test(fs.readFileSync(file, 'utf8'))) { console.error(`${f} contains the word "AI"`); process.exit(1); }
 }
+
+// Every theme must meet WCAG AA (body 4.5:1, large text 3:1) before any card uses it
+const low = checkThemes(brand.themes).filter((r) => !r.ok);
+if (low.length) {
+  for (const r of low) console.error(`brand.json theme "${r.theme}": ${r.label} is ${r.ratio.toFixed(2)}:1 (${r.fg} on ${r.bg}), needs ${r.min}:1`);
+  process.exit(1);
+}
+console.log(`brand.json: ${Object.keys(brand.themes).length} themes meet WCAG AA (node scripts/contrast.mjs for the ratios).`);
 
 let failed = false;
 for (const f of files) {

@@ -1,6 +1,7 @@
 {
   "date": "2026-10-22",
   "slug": "overtime-week",
+  "theme": "paper",
   "hook": "Ten overtime hours. $322.95. Here's the math.",
   "result": {
     "label": "What those 10 hours cost, fully loaded",
@@ -18,6 +19,6 @@
     "contentBottom": 1782,
     "hookLines": 3
   },
-  "renderedAt": "2026-10-17T00:44:24.884Z",
+  "renderedAt": "2026-10-17T01:35:24.115Z",
   "chromium": "141.0.7390.37"
 }

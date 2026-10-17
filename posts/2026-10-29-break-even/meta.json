@@ -1,6 +1,7 @@
 {
   "date": "2026-10-29",
   "slug": "break-even",
+  "theme": "ink",
   "hook": "Your store starts earning on the 22nd.",
   "result": {
     "label": "Break-even sales per day",
@@ -18,6 +19,6 @@
     "contentBottom": 1680,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-17T00:50:23.737Z",
+  "renderedAt": "2026-10-17T01:40:24.053Z",
   "chromium": "141.0.7390.37"
 }

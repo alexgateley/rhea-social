@@ -1,6 +1,7 @@
 {
   "date": "2026-11-05",
   "slug": "blended-card-rate",
+  "theme": "sage-wash",
   "hook": "0.6% sounds small. It's $43,200.",
   "result": {
     "label": "Saved per store, per year",
@@ -18,6 +19,6 @@
     "contentBottom": 1578,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-17T00:58:52.124Z",
+  "renderedAt": "2026-10-17T01:45:33.202Z",
   "chromium": "141.0.7390.37"
 }

@@ -1,6 +1,7 @@
 {
   "date": "2026-10-30",
   "slug": "sales-tax-not-revenue",
+  "theme": "sage-wash",
   "hook": "$8,250 of your deposits aren't yours.",
   "result": {
     "label": "Sales tax collected: not revenue",
@@ -18,6 +19,6 @@
     "contentBottom": 1578,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-17T00:52:04.349Z",
+  "renderedAt": "2026-10-17T01:41:20.839Z",
   "chromium": "141.0.7390.37"
 }

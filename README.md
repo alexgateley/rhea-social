@@ -12,10 +12,11 @@ as rules of thumb; no industry statistics are invented. Rhea itself is described
 "automated books, labor and per-store profit for multi-store owners" (rheafi.com).
 
 ```
-brand.json                         handle, site, colors, time zone, posting hour, caption footer, hashtags
+brand.json                         handle, site, the four card themes, time zone, posting hour, caption footer, hashtag sets
 content/2026-10.json               a run of 20 posts (hook, term, formula, inputs, steps, result, takeaway, caption)
 scripts/verify.mjs                 recomputes every step and result from the inputs; exits non-zero on a mismatch
-render/template.html               the 1080×1920 card; all motion is a function of the CSS variable --t (seconds)
+scripts/contrast.mjs               WCAG contrast of every theme (verify runs it too)
+render/template.html               the 1080×1920 card in one of four themes; all motion is a function of the CSS variable --t (seconds)
 render/render.mjs                  Chromium frames at 24 fps → ffmpeg → posts/<date>-<slug>/
 render/relink.mjs                  re-dates rendered folders when the schedule moves (no re-render needed)
 posts/<date>-<slug>/reel.mp4       the Reel (H.264, silent AAC track, 22–26 s)
@@ -92,11 +93,11 @@ font files) and a Chromium that Playwright can find: `npx playwright install chr
 
 1. Draft `content/YYYY-MM.json`, named for the month its first post falls in: one post per weekday,
    in date order (the run may continue into the next month, as the first one does). Copy the shape
-   of `content/2026-10.json` (hook of at most 9 words, a term, the formula in plain words, the
-   inputs with units, 3 to 5 worked steps, the result, a takeaway of at most 18 words, 2 to 4
-   caption lines, 6 to 8 hashtags from `brand.json`). `thumbOffsetMs` is 12500 for 3 steps, 14100
-   for 4, 15700 for 5 (`render/timing.mjs`). A new topic needs its formula added to `COMPUTE` in
-   `scripts/verify.mjs`.
+   of `content/2026-10.json`: a `theme` (see below), hook of at most 9 words, a term, the formula
+   in plain words, the inputs with units, 3 to 5 worked steps, the result, a takeaway of at most
+   18 words, the caption and hashtags (see "Captions and hashtags"). `thumbOffsetMs` is 12500 for
+   3 steps, 14100 for 4, 15700 for 5 (`render/timing.mjs`). A new topic needs its formula added to
+   `COMPUTE` in `scripts/verify.mjs`.
 2. `npm run verify` – recomputes every step, result and quoted figure; fix anything it lists.
 3. `npm run render -- --month YYYY-MM` – renders every post (about a minute each; add
    `--only <slug>` for one). It refuses content that does not verify and stops if a card would
@@ -108,12 +109,64 @@ If the dates move after rendering (a run starts earlier, a day is skipped), chan
 content file and run `npm run relink -- --month YYYY-MM`: the cards show no date, so the folders are
 renamed and `posts/index.json` rebuilt without re-rendering.
 
+A post with a marker in `published/` has already gone out: `render` and `relink` leave its folder,
+caption and video exactly as they were (`--force` overrides for `render`). The first Reel,
+2026-10-16, was posted before themes and the new captions existed and stays as published.
+
+## Themes
+
+Each post names one of four themes in `brand.json`; the template colors the whole card from it
+and inverts the Ξ mark on the dark ones. From post 2 they rotate `ink → sage-wash → sage → paper`
+(`themeRotation`): a cycle of four over Instagram's three-column grid, so no column is ever a
+stripe of one color. Post 1 is `paper`.
+
+| Theme | Background | Hook | Result, values, takeaway | Muted | Headings | Accent | Takeaway wash |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| paper | #f5f2ed | #0e1116 | #0e1116 | #545961 | #3f5c4a | #7f9886 | #e9efe9 |
+| ink | #0e1116 | #f5f2ed | #f5f2ed | #c9c4bb | #7f9886 | #7f9886 | #1b2320 |
+| sage-wash | #e9efe9 | #3f5c4a | #0e1116 | #545961 | #3f5c4a | #3f5c4a | #ffffff |
+| sage | #3f5c4a | #f5f2ed | #f5f2ed | #dadbd5 | #e3e3dd | #acb6ac | #34503f |
+
+WCAG 2 contrast, computed by `node scripts/contrast.mjs` (and checked by `npm run verify`: body text
+needs 4.5:1, large text 3:1; the accent is decorative and reported only):
+
+| Pair | paper | ink | sage-wash | sage | Needs |
+| --- | --- | --- | --- | --- | --- |
+| Hook on background | 16.94 | 16.94 | 6.33 | 6.62 | 3 (large) |
+| Result and step values on background | 16.94 | 16.94 | 16.20 | 6.62 | 3 (large) |
+| Formula and step labels (muted) on background | 6.31 | 10.89 | 6.04 | 5.31 | 4.5 |
+| Kicker, term, result label (heading) on background | 6.62 | 6.07 | 6.33 | 5.74 | 4.5 |
+| Takeaway text on its wash | 16.20 | 14.38 | 18.91 | 7.95 | 4.5 |
+| Mark bars on mark tile | 18.91 | 16.94 | 18.91 | 16.94 | 3 |
+| Accent (rule, bar, border) on background | 2.79 | 6.07 | 6.33 | 3.53 | decorative |
+
+On `sage`, the accent is paper at 60% over the background (#acb6ac), headings paper at 90%
+(#e3e3dd) and muted text paper at 85% (#dadbd5), stored as solid colors so the ratios are exact.
+
+## Captions and hashtags
+
+A caption is a keyword sentence, then 2 to 4 short lines restating the number, then the brand
+footer, then the hashtags:
+
+- **First line:** plain English with the words people search and who it is for, no hashtags, e.g.
+  "Labor cost percentage for restaurant, coffee shop and salon owners: how to calculate it and what
+  it means." `verify` requires 8+ words, one of the audience words in `brand.json`
+  (`captionKeywords`) and "owners" or "operators".
+- **Hashtags:** 3 to 5 topic tags from one of two sets, plus `#RunonRhea` on every post.
+  Set A (`#restaurantowner #smallbusinessowner #laborcost #franchiseowner #coffeeshopowner`) goes on
+  even-numbered posts, set B (`#restaurantmanagement #salonowner #profitmargin #multiunit
+  #smallbusinessfinance`) on odd-numbered posts, counted by position in the content file. This is an
+  **A/B test: review reach and profile visits per set in Instagram Insights on 2026-11-02** (two
+  weeks of posts), then keep the better set or mix them. `#ownermath` and `#restaurantmath` were
+  dropped (no audience). `verify` enforces the set by parity and the brand tag.
+
 ## Commands
 
 | Command | What it does |
 | --- | --- |
-| `npm run verify` | check every `content/*.json` (`-- --month 2026-10` for one) |
-| `npm run render -- --month 2026-10` | render the run's Reels into `posts/` (`--only <slug>`, `--keep-frames`) |
+| `npm run verify` | check every `content/*.json` (`-- --month 2026-10` for one), and the themes' contrast |
+| `node scripts/contrast.mjs` | print every theme's contrast ratios |
+| `npm run render -- --month 2026-10` | render the run's Reels into `posts/` (`--only <slug>`, `--keep-frames`, `--force` for published posts) |
 | `npm run relink -- --month 2026-10` | re-date rendered folders and rebuild `posts/index.json` after a schedule change |
 | `npm run publish:dry` | log what the publisher would post today without calling the API |
 | `POST_DATE=2026-10-16 npm run publish:dry` | the same for a specific date |

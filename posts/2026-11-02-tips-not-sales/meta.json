@@ -1,6 +1,7 @@
 {
   "date": "2026-11-02",
   "slug": "tips-not-sales",
+  "theme": "sage",
   "hook": "A $9,000 tip month costs you $922.50.",
   "result": {
     "label": "Your cost to pass $9,000 through",
@@ -18,6 +19,6 @@
     "contentBottom": 1687,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-17T00:53:56.254Z",
+  "renderedAt": "2026-10-17T01:42:23.856Z",
   "chromium": "141.0.7390.37"
 }

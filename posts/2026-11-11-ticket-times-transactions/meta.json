@@ -1,6 +1,7 @@
 {
   "date": "2026-11-11",
   "slug": "ticket-times-transactions",
+  "theme": "sage-wash",
   "hook": "Fifty cents a ticket is $69,350 a year.",
   "result": {
     "label": "A year of 50¢ more per ticket",
@@ -18,6 +19,6 @@
     "contentBottom": 1631,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-17T01:05:30.837Z",
+  "renderedAt": "2026-10-17T01:50:01.604Z",
   "chromium": "141.0.7390.37"
 }

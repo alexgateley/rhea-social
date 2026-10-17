@@ -1,6 +1,7 @@
 {
   "date": "2026-10-26",
   "slug": "prime-cost",
+  "theme": "sage-wash",
   "hook": "63.5¢ of every dollar is gone before rent.",
   "result": {
     "label": "Prime cost %",
@@ -18,6 +19,6 @@
     "contentBottom": 1578,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-17T00:46:24.983Z",
+  "renderedAt": "2026-10-17T01:37:23.618Z",
   "chromium": "141.0.7390.37"
 }

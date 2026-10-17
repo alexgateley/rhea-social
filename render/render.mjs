@@ -1,9 +1,13 @@
 #!/usr/bin/env node
 // Renders Owner math Reels from a month of content, one folder per post under posts/:
 //
-//   npm run render -- --month 2026-11                 # every post of the month
-//   npm run render -- --month 2026-11 --only prime-cost
-//   npm run render -- --month 2026-11 --keep-frames   # leave the PNG frames in render/tmp/
+//   npm run render -- --month 2026-10                 # every post of the run
+//   npm run render -- --month 2026-10 --only prime-cost
+//   npm run render -- --month 2026-10 --keep-frames   # leave the PNG frames in render/tmp/
+//   npm run render -- --month 2026-10 --force         # also re-render posts that are already published
+//
+// A post with a marker in published/ has already gone out, so its folder is left exactly as it
+// was unless --force is given (the published Reel and caption should match what people saw).
 //
 // For each post: Chromium (Playwright) loads render/template.html, window.setPost() fills it, and
 // the clock --t is stepped from 0 to the end at 24 fps with one PNG screenshot per frame. ffmpeg
@@ -29,6 +33,7 @@ const opt = (name) => (args.includes(name) ? args[args.indexOf(name) + 1] : null
 const month = opt('--month');
 const only = opt('--only');
 const keepFrames = args.includes('--keep-frames');
+const force = args.includes('--force');
 if (!month || !/^\d{4}-\d{2}$/.test(month)) { console.error('Usage: node render/render.mjs --month YYYY-MM [--only <slug>] [--keep-frames]'); process.exit(2); }
 
 const brand = JSON.parse(fs.readFileSync(path.join(root, 'brand.json'), 'utf8'));
@@ -44,6 +49,7 @@ const posts = content.posts.filter((p) => !only || p.slug === only);
 if (posts.length === 0) { console.error(`No post with slug "${only}" in ${month}`); process.exit(2); }
 
 const postsDir = path.join(root, brand.postsDir || 'posts');
+const publishedDir = path.join(root, brand.publishedDir || 'published');
 const tmpRoot = path.join(root, 'render', 'tmp');
 const templateUrl = pathToFileURL(path.join(root, 'render', 'template.html')).href;
 const ffmpeg = process.env.FFMPEG || 'ffmpeg';
@@ -105,6 +111,7 @@ async function renderPost(browser, post) {
   fs.writeFileSync(path.join(folder, 'meta.json'), JSON.stringify({
     date: post.date,
     slug: post.slug,
+    theme: post.theme || 'paper',
     hook: post.hook,
     result: post.result,
     thumbOffsetMs: t.thumbOffsetMs,
@@ -126,10 +133,17 @@ const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH 
 try {
   const done = [];
   for (const post of posts) {
+    const marker = path.join(publishedDir, `${post.date}.json`);
+    if (fs.existsSync(marker) && !force) {
+      console.log(`${folderName(post)}: already published (${path.relative(root, marker)}); left as it is. Use --force to re-render it.`);
+      if (fs.existsSync(path.join(postsDir, folderName(post), 'reel.mp4'))) done.push([post.date, folderName(post)]);
+      continue;
+    }
     await renderPost(browser, post);
     done.push([post.date, folderName(post)]);
     updateIndex(done);
   }
+  updateIndex(done);
   console.log(`Rendered ${done.length} post${done.length === 1 ? '' : 's'}; posts/index.json updated.`);
 } finally {
   await browser.close();

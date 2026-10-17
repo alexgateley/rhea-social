@@ -12,6 +12,29 @@
     "sageWash": "#e9efe9",
     "line": "#e4dfd7"
   },
+  "themes": {
+    "paper": {
+      "note": "The original card: paper background, ink type, sage accent.",
+      "bg": "#f5f2ed", "type": "#0e1116", "hook": "#0e1116", "muted": "#545961", "heading": "#3f5c4a",
+      "accent": "#7f9886", "wash": "#e9efe9", "line": "#e4dfd7", "markBg": "#0e1116", "markFg": "#ffffff"
+    },
+    "ink": {
+      "note": "Dark: ink background, paper type, sage accent and headings, warm grey muted text; the mark is inverted.",
+      "bg": "#0e1116", "type": "#f5f2ed", "hook": "#f5f2ed", "muted": "#c9c4bb", "heading": "#7f9886",
+      "accent": "#7f9886", "wash": "#1b2320", "line": "#2b3038", "markBg": "#f5f2ed", "markFg": "#0e1116"
+    },
+    "sage-wash": {
+      "note": "Pale sage background, sage-ink hook and headings, ink result and values; the takeaway sits on white.",
+      "bg": "#e9efe9", "type": "#0e1116", "hook": "#3f5c4a", "muted": "#545961", "heading": "#3f5c4a",
+      "accent": "#3f5c4a", "wash": "#ffffff", "line": "#cfd9d1", "markBg": "#0e1116", "markFg": "#ffffff"
+    },
+    "sage": {
+      "note": "Sage-ink background, paper type; the accent (#acb6ac) is paper at 60% over the background, headings paper at 90%, muted paper at 85%; the mark is inverted.",
+      "bg": "#3f5c4a", "type": "#f5f2ed", "hook": "#f5f2ed", "muted": "#dadbd5", "heading": "#e3e3dd",
+      "accent": "#acb6ac", "wash": "#34503f", "line": "#6e8477", "markBg": "#f5f2ed", "markFg": "#0e1116"
+    }
+  },
+  "themeRotation": ["ink", "sage-wash", "sage", "paper"],
   "timezone": "America/Los_Angeles",
   "postHour": 7,
   "weekdaysOnly": true,
@@ -19,17 +42,11 @@
   "postsDir": "posts",
   "publishedDir": "published",
   "captionFooter": "Rhea: automated books, labor and per-store profit for multi-store owners. rheafi.com (link in bio)",
-  "hashtags": [
-    "#franchiseowner",
-    "#multiunit",
-    "#restaurantowner",
-    "#coffeeshopowner",
-    "#salonowner",
-    "#smallbusinessfinance",
-    "#bookkeeping",
-    "#laborcost",
-    "#primecost",
-    "#restaurantmath",
-    "#ownermath"
-  ]
+  "brandHashtag": "#RunonRhea",
+  "hashtagSets": {
+    "A": ["#restaurantowner", "#smallbusinessowner", "#laborcost", "#franchiseowner", "#coffeeshopowner"],
+    "B": ["#restaurantmanagement", "#salonowner", "#profitmargin", "#multiunit", "#smallbusinessfinance"]
+  },
+  "hashtagSetRule": "Set A on even-numbered posts, set B on odd-numbered posts (1-based, by position in the content file); 3 to 5 per post plus the brand tag. An A/B to review in Instagram Insights on 2026-11-02.",
+  "captionKeywords": ["restaurant", "coffee shop", "salon", "franchise", "multi-unit", "small business"]
 }

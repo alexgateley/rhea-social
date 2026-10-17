@@ -1,6 +1,7 @@
 {
   "date": "2026-10-28",
   "slug": "royalty-ad-fund",
+  "theme": "paper",
   "hook": "8% off the top is $115,200 a year.",
   "result": {
     "label": "To the franchisor this month",
@@ -18,6 +19,6 @@
     "contentBottom": 1687,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-17T00:48:49.378Z",
+  "renderedAt": "2026-10-17T01:39:22.932Z",
   "chromium": "141.0.7390.37"
 }

@@ -8,7 +8,8 @@
 // posts/ (whatever date it was rendered under), renames it to <date>-<slug>, rewrites meta.json's
 // date and caption.txt from the content, and rebuilds posts/index.json from every content file
 // whose posts have a folder. A post with no rendered folder is listed; render it with
-// `npm run render -- --month <month> --only <slug>`.
+// `npm run render -- --month <month> --only <slug>`. A post with a marker in published/ is left
+// exactly as it was (its caption and files are what people saw).
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -21,6 +22,7 @@ if (!month || !/^\d{4}-\d{2}$/.test(month)) { console.error('Usage: node render/
 
 const brand = JSON.parse(fs.readFileSync(path.join(root, 'brand.json'), 'utf8'));
 const postsDir = path.join(root, brand.postsDir || 'posts');
+const publishedDir = path.join(root, brand.publishedDir || 'published');
 const verify = spawnSync(process.execPath, [path.join(root, 'scripts/verify.mjs'), '--month', month], { stdio: 'inherit' });
 if (verify.status !== 0) process.exit(verify.status ?? 1);
 
@@ -34,6 +36,10 @@ for (const post of content.posts) {
   const want = `${post.date}-${post.slug}`;
   const have = folderOf(post.slug);
   if (!have) { missing.push(post.slug); continue; }
+  if (fs.existsSync(path.join(publishedDir, `${post.date}.json`))) {
+    if (have !== want) console.log(`${want} is published but its folder is ${have}; not touching it`);
+    continue;
+  }
   if (have !== want) {
     fs.renameSync(path.join(postsDir, have), path.join(postsDir, want));
     folders[folders.indexOf(have)] = want;

@@ -50,7 +50,6 @@
   "themeRule": "Themes rotate ink, sage-wash, sage, paper over every post in (date, slot) order. A day's two posts never share a theme, and no post shares a theme with the post before it. A post with a marker in published/ keeps its theme whatever the rule says.",
 
   "timezone": "America/Los_Angeles",
-  "postHour": 7,
   "weekdaysOnly": false,
   "slots": {
     "morning": {
@@ -58,7 +57,7 @@
       "label": "7AM",
       "index": "posts/index.json",
       "markerSuffix": "",
-      "note": "The existing slot: owner math on weekdays, a tip or a myth on weekends. posts/index.json and published/<date>.json are unchanged, so the publisher that is live today keeps working for every rendered morning post. postHour above is the same 7 and goes away when scripts/publish.mjs reads slots."
+      "note": "The existing slot: owner math on weekdays, a tip or a myth on weekends. posts/index.json and published/<date>.json are unchanged, so the publisher that is live today keeps working for every rendered morning post. scripts/publish.mjs reads the hour from here (the old postHour key is gone)."
     },
     "evening": {
       "hour": 18,

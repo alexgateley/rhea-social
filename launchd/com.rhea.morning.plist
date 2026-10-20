@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <!-- Kicks the "Post @RunonRhea" workflow's morning slot at 7:05 and 9:05 AM Pacific (the Mac's local time;
+       this Mac is in America/Los_Angeles, the same zone as brand.json). launchd runs a missed calendar
+       job at the next wake, and the workflow never posts a slot twice.
+       Install (after the twice-daily branch is pushed to main, so the workflow has its slot input):
+         cp launchd/com.rhea.morning.plist ~/Library/LaunchAgents/
+         launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.rhea.morning.plist
+       Test:      launchctl kickstart gui/$(id -u)/com.rhea.morning   (log: ~/Library/Logs/rhea-runonrhea.log)
+       Uninstall: launchctl bootout gui/$(id -u)/com.rhea.morning -->
+  <key>Label</key>
+  <string>com.rhea.morning</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/sh</string>
+    <string>/Users/alex/Desktop/rhea-social/scripts/kick-post.sh</string>
+    <string>morning</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <array>
+    <dict>
+      <key>Hour</key>
+      <integer>7</integer>
+      <key>Minute</key>
+      <integer>5</integer>
+    </dict>
+    <dict>
+      <key>Hour</key>
+      <integer>9</integer>
+      <key>Minute</key>
+      <integer>5</integer>
+    </dict>
+  </array>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>/Users/alex/Library/Logs/rhea-runonrhea-morning.launchd.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/alex/Library/Logs/rhea-runonrhea-morning.launchd.log</string>
+  <key>RunAtLoad</key>
+  <false/>
+</dict>
+</plist>

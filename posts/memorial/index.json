@@ -1,0 +1,22 @@
+{
+  "2026-10-25": {
+    "folder": "2026-10-25",
+    "slides": [
+      "slide-1.jpg",
+      "slide-2.jpg",
+      "slide-3.jpg",
+      "slide-4.jpg",
+      "slide-5.jpg"
+    ],
+    "caption": "caption.txt",
+    "source": "memorial/2026-10-25/ (copied unchanged; the founder approved the photo being public)",
+    "sha256": {
+      "slide-1.jpg": "6eb7bf6ca4c5cf72194a3600cf010282688ff3b9df1512dba7225d22f4044687",
+      "slide-2.jpg": "0fe322b53b5eefd82b240f6dd9fade56b8c3d93db1983ceea288116dc0912f59",
+      "slide-3.jpg": "4040216b76af138f11e6d7830e5e7cfa1a25da63e8ba61f260baae9e24bbfcb7",
+      "slide-4.jpg": "e02d3f0d5730f590b325752ee7bfe20649f56af4cbd98ce2318668df9e70d661",
+      "slide-5.jpg": "6c2f8192c247f5fc397eeed07a78879579d79f5d407aa6b9d8ecfec0d14073a0",
+      "caption.txt": "87d956b845cfb78aee5a5f803d2f2995744aab94c807c3db9b6e84f923f55777"
+    }
+  }
+}

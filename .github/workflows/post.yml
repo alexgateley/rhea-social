@@ -1,21 +1,31 @@
-name: Post Owner math
+name: Post @RunonRhea
 
 on:
   schedule:
-    # 7:00 AM America/Los_Angeles is 14:00 UTC in summer (PDT) and 15:00 UTC in winter (PST), so
-    # both are scheduled and the script itself posts only at or after 7 AM Pacific; 16:07 UTC is a
-    # retry. GitHub runs these hours late or not at all on a quiet repo, so a launch agent on Alex's
-    # Mac also kicks the workflow at 7:05 and 9:05 AM Pacific (see README). The marker in published/
-    # stops the later runs from posting again. Weekdays only (1-5): Owner math does not post on
-    # weekends.
-    - cron: '7 14 * * 1-5'
-    - cron: '7 15 * * 1-5'
-    - cron: '7 16 * * 1-5'
+    # Two slots a day in America/Los_Angeles, every day (brand.json `slots`). Each slot is scheduled in
+    # both PDT and PST and once more as a retry; the script itself posts a slot only from its hour in
+    # Pacific time, so daylight saving needs no edit. GitHub runs these late or not at all on a quiet
+    # repo, so launch agents on Alex's Mac also kick the workflow at 7:05/9:05 AM and 6:05/8:05 PM
+    # Pacific (see README). The markers in published/ stop later runs from posting again.
+    #
+    # Morning slot, 7:00 AM Pacific: 14:00 UTC in PDT, 15:00 UTC in PST
+    - cron: '7 14 * * *'
+    - cron: '7 15 * * *'
+    - cron: '7 16 * * *'
+    # Evening slot, 6:00 PM Pacific: 01:00 UTC (the next UTC day) in PDT, 02:00 UTC in PST
+    - cron: '7 1 * * *'
+    - cron: '7 2 * * *'
+    - cron: '7 3 * * *'
   workflow_dispatch:
     inputs:
       date:
-        description: 'Post a specific date (YYYY-MM-DD) now, skipping the 7 AM and weekday checks'
+        description: 'Post a specific date (YYYY-MM-DD) now, skipping the time-of-day check'
         required: false
+      slot:
+        description: 'auto = whatever is due today (both slots); morning = the 7 AM post; evening = the 6 PM post'
+        type: choice
+        options: [auto, morning, evening]
+        default: auto
       dry_run:
         description: 'Only log what would be posted'
         type: boolean
@@ -28,7 +38,7 @@ jobs:
   post:
     runs-on: ubuntu-latest
     concurrency:
-      group: post-owner-math
+      group: post-runonrhea
       cancel-in-progress: false
     steps:
       - uses: actions/checkout@v4
@@ -59,43 +69,64 @@ jobs:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
         run: node scripts/publish.mjs check
 
-      # PAGES_BASE_URL, the time zone and the posting hour come from brand.json
-      - name: Publish today's Reel
+      # Posts whatever is due and not yet posted: the 7 AM Reel from 7 AM, the 6 PM Reel from 6 PM, and
+      # on a memorial day (brand.json memorial.dates) only the memorial carousel, from 7 AM. SLOT limits
+      # a run to one slot; schedule runs have no inputs and look at both. PAGES_BASE_URL, the time zone
+      # and the hours come from brand.json.
+      - name: Publish what is due
         if: steps.creds.outputs.ready == 'true'
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           POST_DATE: ${{ inputs.date }}
+          SLOT: ${{ inputs.slot }}
           DRY_RUN: ${{ inputs.dry_run }}
         run: node scripts/publish.mjs
 
-      # Runs even when the post failed partway: a marker already written must be saved or the next
-      # run would post the day again
+      # Media of posts that went out more than 30 days ago leaves the Pages site (captions and meta
+      # stay); never a post without a marker, never posts/memorial/ or render/features/
+      - name: Prune old media
+        if: always() && steps.creds.outputs.ready == 'true' && inputs.dry_run != true
+        run: node scripts/prune.mjs
+
+      # Runs even when a post failed partway: a marker already written must be saved or the next run
+      # would post that slot again. The prune's deletions go in the same commit and push.
       - name: Record what was posted
         if: always() && steps.creds.outputs.ready == 'true'
         run: |
           git config user.name "rhea-social-bot"
           git config user.email "rhea-social-bot@users.noreply.github.com"
           git add published 2>/dev/null || true
-          # Name the commit after the post's own date (the new marker files), in Pacific time when none is staged
-          posted=$(git diff --cached --name-only -- published | sed -n 's#^published/\([0-9-]*\)\.json$#\1#p' | sort | paste -sd ' ' -)
-          git commit -m "Posted ${posted:-$(TZ=America/Los_Angeles date +%F)}" || { echo "Nothing new to record"; exit 0; }
+          # Name the commit after each new marker: "Posted 2026-10-21, 2026-10-21 evening"
+          posted=$(git diff --cached --name-only --diff-filter=A -- published \
+            | sed -n 's#^published/\([0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}\)\(-[a-z]*\)\{0,1\}\.json$#\1\2#p' \
+            | sed 's/-\([a-z][a-z]*\)$/ \1/' | sort | paste -sd ',' - | sed 's/,/, /g')
+          git add -A posts 2>/dev/null || true
+          pruned=$(git diff --cached --name-only --diff-filter=D -- posts | wc -l | tr -d ' ')
+          if git diff --cached --quiet; then echo "Nothing new to record"; exit 0; fi
+          if [ -n "$posted" ]; then msg="Posted $posted"; else msg="Pruned media posted more than 30 days ago"; fi
+          if [ -n "$posted" ] && [ "$pruned" != "0" ]; then msg="$msg; pruned $pruned old media files"; fi
+          git commit -q -m "$msg"
           for i in 1 2 3 4 5; do
             git pull --rebase -q origin main && git push -q && exit 0
             sleep $((i * 5))
           done
           echo "::error::Could not push the marker after 5 attempts"; exit 1
 
-      # Long-lived tokens last 60 days. Refresh weekly (Mondays, the first scheduled run of the
-      # week) and store the new one, which needs a fine-grained personal access token (GH_PAT) with
-      # "Secrets: write" on this repo.
-      - name: Refresh the Instagram token (Mondays)
-        if: github.event_name == 'schedule' && steps.creds.outputs.ready == 'true'
+      # Long-lived tokens last 60 days. Refresh on Monday mornings (Pacific), on whichever run gets there
+      # (a schedule or a launch-agent kick, since the schedule alone is unreliable), and store the new
+      # token, which needs a fine-grained personal access token (GH_PAT) with "Secrets: write" on this
+      # repo. A second refresh the same morning is refused by Instagram (token under 24 hours old) and
+      # only logged.
+      - name: Refresh the Instagram token (Monday mornings)
+        if: steps.creds.outputs.ready == 'true' && inputs.dry_run != true
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
-          if [ "$(date -u +%u)" != "1" ]; then echo "Not Monday; skipping refresh"; exit 0; fi
+          if [ "$(TZ=America/Los_Angeles date +%u)" != "1" ] || [ "$(TZ=America/Los_Angeles date +%H)" -ge 12 ]; then
+            echo "Not a Monday morning in Pacific time; skipping refresh"; exit 0
+          fi
           node scripts/publish.mjs refresh
           if [ -s new-token.txt ] && [ -n "$GH_TOKEN" ]; then
             gh secret set IG_ACCESS_TOKEN --repo "$GITHUB_REPOSITORY" < new-token.txt

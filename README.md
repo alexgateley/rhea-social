@@ -34,7 +34,7 @@ published/<date>.json              written by the job after posting (prevents do
 scripts/publish.mjs                the publisher (post, refresh, check)
 .github/workflows/post.yml         the daily job
 scripts/setup-secrets.sh           stores the Instagram credentials as repo secrets
-scripts/kick-post.sh, launchd/     the Mac launch agent that kicks the job on time
+scripts/kick-post.sh, launchd/     the Mac launch agents (7 AM and 6 PM) that kick the job on time
 ```
 
 ## How it mirrors icubasics-social
@@ -45,13 +45,16 @@ Same shape as the Question of the Day publisher, so the two repos are run the sa
   one account per repository, Reels only. Same flow: read `posts/index.json` for today, HEAD-check
   the media URL on GitHub Pages, create a `REELS` container (`share_to_feed=true`, `thumb_offset`
   from `meta.json`), poll its status, `media_publish`, then write the marker
-  `published/<date>.json`. `refresh` and `check` modes are kept. The time zone, posting hour,
-  weekdays-only rule and Pages URL come from `brand.json` instead of constants.
+  `published/<date>.json`. `refresh` and `check` modes are kept. The time zone, the slots' hours
+  and the Pages URL come from `brand.json` instead of constants. (Since October 20 it posts two
+  slots a day and memorial carousels, with icubasics-social's carousel code: "Index, markers and
+  the publisher" below.)
 - `.github/workflows/post.yml` has the same steps (credentials check, dry-run API check, publish,
-  marker commit with a pull-rebase retry, weekly token refresh), on 7 AM Pacific crons in both PDT
-  and PST plus a retry, weekdays only, committing as `rhea-social-bot`.
-- `scripts/setup-secrets.sh`, `scripts/kick-post.sh` and `launchd/com.rhea.ownermath.plist` are the
-  same tools for the same reasons (see "Why posts arrive from a launch agent" below).
+  marker commit with a pull-rebase retry, weekly token refresh), on Pacific crons in both PDT and
+  PST plus a retry for each slot, every day, committing as `rhea-social-bot`.
+- `scripts/setup-secrets.sh`, `scripts/kick-post.sh` and `launchd/com.rhea.morning.plist` and
+  `com.rhea.evening.plist` are the same tools for the same reasons (see "Why posts arrive from a
+  launch agent" below).
 - Posts live in the repo, including the rendered media, served by GitHub Pages from `main` (`.nojekyll`).
 
 What is different: the content is written here (`content/YYYY-MM.json`) and rendered here
@@ -79,17 +82,18 @@ before anything renders or posts.
    them. Optionally also give it a fine-grained GitHub personal access token for this repo with
    *Secrets: Read and write* (`GH_PAT`), so the job can store the refreshed Instagram token every
    Monday; without it, regenerate the token in the Meta dashboard every 60 days.
-6. **Test, then post the first Reel:** Actions → "Post Owner math" → Run workflow with `dry_run`
-   checked (it checks the token and logs what would be posted). Then run it again with
-   `date` = `2026-10-16` and `dry_run` off: that posts the first Reel right away, whatever the time
-   of day (a `date` skips the 7 AM and weekday checks). From the command line:
-   `gh workflow run "Post Owner math" --repo alexgateley/rhea-social -f date=2026-10-16 -f dry_run=false`.
-   The rest post themselves on their weekdays.
-7. **Launch agent (optional but recommended):** edit the script path in
-   `launchd/com.rhea.ownermath.plist` (the `/Users/alex/<path-to>/rhea-social` placeholder), then
-   `cp launchd/com.rhea.ownermath.plist ~/Library/LaunchAgents/ && launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.rhea.ownermath.plist`.
-   Test with `launchctl kickstart gui/$(id -u)/com.rhea.ownermath`; the log is
-   `~/Library/Logs/rhea-ownermath.log`.
+6. **Test, then post:** Actions → "Post @RunonRhea" → Run workflow with `dry_run` checked (it
+   checks the token and logs what would be posted). A run with a `date` (and a `slot`) and `dry_run`
+   off posts that day right away, whatever the time of day. From the command line:
+   `gh workflow run "Post @RunonRhea" --repo alexgateley/rhea-social -f date=2026-10-20 -f slot=morning -f dry_run=false`.
+   (The first Reel, 2026-10-16, went out this way under the workflow's first name, "Post Owner
+   math".) The rest post themselves.
+7. **Launch agents (recommended):** after the workflow with the `slot` input is on `main`,
+   `cp launchd/com.rhea.morning.plist launchd/com.rhea.evening.plist ~/Library/LaunchAgents/`, then
+   `launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.rhea.morning.plist` and the same for
+   `com.rhea.evening.plist`. Test with `launchctl kickstart gui/$(id -u)/com.rhea.morning`; the log
+   is `~/Library/Logs/rhea-runonrhea.log`. (The first run's `com.rhea.ownermath.plist` was never
+   installed and is gone.)
 
 Rendering locally needs Node 22, ffmpeg on the PATH, `npm install` (Playwright and the Inter Tight
 font files) and a Chromium that Playwright can find: `npx playwright install chromium`, or set
@@ -172,28 +176,41 @@ footer, then the hashtags:
 
 ## Commands
 
+Current as of October 20, 2026 (two slots a day); the builders' new commands are also listed under
+"Commands added" below.
+
 | Command | What it does |
 | --- | --- |
 | `npm run verify` | check every `content/*.json` (`-- --month 2026-10` for one), and the themes' contrast |
 | `node scripts/contrast.mjs` | print every theme's contrast ratios |
-| `npm run render -- --month 2026-10` | render the run's Reels into `posts/` (`--only <slug>`, `--keep-frames`, `--force` for published posts) |
-| `npm run relink -- --month 2026-10` | re-date rendered folders and rebuild `posts/index.json` after a schedule change |
-| `npm run publish:dry` | log what the publisher would post today without calling the API |
-| `POST_DATE=2026-10-16 npm run publish:dry` | the same for a specific date |
+| `npm run schedule -- --from 2026-10-21 --to 2026-11-30` | print the slot and type every day should carry |
+| `npm run render -- --month 2026-11` | render what is new or changed, rewrite captions, rebuild both indexes, then copy new Reels to the Desktop (`--slot`, `--type`, `--only <slug>`, `--no-desktop`, `--no-verify`, `--force`) |
+| `npm run relink -- --month 2026-10` | re-date rendered folders and rebuild the indexes after a schedule change |
+| `npm run record -- --id overview-stores` | record one feature from the local app into `render/features/<id>/` |
+| `npm run contact-sheet -- --month 2026-11` | every cover of the month on one page in `render/tmp/` |
+| `npm run desktop` | copy new Reels and captions to `~/Desktop/Instagram Reels to edit/@runonrhea/<date>/` (each file once; `DESKTOP_REELS_DIR=<folder>` writes elsewhere) |
+| `npm run publish:dry` | log what the publisher would post right now, both slots, without calling the API (dry runs skip the hour checks) |
+| `POST_DATE=2026-10-21 SLOT=evening npm run publish:dry` | the same for one date and slot (`SLOT` is `auto`, `morning` or `evening`) |
+| `POST_DATE=2026-10-25 npm run publish:dry` | the memorial carousel: its five slide URLs and the full caption |
+| `node scripts/publish.mjs mark --date 2026-10-25 --slot memorial` | record a post put up by hand (`--slot morning`, `evening` or `memorial`, optional `--note "..."`; also `npm run mark -- ...`), then commit and push the marker |
+| `npm run prune -- --days 30 --dry-run` | list (or, without `--dry-run`, remove) `reel.mp4` and `cover.jpg` of posts posted more than 30 days ago |
+| `npm test` | the publisher, memorial, prune, Desktop-copy and workflow tests (fake fetch, temporary folders; no network) |
 | `npm run check` | verify the token, account and publishing quota (needs `IG_USER_ID`, `IG_ACCESS_TOKEN`) |
 | `node scripts/publish.mjs refresh` | refresh the long-lived token into `new-token.txt` |
-| `gh workflow run "Post Owner math" -f dry_run=true` | run the job from the command line |
-| `gh workflow run "Post Owner math" -f date=2026-10-16 -f dry_run=false` | post a specific day now |
+| `gh workflow run "Post @RunonRhea" -f dry_run=true` | run the job from the command line, logging only |
+| `gh workflow run "Post @RunonRhea" -f date=2026-10-21 -f slot=evening -f dry_run=false` | post one day and slot now |
+| `KICK_DRY_RUN=true sh scripts/kick-post.sh evening` | show the command a launch agent would run, without running it |
 
 ## Notes
 
-- The job runs at 14:07, 15:07 and 16:07 UTC on weekdays; the script posts only from 7 AM
-  America/Los_Angeles onward, which handles daylight saving time, and never on a weekend unless
-  `POST_DATE` is given.
-- If a day has no folder in `posts/index.json`, the job logs that and does nothing.
-- To skip a day, delete its folder and its line in `index.json` before 7 AM. To re-post a day,
-  delete `published/<date>.json` and run the workflow with that date. To post a day early or on
-  demand, run the workflow with that `date` (or `POST_DATE=... node scripts/publish.mjs`).
+- The job runs every day at 14:07, 15:07 and 16:07 UTC (the morning slot) and 01:07, 02:07 and
+  03:07 UTC (the evening slot); the script posts a slot only from its hour in America/Los_Angeles
+  (7 AM, 6 PM), which handles daylight saving time, unless `POST_DATE` is given.
+- If a slot has no folder for the day in its index, the job logs that and does nothing for it.
+- To skip a post, delete its folder and its line in the slot's index before its hour. To re-post
+  one, delete its marker (`published/<date>.json`, `<date>-evening.json`) and run the workflow with
+  that date and slot. To post early or on demand, run the workflow with that `date` and `slot` (or
+  `POST_DATE=... SLOT=... node scripts/publish.mjs`).
 - A Reel plays 22.4 s (3 steps), 24.0 s (4) or 25.6 s (5): hook 0–3 s, term and formula 3–7 s,
   one step every 1.6 s, the result holds 4.2 s, the takeaway 4.2 s, the end card 2.2 s. The cover
   frame is taken 0.7 s after the result lands.
@@ -201,11 +218,12 @@ footer, then the hashtags:
 ## Why posts arrive from a launch agent on Alex's Mac
 
 GitHub's cron scheduler fires hours late or not at all on a quiet repository, so the schedule in
-the workflow is only a backup. The real trigger is a launchd agent on Alex's Mac,
-`launchd/com.rhea.ownermath.plist`, which runs `scripts/kick-post.sh` at 7:05 and 9:05 AM Pacific.
-The script calls `gh workflow run "Post Owner math" -f dry_run=false`; the workflow posts today's
-Reel once (the marker in `published/` prevents duplicates) and only from 7 AM Pacific onward, so
-extra kicks are harmless. launchd runs a missed job at the next wake, but a Mac that is shut down or
+the workflow is only a backup. The real trigger is two launchd agents on Alex's Mac:
+`launchd/com.rhea.morning.plist` runs `scripts/kick-post.sh morning` at 7:05 and 9:05 AM Pacific,
+`launchd/com.rhea.evening.plist` runs `scripts/kick-post.sh evening` at 6:05 and 8:05 PM. The
+script calls `gh workflow run "Post @RunonRhea" -f slot=<slot> -f dry_run=false`; the workflow
+posts each slot once (a marker per date and slot in `published/` prevents duplicates) and only from
+the slot's hour, so extra kicks are harmless. launchd runs a missed job at the next wake, but a Mac that is shut down or
 offline at both times posts only if GitHub's own schedule happens to fire.
 
 ---
@@ -420,6 +438,26 @@ New mode `node scripts/publish.mjs mark --date YYYY-MM-DD --slot morning|evening
 writes the marker by hand (`mediaId: "by-hand"`), for a post the founder put up himself before the job ran;
 commit and push the marker so the job sees it.
 
+As built (builder C), in addition to the above:
+
+- **One slot failing never stops the other.** Each slot (and the memorial post) is tried on its own; whatever
+  went out keeps its marker, the run exits non-zero if anything failed, and the next run retries only what is
+  missing.
+- **Guards before any call to Instagram:** the folder name must be a post folder (`<date>-<slug>`); `reel.mp4`
+  must exist; when `meta.json` names a `slot` or `date`, it must match the index (an index pointing at the
+  wrong folder posts nothing and says so); the caption must fit Instagram's 2,200 characters.
+- **Hashtag limit as a safety net:** `verify` requires exactly five; if a caption still reaches the publisher
+  with more than `hashtagRules.maxPerPost` (5), the trailing hashtag line is cut to five with a warning (the
+  same rule icubasics-social's publisher applies), so Instagram never refuses a post over it. Memorial
+  captions are posted exactly as written: nothing added, nothing cut.
+- **Dry runs** (`DRY_RUN=true`, `npm run publish:dry`) skip the hour checks, never call `fetch` (not even the
+  HEAD check), never write a marker, and print each post's URL and full caption (for the memorial: every
+  slide URL in order, then the caption).
+- **Markers** now carry `slot` (and `type` when `meta.json` has one); the two existing morning markers keep
+  their shape and stay valid (`published/<date>.json` is the morning marker).
+- `brand.json` `postHour` is gone (the hours are `slots.*.hour`); `weekdaysOnly` stays `false` and is no longer
+  read.
+
 ### Memorial days
 
 `brand.memorial.dates` lists the days Kathy's memorial post is the only post (2026-10-25, 2027-04-20,
@@ -437,7 +475,20 @@ commit and push the marker so the job sees it.
 - the Desktop copy adds nothing for it, and `~/Desktop/Instagram Reels to edit/@runonrhea/2026-10-25/` is
   never written, renamed or deleted;
 - if the founder posts it by hand first: `node scripts/publish.mjs mark --date 2026-10-25 --slot memorial`,
-  commit, push.
+  commit, push. That one line is all it takes: the job then sees the memorial marker, skips the carousel, and
+  still posts nothing else that day. (`--note "posted from my phone"` is optional; an existing marker is never
+  overwritten.)
+
+As built: the memorial post is tried only in the morning slot (a run limited to `SLOT=evening` posts nothing on a
+memorial day, even when the carousel has not gone out); a plain run after 7 AM, including the 6 PM ones, posts
+the carousel if it is still missing. `posts/memorial/index.json` records each file's SHA-256; the tests
+(`scripts/memorial.test.mjs`) require the copies to match it and, on the founder's Mac where the git-ignored
+`memorial/2026-10-25/` exists, to match the originals byte for byte, and check every slide is a 1080×1350 JPEG and
+the caption has no hashtags. The publisher only warns on a checksum mismatch (a deliberate update by the founder
+should still post). On GitHub the "no memorial post prepared" line is a `::notice::`, so 2027-04-20 and
+2027-05-09 show up in the run summary until their folders exist. The carousel's child containers carry only
+`image_url` and `is_carousel_item=true`, exactly as icubasics-social's working recap code sends them (no
+`media_type` and no alt text on the children).
 
 `posts/memorial/2026-10-25/` holds exact copies of the six files in `memorial/2026-10-25/` (slide-1.jpg to
 slide-5.jpg, caption.txt; checksums equal, checked by a test), and `posts/memorial/index.json` maps the date to
@@ -481,6 +532,16 @@ launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.rhea.evening.plist
 GitHub's own schedule is the backup it always was. A day that passes before the branch is pushed is not posted
 late by the job (the date moves on); the founder can post it with `-f date=... -f slot=...`.
 
+As built: the marker commit reads e.g. "Posted 2026-10-21, 2026-10-21 evening" (or "Posted 2026-10-25 memorial"),
+and adds "; pruned N old media files" when the prune removed something; a run with only prune deletions commits
+"Pruned media posted more than 30 days ago". The prune is skipped on dry runs. The token refresh moved from
+"scheduled runs on Mondays (UTC)" to "any non-dry run on a Monday morning, Pacific", because the schedule alone is
+unreliable and a launch-agent kick is a `workflow_dispatch`; a second refresh the same morning is refused by
+Instagram (token under 24 hours old) and only logged. Install the launch agents only after the branch is on
+`main`: until then GitHub's workflow is still "Post Owner math", which has no `slot` input, and the kicks would
+fail (logged in `~/Library/Logs/rhea-runonrhea.log`). The old `launchd/com.rhea.ownermath.plist` (never
+installed) is deleted. `KICK_DRY_RUN=true sh scripts/kick-post.sh morning` prints the command without running it.
+
 ## The Desktop copy
 
 `scripts/desktop-copy.mjs` (also `npm run desktop`; `render` runs it at the end) copies every rendered Reel
@@ -502,6 +563,32 @@ an emptied day folder's files are never recreated (the folder itself may be remo
 touches the other accounts' folders or the shared `.copied` one level up, never writes into a memorial date's
 folder, and takes `DESKTOP_REELS_DIR` as an override so its tests and the builders run against a temporary
 folder only. Future months fill in on their own because `render` ends with it.
+
+As built (builder C), `scripts/desktop-copy.mjs`:
+
+- Reads both indexes (`posts/index.json` → `7AM`, `posts/index-evening.json` → `6PM`), so it copies exactly what
+  is scheduled, and takes the type and slug from `meta.json` (a morning folder without `type`, like the 18
+  owner-math folders rendered before October 20, counts as owner math). A post whose `reel.mp4` is missing (not
+  rendered, or pruned) is skipped and not recorded, so it is copied if it comes back.
+- Keys in `.copied` are one per file, `<date>/<name>.mp4` and `<date>/<name>.txt`, so deleting just the video or
+  just the caption is also respected. A file of the same name already there (put there by hand) is recorded and
+  never overwritten. Videos are written to a hidden `.<name>.partial` and renamed, so an interrupted copy never
+  leaves half a video.
+- Like the founder's other accounts' copy, a caption follows later caption changes, but only while the post has
+  no marker, its video is still in the folder, and the `.txt` is exactly what the script last wrote (a hash per
+  caption in `@runonrhea/.captions.json`): a caption the founder edited, or one he put there, is never
+  overwritten.
+- Memorial dates from `brand.json` and, hard-coded as well, 2026-10-25 are skipped entirely: no file and no folder
+  is ever created for them.
+- It refuses to write anywhere in `~/Desktop/Instagram Reels to edit` but its `@runonrhea` folder (never the
+  shared folder with the other app's `.copied`, never `@icubasics`, `@rnbasicsnclex`, `@themedicbasics`), and
+  refuses those account names anywhere else.
+- Proved against a temporary folder on 2026-10-20 with the real repo: 36 files (the 18 owner-math Reels from
+  October 20 to November 12 and their captions), and a second run added nothing. The real Desktop folder was not
+  written to. If the founder ever deletes `@runonrhea/.copied`, the next run copies everything again.
+- `render/render.mjs` runs `node scripts/desktop-copy.mjs` at its end unless `--no-desktop` (it inherits
+  `DESKTOP_REELS_DIR`); the module also exports `desktopCopy()` (returns `{ added, refreshed, skipped }`) and
+  exits non-zero only for a refused folder.
 
 ## GitHub Pages size
 
@@ -625,7 +712,7 @@ morning Reel with `gh workflow run "Post @RunonRhea" -f date=2026-10-20 -f slot=
 | `npm run prune -- --days 30 [--dry-run]` | remove media of posts posted more than 30 days ago |
 | `SLOT=evening npm run publish:dry`, `POST_DATE=... SLOT=... npm run publish:dry` | what the publisher would post |
 | `node scripts/publish.mjs mark --date 2026-10-25 --slot memorial` | record a post the founder put up by hand |
-| `npm test` | the publisher, prune and Desktop-copy tests (fake fetch, temporary folders) |
+| `npm test` | the publisher, memorial, prune, Desktop-copy and workflow tests (fake fetch, temporary folders) |
 | `gh workflow run "Post @RunonRhea" -f date=2026-10-21 -f slot=evening -f dry_run=false` | post one day and slot now |
 
 ## Decisions and why

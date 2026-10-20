@@ -2,3 +2,7 @@ node_modules/
 render/tmp/
 new-token.txt
 .DS_Store
+
+# Kathy memorial: the photo and rendered drafts stay on the Mac (Alex posts these himself)
+memorial/src/
+memorial/20*/

@@ -3,6 +3,18 @@
   "name": "Rhea",
   "site": "rheafi.com",
   "series": "Owner math",
+  "kickers": {
+    "owner-math": "Owner math",
+    "tip": "Daily tip",
+    "myth": "Myth vs fact",
+    "feature": "In the app"
+  },
+  "endCardLines": {
+    "owner-math": "Owner math, every weekday at 7",
+    "tip": "A tip for multi-store owners, daily",
+    "myth": "Myth vs fact, for multi-store owners",
+    "feature": "Try the demo: demo.rheafi.com"
+  },
   "colors": {
     "paper": "#f5f2ed",
     "ink": "#0e1116",
@@ -35,18 +47,116 @@
     }
   },
   "themeRotation": ["ink", "sage-wash", "sage", "paper"],
+  "themeRule": "Themes rotate ink, sage-wash, sage, paper over every post in (date, slot) order. A day's two posts never share a theme, and no post shares a theme with the post before it. A post with a marker in published/ keeps its theme whatever the rule says.",
+
   "timezone": "America/Los_Angeles",
   "postHour": 7,
-  "weekdaysOnly": true,
+  "weekdaysOnly": false,
+  "slots": {
+    "morning": {
+      "hour": 7,
+      "label": "7AM",
+      "index": "posts/index.json",
+      "markerSuffix": "",
+      "note": "The existing slot: owner math on weekdays, a tip or a myth on weekends. posts/index.json and published/<date>.json are unchanged, so the publisher that is live today keeps working for every rendered morning post. postHour above is the same 7 and goes away when scripts/publish.mjs reads slots."
+    },
+    "evening": {
+      "hour": 18,
+      "label": "6PM",
+      "index": "posts/index-evening.json",
+      "markerSuffix": "-evening",
+      "note": "The new slot: feature, tip, feature, myth, repeating over every non-memorial day. Folders are posts/<date>-evening-<slug>/, markers published/<date>-evening.json."
+    }
+  },
+  "rotation": {
+    "weekdayMorning": "owner-math",
+    "weekendMorning": "tip or myth: the one that day's evening is not; when the evening is a feature, the one the previous weekend morning was not",
+    "evening": ["feature", "tip", "feature", "myth"],
+    "rule": "A day's two posts differ in type; consecutive evenings differ in type; consecutive weekend mornings differ in type; a feature recording returns no sooner than 14 days later, with a new headline and caption. Memorial dates take no regular post in either slot and do not advance the cycle."
+  },
+
+  "memorial": {
+    "dates": ["2026-10-25", "2027-04-20", "2027-05-09"],
+    "dir": "posts/memorial",
+    "slot": "morning",
+    "markerSuffix": "-memorial",
+    "note": "On a memorial date the 7 AM run publishes the carousel in posts/memorial/<date>/ (slide-N.jpg in order, caption.txt) once, marker published/<date>-memorial.json, and nothing else posts that day in either slot. A date with no folder posts nothing and logs a notice. The files are copies of memorial/<date>/ (never generated, never reworded)."
+  },
+
   "pagesBaseUrl": "https://alexgateley.github.io/rhea-social",
   "postsDir": "posts",
   "publishedDir": "published",
+  "prune": {
+    "afterDays": 30,
+    "files": ["reel.mp4", "cover.jpg"],
+    "note": "Media of a post whose marker is older than afterDays is removed from the Pages site (caption.txt and meta.json stay). Never a post without a marker, never posts/memorial/."
+  },
+  "desktopCopy": {
+    "dir": "~/Desktop/Instagram Reels to edit/@runonrhea",
+    "listFile": ".copied",
+    "firstDate": "2026-10-20",
+    "dayFolders": true,
+    "typeLabels": { "owner-math": "owner math", "tip": "tip", "myth": "myth", "feature": "feature" },
+    "note": "<dir>/<date>/<date> <7AM|6PM> <type label> <slug>.mp4 and .txt, each copied once (recorded in <dir>/.copied), so a file Alex deleted never comes back. Memorial dates are never written to. render runs it at the end unless --no-desktop; DESKTOP_REELS_DIR overrides dir for tests."
+  },
+
   "captionFooter": "Rhea: automated books, labor and per-store profit for multi-store owners. rheafi.com (link in bio)",
+  "captionFooterFeature": "See it on sample data at demo.rheafi.com. Rhea: automated books, labor and per-store profit for multi-store owners. rheafi.com (link in bio)",
+  "captionFirstLine": {
+    "maxChars": 125,
+    "minWords": 8,
+    "note": "The first line is the search sentence: what owners type (the topic in their words) and who it is for, no hashtags, under 125 characters so it shows whole before Instagram's 'more'."
+  },
+  "captionKeywords": ["restaurant", "coffee shop", "salon", "franchise", "multi-unit", "multi-store", "small business", "quick-service", "quick service"],
+
   "brandHashtag": "#RunonRhea",
+  "hashtagRules": {
+    "maxPerPost": 5,
+    "placement": "caption",
+    "composition": "#RunonRhea + 1 topic tag from the post type's pool + 2 audience tags from two different audience groups + 1 tag from the bookkeeping or broad group = 5",
+    "rotation": "No identical set of five within 14 days; consecutive posts share at most two tags; every audience group appears at least once a week; a tag not in these pools is refused (no made-up, broken, banned or vendor tags).",
+    "memorial": "none",
+    "source": "Instagram, December 18, 2025: up to five hashtags in a caption for a reel or post (README: Hashtags and discovery)"
+  },
+  "hashtagPools": {
+    "audience": {
+      "franchise": ["#franchiseowner", "#franchisee", "#multiunitfranchisee", "#franchisebusiness", "#multiunit"],
+      "restaurant": ["#restaurantowner", "#restaurantmanagement", "#restaurantbusiness", "#quickservicerestaurant", "#foodbusiness"],
+      "coffee": ["#coffeeshopowner", "#cafeowner", "#coffeeshopbusiness", "#coffeebusiness"],
+      "salon": ["#salonowner", "#salonbusiness", "#salonownerlife", "#beautybusiness"],
+      "bookkeeping": ["#smallbusinessbookkeeping", "#smallbusinessfinance", "#bookkeepingtips", "#businessfinance", "#bookkeeping"],
+      "broad": ["#smallbusinessowner", "#businessowner", "#smallbusinesstips"]
+    },
+    "topic": {
+      "owner-math": ["#laborcost", "#primecost", "#foodcost", "#profitmargin", "#cashflow", "#breakeven", "#restaurantprofit", "#salestax", "#creditcardfees", "#giftcards", "#overtime"],
+      "tip": ["#smallbusinesstips", "#businesstips", "#bookkeepingtips", "#restaurantmanagement", "#cashflow", "#monthendclose"],
+      "myth": ["#mythvsfact", "#bookkeepingtips", "#accountingtips", "#smallbusinessbookkeeping", "#cashflow"],
+      "feature": ["#bookkeepingsoftware", "#restaurantaccounting", "#franchiseaccounting", "#accountingsoftware", "#restauranttech", "#laborcost"]
+    },
+    "sizes": "Not measured: no reliable public source gives current post counts, and Instagram's own search shows a count only inside the app. Check a tag's count under Search > Tags in the Instagram app before adding one; drop a tag whose page is empty or spammy."
+  },
   "hashtagSets": {
     "A": ["#restaurantowner", "#smallbusinessowner", "#laborcost", "#franchiseowner", "#coffeeshopowner"],
     "B": ["#restaurantmanagement", "#salonowner", "#profitmargin", "#multiunit", "#smallbusinessfinance"]
   },
-  "hashtagSetRule": "Set A on even-numbered posts, set B on odd-numbered posts (1-based, by position in the content file); 3 to 5 per post plus the brand tag. An A/B to review in Instagram Insights on 2026-11-02.",
-  "captionKeywords": ["restaurant", "coffee shop", "salon", "franchise", "multi-unit", "small business"]
+  "hashtagSetRule": "RETIRED on 2026-10-20 in favor of hashtagPools (the 2026-11-02 A/B review is moot: posts 1 and 2 are the only ones that went out with the old sets). Kept only until scripts/verify.mjs reads hashtagPools; builder A deletes hashtagSets and this line then.",
+
+  "pricing": {
+    "source": "rhea-site/src/lib/pricing.ts and src/app/pricing/page.tsx, live at rheafi.com/pricing, read 2026-10-20",
+    "perStoreMonthlyBilledAnnually": { "1-3": "$149", "4-10": "$139", "11-20": "$129", "21-30": "$119", "over 30": "We'll quote" },
+    "billedMonthlyExtraPerStore": "$20",
+    "trial": "7-day free trial",
+    "guarantee": "60-day money-back guarantee: not for you in the first 60 days, and we refund your subscription in full",
+    "guidedSetup": "guided setup is $199 + $49 a store, one time, paid when you subscribe",
+    "groups": "From 4 stores, a named contact and annual invoices paid by bank transfer (ACH)",
+    "stage": "Rhea is in pilot. Pilots for groups of 4 or more stores are open now; one to three stores can start once self-serve sign-up opens.",
+    "rule": "A post names a price only with these exact figures and words; any other dollar figure about Rhea is refused by verify."
+  },
+  "product": {
+    "pitch": "automated books, labor and per-store profit for multi-store owners",
+    "demoUrl": "demo.rheafi.com",
+    "siteUrl": "rheafi.com",
+    "demoNote": "Demo company · made-up numbers",
+    "factsFile": "FACTS.md"
+  }
 }

@@ -24,7 +24,9 @@
 //     neighbors share at most two, every industry group and bookkeeping each week;
 //   - themes: a valid theme, never the same as the post before (column repeats in the grid are warned);
 //   - features: the demo note and call to action exactly, a recording id that content/recordings.json
-//     describes, the same recording again only 14+ days later with a new headline.
+//     describes, the same recording again only 14+ days later with a new headline;
+//   - memorial carousels: posts/memorial/<date>/ matches its index and the founder's memorial/<date>/
+//     where that folder is on this machine (scripts/memorial.mjs).
 // A post with a marker in published/ is history: only its arithmetic is rechecked.
 // Exits non-zero when any file has a problem; warnings do not fail.
 import fs from 'node:fs';
@@ -35,7 +37,8 @@ import { checkThemes } from './contrast.mjs';
 import { COMPUTE } from './compute.mjs';
 import { createSchedule, addDays, daysBetween, isIsoDate, weekday } from './schedule.mjs';
 import { timing, cardHash } from '../render/timing.mjs';
-import { industryRule, pluralPair } from './hashtags.mjs';
+import { industryRule, isRoyaltyPost, pluralPair } from './hashtags.mjs';
+import { compareMemorial } from './memorial.mjs';
 
 // VERIFY_ROOT points the check at another copy of the repo (scripts/verify.test.mjs uses a temporary one)
 const root = process.env.VERIFY_ROOT ? path.resolve(process.env.VERIFY_ROOT) : path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -93,8 +96,8 @@ const BANNED = [
 
 // Whenever a post names one of these, it must also say the status FACTS.md gives it
 const STATUS = [
-  // (reading the bookkeeper's QuickBooks Online reports is built; pushing to QuickBooks is sandbox only)
-  [/\bQuickBooks\b(?! Online (reports?|exports?|P&L))/, /\bsandbox\b|with or without QuickBooks/i, 'QuickBooks: the push is sandbox only, say "sandbox" (or "with or without QuickBooks")'],
+  // (reading the bookkeeper's QuickBooks Online reports, P&L and general ledger is built; pushing to QuickBooks is sandbox only)
+  [/\bQuickBooks\b(?! Online (reports?|exports?|P&L|general ledger))/, /\bsandbox\b|with or without QuickBooks/i, 'QuickBooks: the push is sandbox only, say "sandbox" (or "with or without QuickBooks")'],
   [/\bPay from Rhea\b|\bStripe\b/, /\btest mode\b/i, 'Pay from Rhea and Stripe are in test mode: say so'],
   [/\bGusto\b/, /\boff\b/i, 'Connect with Gusto is off until the founder has keys: say so'],
   [/\bMelio\b/, /\bpending\b/i, 'Melio is pending: say so'],
@@ -278,12 +281,14 @@ function checkHashtagSet(p, say) {
   for (const h of p.hashtagHints ?? []) if (!tags.map(lower).includes(lower(h))) say(`hashtagHints lists ${h}, which is not in hashtags`);
   if (tags.length !== want) say(`has ${tags.length} hashtags (exactly ${want}; Instagram allows up to 5)`);
   if (new Set(tags.map(lower)).size !== tags.length) say('repeats a hashtag');
-  const pair = pluralPair(tags);
-  if (pair) say(`has both #${pair[0].slice(1)} and #${pair[1].slice(1)}: one tag and its plural reach the same people, so one of the five is wasted`);
+  const pair = pluralPair(tags, brand.hashtagRules?.sameAudience ?? []);
+  if (pair) say(`has both #${pair[0].slice(1)} and #${pair[1].slice(1)}: they reach the same people (a plural, or one hashtagRules.sameAudience group), so one of the five is wasted`);
   const type = typeOf(p);
   const topic = topicPool(type);
   const audiences = p.audiences ?? INDUSTRY;
-  if (!Array.isArray(audiences) || audiences.length < 2 || audiences.some((a) => !INDUSTRY.includes(a))) say(`audiences must list two or more of ${INDUSTRY.join(', ')}`);
+  if (!Array.isArray(audiences) || audiences.length < 1 || audiences.some((a) => !INDUSTRY.includes(a))) say(`audiences must list one or more of ${INDUSTRY.join(', ')}`);
+  // Royalty and ad-fund posts are for franchise owners only (brand.json hashtagRules.industryFit)
+  if (isRoyaltyPost(p) && JSON.stringify(audiences) !== JSON.stringify(['franchise'])) say(`is about franchise royalties or the ad fund, so its audiences must be ["franchise"] (hashtagRules.industryFit: royalty posts are franchise-only), not ${JSON.stringify(audiences)}`);
   let topicCount = 0, bookOrBroad = 0, broad = 0, niche = 0, industryCount = 0;
   const industryGroups = new Set();
   for (const t of tags) {
@@ -302,7 +307,8 @@ function checkHashtagSet(p, say) {
     if (Array.isArray(audiences) && !audiences.includes(g)) say(`hashtag ${t} is a ${g} tag, but the post is for ${audiences.join(', ')} (audiences)`);
   }
   if (topicCount < 1) say(`needs at least one topic tag from the ${type} pool`);
-  if (industryCount < 2 || industryGroups.size < 2) say('needs industry tags from at least two different industry groups');
+  const needGroups = Array.isArray(audiences) && audiences.length === 1 ? 1 : 2;
+  if (industryCount < 2 || industryGroups.size < needGroups) say(needGroups === 2 ? 'needs industry tags from at least two different industry groups' : 'needs two industry tags');
   if (Array.isArray(audiences)) {
     const groups = tags.map((t) => groupOfTag.get(lower(t))).filter((g) => g && g !== 'bookkeeping' && g !== 'broad');
     const wrong = industryRule(String(p.caption ?? '').split('\n')[0], audiences, groups);
@@ -424,6 +430,9 @@ console.log(`brand.json: ${Object.keys(brand.themes).length} themes meet WCAG AA
 const problems = new Map(allFiles.map((f) => [f, []]));
 const warnings = new Map(allFiles.map((f) => [f, []]));
 const globalProblems = checkPools();
+// The memorial carousels: the committed copies must match their index and, on the founder's Mac, his own
+// files in memorial/<date>/ (the job posts the copies; an edit there is not posted until synced)
+for (const m of compareMemorial(root, brand)) globalProblems.push(m);
 
 const files = allFiles.map((f) => {
   const content = JSON.parse(fs.readFileSync(path.join(contentDir, f), 'utf8'));
@@ -615,7 +624,7 @@ if (unpublished.length) {
 
 // Report
 let failed = false;
-if (globalProblems.length) { failed = true; console.error('brand.json:'); for (const m of globalProblems) console.error(`  - ${m}`); }
+if (globalProblems.length) { failed = true; console.error('brand.json and the memorial posts:'); for (const m of globalProblems) console.error(`  - ${m}`); }
 for (const f of monthArg ? [`${monthArg}.json`] : allFiles) {
   const file = files.find((x) => x.name === f);
   const list = problems.get(f), warn = warnings.get(f);

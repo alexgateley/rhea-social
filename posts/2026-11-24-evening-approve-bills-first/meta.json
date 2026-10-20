@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-20",
+  "date": "2026-11-24",
   "slot": "evening",
   "type": "tip",
   "slug": "approve-bills-first",
@@ -16,7 +16,7 @@
     "#salonowner",
     "#bookkeepingtips"
   ],
-  "cardHash": "e9d4872924d17232a2212a64cd8072074ad5882f",
+  "cardHash": "9f94b057d8df619d31b1034334d2af9a6bcf7874",
   "durationSec": 24,
   "frames": 576,
   "fps": 24,
@@ -24,14 +24,21 @@
   "height": 1920,
   "layout": {
     "type": "tip",
-    "resultSize": 142,
+    "resultSize": 128,
     "resultLines": 2,
-    "scale": 1,
-    "contentBottom": 1808,
-    "bottomLimit": 1810,
+    "scale": 0.96,
+    "gap": 0.5,
+    "contentBottom": 1533,
+    "bottomLimit": 1536,
     "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
     "hookLines": 3
   },
-  "renderedAt": "2026-10-20T19:19:28.553Z",
-  "chromium": "155.0.8059.85"
+  "renderedAt": "2026-10-20T21:12:02.438Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
 }

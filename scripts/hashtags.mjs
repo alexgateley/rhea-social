@@ -9,7 +9,9 @@
 // hashtagPools.topic) in "hashtags", and list the industries it is true for in "audiences" (default:
 // all four). The picker never adds a topic tag of its own. Tags in "hashtagHints" are kept too (for example #multiunitfranchisee on a royalty post).
 // The picker adds the rest so that each set has two industry tags from two different groups the post
-// fits (and, when the caption's first line names industries, the ones it names: industryRule), a
+// fits (and, when the caption's first line names industries, the ones it names: industryRule; a post
+// true for one industry only, like a royalty post, takes both from that one), never two tags for the
+// same audience (pluralPair: a plural, or a hashtagRules.sameAudience group), a
 // bookkeeping or broad-owner tag, at least one broad and one niche tag, never repeats a set
 // within 14 days, shares at most two tags with the post before it, and covers every industry group
 // and the bookkeeping group each week; among the sets that keep the rules it takes the one whose tags
@@ -36,11 +38,25 @@ const NAMED = [
   ['coffee', /\bcoffee\b|\bcaf(e|é)s?\b/i],
   ['salon', /\bsalons?\b/i],
 ];
-/** Two tags that differ only by a final "s" (#salonowner, #salonowners) reach the same people: one slot wasted. */
-export function pluralPair(tags) {
+/**
+ * Two tags that reach the same people waste one of the five slots: a tag and its plural (#salonowner,
+ * #salonowners), or two tags brand.json lists as one audience (`hashtagRules.sameAudience`, e.g.
+ * #restaurantowner and #restaurateur). Returns the first such pair, or null.
+ */
+export function pluralPair(tags, sameAudience = []) {
   const l = tags.map((t) => String(t).toLowerCase());
   for (const t of l) if (l.includes(`${t}s`)) return [t, `${t}s`];
+  for (const group of sameAudience) {
+    const hit = group.map((t) => String(t).toLowerCase()).filter((t) => l.includes(t));
+    if (hit.length > 1) return hit.slice(0, 2);
+  }
   return null;
+}
+
+/** A post about franchise royalties or the ad fund: true for franchise owners only (hashtagRules.industryFit). */
+export function isRoyaltyPost(p) {
+  const text = [p.keyword, p.hook, p.term, p.title, p.fact, p.headline, String(p.caption ?? '').split('\n')[0]].filter(Boolean).join('\n');
+  return /\broyalt(y|ies)\b|\bad[- ]fund\b/i.test(text);
 }
 
 export function namedIndustries(text) {
@@ -77,6 +93,7 @@ export function createPicker(brand) {
   const broadTier = new Set(pools.tiers.broad.map(lower));
   const nicheTier = new Set(pools.tiers.niche.map(lower));
   const want = brand.hashtagRules.exactly ?? 5;
+  const sameAudience = brand.hashtagRules.sameAudience ?? [];
 
   /** Does a full set keep the composition rules for this post? */
   function composes(tags, p) {
@@ -94,8 +111,10 @@ export function createPicker(brand) {
       industry++; groups.add(g);
     }
     const industryGroups = tags.map((t) => groupOf.get(lower(t))).filter((g) => g && g !== 'bookkeeping' && g !== 'broad');
-    if (pluralPair(tags)) return false;
-    return topicCount >= 1 && industry >= 2 && groups.size >= 2 && bookOrBroad >= 1
+    if (pluralPair(tags, sameAudience)) return false;
+    // Two industry tags from two groups; a post true for one industry only (a royalty post: franchise)
+    // takes both from that one
+    return topicCount >= 1 && industry >= 2 && groups.size >= Math.min(2, audiences.length) && bookOrBroad >= 1
       && tags.some((t) => broadTier.has(lower(t))) && tags.some((t) => nicheTier.has(lower(t)))
       && industryRule(String(p.caption ?? '').split('\n')[0], audiences, industryGroups) === null;
   }

@@ -2,30 +2,17 @@
   "id": "sales-tax",
   "title": "Sales tax: collected by the POS vs paid per the bank, by month",
   "signIn": "viewer",
-  "facts": "FACTS.md 'Seeing the numbers' sales tax row: /ledger/sales-tax, src/core/sales-tax/; Rhea never files",
+  "facts": "FACTS.md 'Seeing the numbers' sales tax row: /ledger/sales-tax, src/core/sales-tax/; Rhea never files. Re-recorded October 20, 2026 to stop above the page's notes card, whose first line claims a return 'takes ten minutes instead of an hour' (src/core/sales-tax/settings.ts SALES_TAX_PROMISE), a time-savings figure nothing backs; the recorder refuses any frame that shows it",
+  "avoid": ["ten minutes instead of an hour"],
   "scenes": [
     {
       "path": "/ledger/sales-tax?llc=entity-101",
-      "note": "Store 101's LLC: collected vs paid by month, tied to 2210",
+      "note": "Store 101's LLC: collected vs paid by month, tied to 2210, then each store's collected beside its net sales",
       "settle": 1,
       "moves": [
-        {
-          "hold": 2.8
-        },
-        {
-          "scroll": 800,
-          "over": 2.4
-        },
-        {
-          "hold": 2.4
-        },
-        {
-          "scroll": 1600,
-          "over": 2.4
-        },
-        {
-          "hold": 2.4
-        }
+        { "hold": 3.6 },
+        { "scroll": 260, "over": 2.2 },
+        { "hold": 6.4 }
       ]
     }
   ]

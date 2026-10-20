@@ -15,6 +15,7 @@ import { folderName, slugOfFolder, markerFile, indexFile, captionText, rebuildIn
 import { planPost } from './plan.mjs';
 import { checkSpec, isBlocked, sceneSeconds, BLOCKED_PATHS } from './record-feature.mjs';
 import { moovFirst } from './probe.mjs';
+import { bedSamples, writeBed, SAMPLE_RATE } from './audio.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const brand = JSON.parse(fs.readFileSync(path.join(root, 'brand.json'), 'utf8'));
@@ -306,5 +307,59 @@ describe('template layout (needs Chrome)', async () => {
     const { text } = await layout(feature(), timing(feature(), { recording: fakeRecording }));
     assert.equal(text.endShown, false);
   });
+  test('Instagram\'s overlays: text cards end by 1536 px and keep the right 150 px clear; headlines start below the grid\'s 3:4 crop', { skip }, async () => {
+    for (const post of [ownerMath(5), tip(5, { action: 'Before payroll runs' }), myth(4)]) {
+      const { report } = await layout(post, timing(post));
+      assert.equal(report.bottomLimit, 1536);
+      assert.ok(report.contentBottom <= 1536, `${typeOf(post)}: bottom ${report.contentBottom}`);
+      assert.ok(report.rightEdge <= 1080 - 150, `${typeOf(post)}: right edge ${report.rightEdge}`);
+      assert.ok(report.hookTop >= 236, `${typeOf(post)}: hook top ${report.hookTop}`);
+    }
+    // Every unposted card in the content files (the first run's rendered owner math excepted)
+    for (const f of fs.readdirSync(path.join(root, 'content')).filter((x) => /^\d{4}-\d{2}\.json$/.test(x))) {
+      for (const post of JSON.parse(fs.readFileSync(path.join(root, 'content', f), 'utf8')).posts) {
+        if (typeOf(post) === 'feature' || !post.type) continue;
+        if (fs.existsSync(markerFile(brand, post.date, slotOf(post), root))) continue;
+        const { report } = await layout(post, timing(post));
+        assert.equal(report.overflow, false, `${post.slug}: ${JSON.stringify(report)}`);
+        assert.ok(report.contentBottom <= 1536 && report.rightEdge <= 930, `${post.slug}: ${JSON.stringify(report)}`);
+      }
+    }
+    const { report } = await layout(feature(), timing(feature(), { recording: fakeRecording }));
+    assert.deepEqual(report.window, { x: 247, y: 594, w: 586, h: 1270, r: 46 });
+    assert.ok(Math.abs(586 / 1270 - 860 / 1864) < 0.0005, 'the window keeps the recordings\' aspect');
+    assert.ok(report.headTop >= 244, `headline top ${report.headTop}`);
+  });
   test('cleanup', { skip }, async () => { await browser.close(); });
+});
+
+describe('the audio bed (render/audio.mjs)', () => {
+  test('exactly the Reel\'s length, quiet, never clipping, and the same every time', () => {
+    const a = bedSamples(22.417), b = bedSamples(22.417);
+    assert.equal(a.length, 2 * Math.round(22.417 * SAMPLE_RATE));
+    assert.deepEqual(a.slice(0, 5000), b.slice(0, 5000));
+    let sum = 0, peak = 0;
+    for (const x of a) { sum += x * x; peak = Math.max(peak, Math.abs(x)); }
+    const rmsDb = 10 * Math.log10(sum / a.length);
+    assert.ok(Math.abs(rmsDb - -28) < 0.5, `RMS ${rmsDb.toFixed(1)} dB`);
+    assert.ok(20 * Math.log10(peak) <= -10 + 1e-9, `peak ${(20 * Math.log10(peak)).toFixed(1)} dBFS`);
+    assert.equal(a[0], 0); // fades in from silence
+    assert.ok(Math.abs(a.at(-1)) < 1e-6 && Math.abs(a.at(-2)) < 1e-6); // and out to it
+  });
+  test('writes a 48 kHz 16-bit stereo WAV', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'rhea-bed-'));
+    try {
+      const file = writeBed(path.join(dir, 'bed.wav'), 2);
+      const b = fs.readFileSync(file);
+      assert.equal(b.toString('latin1', 0, 4), 'RIFF');
+      assert.equal(b.readUInt16LE(22), 2);
+      assert.equal(b.readUInt32LE(24), 48000);
+      assert.equal(b.readUInt16LE(34), 16);
+      assert.equal(b.readUInt32LE(40), 2 * 48000 * 2 * 2);
+    } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+  });
+  test('brand.json turns it on, at -28 dB', () => {
+    assert.equal(brand.audioBed.enabled, true);
+    assert.equal(brand.audioBed.levelDb, -28);
+  });
 });

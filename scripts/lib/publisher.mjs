@@ -90,6 +90,32 @@ export function limitHashtags(caption, max) {
   return { caption: lines.join('\n').trimEnd(), removed, over: Math.max(0, before - max) };
 }
 
+/** The one-line way to record a by-hand post from anywhere: the workflow writes the marker on main. */
+export const BY_HAND_WORKFLOW = (date) => `gh workflow run "Post @RunonRhea" --repo alexgateley/rhea-social -f date=${date} -f by_hand=true`;
+
+/**
+ * A marker counts only on main: the job checks out main and nothing else. Before `mark` writes one in
+ * a local clone, the clone must be on main and not behind origin/main (after a fetch); otherwise the
+ * marker lands on a branch the job never reads (a bare `git push` from twice-daily pushes there), or
+ * the push is refused because the bot's own marker commits are newer. `git(args)` runs git in the
+ * clone and returns { status, stdout, stderr } (the tests pass a fake). Resolves to { ok, reason, fix }.
+ */
+export function checkMarkBranch(git) {
+  const head = git(['rev-parse', '--abbrev-ref', 'HEAD']);
+  if (head.status !== 0) return { ok: false, reason: `this folder is not a git clone (${String(head.stderr || '').trim()})`, fix: null };
+  const branch = head.stdout.trim();
+  if (branch !== 'main') {
+    return { ok: false, reason: `this clone is on "${branch}", but the job reads main only, so a marker committed here would not stop it`, fix: 'git switch main && git pull --rebase origin main' };
+  }
+  const fetched = git(['fetch', '--quiet', 'origin', 'main']);
+  if (fetched.status !== 0) return { ok: false, reason: `could not fetch origin main (${String(fetched.stderr || '').trim().split('\n')[0]})`, fix: null };
+  const behind = Number(git(['rev-list', '--count', 'HEAD..origin/main']).stdout.trim() || 0);
+  if (behind > 0) {
+    return { ok: false, reason: `main is ${behind} commit${behind === 1 ? '' : 's'} behind origin/main (the job commits a marker after every post), so the push would be refused`, fix: 'git pull --rebase origin main' };
+  }
+  return { ok: true };
+}
+
 /**
  * createPublisher({ root, fetch, now, env, log, warn, sleep }) → { publish, mark, refresh, check }
  *
@@ -358,18 +384,27 @@ export function createPublisher({
   /**
    * Records a post the founder put up by hand, so the job won't post it again:
    *   node scripts/publish.mjs mark --date 2026-10-25 --slot memorial
+   * The job reads main only, so the marker counts once it is on main: the workflow's by_hand input
+   * writes it there; run locally, scripts/publish.mjs first checks this clone is on an up-to-date main
+   * (checkMarkBranch below).
    */
   function mark({ date, slot, note } = {}) {
     if (!date || !DATE_RE.test(date)) throw new Error('mark needs --date YYYY-MM-DD');
     const valid = [...Object.keys(slots), 'memorial'];
-    if (!valid.includes(slot)) throw new Error(`mark needs --slot ${valid.join('|')}`);
+    // On a memorial date the memorial post is the only post, and only its marker stops the job: any
+    // slot named that day (morning, evening, auto or none) records the memorial post
+    if (memorial.dates.includes(date) && slot !== 'memorial') {
+      log(`${date} is a memorial date: the memorial post is the only post that day, so this records the memorial post${slot ? ` (not "${slot}")` : ''}.`);
+      slot = 'memorial';
+    }
+    if (!valid.includes(slot)) throw new Error(`mark needs --slot ${valid.join('|')}${slot === 'auto' ? ' (auto works only on a memorial date)' : ''}`);
     if (slot === 'memorial' && !memorial.dates.includes(date)) {
       throw new Error(`${date} is not a memorial date (brand.json memorial.dates: ${memorial.dates.join(', ')})`);
     }
     const file = markerPath(date, slot);
     if (fs.existsSync(file)) {
       log(`${rel(file)} already exists; nothing changed.`);
-      return { file, written: false };
+      return { file, written: false, slot };
     }
     const folder = slot === 'memorial'
       ? `${memorial.dir}/${date}`
@@ -379,8 +414,10 @@ export function createPublisher({
       kind: slot === 'memorial' ? 'carousel' : 'reel', ...(note ? { note } : {}),
     });
     log(`Wrote ${rel(file)}: the job will not post ${date} ${slot}.`);
-    log(`Commit and push it so the job sees it:\n  git add ${rel(file)} && git commit -m "Posted ${date} ${slot} by hand" && git push`);
-    return { file, written: true };
+    if (env.GITHUB_ACTIONS !== 'true') {
+      log(`Commit it and push it to main (the only branch the job reads) before the slot's hour:\n  git add ${rel(file)} && git commit -m "Posted ${date} ${slot} by hand" && git push origin main`);
+    }
+    return { file, written: true, slot };
   }
 
   async function refresh() {

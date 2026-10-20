@@ -2,8 +2,8 @@
   "id": "bills",
   "title": "Bills: approved before they are paid, matched to the statement line that paid them",
   "fps": 24,
-  "frames": 352,
-  "durationSec": 14.667,
+  "frames": 345,
+  "durationSec": 14.375,
   "width": 860,
   "height": 1864,
   "viewport": {
@@ -15,31 +15,43 @@
   "scenes": [
     {
       "path": "/bills",
-      "note": "Bills: to approve, due, paid",
+      "note": "Bills: what to approve, what is due and what was paid, then Accounts Payable by LLC; tap the Paid tab",
       "startFrame": 0,
-      "endFrame": 208,
+      "endFrame": 189,
       "startSec": 0,
-      "endSec": 8.667,
+      "endSec": 7.875,
       "reelSec": [
         1,
-        9.667
+        8.875
       ]
     },
     {
-      "path": "/bills/bil_136565a7-d3d1-4bb0-b117-de15e1e3b645",
-      "note": "One bill: vendor, lines coded to accounts, who approved it, and the payment matched to the bank line",
-      "startFrame": 208,
-      "endFrame": 352,
-      "startSec": 8.667,
-      "endSec": 14.667,
+      "path": "/bills/bil_b930d56a-b851-4cea-bd43-e8941589f3e3",
+      "note": "The paid bills; tap the first",
+      "startFrame": 189,
+      "endFrame": 239,
+      "startSec": 7.875,
+      "endSec": 9.958,
       "reelSec": [
-        9.667,
-        15.667
+        8.875,
+        10.958
+      ]
+    },
+    {
+      "path": "/bills/bil_b930d56a-b851-4cea-bd43-e8941589f3e3",
+      "note": "One paid bill: its lines coded to accounts and its payment matched to its statement line (the page's Pay from Rhea card, test mode, sits below and is never in view)",
+      "startFrame": 239,
+      "endFrame": 345,
+      "startSec": 9.958,
+      "endSec": 14.375,
+      "reelSec": [
+        10.958,
+        15.375
       ]
     }
   ],
   "note": "Reel time = recording time + 1.0 s (render/timing.mjs RECORDING_AT). Pick a feature post's thumbOffsetMs inside a scene's reelSec.",
-  "recordedAt": "2026-10-20T18:58:13.479Z",
+  "recordedAt": "2026-10-20T20:54:08.018Z",
   "app": {
     "url": "http://localhost:3600",
     "commit": "9bc6e96",

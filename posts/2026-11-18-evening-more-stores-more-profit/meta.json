@@ -23,14 +23,21 @@
   "height": 1920,
   "layout": {
     "type": "myth",
-    "resultSize": 132,
+    "resultSize": 116,
     "resultLines": 3,
     "scale": 1,
-    "contentBottom": 1633,
-    "bottomLimit": 1810,
+    "gap": 0.55,
+    "contentBottom": 1531,
+    "bottomLimit": 1536,
     "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 319,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-20T19:18:26.977Z",
-  "chromium": "155.0.8059.85"
+  "renderedAt": "2026-10-20T21:08:00.020Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
 }

@@ -5,13 +5,13 @@
   "series": "Owner math",
   "kickers": {
     "owner-math": "Owner math",
-    "tip": "Daily tip",
+    "tip": "Owner tip",
     "myth": "Myth vs fact",
     "feature": "In the app"
   },
   "endCardLines": {
     "owner-math": "Owner math, every weekday",
-    "tip": "A tip for multi-store owners, daily",
+    "tip": "Tips for multi-store owners",
     "myth": "Myth vs fact, for multi-store owners",
     "feature": "Try the demo: demo.rheafi.com"
   },
@@ -83,6 +83,12 @@
     "note": "On a memorial date the 7 AM run publishes the carousel in posts/memorial/<date>/ (slide-N.jpg in order, caption.txt) once, marker published/<date>-memorial.json, and nothing else posts that day in either slot. A date with no folder posts nothing and logs a notice. The files are copies of memorial/<date>/ (never generated, never reworded)."
   },
 
+  "audioBed": {
+    "enabled": true,
+    "levelDb": -28,
+    "note": "Every Reel the renderer makes carries a quiet audio bed written by render/audio.mjs (original audio Rhea owns: a soft four-chord pad and a light mallet line, about -25 LUFS), because Instagram shows muted Reels to fewer people. false puts the silent track back. The 17 first-run owner-math Reels (October 21 to November 12) were rendered before it and stay silent unless re-rendered."
+  },
+
   "pagesBaseUrl": "https://alexgateley.github.io/rhea-social",
   "postsDir": "posts",
   "publishedDir": "published",
@@ -115,9 +121,11 @@
     "maxPerPost": 5,
     "exactly": 5,
     "placement": "caption: the last line of the caption, never a comment, never the first line (tags in a comment count toward the same five, so a comment adds nothing)",
-    "composition": "5 tags = at least 1 topic tag from the post type's pool (topic) + 2 industry tags from two different industry groups the post fits (franchise, restaurant, coffee, salon; a post's audiences field lists the groups it is true for) + at least 1 bookkeeping or broad-owner tag; the fifth is any pool tag that keeps these rules. Each set mixes sizes: at least one broad tag and at least one niche tag (hashtagPools.tiers).",
+    "composition": "5 tags = at least 1 topic tag from the post type's pool (topic) + 2 industry tags from two different industry groups the post fits (both from the one group when the post fits only one, as a royalty post fits franchise) (franchise, restaurant, coffee, salon; a post's audiences field lists the groups it is true for) + at least 1 bookkeeping or broad-owner tag; the fifth is any pool tag that keeps these rules. Each set mixes sizes: at least one broad tag and at least one niche tag (hashtagPools.tiers).",
     "rotation": "No identical set of five within 14 days of another post; consecutive posts (in date and slot order) share at most two tags; in every Monday-to-Sunday week the content covers, each industry group and the bookkeeping group appear at least once. A tag outside these pools is refused, so a made-up, broken, banned, misleading or vendor tag cannot ship.",
-    "industryFit": "An industry tag goes only on a post that is true for that industry: no salon tags on food cost, prime cost or delivery posts; no franchise tags on posts that only make sense for an independent; royalty posts are franchise-only.",
+    "industryFit": "An industry tag goes only on a post that is true for that industry: no salon tags on food cost, prime cost or delivery posts; no franchise tags on posts that only make sense for an independent; royalty posts are franchise-only (verify: a post whose keyword, card or first line names royalties or the ad fund has audiences [\"franchise\"], and its two industry tags are both franchise tags).",
+    "sameAudience": [["#restaurantowner", "#restaurantowners", "#restaurateur"]],
+    "sameAudienceNote": "Tags in one group reach the same people (restaurateur is restaurant owner), so a set never carries two of them: one of the five would be wasted. A tag and its plural count the same way (scripts/hashtags.mjs pluralPair).",
     "industryFromFirstLine": "The industry tags follow the caption's first line, so the words search reads and the tags tell Instagram the same audience: when the first line names industries (franchise or multi-unit, restaurant or quick-service, coffee shop or cafe, salon), the industry tags cover two of them (or the one it names), and every industry tag is one it names or a franchise tag (multi-unit franchise owners are the account's core audience). A first line that names only franchise owners lets the second industry tag come from any group the post fits. A first line that names no industry (multi-store owners) leaves the choice to the rotation. Enforced by verify (scripts/hashtags.mjs industryRule), applied by the picker.",
     "memorial": "none: the memorial carousel is posted exactly as the founder wrote it",
     "source": "README.md, 'Hashtags and discovery' (researched October 20, 2026): Instagram's @creators account, December 18, 2025, 'up to 5 hashtags in a reel or post'; Instagram's Help Center, 'You can use up to 5 tags on a post'; Instagram's advice to use 'fewer (up to 5) more targeted hashtags, rather than many generic ones'."

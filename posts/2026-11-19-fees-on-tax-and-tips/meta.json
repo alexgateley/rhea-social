@@ -18,7 +18,7 @@
     "#smallbusinessfinance",
     "#smallbusinesstips"
   ],
-  "cardHash": "7e3c6885d1fb463f8899613f6172badea9c4ec51",
+  "cardHash": "f2ac7d8ec12cdacaba17b4b9f3cc593ffc04d560",
   "durationSec": 22.417,
   "frames": 538,
   "fps": 24,
@@ -29,11 +29,18 @@
     "resultSize": 210,
     "resultLines": 1,
     "scale": 1,
+    "gap": 1,
     "contentBottom": 1519,
-    "bottomLimit": 1810,
+    "bottomLimit": 1536,
     "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-20T19:47:37.633Z",
-  "chromium": "155.0.8059.85"
+  "renderedAt": "2026-10-20T21:08:22.428Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
 }

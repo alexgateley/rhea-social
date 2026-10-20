@@ -5,7 +5,12 @@
   "slug": "statements-reconciled",
   "theme": "paper",
   "headline": "Bank and card statements, in the books and reconciled",
-  "recording": "statements-reconcile",
+  "recording": {
+    "id": "statements-reconcile",
+    "sha1": "5e79921b40463c2c2eb27909284da6b19b17ac80",
+    "frames": 381,
+    "fps": 24
+  },
   "thumbOffsetMs": 15700,
   "captionFirstLine": "Bank statement reconciliation for multi-store owners: every LLC's accounts tied to the cent.",
   "hashtags": [
@@ -28,16 +33,21 @@
     "subSize": 34,
     "subLines": 2,
     "contentBottom": 508,
-    "bottomLimit": 476,
+    "bottomLimit": 510,
     "overflow": false,
     "window": {
-      "x": 240,
-      "y": 560,
-      "w": 600,
-      "h": 1300,
+      "x": 247,
+      "y": 594,
+      "w": 586,
+      "h": 1270,
       "r": 46
-    }
+    },
+    "headTop": 244
   },
-  "renderedAt": "2026-10-20T19:14:07.879Z",
-  "chromium": "155.0.8059.85"
+  "renderedAt": "2026-10-20T21:03:24.333Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
 }

@@ -28,12 +28,19 @@
     "type": "owner-math",
     "resultSize": 210,
     "resultLines": 1,
-    "scale": 1,
-    "contentBottom": 1781,
-    "bottomLimit": 1810,
+    "scale": 0.96,
+    "gap": 0.5,
+    "contentBottom": 1491,
+    "bottomLimit": 1536,
     "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
     "hookLines": 3
   },
-  "renderedAt": "2026-10-20T19:49:36.089Z",
-  "chromium": "155.0.8059.85"
+  "renderedAt": "2026-10-20T21:16:20.601Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
 }

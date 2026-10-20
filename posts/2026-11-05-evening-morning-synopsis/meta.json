@@ -5,7 +5,12 @@
   "slug": "morning-synopsis",
   "theme": "paper",
   "headline": "Every store, summed up in sentences each morning",
-  "recording": "synopsis",
+  "recording": {
+    "id": "synopsis",
+    "sha1": "e73488ee5de52d11cd4f9284e8f32b624833343f",
+    "frames": 365,
+    "fps": 24
+  },
   "thumbOffsetMs": 2200,
   "captionFirstLine": "Daily sales summary email for multi-store owners: every store's yesterday in plain sentences.",
   "hashtags": [
@@ -28,16 +33,21 @@
     "subSize": 34,
     "subLines": 2,
     "contentBottom": 508,
-    "bottomLimit": 476,
+    "bottomLimit": 510,
     "overflow": false,
     "window": {
-      "x": 240,
-      "y": 560,
-      "w": 600,
-      "h": 1300,
+      "x": 247,
+      "y": 594,
+      "w": 586,
+      "h": 1270,
       "r": 46
-    }
+    },
+    "headTop": 244
   },
-  "renderedAt": "2026-10-20T19:11:24.698Z",
-  "chromium": "155.0.8059.85"
+  "renderedAt": "2026-10-20T21:00:39.697Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
 }

@@ -11,8 +11,8 @@
   "hashtags": [
     "#cashflowmanagement",
     "#restaurantowner",
-    "#restaurateur",
     "#coffeeshopowners",
+    "#salonowners",
     "#smallbusinesstips"
   ],
   "cardHash": "09048b86b56c4586c999b353a3cb57bb9578c164",
@@ -23,14 +23,21 @@
   "height": 1920,
   "layout": {
     "type": "myth",
-    "resultSize": 132,
-    "resultLines": 3,
+    "resultSize": 114,
+    "resultLines": 2,
     "scale": 1,
-    "contentBottom": 1693,
-    "bottomLimit": 1810,
+    "gap": 0.85,
+    "contentBottom": 1533,
+    "bottomLimit": 1536,
     "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 327,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-20T19:12:50.554Z",
-  "chromium": "155.0.8059.85"
+  "renderedAt": "2026-10-20T21:02:09.255Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
 }

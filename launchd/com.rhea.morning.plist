@@ -2,20 +2,31 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-  <!-- Kicks the "Post @RunonRhea" workflow's morning slot at 7:05 and 9:05 AM Pacific (the Mac's local time;
-       this Mac is in America/Los_Angeles, the same zone as brand.json). launchd runs a missed calendar
-       job at the next wake, and the workflow never posts a slot twice.
-       Install (after the twice-daily branch is pushed to main, so the workflow has its slot input):
+  <!-- Kicks the "Post @RunonRhea" workflow at 7:05 AM and 9:05 AM Pacific (the 7 AM slot and a retry; the Mac's local time,
+       America/Los_Angeles, the same zone as brand.json). It sends slot=auto: the workflow posts whatever
+       is due and not yet posted (a slot only from its hour, each slot once, on a memorial day only the
+       memorial carousel), so an evening kick also posts a morning Reel or a memorial carousel that
+       failed earlier. launchd runs a missed calendar job at the next wake.
+
+       The command is written out here instead of running scripts/kick-post.sh: macOS protects
+       ~/Desktop (privacy settings, "Files and Folders"), and a launchd job that reads a script from
+       there can fail with "Operation not permitted" or wait on a prompt nobody sees. Nothing below
+       reads from ~/Desktop. scripts/kick-post.sh does the same by hand (KICK_DRY_RUN=true prints it).
+
+       Install (after the twice-daily branch is merged to main, so the workflow has its slot input):
          cp launchd/com.rhea.morning.plist ~/Library/LaunchAgents/
          launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.rhea.morning.plist
-       Test:      launchctl kickstart gui/$(id -u)/com.rhea.morning   (log: ~/Library/Logs/rhea-runonrhea.log)
+       Test:      launchctl kickstart gui/$(id -u)/com.rhea.morning
+                  then read ~/Library/Logs/rhea-runonrhea.log ("kicked auto (morning agent)") and
+                  ~/Library/Logs/rhea-runonrhea-morning.launchd.log (errors from launchd or the shell)
        Uninstall: launchctl bootout gui/$(id -u)/com.rhea.morning -->
   <key>Label</key>
   <string>com.rhea.morning</string>
   <key>ProgramArguments</key>
   <array>
     <string>/bin/sh</string>
-    <string>/Users/alex/Desktop/rhea-social/scripts/kick-post.sh</string>
+    <string>-c</string>
+    <string>LOG="$HOME/Library/Logs/rhea-runonrhea.log"; mkdir -p "$HOME/Library/Logs"; n=0; until curl -s -o /dev/null --max-time 5 https://api.github.com/ || [ $n -ge 12 ]; do n=$((n+1)); sleep 10; done; if out=$(gh workflow run "Post @RunonRhea" --repo alexgateley/rhea-social -f slot=auto -f dry_run=false 2&gt;&amp;1); then echo "$(date '+%Y-%m-%d %H:%M:%S %Z') kicked auto ($0 agent): $out" &gt;&gt; "$LOG"; else echo "$(date '+%Y-%m-%d %H:%M:%S %Z') FAILED to kick auto ($0 agent): $out" &gt;&gt; "$LOG"; exit 1; fi</string>
     <string>morning</string>
   </array>
   <key>StartCalendarInterval</key>
@@ -38,6 +49,8 @@
     <key>PATH</key>
     <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
   </dict>
+  <key>WorkingDirectory</key>
+  <string>/tmp</string>
   <key>StandardOutPath</key>
   <string>/Users/alex/Library/Logs/rhea-runonrhea-morning.launchd.log</string>
   <key>StandardErrorPath</key>

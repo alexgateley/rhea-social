@@ -115,6 +115,26 @@ test('never a tag and its plural in one set', () => {
   for (const q of run(sequence())) assert.equal(pluralPair(q.hashtags), null, q.hashtags.join(' '));
 });
 
+test('never two tags for one audience: #restaurantowner, #restaurantowners and #restaurateur are one', () => {
+  const same = brand.hashtagRules.sameAudience;
+  assert.deepEqual(pluralPair(['#restaurantowner', '#restaurateur', '#laborcost'], same), ['#restaurantowner', '#restaurateur']);
+  assert.deepEqual(pluralPair(['#restaurateur', '#restaurantowners'], same), ['#restaurantowners', '#restaurateur']);
+  assert.equal(pluralPair(['#restaurateur', '#restaurantmanagement'], same), null);
+  const { composes } = createPicker(brand);
+  const p = { date: '2026-12-01', type: 'owner-math', slug: 'x', caption: 'Labor cost for multi-store owners: what it is.' };
+  assert.equal(composes(['#laborcost', '#restaurantowner', '#restaurateur', '#bookkeeping', '#smallbusinessowner'], p), false);
+  for (const q of run(sequence())) assert.equal(pluralPair(q.hashtags, same), null, q.hashtags.join(' '));
+});
+
+test('a post for one industry only (a royalty post) takes both industry tags from it', () => {
+  const { pick, composes } = createPicker(brand);
+  const p = { date: '2026-12-01', type: 'owner-math', slug: 'royalty', audiences: ['franchise'], caption: 'Franchise royalty math for multi-unit owners: what the fees take.', hashtags: ['#profitmargin'] };
+  const tags = pick(p, []);
+  const groups = tags.map((t) => groupOf.get(lower(t))).filter(Boolean);
+  assert.ok(groups.length >= 2 && groups.every((g) => g === 'franchise'), tags.join(' '));
+  assert.equal(composes(['#profitmargin', '#franchiseowner', '#coffeeshopowner', '#bookkeeping', '#multiunitfranchisee'], p), false, 'no coffee tag on a franchise-only post');
+});
+
 test('every unpublished post in content/ keeps the first-line rule and has no plural pair', () => {
   const brandAll = Object.keys(pools.industry);
   for (const f of fs.readdirSync(path.join(root, 'content')).filter((x) => /^\d{4}-\d{2}\.json$/.test(x))) {
@@ -123,7 +143,7 @@ test('every unpublished post in content/ keeps the first-line rule and has no pl
       if (fs.existsSync(marker)) continue;
       const groups = p.hashtags.map((t) => groupOf.get(lower(t))).filter(Boolean);
       assert.equal(industryRule(p.caption.split('\n')[0], p.audiences ?? brandAll, groups), null, `${p.date} ${p.slug}: ${p.hashtags.join(' ')}`);
-      assert.equal(pluralPair(p.hashtags), null, `${p.date} ${p.slug}`);
+      assert.equal(pluralPair(p.hashtags, brand.hashtagRules.sameAudience), null, `${p.date} ${p.slug}`);
       assert.ok(!p.hashtags.map(lower).includes('#breakeven'), `${p.slug}: #breakeven is retired`);
     }
   }

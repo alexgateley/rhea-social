@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-30",
+  "slot": "evening",
+  "type": "myth",
+  "slug": "utility-bills-vary",
+  "theme": "paper",
+  "hook": "Utilities cost about the same every month.",
+  "fact": "Utilities follow the weather and the meter.",
+  "thumbOffsetMs": 4200,
+  "captionFirstLine": "Utility costs for restaurant, coffee shop and salon owners: why the bill isn't the same every month.",
+  "hashtags": [
+    "#businesstips",
+    "#franchiseowner",
+    "#coffeebusiness",
+    "#salonowners",
+    "#businessowner"
+  ],
+  "cardHash": "a9ab1e735a7132464cbc798ea51d12857819b605",
+  "durationSec": 22.917,
+  "frames": 550,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "myth",
+    "resultSize": 114,
+    "resultLines": 3,
+    "scale": 1,
+    "gap": 0.85,
+    "contentBottom": 1533,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 327,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T21:16:24.280Z",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  },
+  "chromium": "155.0.8059.85"
+}

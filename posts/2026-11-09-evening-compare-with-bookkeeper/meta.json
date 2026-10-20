@@ -5,7 +5,12 @@
   "slug": "compare-with-bookkeeper",
   "theme": "sage",
   "headline": "Check your books against your bookkeeper's, to the cent",
-  "recording": "compare-bookkeeper",
+  "recording": {
+    "id": "compare-bookkeeper",
+    "sha1": "e26071138c74359115eddbfac71e8eee6b606255",
+    "frames": 346,
+    "fps": 24
+  },
   "thumbOffsetMs": 10700,
   "captionFirstLine": "Checking your bookkeeper's books: a month-end tool for franchise and multi-store owners.",
   "hashtags": [
@@ -28,16 +33,21 @@
     "subSize": 34,
     "subLines": 2,
     "contentBottom": 495,
-    "bottomLimit": 476,
+    "bottomLimit": 510,
     "overflow": false,
     "window": {
-      "x": 240,
-      "y": 560,
-      "w": 600,
-      "h": 1300,
+      "x": 247,
+      "y": 594,
+      "w": 586,
+      "h": 1270,
       "r": 46
-    }
+    },
+    "headTop": 244
   },
-  "renderedAt": "2026-10-20T19:13:25.597Z",
-  "chromium": "155.0.8059.85"
+  "renderedAt": "2026-10-20T21:02:44.092Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
 }

@@ -5,7 +5,12 @@
   "slug": "sales-tax-collected-vs-paid",
   "theme": "sage-wash",
   "headline": "Sales tax collected vs paid, by month",
-  "recording": "sales-tax",
+  "recording": {
+    "id": "sales-tax",
+    "sha1": "1bc484d4a9577d204b260b9f242d7b0fccd1b9b8",
+    "frames": 293,
+    "fps": 24
+  },
   "thumbOffsetMs": 7400,
   "captionFirstLine": "Sales tax report for multi-store owners: collected vs paid, by LLC and month.",
   "hashtags": [
@@ -15,9 +20,9 @@
     "#businessfinance",
     "#smallbusinesstips"
   ],
-  "cardHash": "c6aa937065779f59524192870fac7d54fb2b3d50",
-  "durationSec": 15.667,
-  "frames": 376,
+  "cardHash": "7ceefc56e62b63e850998708b2d7667c966d5901",
+  "durationSec": 15.417,
+  "frames": 370,
   "fps": 24,
   "width": 1080,
   "height": 1920,
@@ -28,16 +33,21 @@
     "subSize": 34,
     "subLines": 2,
     "contentBottom": 508,
-    "bottomLimit": 476,
+    "bottomLimit": 510,
     "overflow": false,
     "window": {
-      "x": 240,
-      "y": 560,
-      "w": 600,
-      "h": 1300,
+      "x": 247,
+      "y": 594,
+      "w": 586,
+      "h": 1270,
       "r": 46
-    }
+    },
+    "headTop": 244
   },
-  "renderedAt": "2026-10-20T19:21:08.832Z",
-  "chromium": "155.0.8059.85"
+  "renderedAt": "2026-10-20T21:25:33.793Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
 }

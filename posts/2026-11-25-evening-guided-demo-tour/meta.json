@@ -5,7 +5,12 @@
   "slug": "guided-demo-tour",
   "theme": "sage-wash",
   "headline": "Take the guided tour of a 15-store group",
-  "recording": "demo-tour",
+  "recording": {
+    "id": "demo-tour",
+    "sha1": "0e019b1158cf88ad87dc27a79add3790e1f98628",
+    "frames": 338,
+    "fps": 24
+  },
   "thumbOffsetMs": 6600,
   "captionFirstLine": "Bookkeeping software demo for multi-store franchise owners: a guided tour on sample data.",
   "hashtags": [
@@ -28,16 +33,21 @@
     "subSize": 34,
     "subLines": 2,
     "contentBottom": 508,
-    "bottomLimit": 476,
+    "bottomLimit": 510,
     "overflow": false,
     "window": {
-      "x": 240,
-      "y": 560,
-      "w": 600,
-      "h": 1300,
+      "x": 247,
+      "y": 594,
+      "w": 586,
+      "h": 1270,
       "r": 46
-    }
+    },
+    "headTop": 244
   },
-  "renderedAt": "2026-10-20T19:22:32.313Z",
-  "chromium": "155.0.8059.85"
+  "renderedAt": "2026-10-20T21:12:39.865Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
 }

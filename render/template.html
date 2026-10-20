@@ -16,14 +16,22 @@
   render/render.mjs loads this file, calls window.setPost(post, timing, brand) once, then steps the
   CSS custom property --t (seconds) on <html> and screenshots each frame. Every bit of motion below
   is a pure function of --t: no transitions, no keyframes, no timers, so a frame renders the same
-  every time. The owner-math card is drawn exactly as it was for the first run; the other types
-  add classes and move nodes, never change its rules.
+  every time. The other types add classes and move nodes on the owner-math card's rules.
+
+  Instagram's overlays (fix pass, October 20, 2026): the card column ends by BOTTOM_LIMIT, 1536 px
+  (the bottom fifth stays clear for the handle, the caption's first lines and the audio line), and
+  everything from the steps down keeps the right --rail (78 px) clear for the like, comment, share and
+  audio buttons; the spacing (--gap) and then the type (--scale) tighten until a card fits. The 17
+  first-run owner-math Reels (October 16 to November 12) were drawn before this, ending by 1810 px,
+  and keep their videos. A feature's headline starts below y 240, where the profile grid's 3:4 crop
+  begins, and its window sits at (247, 594), 586 by 1270.
 
   Fonts: Inter Tight from node_modules/@fontsource/inter-tight (installed by npm; no network).
   Colors: one of the four themes in brand.json (paper, ink, sage-wash, sage), chosen per post;
   every pair used here is checked by scripts/contrast.mjs.
   Instagram's overlays: the top ~170 px (the Reels header) carries only the kicker and the mark; the
-  feature's demo note and headline sit above the window, clear of the caption and the buttons.
+  feature's demo note and headline sit above the window, clear of the caption and the buttons; the
+  hook and the headline start below y 240 so the profile grid's 3:4 crop keeps them whole.
 -->
 <style>
   @font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 400; font-display: block; src: url("../node_modules/@fontsource/inter-tight/files/inter-tight-latin-400-normal.woff2") format("woff2"); }
@@ -53,9 +61,11 @@
     --hook-move-at: 2.6;
     --hook-move-for: 0.6;
     --result-size: 210px;
+    --gap: 1;          /* vertical spacing between blocks; setPost tightens it before the type */
+    --rail: 78px;      /* kept clear on the right from the steps down: Instagram's buttons */
 
     /* feature: where the screen recording shows (render.mjs reads the same numbers from setPost's report) */
-    --win-x: 240px; --win-y: 560px; --win-w: 600px; --win-h: 1300px; --win-r: 46px;
+    --win-x: 247px; --win-y: 594px; --win-w: 586px; --win-h: 1270px; --win-r: 46px;
     --headline-size: 72px;
     --sub-size: 34px;
     --strike-at: 3.7;
@@ -117,11 +127,11 @@
   }
   .hook-rule {
     width: 120px; height: 8px; background: var(--accent); border-radius: 4px;
-    margin-top: 36px;
+    margin-top: calc(36px * var(--gap));
   }
 
   /* Term and formula */
-  .term-block { margin-top: 44px; }
+  .term-block { margin-top: calc(44px * var(--gap)); }
   .term {
     font-size: 32px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
     color: var(--heading);
@@ -136,10 +146,10 @@
   }
 
   /* Worked steps */
-  .steps { margin-top: 40px; }
+  .steps { margin-top: calc(40px * var(--gap)); margin-right: var(--rail); }
   .step {
     display: flex; align-items: baseline; justify-content: space-between; gap: 40px;
-    padding: 22px 0;
+    padding: calc(22px * var(--gap)) 0;
     border-top: 2px solid var(--line); /* on the step itself, so it appears with the step */
   }
   .step:last-child { border-bottom: 2px solid var(--line); }
@@ -163,7 +173,7 @@
   }
 
   /* The result */
-  .result { margin-top: 48px; }
+  .result { margin-top: calc(48px * var(--gap)); margin-right: var(--rail); }
   .result-label {
     font-size: 32px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
     color: var(--heading);
@@ -184,8 +194,9 @@
 
   /* The takeaway */
   .takeaway {
-    margin-top: 44px;
-    padding: 30px 36px 30px 40px;
+    margin-top: calc(44px * var(--gap));
+    margin-right: var(--rail);
+    padding: calc(30px * var(--gap)) 36px calc(30px * var(--gap)) 40px;
     background: var(--wash);
     border-left: 8px solid var(--accent);
     border-radius: 0 20px 20px 0;
@@ -223,7 +234,7 @@
     text-wrap: balance;
     line-height: 1.0;
     letter-spacing: -0.035em;
-    max-width: 936px;
+    max-width: 858px;
   }
 
   /* tip: "The tip" over the title, then numbered lines */
@@ -251,7 +262,7 @@
   /* myth: the labels are pills, outlined for the myth and filled for the fact */
   .myth-label {
     display: none;
-    margin-bottom: 26px;
+    margin-bottom: calc(26px * var(--gap));
     padding: 8px 22px 7px;
     border: 3px solid var(--heading);
     border-radius: 999px;
@@ -260,6 +271,8 @@
     width: fit-content;
   }
   .type-myth .myth-label { display: block; }
+  /* the MYTH pill starts below y 240, where the profile grid's 3:4 crop begins */
+  .type-myth .hook-wrap { margin-top: 76px; }
   .type-myth .result-label {
     display: block; width: fit-content;
     padding: 9px 24px 8px;
@@ -296,7 +309,7 @@
       0 26px 70px 0 rgba(14, 17, 22, 0.22),
       0 0 0 3000px var(--bg);
   }
-  .f-head { margin-top: 38px; }
+  .f-head { margin-top: 72px; } /* the headline's first line starts below y 240 (the grid's 3:4 crop) */
   .f-headline {
     font-size: var(--headline-size);
     font-weight: 700;
@@ -392,13 +405,18 @@
 
 <script>
   const FRAME_H = 1920;
-  const BOTTOM_LIMIT = FRAME_H - 14 - 96; // progress bar plus breathing room
+  // The card column ends by the top of the bottom fifth: Instagram draws the handle, the caption's first
+  // lines and the audio line over the bottom of a Reel (the first run's cards ended by 1810)
+  const BOTTOM_LIMIT = Math.round(FRAME_H * 0.8);
   const RESULT_MAX = 210, RESULT_MIN = 180;
-  const SCALE_MIN = 0.955; // keeps 44px body type at or above 42px; the result never shrinks below 180px
+  // To fit, the spacing tightens first (--gap down to GAP_MIN), then the type (--scale down to SCALE_MIN:
+  // 44px body type stays at or above 38px, the 88px hook at or above 76px); the result never shrinks below 180px
+  const GAP_MIN = 0.5, SCALE_MIN = 0.86;
   // A big line that wraps (tip action, myth fact): its size range and how many lines it may take
   const WRAP = { tip: { max: 150, min: 104, lines: 2, oneLineMin: 120 }, myth: { max: 132, min: 92, lines: 3 } };
   // feature: the window (must match the CSS variables above), and the headline's fit
-  const WIN = { x: 240, y: 560, w: 600, h: 1300, r: 46 };
+  // 586×1270 keeps the recordings' 860×1864 aspect; 594 puts the headline below the grid's 3:4 crop
+  const WIN = { x: 247, y: 594, w: 586, h: 1270, r: 46 };
   const HEAD_LIMIT = WIN.y - 66 - 18; // the headline block ends above the demo note
   const HEADLINE = { max: 76, min: 56, lines: 2 }, SUB = { max: 34, min: 28, lines: 2 };
 
@@ -498,11 +516,16 @@
     setVar($('end'), '--in', timing.endAt);
     setVar(root, '--hook-move-at', timing.hookMoveAt ?? timing.termAt - 0.4);
 
-    const column = $('frame').clientWidth - 144;
     const rv = $('result-value');
+    const column = $('result').clientWidth; // the column less the right rail
     const bottom = () => $('takeaway').getBoundingClientRect().bottom;
     setVar(root, '--t', 1000); // everything laid out at its final place
-    let resultSize, scale = 1, resultLines = 1;
+    let resultSize, scale = 1, gap = 1, resultLines = 1;
+    // The ways to make room, in order: tighter spacing, then smaller type
+    const levels = [];
+    for (let g = 100; g >= GAP_MIN * 100; g -= 5) levels.push({ gap: g / 100, scale: 1 });
+    for (let k = 995; k >= SCALE_MIN * 1000; k -= 5) levels.push({ gap: GAP_MIN, scale: k / 1000 });
+    const apply = (l) => { gap = l.gap; scale = l.scale; setVar(root, '--gap', gap); setVar(root, '--scale', scale); };
     if (type === 'owner-math') {
       // Fit the result to the column width (never below RESULT_MIN), then the whole column to the frame
       resultSize = RESULT_MAX;
@@ -511,13 +534,10 @@
         resultSize -= 2;
         setVar(root, '--result-size', `${resultSize}px`);
       }
-      while (bottom() > BOTTOM_LIMIT && scale > SCALE_MIN) {
-        scale = Math.round((scale - 0.005) * 1000) / 1000;
-        setVar(root, '--scale', scale);
-      }
+      for (const l of levels) { apply(l); if (bottom() <= BOTTOM_LIMIT) break; }
     } else {
-      // The big line wraps: the largest size at which no word is cut and it takes at most
-      // WRAP.lines lines and the column fits the frame; then the shared scale, as owner math
+      // The big line wraps: at each level, the largest size at which no word is cut, it takes at most
+      // WRAP.lines lines and the column fits the frame
       const w = WRAP[type];
       const fits = (maxLines) => {
         resultLines = lineCount(rv, resultSize, 1.0);
@@ -531,15 +551,19 @@
         return false;
       };
       // A short action reads best on one line ("Every Monday"): take one line down to oneLineMin,
-      // otherwise the largest size that wraps to at most w.lines
-      if (!(w.oneLineMin && search(w.max, w.oneLineMin, 1)) && !search(w.max, w.min, w.lines)) {
-        resultSize = w.min;
-        setVar(root, '--result-size', `${resultSize}px`);
+      // otherwise the largest size that wraps to at most w.lines. The big line is the card's point, so it
+      // stays within 85% of its largest size while the spacing and type tighten; only if nothing fits that
+      // way does it go down to its smallest size
+      const tryLevel = (l, floor) => {
+        apply(l);
+        return (w.oneLineMin && search(w.max, Math.max(w.oneLineMin, floor), 1)) || search(w.max, floor, w.lines);
+      };
+      let found = false;
+      for (const floor of [Math.round(w.max * 0.85), w.min]) {
+        for (const l of levels) if (tryLevel(l, floor)) { found = true; break; }
+        if (found) break;
       }
-      while (bottom() > BOTTOM_LIMIT && scale > SCALE_MIN) {
-        scale = Math.round((scale - 0.005) * 1000) / 1000;
-        setVar(root, '--scale', scale);
-      }
+      if (!found) { resultSize = w.min; setVar(root, '--result-size', `${resultSize}px`); }
       resultLines = lineCount(rv, resultSize, 1.0);
     }
     const contentBottom = bottom();
@@ -551,10 +575,14 @@
     const hookBox = $('hook-in').getBoundingClientRect();
     const hookCenter = hookBox.top + hookBox.height / 2;
     setVar(root, '--hook-shift', `${Math.round(FRAME_H * 0.46 - hookCenter)}px`);
+    // Where everything rests: the right edge of the lower blocks (clear of the buttons) and the hook's top
+    const rightEdge = Math.round(Math.max(...[...document.querySelectorAll('.step, .result, .takeaway')].map((e) => e.getBoundingClientRect().right)));
+    const hookTop = Math.round($('hook').getBoundingClientRect().top);
 
     setVar(root, '--t', 0);
     return {
-      type, resultSize, resultLines, scale, contentBottom: Math.round(contentBottom), bottomLimit: BOTTOM_LIMIT, overflow,
+      type, resultSize, resultLines, scale, gap, contentBottom: Math.round(contentBottom), bottomLimit: BOTTOM_LIMIT, overflow,
+      rightEdge, hookTop,
       hookLines: Math.round($('hook').getBoundingClientRect().height / (88 * scale * 1.07)),
     };
   };
@@ -589,10 +617,15 @@
     const note = $('demo-note-text').getBoundingClientRect();
     const overflow = headLines() > HEADLINE.lines || subLines() > SUB.lines || headBottom() > HEAD_LIMIT
       || head.scrollWidth > head.clientWidth + 1 || note.width > 1080 - 144;
-    setVar(root, '--t', 0);
-    return {
+    // Measured where everything rests (t = 1000), not mid-fade
+    const report = {
       type: 'feature', headlineSize, headlineLines: headLines(), subSize, subLines: subLines(),
       contentBottom: Math.round(headBottom()), bottomLimit: HEAD_LIMIT, overflow, window: { ...WIN },
+      headTop: Math.round(head.getBoundingClientRect().top),
+    };
+    setVar(root, '--t', 0);
+    return {
+      ...report,
     };
   }
 </script>

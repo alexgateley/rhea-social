@@ -2,8 +2,8 @@
   "id": "sales-tax",
   "title": "Sales tax: collected by the POS vs paid per the bank, by month",
   "fps": 24,
-  "frames": 299,
-  "durationSec": 12.458,
+  "frames": 293,
+  "durationSec": 12.208,
   "width": 860,
   "height": 1864,
   "viewport": {
@@ -15,19 +15,19 @@
   "scenes": [
     {
       "path": "/ledger/sales-tax?llc=entity-101",
-      "note": "Store 101's LLC: collected vs paid by month, tied to 2210",
+      "note": "Store 101's LLC: collected vs paid by month, tied to 2210, then each store's collected beside its net sales",
       "startFrame": 0,
-      "endFrame": 299,
+      "endFrame": 293,
       "startSec": 0,
-      "endSec": 12.458,
+      "endSec": 12.208,
       "reelSec": [
         1,
-        13.458
+        13.208
       ]
     }
   ],
   "note": "Reel time = recording time + 1.0 s (render/timing.mjs RECORDING_AT). Pick a feature post's thumbOffsetMs inside a scene's reelSec.",
-  "recordedAt": "2026-10-20T18:58:52.570Z",
+  "recordedAt": "2026-10-20T21:24:53.186Z",
   "app": {
     "url": "http://localhost:3600",
     "commit": "9bc6e96",

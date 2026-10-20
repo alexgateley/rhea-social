@@ -51,7 +51,7 @@ about 8–30 stores" (`rhea-site/src/app/page.tsx` `Hero`).
 | Trial balance per LLC, journal-lines export, clearing-account rollforward tied to the trial balance | built | `/ledger/trial-balance`, `/ledger/rollforward`, `src/core/reports/trial-balance.ts`, `rollforward.ts` |
 | Balance sheet with opening balances typed on Setup | built | `/ledger/balance-sheet`, `src/server/opening-balances.ts`, `src/core/reports/balance-sheet.ts` |
 | Month close: months close in order, corrections only by reversal plus a new version, an add-only audit log; the owner's month-end checklist and "Close every ready month" | built | `/ledger/close`, `/ledger/close/[legalEntityId]/[month]`, `src/core/ledger/`, `src/server/month-close.ts`, `src/server/close-checklist.ts` |
-| Compare with the bookkeeper: the bookkeeper's QuickBooks Online exports (P&L, Trial Balance, General Ledger…) saved as reference data; an account crosswalk; a difference report to the cent, Rhea − bookkeeper; explanations with reason codes | built | `/ledger/compare`, `src/core/bookkeeper/`, `src/server/difference-report.ts`, `docs/bookkeeper-compare.md` |
+| Compare with the bookkeeper: the bookkeeper's QuickBooks Online exports (P&L, Trial Balance, General Ledger…) saved as reference data; an account crosswalk; a difference report to the cent, Rhea − bookkeeper, from the general ledger (best) or the P&L (a trial balance alone compares nothing: it is shown for information); explanations with reason codes | built | `/ledger/compare`, `src/core/bookkeeper/`, `src/server/difference-report.ts`, `docs/bookkeeper-compare.md` |
 | True month-end profit per store from the bookkeeper's monthly P&L (rent, utilities, actual payroll…) | built | `src/server/month-end-costs.ts`, `src/core/bookkeeper/month-end.ts` |
 | Honest P&L: net income, prime cost and COGS % shown only when every store-month in view has month-end costs; otherwise a partial P&L that says so | built | `src/core/reports/completeness.ts`, `src/server/month-end-costs.ts` `loadPnlData` |
 | QuickBooks Online: OAuth, one entry per store day pushed with an idempotency `requestid`, a class per store, entries never edited once pushed (reversals), labor accruals and bank-line deposits never pushed | **sandbox only**: `QBO_ENVIRONMENT=sandbox` on every service, `RHEA_ALLOW_QBO_PRODUCTION=false`; "no live company has ever been written"; the one-QuickBooks-company-per-LLC link is partial | `src/integrations/quickbooks/`, `src/server/quickbooks-sync.ts`, `render.yaml`, `docs/feature-map.md` 2.1 "Today" |
@@ -224,15 +224,17 @@ Everything shown is the demo group's sample data; every feature Reel carries "De
 | month-close | `/ledger/close` | months to close with their checklists, corrections waiting, the audit log | the seed (it closes no month: show "Months to close" and the checklist, not a closed one) |
 | compare-bookkeeper | `/ledger/compare`, then one LLC-month | the by-month table, the month's checklist and rollforward | the seed saves no bookkeeper report, so the difference report is empty: show the page as the place the bookkeeper's P&L lands ("drop your bookkeeper's P&L on Import"), or record the rollforward and trial balance tabs instead |
 | statements-reconcile (optional, 2nd pass) | `/statements`, `/statements/reconcile` | lines booked themselves, "Looks right / Undo", the reconciliation | the four money LLCs |
-| bills (optional) | `/bills` | bills waiting, approvals, AP aging | the four money LLCs |
+| bills (optional) | `/bills` | bills waiting, approvals, AP aging; a paid bill's lines and its matched payment. Never the bill page's Pay from Rhea card (test mode; a bill waiting for approval shows it on its first screen) | the four money LLCs |
 | year-end (optional) | `/ledger/year-end` | the completeness verdict, the sections, the downloads | the seed (year to date) |
 | import (optional) | `/import` | the drop zone, a template preview (no Claude call) | a Rhea template CSV from `samples/templates/` |
 | connections (optional) | `/connections` | the cards; "test accounts, never a real store's" | none |
 | budgets (optional) | `/setup/budgets` and the Overview's pace words | the switch, a store's year | the seed |
-| sales-tax (optional) | `/ledger/sales-tax` | filing periods, by month tied to 2210 | periods come from the daily task `sales-tax-periods`: check the demo has them; otherwise skip |
+| sales-tax (optional) | `/ledger/sales-tax` | filing periods, by month tied to 2210. Never the notes card under By store: its first line says the return "takes ten minutes instead of an hour" (`src/core/sales-tax/settings.ts` `SALES_TAX_PROMISE`, also on Setup → Sales tax), a savings figure posts never make | periods come from the daily task `sales-tax-periods`: check the demo has them; otherwise skip |
 | balance-sheet (optional) | `/ledger/balance-sheet` | a money LLC's balance sheet tying to the reconciliation | the four money LLCs |
 
-Rules for every recording: the demo viewer or demo owner only (never production, never a practice company with a
+Rules for every recording (the recorder enforces the text ones: `NEVER_IN_VIEW` in `render/record-feature.mjs`
+and each scene file's `avoid`): nothing on screen that a post may not say, such as Pay from Rhea (test mode) or
+the app's own time-savings line; the demo viewer or demo owner only (never production, never a practice company with a
 visitor's data); dismiss the tour card first (Escape, or `localStorage` key `rhea.tour.v1`); never show the Admin
 page, Setup → People's email addresses, Setup → Billing, or an address bar; the on-screen period must be a whole
 one the data covers (the seed covers 60 days ending yesterday, so `30d` and `lastmonth` are safe).

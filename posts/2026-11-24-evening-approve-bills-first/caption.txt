@@ -1,6 +1,6 @@
 Accounts payable for multi-store owners: set who approves which bills before anything is paid.
 Code every bill to an account and the store it belongs to.
-Managers approve their own store's bills; the owner approves anything above a set amount.
+Managers approve their own store's bills; anything over your limit comes to you.
 Pay only what's approved, and the books explain every payment.
 Where is your approval limit set?
 

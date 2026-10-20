@@ -29,11 +29,18 @@
     "resultSize": 210,
     "resultLines": 1,
     "scale": 1,
-    "contentBottom": 1613,
-    "bottomLimit": 1810,
+    "gap": 0.8,
+    "contentBottom": 1532,
+    "bottomLimit": 1536,
     "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
     "hookLines": 3
   },
-  "renderedAt": "2026-10-20T19:48:16.020Z",
-  "chromium": "155.0.8059.85"
+  "renderedAt": "2026-10-20T21:11:12.082Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
 }

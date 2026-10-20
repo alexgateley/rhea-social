@@ -15,6 +15,8 @@
     "probe": "node render/probe.mjs",
     "desktop": "node scripts/desktop-copy.mjs",
     "prune": "node scripts/prune.mjs",
+    "memorial:check": "node scripts/memorial.mjs check",
+    "memorial:sync": "node scripts/memorial.mjs sync",
     "publish:dry": "DRY_RUN=true node scripts/publish.mjs",
     "mark": "node scripts/publish.mjs mark",
     "check": "node scripts/publish.mjs check",

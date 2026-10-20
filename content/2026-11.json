@@ -99,22 +99,22 @@
       "date": "2026-11-04",
       "slot": "evening",
       "type": "tip",
-      "slug": "match-card-deposits",
+      "slug": "count-inventory-monthly",
       "theme": "sage",
-      "keyword": "credit card deposits",
-      "audiences": ["franchise", "restaurant", "coffee", "salon"],
-      "hook": "Did every card sale reach the bank?",
-      "title": "Match card days to deposits",
+      "keyword": "inventory count",
+      "audiences": ["franchise", "restaurant", "coffee"],
+      "hook": "Food bought isn't food used.",
+      "title": "Count inventory monthly",
       "lines": [
-        "Each day's card sales should arrive within days.",
-        "Note which deposit pays which day.",
-        "Fees come out; the rest should match.",
-        "A day with no deposit is today's question."
+        "A big order on the 30th inflates this month.",
+        "Next month then looks cheaper than it was.",
+        "Count the same items on the last night.",
+        "Start count + purchases − end count = used."
       ],
-      "action": "Every card day",
-      "takeaway": "A missing deposit is easy to chase this week and hard to chase next quarter.",
-      "caption": "Credit card deposits: how restaurant, coffee shop and salon owners match card sales to the bank.\nCard sales arrive a few days later, minus the processor's fees.\nMatch every day's card sales to the deposit that pays it.\nA day with no deposit is a call to the processor this week, not a mystery next quarter.",
-      "hashtags": ["#cashflowmanagement", "#franchising", "#coffeebusiness", "#salonowners", "#accountingtips"],
+      "action": "Every month-end",
+      "takeaway": "Without a count, COGS % shows when you ordered, not what you used.",
+      "caption": "Inventory counts and food cost for restaurant and coffee shop owners: COGS needs a month-end count.\nPurchases are what you bought; COGS is what you used.\nA big order on the 30th makes this month look expensive and next month cheap.\nCount the same items on the last night of every month, at every store.\nDoes every one of your stores count?",
+      "hashtags": ["#foodcost", "#franchising", "#restaurantmanagement", "#coffeebusiness", "#accountingtips"],
       "thumbOffsetMs": 14100
     },
     {
@@ -233,7 +233,7 @@
       ],
       "takeaway": "The P&L shows the month's result. The balance sheet shows what's left and what's owed.",
       "caption": "Balance sheet basics for small business owners: what the P&L can't show about your stores.\nThe P&L shows a month's sales and costs; it can't show what each LLC owes.\nSales tax collected, gift card balances, unpaid bills, loans and card balances live on the balance sheet.\nRead both every month.",
-      "hashtags": ["#cashflowmanagement", "#restaurantowner", "#restaurateur", "#coffeeshopowners", "#smallbusinesstips"],
+      "hashtags": ["#cashflowmanagement", "#restaurantowner", "#coffeeshopowners", "#salonowners", "#smallbusinesstips"],
       "thumbOffsetMs": 4200
     },
     {
@@ -281,7 +281,7 @@
         }
       ],
       "cta": "Try the demo: demo.rheafi.com",
-      "caption": "Checking your bookkeeper's books: a month-end tool for franchise and multi-store owners.\nCompare with bookkeeper in Rhea's demo: every LLC by month, on sample data.\nDrop the bookkeeper's QuickBooks Online P&L or trial balance on Import; each account's difference shows to the cent.\nThe demo has no bookkeeper's report loaded yet, so this shows where it lands.",
+      "caption": "Checking your bookkeeper's books: a month-end tool for franchise and multi-store owners.\nCompare with bookkeeper in Rhea's demo: every LLC by month, on sample data.\nDrop their QuickBooks Online general ledger (best) or P&L on Import: each account Rhea posts shows its difference to the cent.\nThe demo has no bookkeeper's report loaded yet, so this shows where it lands.",
       "hashtags": ["#franchiseaccounting", "#franchiselife", "#coffeeshopowner", "#salonowners", "#businessowner"],
       "thumbOffsetMs": 10700
     },
@@ -336,22 +336,22 @@
       "date": "2026-11-12",
       "slot": "evening",
       "type": "tip",
-      "slug": "store-pnls-side-by-side",
+      "slug": "cash-before-payroll",
       "theme": "paper",
-      "keyword": "P&L by location",
+      "keyword": "cash flow by LLC",
       "audiences": ["franchise", "restaurant", "coffee", "salon"],
-      "hook": "Your group made money. Did every store?",
-      "title": "Store P&Ls, side by side",
+      "hook": "Can every store's LLC make this week's payroll?",
+      "title": "Check cash before payroll",
       "lines": [
-        "One group P&L hides a losing store.",
-        "Put every store's month in one table.",
-        "Same accounts, same period, same order.",
-        "Start with the bottom three."
+        "List what each LLC must pay this week.",
+        "Read each account's balance before the week starts.",
+        "Subtract the sales tax and tips it still owes.",
+        "Find a short account on Monday, not payday."
       ],
-      "action": "Bottom three first",
-      "takeaway": "A strong store can carry a weak one for years. Side by side, it can't hide.",
-      "caption": "P&L by location for multi-store owners: read every store's profit side by side, same month.\nA group P&L can look fine while one store loses money every month.\nPut every store's month in one table: same accounts, same period.\nStart with the bottom three and ask what's different.",
-      "hashtags": ["#profitmargin", "#coffeeshopowners", "#salonbusiness", "#bookkeeping", "#businessfinance"],
+      "action": "Before payroll",
+      "takeaway": "Profit by store is a monthly question. Cash by LLC is a weekly one.",
+      "caption": "Cash flow by LLC for multi-store owners: check every account can cover payroll before the week starts.\nWhen each store's LLC pays its own payroll, rent and bills, each account has to cover them.\nBefore the week starts, read each balance minus the sales tax and tips it still owes.\nA short account found on Monday is a fix; found on payday, it's a scramble.\nWhich of your LLCs would be short this Friday?",
+      "hashtags": ["#cashflowmanagement", "#restaurateur", "#coffeeshopowners", "#salonbusiness", "#bookkeeping"],
       "thumbOffsetMs": 14100
     },
     {
@@ -459,8 +459,8 @@
         "Weekend sales often arrive together on Monday.",
         "Cash, tips and refunds move the totals."
       ],
-      "takeaway": "Match each deposit to the days it pays. Then the difference is just fees.",
-      "caption": "Merchant deposits vs sales for restaurant, coffee shop and salon owners: why they never match exactly.\nCard deposits arrive after the sale, net of the processor's fees.\nWeekend batches often land together, and refunds and tips move the totals.\nMatch each deposit to the days it pays, and the difference should be the fees alone.",
+      "takeaway": "Expect the gap: fees, timing and refunds explain it. Anything else is a question for the processor.",
+      "caption": "Merchant deposits vs sales for restaurant, coffee shop and salon owners: why they never match exactly.\nCard deposits arrive after the sale, net of the processor's fees.\nWeekend batches often land together, and refunds and tips move the totals.\nFees, timing and refunds explain the gap; anything they don't explain is worth a call to the processor.",
       "hashtags": ["#bankreconciliation", "#franchising", "#qsr", "#coffeeshopbusiness", "#bookkeepingtips"],
       "thumbOffsetMs": 4200
     },
@@ -713,7 +713,6 @@
       "theme": "ink",
       "keyword": "credit card fees on sales tax",
       "audiences": ["franchise", "restaurant", "coffee", "salon"],
-      "taxAdjacent": true,
       "hook": "You pay card fees on money that isn't yours.",
       "term": "Card fees on tax and tips",
       "formula": "Fee rate × (sales tax + tips charged on cards)",
@@ -742,8 +741,8 @@
         "label": "Fees on it this month at 2.9%",
         "value": "$365.40"
       },
-      "takeaway": "That's $4,384.80 a year. Whether fees on tips can be passed to staff: ask your CPA.",
-      "caption": "Credit card fees on sales tax and tips: a hidden cost for restaurant, coffee shop and salon owners.\n$80,000 of card sales carries $6,600 of 8.25% sales tax and $6,000 of tips.\nThe processor charges 2.9% on all of it: $365.40 a month on money that isn't yours.\nThat is $4,384.80 a year. On passing tip fees to staff, ask your CPA.",
+      "takeaway": "That's $4,384.80 a year in fees on money you only pass through.",
+      "caption": "Credit card fees on sales tax and tips: a hidden cost for restaurant, coffee shop and salon owners.\n$80,000 of card sales carries $6,600 of 8.25% sales tax and $6,000 of tips.\nThe processor charges 2.9% on all of it: $365.40 a month on money that isn't yours.\nThat is $4,384.80 a year, on money that goes to the state and to your team.",
       "hashtags": ["#creditcardfees", "#qsr", "#cafeowner", "#smallbusinessfinance", "#smallbusinesstips"],
       "thumbOffsetMs": 12500
     },
@@ -823,22 +822,29 @@
       "date": "2026-11-20",
       "slot": "evening",
       "type": "tip",
-      "slug": "approve-bills-first",
+      "slug": "personal-off-the-business-card",
       "theme": "paper",
-      "keyword": "accounts payable",
+      "keyword": "owner draws",
       "audiences": ["franchise", "restaurant", "coffee", "salon"],
-      "hook": "Who approved that invoice before it was paid?",
-      "title": "Approve bills before paying",
+      "taxAdjacent": true,
+      "hook": "Is your personal spending on the business card?",
+      "title": "Keep personal off business",
       "lines": [
-        "Every bill gets coded to an account.",
-        "Managers approve their store's bills.",
-        "The owner approves anything above a set amount.",
-        "Pay only what's approved."
+        "Personal charges on business cards blur every month.",
+        "Each one has to be found and reclassified.",
+        "Pay yourself by owner draw or payroll instead.",
+        "Ask your CPA how to pay yourself."
       ],
-      "action": "Approve, then pay",
-      "takeaway": "Write the approval limits down once. Then nobody pays a bill nobody checked.",
-      "caption": "Accounts payable for multi-store owners: set who approves which bills before anything is paid.\nCode every bill to an account and the store it belongs to.\nManagers approve their own store's bills; the owner approves anything above a set amount.\nPay only what's approved, and the books explain every payment.\nWhere is your approval limit set?",
-      "hashtags": ["#accountspayable", "#franchiselife", "#restaurantbusiness", "#salonowner", "#bookkeepingtips"],
+      "action": "Separate cards",
+      "takeaway": "Clean business cards make cleaner books and an easier year-end. How to pay yourself: ask your CPA.",
+      "caption": "Owner draws and personal spending: keep them off the business card, a tip for small business owners.\nPersonal charges on a business card have to be found and moved every month.\nKeep personal spending on personal cards; take money out as a draw or as pay.\nWhich way to pay yourself depends on how the LLC is taxed: ask your CPA.",
+      "hashtags": [
+        "#cashflowmanagement",
+        "#restaurantbusiness",
+        "#salonowner",
+        "#smallbusinessbookkeeping",
+        "#smallbusinessowner"
+      ],
       "thumbOffsetMs": 14100
     },
     {
@@ -1045,29 +1051,22 @@
       "date": "2026-11-24",
       "slot": "evening",
       "type": "tip",
-      "slug": "personal-off-the-business-card",
+      "slug": "approve-bills-first",
       "theme": "paper",
-      "keyword": "owner draws",
+      "keyword": "accounts payable",
       "audiences": ["franchise", "restaurant", "coffee", "salon"],
-      "taxAdjacent": true,
-      "hook": "Is your personal spending on the business card?",
-      "title": "Keep personal off business",
+      "hook": "Who approved that invoice before it was paid?",
+      "title": "Approve bills before paying",
       "lines": [
-        "Personal charges on business cards blur every month.",
-        "Each one has to be found and reclassified.",
-        "Pay yourself by owner draw or payroll instead.",
-        "Ask your CPA how to pay yourself."
+        "Every bill gets coded to an account.",
+        "Managers approve their store's bills.",
+        "Bills over your limit come to you.",
+        "Pay only what's approved."
       ],
-      "action": "Separate cards",
-      "takeaway": "Clean business cards make cleaner books and an easier year-end. How to pay yourself: ask your CPA.",
-      "caption": "Owner draws and personal spending: keep them off the business card, a tip for small business owners.\nPersonal charges on a business card have to be found and moved every month.\nKeep personal spending on personal cards; take money out as a draw or as pay.\nWhich way to pay yourself depends on how the LLC is taxed: ask your CPA.",
-      "hashtags": [
-        "#cashflowmanagement",
-        "#restaurantbusiness",
-        "#salonowner",
-        "#smallbusinessbookkeeping",
-        "#smallbusinessowner"
-      ],
+      "action": "Approve, then pay",
+      "takeaway": "Write the approval limits down once. Then nobody pays a bill nobody checked.",
+      "caption": "Accounts payable for multi-store owners: set who approves which bills before anything is paid.\nCode every bill to an account and the store it belongs to.\nManagers approve their own store's bills; anything over your limit comes to you.\nPay only what's approved, and the books explain every payment.\nWhere is your approval limit set?",
+      "hashtags": ["#accountspayable", "#franchiselife", "#restaurantbusiness", "#salonowner", "#bookkeepingtips"],
       "thumbOffsetMs": 14100
     },
     {
@@ -1332,28 +1331,34 @@
       "date": "2026-11-29",
       "slot": "evening",
       "type": "feature",
-      "slug": "closing-november",
+      "slug": "what-to-do-first",
       "theme": "sage-wash",
-      "keyword": "closing November",
+      "keyword": "daily flash report",
       "audiences": ["franchise", "restaurant", "coffee", "salon"],
-      "headline": "November closes. Is every store's checklist done?",
-      "sub": "Months waiting, each LLC's checklist, and every step in the audit log",
+      "headline": "Monday morning: what to do first, store by store",
+      "sub": "Labor over target, overtime pace and cash below bills due, worst first",
       "demoNote": "Demo company · made-up numbers",
-      "recording": "month-close",
+      "recording": "synopsis",
       "claims": [
         {
-          "text": "Ledger, Month close: months to close, each LLC-month's checklist and Close every ready month",
-          "evidence": "src/server/close-checklist.ts"
+          "text": "A daily synopsis on the Overview and in the owner's email: what to do first, then the findings, worst first",
+          "evidence": "src/core/synopsis/"
         },
         {
-          "text": "Every close, reopen and correction writes an add-only audit log",
-          "evidence": "src/server/month-close.ts"
+          "text": "The owner's morning email: one line per store, worst first",
+          "evidence": "src/server/owner-email.ts"
         }
       ],
       "cta": "Try the demo: demo.rheafi.com",
-      "caption": "Closing November for multi-store owners: each LLC's month-end checklist, in one place.\nBack to Month close in Rhea's demo, on sample data, with November about to end.\nEach LLC-month shows what's left: sales, time cards, statements, bills, payroll as paid.\nEvery close, reopen and correction goes in an audit log nobody can edit.",
-      "hashtags": ["#monthendclose", "#multiunitfranchisee", "#restaurantowners", "#coffeebusiness", "#smallbusinesstips"],
-      "thumbOffsetMs": 14600
+      "caption": "Daily flash report for franchise and restaurant owners: what needs you first on Monday morning.\nThe synopsis in Rhea's demo, on sample data: one Monday's read of 15 stores.\nIt starts with the one thing to do first, then labor over target, overtime pace, cash below bills due.\nThe same summary opens the owner's morning email.",
+      "hashtags": [
+        "#restauranttech",
+        "#multiunitfranchisee",
+        "#restaurantowners",
+        "#smallbusinessbookkeeping",
+        "#smallbusinesstips"
+      ],
+      "thumbOffsetMs": 5800
     },
     {
       "date": "2026-11-30",
@@ -1398,20 +1403,20 @@
       "date": "2026-11-30",
       "slot": "evening",
       "type": "myth",
-      "slug": "closed-month-edits",
+      "slug": "utility-bills-vary",
       "theme": "paper",
-      "keyword": "closing the books",
+      "keyword": "utility costs",
       "audiences": ["franchise", "restaurant", "coffee", "salon"],
-      "hook": "A closed month can be edited later.",
-      "fact": "Fix closed months with a reversal.",
+      "hook": "Utilities cost about the same every month.",
+      "fact": "Utilities follow the weather and the meter.",
       "why": [
-        "Your bookkeeper and CPA already used those numbers.",
-        "A reversing entry and a new one show what changed.",
-        "Editing in place erases the trail."
+        "Heating and cooling swing with the season.",
+        "Many bills cover the month before.",
+        "A leak or a failing unit shows on the bill."
       ],
-      "takeaway": "Once a month is closed, change it only by a dated correction everyone can see.",
-      "caption": "Closing the books for multi-store owners: why a closed month is fixed by reversal, not edits.\nReports, loans and tax work were built on the closed month's numbers.\nA correction is a reversing entry plus a new entry, dated, with a note.\nEditing a closed month in place erases the trail.",
-      "hashtags": ["#monthendclose", "#franchiseowner", "#restaurantindustry", "#salonowners", "#smallbusinessbookkeeping"],
+      "takeaway": "Compare each store's bill with its own month last year, not with last month.",
+      "caption": "Utility costs for restaurant, coffee shop and salon owners: why the bill isn't the same every month.\nHeating and cooling follow the weather, so winter and summer bills run higher.\nMany utility bills cover the month before, so a cold snap shows up a month later.\nCompare each store with its own month last year; a jump the weather can't explain is worth a look.\nWhich store's bill jumped last winter?",
+      "hashtags": ["#businesstips", "#franchiseowner", "#coffeebusiness", "#salonowners", "#businessowner"],
       "thumbOffsetMs": 4200
     }
   ]

@@ -7,7 +7,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createPublisher } from './lib/publisher.mjs';
@@ -87,4 +89,105 @@ test('dry run of the real repo for 2026-10-25: exactly the five slides and the c
   assert.equal(d.caption, fs.readFileSync(path.join(memDir, '2026-10-25', 'caption.txt'), 'utf8').trim());
   assert.doesNotMatch(logs.join('\n'), /WARNING/);
   assert.ok(!fs.existsSync(path.join(root, 'published', '2026-10-25-memorial.json')) || JSON.parse(fs.readFileSync(path.join(root, 'published', '2026-10-25-memorial.json'), 'utf8')).date === '2026-10-25');
+});
+
+// ---- scripts/memorial.mjs: the check verify runs, and the sync, against a temporary repo with made-up
+// files (never the founder's photo) ----
+
+const JPEG = (n) => Buffer.concat([Buffer.from([0xff, 0xd8, 0xff, 0xe0]), Buffer.from(`made-up slide ${n}`)]);
+
+function tempRepo() {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'rhea-memorial-'));
+  fs.writeFileSync(path.join(dir, 'brand.json'), JSON.stringify(brand));
+  const src = path.join(dir, 'memorial', '2026-10-25');
+  fs.mkdirSync(src, { recursive: true });
+  for (const n of [1, 2, 3]) fs.writeFileSync(path.join(src, `slide-${n}.jpg`), JPEG(n));
+  fs.writeFileSync(path.join(src, 'caption.txt'), 'A made-up caption.\n');
+  // The founder's other files in the same folder are never copied
+  fs.writeFileSync(path.join(src, 'cover.jpg'), JPEG('cover'));
+  fs.writeFileSync(path.join(src, 'reel.mp4'), 'a draft');
+  fs.writeFileSync(path.join(dir, 'memorial', 'notes.md'), 'private notes');
+  return { dir, src };
+}
+
+const snapshot = (dir) => Object.fromEntries(fs.readdirSync(dir, { recursive: true }).sort().map((f) => {
+  const p = path.join(dir, f);
+  return [f, fs.statSync(p).isDirectory() ? 'dir' : `${sha256(p)} ${fs.statSync(p).mtimeMs}`];
+}));
+
+test('memorial:sync copies only slide-N.jpg and caption.txt, writes their checksums, and never changes memorial/', async () => {
+  const { compareMemorial, syncMemorial } = await import('./memorial.mjs');
+  const { dir, src } = tempRepo();
+  try {
+    const before = snapshot(path.join(dir, 'memorial'));
+    assert.match(compareMemorial(dir, brand).join('\n'), /memorial 2026-10-25: memorial\/2026-10-25\/ has a memorial post, but nothing is committed/);
+    const dry = syncMemorial({ root: dir, date: '2026-10-25', dryRun: true, log: () => {} });
+    assert.deepEqual(dry.changed, ['slide-1.jpg', 'slide-2.jpg', 'slide-3.jpg', 'caption.txt']);
+    assert.ok(!fs.existsSync(path.join(dir, 'posts')), 'a dry run writes nothing');
+    syncMemorial({ root: dir, date: '2026-10-25', log: () => {} });
+    const out = path.join(dir, 'posts', 'memorial', '2026-10-25');
+    assert.deepEqual(fs.readdirSync(out).sort(), ['caption.txt', 'slide-1.jpg', 'slide-2.jpg', 'slide-3.jpg']);
+    for (const f of fs.readdirSync(out)) assert.equal(sha256(path.join(out, f)), sha256(path.join(src, f)));
+    const idx = JSON.parse(fs.readFileSync(path.join(dir, 'posts', 'memorial', 'index.json'), 'utf8'))['2026-10-25'];
+    assert.deepEqual(idx.slides, ['slide-1.jpg', 'slide-2.jpg', 'slide-3.jpg']);
+    assert.equal(idx.sha256['caption.txt'], sha256(path.join(src, 'caption.txt')));
+    assert.deepEqual(compareMemorial(dir, brand), []);
+    assert.deepEqual(snapshot(path.join(dir, 'memorial')), before, 'memorial/ is read, never written');
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('an edit to the founder\'s files after the copy is caught by name until it is synced', async () => {
+  const { compareMemorial, syncMemorial } = await import('./memorial.mjs');
+  const { dir, src } = tempRepo();
+  try {
+    syncMemorial({ root: dir, date: '2026-10-25', log: () => {} });
+    fs.writeFileSync(path.join(src, 'slide-2.jpg'), JPEG('2 edited'));
+    fs.writeFileSync(path.join(src, 'caption.txt'), 'A reworded caption.\n');
+    fs.writeFileSync(path.join(src, 'slide-4.jpg'), JPEG(4));
+    const problems = compareMemorial(dir, brand).join('\n');
+    assert.match(problems, /the job would post an older version/);
+    assert.match(problems, /slide-2\.jpg/);
+    assert.match(problems, /caption\.txt/);
+    assert.match(problems, /slide-4\.jpg \(not copied\)/);
+    assert.match(problems, /npm run memorial:sync -- --date 2026-10-25/);
+    const { changed, stale } = syncMemorial({ root: dir, date: '2026-10-25', log: () => {} });
+    assert.deepEqual(changed.sort(), ['caption.txt', 'slide-2.jpg', 'slide-4.jpg']);
+    assert.deepEqual(stale, []);
+    assert.deepEqual(compareMemorial(dir, brand), []);
+    // A slide the founder removed leaves the committed carousel too
+    fs.rmSync(path.join(src, 'slide-4.jpg'));
+    assert.match(compareMemorial(dir, brand).join('\n'), /slide-4\.jpg \(no longer in memorial\/2026-10-25\/\)/);
+    assert.deepEqual(syncMemorial({ root: dir, date: '2026-10-25', log: () => {} }).stale, ['slide-4.jpg']);
+    assert.ok(!fs.existsSync(path.join(dir, 'posts', 'memorial', '2026-10-25', 'slide-4.jpg')));
+    assert.deepEqual(compareMemorial(dir, brand), []);
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('a committed copy that no longer matches its own checksum is caught, and sync refuses a non-memorial date', async () => {
+  const { compareMemorial, syncMemorial } = await import('./memorial.mjs');
+  const { dir } = tempRepo();
+  try {
+    syncMemorial({ root: dir, date: '2026-10-25', log: () => {} });
+    fs.rmSync(path.join(dir, 'memorial'), { recursive: true }); // as on GitHub, where memorial/ never is
+    assert.deepEqual(compareMemorial(dir, brand), []);
+    fs.writeFileSync(path.join(dir, 'posts', 'memorial', '2026-10-25', 'slide-1.jpg'), JPEG('swapped'));
+    assert.match(compareMemorial(dir, brand).join('\n'), /slide-1\.jpg does not match its checksum/);
+    assert.throws(() => syncMemorial({ root: dir, date: '2026-10-26', log: () => {} }), /not a memorial date/);
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('the real repo: the committed memorial copies agree with the founder\'s files (verify runs the same check)', async () => {
+  const { compareMemorial } = await import('./memorial.mjs');
+  assert.deepEqual(compareMemorial(root, brand), []);
+});
+
+test('memorial/ is the founder\'s and never published: his notes and drafts are git-ignored', () => {
+  const ignored = (p) => spawnSync('git', ['-C', root, 'check-ignore', '-q', p]).status === 0;
+  assert.ok(ignored('memorial/kathy.md'), 'memorial/kathy.md must be git-ignored: Pages serves every committed file publicly');
+  assert.ok(ignored('memorial/src/photo.jpg'));
+  assert.ok(ignored('memorial/2026-10-25/slide-1.jpg'));
+  assert.ok(!ignored('posts/memorial/2026-10-25/slide-1.jpg'), 'the committed copies are what the job posts');
+  const gi = fs.readFileSync(path.join(root, '.gitignore'), 'utf8');
+  assert.match(gi, /^memorial\/src\/$/m);
+  assert.match(gi, /^memorial\/20\*\/$/m);
 });

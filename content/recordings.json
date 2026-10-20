@@ -47,13 +47,13 @@
       "status": "recorded (render/features/synopsis.json, by builder B)",
       "screens": ["/synopsis: the day's synopsis, Do first, findings worst first, one line per store"],
       "evidence": ["src/core/synopsis/", "src/server/owner-email.ts"],
-      "usedBy": ["2026-11-05 6PM morning-synopsis"]
+      "usedBy": ["2026-11-05 6PM morning-synopsis", "2026-11-29 6PM what-to-do-first"]
     },
     "month-close": {
       "status": "recorded (render/features/month-close.json, by builder B)",
       "screens": ["/ledger/close: Months to close; tap an LLC-month; its checklist (the seed closes no month)"],
       "evidence": ["src/server/close-checklist.ts", "src/core/ledger/", "src/server/month-close.ts"],
-      "usedBy": ["2026-11-07 6PM close-the-month", "2026-11-29 6PM closing-november"]
+      "usedBy": ["2026-11-07 6PM close-the-month"]
     },
     "compare-bookkeeper": {
       "status": "recorded (render/features/compare-bookkeeper.json, by builder B)",
@@ -145,15 +145,15 @@
       }
     },
     "bills": {
-      "seconds": 14.2,
-      "status": "recorded (render/features/bills.json, by builder B)",
+      "seconds": 14.4,
+      "status": "recorded (render/features/bills.json, the current scene file; \"spec\" below is the first plan). Re-recorded October 20, 2026 on a paid bill, so the Pay from Rhea card (test mode) is never on screen",
       "screens": [
         "/bills: what to approve, what is due, what was paid (the money LLCs' sample bills)",
-        "scroll to Accounts Payable (aging)",
-        "tap one bill: its lines, approval and the payment matched to a statement line"
+        "scroll to Accounts Payable (aging, by LLC), then the Bills card; tap the Paid tab",
+        "tap the first paid bill: its lines coded to accounts and its payment, matched to its statement line"
       ],
       "evidence": ["src/core/bills/", "src/server/bills.ts"],
-      "notes": "Do not open Pay from Rhea or any payment form (test mode). If a bill page shows an email address the recorder stops: pick a bill that came in by photo or typing.",
+      "notes": "Never show Pay from Rhea or any payment form (test mode): the scene file's \"avoid\" list and the recorder's NEVER_IN_VIEW refuse any frame showing \"Pay from Rhea\", \"Payments are sent by Stripe\" or \"Pay by card\". A paid bill's page ends with its Payments card above Pay from Rhea; a bill waiting for approval shows Pay from Rhea on its first screen. If a bill page shows an email address the recorder stops: pick another bill.",
       "usedBy": ["2026-11-15 6PM bills-approved"],
       "spec": {
         "id": "bills",
@@ -399,13 +399,13 @@
       }
     },
     "sales-tax": {
-      "seconds": 14.6,
-      "status": "recorded (render/features/sales-tax.json, by builder B)",
+      "seconds": 12.2,
+      "status": "recorded (render/features/sales-tax.json, the current scene file; \"spec\" below is the first plan). Re-recorded October 20, 2026 to stop above the page's notes card, whose first line says a return \"takes ten minutes instead of an hour\", a savings figure posts never make",
       "screens": [
         "/ledger/sales-tax?llc=entity-101: sales tax the POS collected by month beside what the bank statements show was paid (Texas Comptroller lines in the demo statements)"
       ],
       "evidence": ["src/core/sales-tax/", "/ledger/sales-tax"],
-      "notes": "FACTS.md: filing periods come from the daily sales-tax-periods task, which the seed does not run; record the by-month table (it needs no periods). If the page shows \"No sales tax in Rhea for this LLC yet\", use entity-103, entity-105 or entity-108.",
+      "notes": "FACTS.md: filing periods come from the daily sales-tax-periods task, which the seed does not run; record the by-month table (it needs no periods). If the page shows \"No sales tax in Rhea for this LLC yet\", use entity-103, entity-105 or entity-108. Scroll no further than about 300 px: below the By store card the notes card carries SALES_TAX_PROMISE (src/core/sales-tax/settings.ts), and the recorder refuses any frame that shows it.",
       "usedBy": ["2026-11-23 6PM sales-tax-collected-vs-paid"],
       "spec": {
         "id": "sales-tax",

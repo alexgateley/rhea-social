@@ -6,6 +6,8 @@
 //   npm run record -- --all                           # every render/features/*.json
 //   npm run record -- --id deposits --keep-frames     # keep the PNG frames in render/tmp/features/<id>/
 //   npm run record -- --id deposits --dry-run         # check the scene file only (no browser)
+//   npm run record -- --all --check-view              # play every scene against the app and check every frame's
+//                                                     # guards (NEVER_IN_VIEW, emails, banned words), writing nothing
 //
 // The app must be running locally on demo data (README "Feature Reels: recording and composing";
 // FACTS.md "Running the app locally for recording"): FEATURE_APP_URL, default
@@ -26,7 +28,10 @@
 //
 // Refused while recording: a path on the blocklist (/admin, /setup/people, /setup/billing,
 // /account), a page showing an email address, and a page showing the two-letter word for
-// artificial intelligence or naming Claude or Anthropic (posts never say either).
+// artificial intelligence or naming Claude or Anthropic (posts never say either). And never in
+// view in any frame (the page may hold them further down): what a post may not say or show without
+// its status, NEVER_IN_VIEW (Pay from Rhea and its Stripe line, test mode; the app's "ten minutes
+// instead of an hour", a time-savings figure nothing backs), plus a scene file's own "avoid" list.
 //
 // Scene file (render/features/<id>.json):
 //   { "id": "deposits", "title": "…", "signIn": "viewer",
@@ -41,7 +46,8 @@
 //   scrollX: scroll the element's nearest sideways-scrolling box to "to" px; tap: { text | selector, role?, nth? };
 //   start: a scroll target applied before the scene's first frame (not recorded); escape: false keeps
 //   an open tour card (Escape is pressed on every page otherwise, to close it).
-//   text matches exactly unless "exact": false; "nth" picks the n-th match (from 0) instead of the first.
+//   text matches exactly unless "exact": false; "nth" picks the n-th match (from 0) instead of the first;
+//   "avoid": [ "phrase", … ] at the top of the file: text that must never be on screen in any frame.
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -57,6 +63,8 @@ export const LENGTH = { min: 12, max: 18, hardMin: 10, hardMax: 20 };
 const TAP_SEC = 0.5;
 const EMAIL = /[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}/;
 const BANNED_TEXT = [/\bAI\b/, /\bClaude\b/, /\bAnthropic\b/];
+/** Never on screen in any frame of any recording (October 20, 2026 review): test-mode features and claims nothing backs. */
+export const NEVER_IN_VIEW = [/\bPay from Rhea\b/, /\bsent by Stripe\b/, /instead of an hour/i, /\bsaves? you\b/i, /\bminutes instead of\b/i];
 
 export const isBlocked = (p) => BLOCKED_PATHS.some((b) => p === b || p.startsWith(`${b}/`) || p.startsWith(`${b}?`));
 
@@ -84,6 +92,7 @@ export function checkSpec(spec, id) {
     }
     if (s.tap && !s.tap.text && !s.tap.selector) problems.push(`${where}: tap needs text or selector`);
   });
+  if (spec.avoid !== undefined && (!Array.isArray(spec.avoid) || spec.avoid.some((a) => typeof a !== 'string' || !a.trim()))) problems.push('"avoid" is a list of phrases');
   const total = (spec.scenes ?? []).reduce((sum, s) => sum + sceneSeconds(s), 0);
   if (total < LENGTH.hardMin || total > LENGTH.hardMax) problems.push(`${total.toFixed(1)} s long; a recording is ${LENGTH.min}–${LENGTH.max} s`);
   return { problems, total };
@@ -147,7 +156,7 @@ async function signIn(session, as) {
   session.signedInAs = as;
 }
 
-export async function record(session, id, { keepFrames = false } = {}) {
+export async function record(session, id, { keepFrames = false, checkOnly = false } = {}) {
   const specFile = path.join(FEATURES_DIR, `${id}.json`);
   if (!fs.existsSync(specFile)) throw new Error(`no scene file render/features/${id}.json`);
   const spec = JSON.parse(fs.readFileSync(specFile, 'utf8'));
@@ -157,9 +166,9 @@ export async function record(session, id, { keepFrames = false } = {}) {
   await signIn(session, spec.signIn ?? 'viewer');
   const { appUrl, browser } = session;
 
-  const framesDir = path.join(root, 'render', 'tmp', 'features', id);
+  const framesDir = path.join(root, 'render', 'tmp', 'features', checkOnly ? `${id}-check` : id);
   fs.rmSync(framesDir, { recursive: true, force: true });
-  fs.mkdirSync(framesDir, { recursive: true });
+  if (!checkOnly) fs.mkdirSync(framesDir, { recursive: true });
   const page = await session.context.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));
@@ -184,15 +193,34 @@ export async function record(session, id, { keepFrames = false } = {}) {
     for (const re of BANNED_TEXT) if (re.test(text)) throw new Error(`${url.pathname} shows "${text.match(re)[0]}"; posts never say it, pick another screen`);
   };
 
+  // Text that must never be on screen: checked on every screenshot, by where it is drawn
+  const avoid = [...NEVER_IN_VIEW, ...(spec.avoid ?? []).map((a) => new RegExp(a.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'))]
+    .map((re) => ({ source: re.source, flags: re.flags }));
+  const inView = () => page.evaluate((patterns) => {
+    const res = patterns.map((p) => new RegExp(p.source, p.flags));
+    const vh = window.innerHeight, vw = window.innerWidth;
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    for (let n = walker.nextNode(); n; n = walker.nextNode()) {
+      const text = n.textContent;
+      if (!res.some((re) => re.test(text))) continue;
+      const range = document.createRange();
+      range.selectNodeContents(n);
+      for (const r of range.getClientRects()) if (r.width > 0 && r.height > 0 && r.bottom > 0 && r.top < vh && r.right > 0 && r.left < vw) return text.trim().slice(0, 90);
+    }
+    return null;
+  }, avoid);
+
   let frame = 0;
   const shot = async () => {
+    const seen = await inView();
+    if (seen) throw new Error(`frame ${frame}: "${seen}" is on screen; it must never be (NEVER_IN_VIEW or the scene file's "avoid"); stop the scene before it or scroll less`);
     const file = path.join(framesDir, `frame-${String(frame).padStart(5, '0')}.png`);
-    await page.screenshot({ path: file, type: 'png', animations: 'disabled', caret: 'hide', scale: 'device' });
+    if (!checkOnly) await page.screenshot({ path: file, type: 'png', animations: 'disabled', caret: 'hide', scale: 'device' });
     frame++;
     return file;
   };
   const repeat = (file, n) => {
-    for (let i = 0; i < n; i++) { fs.copyFileSync(file, path.join(framesDir, `frame-${String(frame).padStart(5, '0')}.png`)); frame++; }
+    for (let i = 0; i < n; i++) { if (!checkOnly) fs.copyFileSync(file, path.join(framesDir, `frame-${String(frame).padStart(5, '0')}.png`)); frame++; }
   };
   const locate = (target) => {
     const all = target.selector ? page.locator(target.selector) : target.role ? page.getByRole(target.role, { name: target.text, exact: target.exact ?? false }) : page.getByText(target.text, { exact: target.exact ?? true });
@@ -301,6 +329,10 @@ export async function record(session, id, { keepFrames = false } = {}) {
   const chromiumVersion = browser.version();
   await page.close();
   if (errors.length) console.warn(`${id}: the page logged ${errors.length} error(s): ${errors.slice(0, 2).join(' | ').slice(0, 300)}`);
+  if (checkOnly) {
+    console.log(`${id}: ${frame} frames played, every guard passed (nothing written)`);
+    return { id, frames: frame, scenes: scenesOut };
+  }
 
   const outDir = path.join(FEATURES_DIR, id);
   fs.mkdirSync(outDir, { recursive: true });
@@ -358,7 +390,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
           if (problems.length) failed++;
         } else {
           session ??= await openSession();
-          await record(session, one, { keepFrames: args.includes('--keep-frames') });
+          await record(session, one, { keepFrames: args.includes('--keep-frames'), checkOnly: args.includes('--check-view') });
         }
       } catch (e) { console.error(`${one}: ${e.message.split('\n')[0]}`); failed++; }
     }

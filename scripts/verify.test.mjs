@@ -2,6 +2,7 @@
 // mistake it exists to catch makes it fail with a message that says what is wrong.
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -142,4 +143,30 @@ test('a feature reusing its recording within 14 days fails', () => {
 test('word limits fail', () => {
   fails(withPost('labor-daily', (p) => { p.action = 'Every single morning before opening'; }), /action has 5 words \(max 4\)/);
   fails(withPost('one-group-pnl', (p) => { p.fact = 'Every single store needs its very own P&L.'; }), /fact has 8 words \(max 7\)/);
+});
+
+test('a royalty or ad-fund post is for franchise owners only, and its two industry tags may both be franchise tags', () => {
+  fails(withPost('royalty-ad-fund', (p) => { p.audiences = ['franchise', 'restaurant', 'coffee', 'salon']; }), /franchise royalties or the ad fund, so its audiences must be \["franchise"\]/);
+  fails(withPost('royalty-ad-fund', (p) => { p.hashtags[3] = '#coffeeshopbusiness'; }), /#coffeeshopbusiness is a coffee tag, but the post is for franchise/);
+  // A myth about royalties is a royalty post too
+  fails(withPost('utility-bills-vary', (p) => { p.hook = 'The royalty is a fixed monthly cost.'; }), /audiences must be \["franchise"\]/);
+});
+
+test('two tags for one audience fail: a plural, or #restaurantowner with #restaurateur', () => {
+  fails(withPost('cash-before-payroll', (p) => { p.hashtags = ['#cashflowmanagement', '#restaurateur', '#restaurantowner', '#salonbusiness', '#bookkeeping']; }), /has both #restaurantowner and #restaurateur: they reach the same people/);
+});
+
+test('a memorial copy that differs from the founder\'s file fails, naming the file', () => {
+  const dir = makeRoot();
+  const committed = path.join(dir, 'posts', 'memorial', '2026-10-25');
+  const source = path.join(dir, 'memorial', '2026-10-25');
+  fs.mkdirSync(committed, { recursive: true });
+  fs.mkdirSync(source, { recursive: true });
+  const jpeg = (s) => Buffer.concat([Buffer.from([0xff, 0xd8]), Buffer.from(s)]);
+  for (const f of ['slide-1.jpg', 'slide-2.jpg']) { fs.writeFileSync(path.join(committed, f), jpeg(f)); fs.writeFileSync(path.join(source, f), jpeg(f)); }
+  fs.writeFileSync(path.join(committed, 'caption.txt'), 'made-up caption\n');
+  fs.writeFileSync(path.join(source, 'caption.txt'), 'made-up caption, edited later\n');
+  const sha = (f) => crypto.createHash('sha256').update(fs.readFileSync(path.join(committed, f))).digest('hex');
+  fs.writeFileSync(path.join(dir, 'posts', 'memorial', 'index.json'), JSON.stringify({ '2026-10-25': { folder: '2026-10-25', slides: ['slide-1.jpg', 'slide-2.jpg'], caption: 'caption.txt', sha256: Object.fromEntries(['slide-1.jpg', 'slide-2.jpg', 'caption.txt'].map((f) => [f, sha(f)])) } }));
+  fails(dir, /memorial 2026-10-25: the job would post an older version\. .*differ: caption\.txt/);
 });

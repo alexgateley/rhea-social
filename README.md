@@ -9,16 +9,20 @@ GitHub Pages and published by a GitHub Actions job at **7:00 AM and 6:00 PM Paci
 November 30 is written, verified and rendered: 83 Reels in `posts/` (43 mornings, 40 evenings), plus Kathy's
 memorial carousel for October 25 in `posts/memorial/2026-10-25/`. October 16, 19 and 20 are posted (markers in
 `published/`; the branch includes main's "Posted 2026-10-20"). Nothing after November 30 is written yet. "Go live"
-below is all that is left to switch it on; "Two slots a day" further down has the design and every decision, and
-`FACTS.md` what a post may say about Rhea.
+below is all that is left to switch it on; "Two slots a day" further down has the design and every decision,
+`FACTS.md` what a post may say about Rhea, and "Fix pass" at the end what the October 20 review changed.
 
 | Type | When | What the Reel is | Length |
 | --- | --- | --- | --- |
 | owner math | 7 AM, weekdays | a number an owner should know, worked through from its inputs, the result very large | 22.4 to 25.6 s |
-| tip | 7 AM on weekends, and 6 PM | one habit for multi-store owners: 3 to 5 numbered lines, then the action very large | 22.4 to 25.6 s |
+| tip | 7 AM on weekends, and 6 PM | one habit for multi-store owners ("Owner tip"): 3 to 5 numbered lines, then the action very large | 22.4 to 25.6 s |
 | myth vs fact | 7 AM on weekends, and 6 PM | the myth struck through, the fact very large, 2 to 4 lines on why | 21.3 to 24.5 s |
-| feature | 6 PM | the app moving on the demo company, "Demo company · made-up numbers" on screen the whole time, "Try the demo: demo.rheafi.com" at the end | 15 to 19 s |
+| feature | 6 PM | the app moving on the demo company, "Demo company · made-up numbers" on screen the whole time, "Try the demo: demo.rheafi.com" at the end | 14 to 20 s |
 | memorial | 7 AM on 2026-10-25, 2027-04-20, 2027-05-09 | Kathy's carousel, the only post that day (only October 25 has slides so far) | 5 slides |
+
+Every Reel rendered since the fix pass carries a quiet audio bed Rhea owns (`render/audio.mjs`; Instagram shows
+muted Reels to fewer people) and keeps its text out of Instagram's caption area and buttons. The 17 owner-math
+Reels of the first run still to post (October 21 to November 12) keep their silent videos as rendered.
 
 The 6 PM slot rotates feature, tip, feature, myth, so neighboring days differ; a day's two posts are never the
 same type (`npm run schedule -- --from 2026-10-21 --to 2026-11-30` prints every day). Every Reel and its caption
@@ -26,13 +30,15 @@ is also copied to `~/Desktop/Instagram Reels to edit/@runonrhea/<date>/` for re-
 
 ## Go live (founder)
 
-1. **Merge to main.** `git push -u origin twice-daily`, open a pull request and merge it. Merge on October 20 if
-   you can, so October 21 starts on time (October 20 has no evening post). Until the merge, the old job on `main`
-   keeps posting weekday mornings with the first-run captions, as it did on October 20; if it posts October 21
-   first, copy that post's caption and hashtags from `main` into `content/2026-10.json` and its `caption.txt`
-   before merging, so the history matches what went out.
+1. **Merge to main.** `git push -u origin twice-daily`, open a pull request and merge it, then
+   `git switch main && git pull`, so this clone is on `main` again (the job reads `main` only; everything you
+   commit for it from now on goes to `main`). Merge on October 20 if you can, so October 21 starts on time
+   (October 20 has no evening post). Until the merge, the old job on `main` keeps posting weekday mornings with
+   the first-run captions, as it did on October 20; if it posts October 21 first, copy that post's caption and
+   hashtags from `main` into `content/2026-10.json` and its `caption.txt` before merging, so the history matches
+   what went out.
 2. **Wait for Pages.** Actions → "pages build and deployment" turns green (a few minutes; the push carries about
-   80 MB of Reels). Then check that
+   100 MB of Reels). Then check that
    `https://alexgateley.github.io/rhea-social/posts/2026-10-21-sales-per-labor-hour/reel.mp4` and
    `https://alexgateley.github.io/rhea-social/posts/memorial/2026-10-25/slide-1.jpg` open in a browser.
 3. **Dry run on GitHub.** `gh workflow run "Post @RunonRhea" --repo alexgateley/rhea-social -f dry_run=true`
@@ -43,16 +49,31 @@ is also copied to `~/Desktop/Instagram Reels to edit/@runonrhea/<date>/` for re-
    cp launchd/com.rhea.morning.plist launchd/com.rhea.evening.plist ~/Library/LaunchAgents/
    launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.rhea.morning.plist
    launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.rhea.evening.plist
+   launchctl kickstart gui/$(id -u)/com.rhea.morning
    ```
-   They kick the workflow at 7:05 and 9:05 AM and at 6:05 and 8:05 PM; the log is
-   `~/Library/Logs/rhea-runonrhea.log`. `KICK_DRY_RUN=true sh scripts/kick-post.sh morning` shows the command
-   without running it.
-5. **Fill the Desktop folder once.** In this folder, `npm run desktop`: it copies the 81 Reels from October 20 to
+   They kick the workflow with `slot=auto` at 7:05 and 9:05 AM and at 6:05 and 8:05 PM (auto posts only what is
+   due, so the evening kicks also catch a morning Reel or a memorial carousel that failed earlier). Their command
+   is written out in the plist and reads nothing from `~/Desktop`, which macOS keeps from launchd jobs. After the
+   `kickstart`, check **both** `~/Library/Logs/rhea-runonrhea.log` (a line "kicked auto (morning agent): …") and
+   `~/Library/Logs/rhea-runonrhea-morning.launchd.log` (empty unless launchd or the shell failed), and that a run
+   of "Post @RunonRhea" started on GitHub (Actions; outside the posting hours it posts nothing).
+5. **Store GH_PAT, or the token runs out in mid-December.** The Instagram token in `IG_ACCESS_TOKEN` was stored
+   on 2026-10-17 and lasts 60 days (about December 16). The job refreshes it every Monday morning, but can store
+   the new one only with a GitHub token: create a fine-grained personal access token for this repository with
+   *Secrets: Read and write* and run `sh scripts/setup-secrets.sh` (it asks for `GH_PAT` last; the Instagram
+   values can be re-entered as they are). Without it, put a reminder in your calendar for **December 9** to
+   generate a new Instagram token in the Meta dashboard and store it (`sh scripts/setup-secrets.sh`); otherwise
+   every post from then on fails, the April and May memorial posts included.
+6. **Fill the Desktop folder once.** In this folder, `npm run desktop`: it copies the 81 Reels from October 20 to
    November 30 and their captions into `~/Desktop/Instagram Reels to edit/@runonrhea/<date>/`
    (`<date> 7AM owner math <slug>.mp4` and `.txt`, `<date> 6PM feature <slug>.mp4` and `.txt`). Every later
    `npm run render` does it on its own. Delete whatever you don't want; it is never copied back. Keep
    `@runonrhea/.copied` (deleting it copies everything again). The memorial folder `2026-10-25/` is never touched.
-6. **Optional, five minutes:** in the Instagram app, Search → Tags, look up the niche tags (#multiunitfranchisee,
+   **Re-posting with music:** Instagram counts "reels that have already been posted on Instagram" among those it
+   shows to fewer people, so a second post of the same video with music can reach fewer people than the first.
+   Either change it enough to be a new Reel (a new first seconds, a different cut) or delete the auto-posted one
+   and post yours in its place; don't keep two copies of the same Reel up.
+7. **Optional, five minutes:** in the Instagram app, Search → Tags, look up the niche tags (#multiunitfranchisee,
    #salonownerlife, #coffeeshopowners, #franchiseaccounting, #restauranttech, #qsr). If one is empty, says recent
    posts are hidden, or is mostly another industry, delete it from `brand.json` `hashtagPools`, then
    `npm run hashtags -- --month 2026-11 --redo`, `npm run verify` and `npm run render -- --month 2026-11`
@@ -60,10 +81,27 @@ is also copied to `~/Desktop/Instagram Reels to edit/@runonrhea/<date>/` for re-
 
 What happens next: each run posts whatever is due today and not yet posted, each slot once (a marker per date and
 slot). A run at 6 PM that finds the morning Reel still unposted posts both, a few minutes apart. Kathy's carousel
-goes out at 7 AM on October 25 and nothing else posts that day; **if you post it by hand first**, run
-`node scripts/publish.mjs mark --date 2026-10-25 --slot memorial`, then
-`git add published/2026-10-25-memorial.json && git commit -m "Posted 2026-10-25 memorial by hand" && git push`,
-and the job posts nothing that day. December needs drafting before December 1 ("Every month").
+goes out at 7 AM on October 25 and nothing else posts that day.
+
+**If you post the memorial carousel by hand first** (or any Reel), record it before its hour so the job won't
+post it again. From anywhere, the phone included (GitHub app → Actions → Post @RunonRhea → Run workflow, with the
+date and "by_hand" ticked), or from this Mac:
+
+```
+gh workflow run "Post @RunonRhea" --repo alexgateley/rhea-social -f date=2026-10-25 -f by_hand=true
+```
+
+The job writes `published/2026-10-25-memorial.json` on `main` itself, posts nothing, and every later run that day
+posts nothing (on a memorial date any slot records the memorial post). Check the run turned green. The local
+alternative, in this clone on an up-to-date `main`:
+`git switch main && git pull --rebase origin main && node scripts/publish.mjs mark --date 2026-10-25 --slot memorial && git add published/2026-10-25-memorial.json && git commit -m "Posted 2026-10-25 memorial by hand" && git push origin main`
+(`mark` refuses to write the marker on any other branch, or when `main` is behind GitHub's, and says why).
+
+**If you edit the memorial slides or caption again** in `memorial/2026-10-25/`: `npm run memorial:sync -- --date
+2026-10-25`, commit `posts/memorial/` and push it to `main` before 7 AM on October 25. The job posts the committed
+copies, never your folder; `npm run verify` (and so every `npm run render`) fails while the two differ.
+
+December needs drafting before December 1 ("Every month").
 
 ```
 brand.json                          handle, themes, slots (7 AM, 6 PM), rotation, memorial dates, caption footers, hashtag rules and pools, pinned pricing
@@ -120,8 +158,11 @@ before anything renders or posts.
 
 ## One-time setup
 
-1. **GitHub repo:** create `alexgateley/rhea-social` (public, so Pages can serve the media), add
-   it as the remote and push `main`.
+1. **GitHub repo:** `alexgateley/rhea-social` is **private**, and GitHub Pages still serves **every committed
+   file publicly** at `https://alexgateley.github.io/rhea-social/<path>` (README.md and brand.json answer
+   there today). So nothing private is ever committed: `.gitignore` keeps `memorial/` (the founder's notes,
+   Kathy's photo and drafts) out, and `git add -A` is safe only because of it. Add it as the remote and push
+   `main`.
 2. **GitHub Pages:** repo Settings → Pages → Source "Deploy from a branch", branch `main`,
    folder `/ (root)`. Media is then served at `https://alexgateley.github.io/rhea-social/posts/...`
    (the `pagesBaseUrl` in `brand.json`). Wait for the first Pages deploy before posting.
@@ -148,9 +189,9 @@ before anything renders or posts.
 7. **Launch agents (recommended):** after the workflow with the `slot` input is on `main`,
    `cp launchd/com.rhea.morning.plist launchd/com.rhea.evening.plist ~/Library/LaunchAgents/`, then
    `launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.rhea.morning.plist` and the same for
-   `com.rhea.evening.plist`. Test with `launchctl kickstart gui/$(id -u)/com.rhea.morning`; the log
-   is `~/Library/Logs/rhea-runonrhea.log`. (The first run's `com.rhea.ownermath.plist` was never
-   installed and is gone.)
+   `com.rhea.evening.plist`. Test with `launchctl kickstart gui/$(id -u)/com.rhea.morning`, then read
+   both `~/Library/Logs/rhea-runonrhea.log` and `~/Library/Logs/rhea-runonrhea-morning.launchd.log`
+   ("Go live" step 4). (The first run's `com.rhea.ownermath.plist` was never installed and is gone.)
 
 Rendering locally needs Node 22, ffmpeg on the PATH, `npm install` (Playwright and the Inter Tight
 font files) and a Chromium that Playwright can find: `npx playwright install chromium`, or set
@@ -178,7 +219,15 @@ December 1.
    once), rewrites captions, rebuilds both indexes, draws `render/tmp/contact-sheet-2026-12.jpg` and copies the
    new Reels to the Desktop folder. It refuses content that does not verify and never touches a posted Reel.
 7. Look at the contact sheet and a few Reels; `npm run probe`; `npm test`.
-8. Commit and push. Pages serves the files; the job posts each slot on its date.
+8. **Get it onto `main` before December 1.** Pages serves `main` and the job reads `main`; a push to any other
+   branch (`twice-daily`, a drafting branch) is invisible to both. Either work on `main`:
+   `git switch main && git pull --rebase origin main`, commit, `git push origin main`; or push your branch and
+   merge its pull request. Then check one new Reel's URL opens on Pages.
+
+When drafting, keep **one topic per week**: no idea (a group P&L hiding a store, matching card deposits, closing
+the month) in two posts within about 7 days, and no sentence copied from one caption into another. A second pass
+of a recording gets a headline that fits what its screens show (the demo's dates are fixed: a month-close
+recording shows the demo's own months, not the current one).
 
 If the dates move after rendering, change them in the content file and run `npm run relink -- --month YYYY-MM`:
 the cards show no date, so folders are renamed and the indexes rebuilt without re-rendering. A post with a
@@ -247,23 +296,28 @@ Current as of October 20, 2026 (two slots a day).
 | `npm run schedule -- --from 2026-10-21 --to 2026-11-30` | print the slot and type every day should carry |
 | `npm run hashtags -- --month 2026-12` | complete each post's five hashtags (`--redo` re-picks the month's unposted posts, `--dry-run` prints) |
 | `npm run render -- --month 2026-11 --check` | fit every card to the frame without rendering |
-| `npm run probe` | check every Reel in `posts/` against the specs of the Reels Instagram accepted |
+| `npm run probe` | check every Reel in `posts/` against the specs of the Reels Instagram accepted, and that a Reel meant to carry the audio bed is not muted (silent first-run Reels are listed) |
 | `npm run render -- --month 2026-11` | render what is new or changed, rewrite captions, rebuild both indexes, then copy new Reels to the Desktop (`--slot`, `--type`, `--only <slug>`, `--no-desktop`, `--no-verify`, `--force`) |
 | `npm run relink -- --month 2026-10` | re-date rendered folders and rebuild the indexes after a schedule change |
-| `npm run record -- --id overview-stores` | record one feature from the local app into `render/features/<id>/` |
+| `npm run record -- --id overview-stores` | record one feature from the local app into `render/features/<id>/` (refuses any frame showing an email, the banned words or `NEVER_IN_VIEW` text) |
+| `npm run record -- --all --check-view` | play every recording's scenes against the local app and check every frame's guards, writing nothing |
 | `npm run contact-sheet -- --month 2026-11` | every cover of the month on one page in `render/tmp/` |
 | `npm run desktop` | copy new Reels and captions to `~/Desktop/Instagram Reels to edit/@runonrhea/<date>/` (each file once; `DESKTOP_REELS_DIR=<folder>` writes elsewhere) |
 | `npm run publish:dry` | log what the publisher would post right now, both slots, without calling the API (dry runs skip the hour checks) |
 | `POST_DATE=2026-10-21 SLOT=evening npm run publish:dry` | the same for one date and slot (`SLOT` is `auto`, `morning` or `evening`) |
 | `POST_DATE=2026-10-25 npm run publish:dry` | the memorial carousel: its five slide URLs and the full caption |
-| `node scripts/publish.mjs mark --date 2026-10-25 --slot memorial` | record a post put up by hand (`--slot morning`, `evening` or `memorial`, optional `--note "..."`; also `npm run mark -- ...`), then commit and push the marker |
+| `gh workflow run "Post @RunonRhea" -f date=2026-10-25 -f by_hand=true` | record a post put up by hand, on `main`, from anywhere (add `-f slot=morning` or `evening` on a regular date; on a memorial date any slot records the memorial post) |
+| `node scripts/publish.mjs mark --date 2026-10-25 --slot memorial` | the same from this clone (optional `--note "..."`; also `npm run mark -- ...`): refuses unless the clone is on `main` and not behind `origin/main`, then `git push origin main` |
+| `npm run memorial:check` | compare `posts/memorial/<date>/` with its checksums and with `memorial/<date>/` (verify runs it too) |
+| `npm run memorial:sync -- --date 2026-10-25` | copy the founder's `slide-N.jpg` and `caption.txt` from `memorial/<date>/` (only read) and update `posts/memorial/index.json` (`--dry-run` lists) |
 | `npm run prune -- --days 30 --dry-run` | list (or, without `--dry-run`, remove) `reel.mp4` and `cover.jpg` of posts posted more than 30 days ago |
 | `npm test` | every test: content, schedule, hashtags, renderer, publisher, memorial, prune, Desktop copy, workflow (fake fetch, temporary folders; no network; set `CHROME_PATH` and `FFMPEG` to run the render checks too) |
 | `npm run check` | verify the token, account and publishing quota (needs `IG_USER_ID`, `IG_ACCESS_TOKEN`) |
 | `node scripts/publish.mjs refresh` | refresh the long-lived token into `new-token.txt` |
 | `gh workflow run "Post @RunonRhea" -f dry_run=true` | run the job from the command line, logging only |
 | `gh workflow run "Post @RunonRhea" -f date=2026-10-21 -f slot=evening -f dry_run=false` | post one day and slot now |
-| `KICK_DRY_RUN=true sh scripts/kick-post.sh evening` | show the command a launch agent would run, without running it |
+| `KICK_DRY_RUN=true sh scripts/kick-post.sh` | show the kick a launch agent sends (`slot=auto`), without running it (`morning` or `evening` limit a manual kick to one slot) |
+| `node render/audio.mjs out.wav 24` | write the audio bed for a 24 s Reel (the renderer does this for every Reel) |
 
 ## Notes
 
@@ -285,12 +339,17 @@ Current as of October 20, 2026 (two slots a day).
 
 GitHub's cron scheduler fires hours late or not at all on a quiet repository, so the schedule in
 the workflow is only a backup. The real trigger is two launchd agents on Alex's Mac:
-`launchd/com.rhea.morning.plist` runs `scripts/kick-post.sh morning` at 7:05 and 9:05 AM Pacific,
-`launchd/com.rhea.evening.plist` runs `scripts/kick-post.sh evening` at 6:05 and 8:05 PM. The
-script calls `gh workflow run "Post @RunonRhea" -f slot=<slot> -f dry_run=false`; the workflow
-posts each slot once (a marker per date and slot in `published/` prevents duplicates) and only from
-the slot's hour, so extra kicks are harmless. launchd runs a missed job at the next wake, but a Mac that is shut down or
-offline at both times posts only if GitHub's own schedule happens to fire.
+`launchd/com.rhea.morning.plist` at 7:05 and 9:05 AM Pacific, `launchd/com.rhea.evening.plist` at 6:05 and
+8:05 PM. Each runs `gh workflow run "Post @RunonRhea" -f slot=auto -f dry_run=false`, written out in the plist
+itself: the agents read nothing from `~/Desktop`, because macOS's privacy protection keeps launchd jobs out of
+it (a job that runs a script stored there can fail with "Operation not permitted", or wait on a prompt nobody
+sees at 7 AM; the founder's icubasics agents run from `~/.gemini/...`, which is not protected).
+`scripts/kick-post.sh` sends the same kick by hand. `slot=auto` lets the workflow decide: it posts each slot
+once (a marker per date and slot in `published/` prevents duplicates) and only from the slot's hour, so extra
+kicks are harmless and the evening kicks also retry a missed morning Reel or memorial carousel. Every run checks
+out `main` as it is when the run starts, so a run that queued behind another sees the marker that run pushed.
+launchd runs a missed job at the next wake, but a Mac that is shut down or offline at both times posts only if
+GitHub's own schedule happens to fire.
 
 ---
 
@@ -373,13 +432,13 @@ the content files; `npm run schedule -- --from 2026-10-21 --to 2026-11-30` print
 | 2026-11-26 | Thu | owner math: closed-day-cost (Thanksgiving) | myth M13 |
 | 2026-11-27 | Fri | owner math: overhead-per-store | feature: budgets (new) |
 | 2026-11-28 | Sat | myth M14 | tip T15 |
-| 2026-11-29 | Sun | tip T16 | feature F9 month-close, 2nd pass (closing November) |
+| 2026-11-29 | Sun | tip T16 | feature F8 synopsis, 2nd pass (what-to-do-first; fix pass: it was month-close's 2nd pass) |
 | 2026-11-30 | Mon | owner math: accrued-wages | myth M15 |
 
 Written (builder A): 12 new owner-math posts, 16 tips, 15 myths and 20 feature posts on **18 distinct
 recordings** (the plan's ten, then statements and reconciliation, bills and approvals, the year-end package,
 the balance sheet, labor and payroll as paid, sales tax, the guided demo with the trial, and budgets;
-overview-stores and month-close return for a second pass with new headlines). *Integration:* the balance sheet
+overview-stores and, since the fix pass, synopsis return for a second pass with new headlines). *Integration:* the balance sheet
 took POS connections and the file drop's place on November 19 (below). Beyond November the same
 rule continues; `npm run schedule -- --from 2026-12-01 --to 2026-12-31` prints the month to draft.
 
@@ -461,9 +520,10 @@ Built by builder B on October 20, 2026; where it differs from the plan, "Rendere
 below says so and why.
 
 `render/template.html` draws four card types in the same frame, themes and motion rules (every motion a function
-of `--t`); `window.setPost(post, timing, brand)` picks the layout by `post.type`, and the owner-math card is drawn
-exactly as before (checked frame by frame against the old template: the only differences are Chromium's own
-run-to-run noise, a handful of pixels at 1/255 that the old template also shows against itself).
+of `--t`); `window.setPost(post, timing, brand)` picks the layout by `post.type`. Until the fix pass the owner-math card was
+drawn exactly as in the first run; since then every type keeps Instagram's overlays clear (the column ends by
+1536 px, the right 78 px of the column stay empty from the steps down, spacing and then type tighten to fit:
+"Fix pass" below), and the 17 first-run owner-math Reels still to post keep their videos as first rendered.
 
 - **tip**: the hook alone, then "The tip" and the `title` (in the term and formula block), the `lines` as numbered
   rows, the `action` very large under "Do it" (`actionLabel` and `titleLabel` may override those two labels), the
@@ -473,7 +533,8 @@ run-to-run noise, a handful of pixels at 1/255 that the old template also shows 
   lines as rows; the takeaway.
 - **feature**: the `headline` (76 to 56 px, at most two lines) and `sub` (34 to 28 px, at most two lines) at the
   top, the demo note as a pill on its own line just above the window for the whole Reel, the recording in a
-  rounded 600×1300 window at (240, 560), the bar, then the end card with the `cta` as its big line.
+  rounded 586×1270 window at (247, 594) (600×1300 at (240, 560) before the fix pass), the bar, then the end card
+  with the `cta` as its big line.
 - Every type: the kicker is `brand.kickers[type]`, the end card's line `brand.endCardLines[type]` (hidden on a
   feature when it repeats the `cta`); in tips, myths and features a space before `%` or `¢` never breaks a line.
   Nothing is ever cut: a card that would not fit is refused with the sizes it tried (`render --check` lists every
@@ -509,8 +570,8 @@ every run.
 ### Feature Reels: recording and composing
 
 A feature Reel is a screen recording of the local app on demo data, composed into the 1080×1920 frame: headline
-and sub at the top, the demo note above the window, the recording in a rounded phone-shaped window 600×1300 at
-(240, 560), the theme's background and progress bar, then the end card. The geometry follows the founder's other
+and sub at the top, the demo note above the window, the recording in a rounded phone-shaped window 586×1270 at
+(247, 594), the theme's background and progress bar, then the end card. The geometry follows the founder's other
 feature Reels (`feature.swift`: a 1300 px tall window in the lower frame) in Rhea's themes and type.
 
 - **Recording** (`npm run record -- --id <recording>`; `--id a,b,c` or `--all` records several in one sign-in;
@@ -534,9 +595,9 @@ feature Reels (`feature.swift`: a 1300 px tall window in the lower frame) in Rhe
   `reelSec`), so composing never needs the app again. Recordings are committed (0.4 to 3 MB each; they are inputs,
   never pruned).
 - **Composing** (`render.mjs` for `type: "feature"`): the template draws every frame with the window transparent
-  (Chromium's `omitBackground`), and ffmpeg lays the recording, scaled to 600×1300 with Lanczos, under it: its first
+  (Chromium's `omitBackground`), and ffmpeg lays the recording, scaled to 586×1270 with Lanczos, under it: its first
   frame waits in the window from 0 s, it plays from 1.0 s, and its last frame stays under the end card as it fades
-  in. Same codec settings as the cards (libx264 High 4.1, CRF 20, yuv420p, silent AAC 64k, `+faststart`). The cover
+  in. Same codec settings as the cards (libx264 High 4.1, CRF 20, yuv420p, the audio bed as AAC 96k, `+faststart`). The cover
   is the composed Reel's frame at `thumbOffsetMs` (pick it inside one of the recording's holds: `frames.json`
   lists each scene's `reelSec`).
 - **Running the app** for a recording session (what worked on October 20, 2026; `FACTS.md` has the background):
@@ -573,10 +634,10 @@ The recordings (`render/features/`, made October 20, 2026 on the demo seed; `fra
 | month-close | Month close: tiles, months to close, tap Sunrise Bagel 102 LLC's August: its checklist and the close | 14.4 s |
 | compare-bookkeeper | Compare: no reports yet and the steps; Sunrise Bagel 101 LLC's September: the five steps, clearing accounts | 14.4 s |
 | statements-reconcile | Statements: the accounts, tap checking 2214: its register; Reconcile accounts for October | 15.9 s |
-| bills | Bills: past-due note, accounts payable by LLC, tap a bill waiting for approval | 14.7 s |
+| bills | Bills: past-due note, accounts payable by LLC, tap Paid, tap a paid bill: its lines and its payment matched to its statement line (re-recorded in the fix pass; Pay from Rhea never on screen) | 14.4 s |
 | year-end | Year-end package, Sunrise Bagel 101 LLC 2026: the verdict, "not a tax return", what is in the package | 14.6 s |
 | labor-payroll | Labor, then Labor → Payroll: no payroll as paid yet, how Rhea keeps it from counting twice | 12.2 s |
-| sales-tax | Sales tax, Sunrise Bagel 101 LLC: collected vs paid by month, by store, "Rhea never files" | 12.5 s |
+| sales-tax | Sales tax, Sunrise Bagel 101 LLC: collected vs paid by month, by store (re-recorded in the fix pass to stop above the notes card's "ten minutes instead of an hour") | 12.2 s |
 | demo-tour | /demo ("Try Rhea"), then the guided tour's first three cards | 14.1 s |
 | budgets | Setup → Budgets (read-only), then the Overview's synopsis line on a store's pace to its budget | 12.0 s |
 | balance-sheet | Balance sheet, Sunrise Bagel 101 LLC, September: assets, liabilities, equity, "Equals assets" | 15.0 s |
@@ -590,7 +651,7 @@ post, for when those screens read as the demo does.
 
 ### Renderer: what changed from the plan, and why
 
-- **The window sits at y 560, not 500, and the demo note is a pill above it, not under it.** Under the window the
+- **The window sits at y 594 (560 until the fix pass), not 500, and the demo note is a pill above it, not under it.** Under the window the
   note would sit behind Instagram's caption and buttons for the whole Reel; above it, it is always visible and
   never covers the app's own header.
 - **The recorder's scene format** is a list of moves (holds, scrolls to a pixel or to an element, sideways scrolls)
@@ -659,14 +720,19 @@ As built (builder C), in addition to the above:
   logs "Memorial day <date>: no memorial post prepared; nothing posts today";
 - the Desktop copy adds nothing for it, and `~/Desktop/Instagram Reels to edit/@runonrhea/2026-10-25/` is
   never written, renamed or deleted;
-- if the founder posts it by hand first: `node scripts/publish.mjs mark --date 2026-10-25 --slot memorial`,
-  commit, push. That one line is all it takes: the job then sees the memorial marker, skips the carousel, and
-  still posts nothing else that day. (`--note "posted from my phone"` is optional; an existing marker is never
-  overwritten.)
+- if the founder posts it by hand first: `gh workflow run "Post @RunonRhea" --repo alexgateley/rhea-social -f
+  date=2026-10-25 -f by_hand=true` (or the GitHub app's Run workflow with the date and by_hand). The job writes
+  the memorial marker on `main` itself; every later run sees it, skips the carousel and still posts nothing else
+  that day. From this clone instead, `node scripts/publish.mjs mark --date 2026-10-25 --slot memorial` refuses
+  unless the clone is on `main` and not behind `origin/main`, and tells you to `git push origin main` (a bare
+  `git push` from `twice-daily` would have pushed where the job never looks). On a memorial date `mark` records
+  the memorial post whatever slot is named. (`--note "posted from my phone"` is optional; an existing marker is
+  never overwritten.)
 
-As built: the memorial post is tried only in the morning slot (a run limited to `SLOT=evening` posts nothing on a
-memorial day, even when the carousel has not gone out); a plain run after 7 AM, including the 6 PM ones, posts
-the carousel if it is still missing. `posts/memorial/index.json` records each file's SHA-256; the tests
+As built: the memorial post is tried in the morning slot, from 7 AM; a run limited to `SLOT=evening` posts
+nothing on a memorial day, even when the carousel has not gone out. Every launch-agent kick is `slot=auto` (fix
+pass; the evening agent used to send `evening`), so the 9:05 AM, 6:05 PM and 8:05 PM kicks all post the carousel
+if it is still missing. `posts/memorial/index.json` records each file's SHA-256; the tests
 (`scripts/memorial.test.mjs`) require the copies to match it and, on the founder's Mac where the git-ignored
 `memorial/2026-10-25/` exists, to match the originals byte for byte, and check every slide is a 1080×1350 JPEG and
 the caption has no hashtags. The publisher only warns on a checksum mismatch (a deliberate update by the founder
@@ -677,7 +743,9 @@ should still post). On GitHub the "no memorial post prepared" line is a `::notic
 
 `posts/memorial/2026-10-25/` holds exact copies of the six files in `memorial/2026-10-25/` (slide-1.jpg to
 slide-5.jpg, caption.txt; checksums equal, checked by a test), and `posts/memorial/index.json` maps the date to
-its folder and slide list. `memorial/` itself (kathy.md, and the git-ignored `memorial/src/` and `memorial/20*/`)
+its folder and slide list. Since the fix pass `npm run verify` (which every render runs first) also compares
+them, `npm run memorial:check` does it alone, and `npm run memorial:sync -- --date 2026-10-25` copies the founder's
+`slide-N.jpg` and `caption.txt` over (nothing else from his folder) and rewrites the index; his folder is only read. `memorial/` itself (kathy.md, and the git-ignored `memorial/src/` and `memorial/20*/`)
 is the founder's: nothing there is changed, re-rendered, renamed or deleted, and its `.gitignore` lines stay.
 No generated post ever uses her story, name or photo; memorial posts carry no hashtags.
 
@@ -693,7 +761,8 @@ schedule:
   - cron: '7 1 * * *'    # 6:07 PM PDT evening slot (01:07 UTC the next calendar day)
   - cron: '7 2 * * *'    # 6:07 PM PST evening slot (7:07 PDT retry)
   - cron: '7 3 * * *'    # retry
-workflow_dispatch inputs: date (YYYY-MM-DD), slot (choice: auto, morning, evening), dry_run (boolean)
+workflow_dispatch inputs: date (YYYY-MM-DD), slot (choice: auto, morning, evening), dry_run (boolean),
+                         by_hand (boolean: record a post made by hand, post nothing)
 ```
 
 The weekdays-only rule is gone. The job's steps stay (credentials check, dry-run API check, publish, marker
@@ -701,12 +770,15 @@ commit with the pull-rebase retry, the Monday token refresh); the publish step p
 input (`auto` = both), and the marker commit names every new marker. Then it runs the prune (below) and commits
 its deletions in the same push. Concurrency group `post-runonrhea`, never cancelled.
 
-Launch agents (written, not loaded; the founder installs them): `launchd/com.rhea.morning.plist` kicks
-`scripts/kick-post.sh morning` at 7:05 and 9:05 AM, `launchd/com.rhea.evening.plist` kicks
-`scripts/kick-post.sh evening` at 6:05 and 8:05 PM, both with the real path
-`/Users/alex/Desktop/rhea-social/scripts/kick-post.sh`, logs in `~/Library/Logs/rhea-runonrhea*.log`.
-`kick-post.sh <slot>` runs `gh workflow run "Post @RunonRhea" -f slot=<slot> -f dry_run=false`, no weekend
-check. Install:
+Launch agents (written, not loaded; the founder installs them): `launchd/com.rhea.morning.plist` at 7:05 and
+9:05 AM and `launchd/com.rhea.evening.plist` at 6:05 and 8:05 PM each run, through `/bin/sh -c`, the kick
+written out in the plist: wait for the network, `gh workflow run "Post @RunonRhea" --repo alexgateley/rhea-social
+-f slot=auto -f dry_run=false`, one line in `~/Library/Logs/rhea-runonrhea.log`. Fix pass: they used to run
+`/Users/alex/Desktop/rhea-social/scripts/kick-post.sh` with `morning` or `evening`; macOS keeps launchd jobs out
+of `~/Desktop`, and an evening-only kick never retried a missed morning post or memorial carousel. launchd's own
+errors go to `~/Library/Logs/rhea-runonrhea-<slot>.launchd.log`. `scripts/workflow.test.mjs` runs each plist's
+command against a fake `gh` and `curl` and fails if anything in a plist points at `~/Desktop`.
+`scripts/kick-post.sh [auto|morning|evening]` is the same kick by hand. Install:
 
 ```
 cp launchd/com.rhea.morning.plist launchd/com.rhea.evening.plist ~/Library/LaunchAgents/
@@ -725,7 +797,15 @@ unreliable and a launch-agent kick is a `workflow_dispatch`; a second refresh th
 Instagram (token under 24 hours old) and only logged. Install the launch agents only after the branch is on
 `main`: until then GitHub's workflow is still "Post Owner math", which has no `slot` input, and the kicks would
 fail (logged in `~/Library/Logs/rhea-runonrhea.log`). The old `launchd/com.rhea.ownermath.plist` (never
-installed) is deleted. `KICK_DRY_RUN=true sh scripts/kick-post.sh morning` prints the command without running it.
+installed) is deleted. `KICK_DRY_RUN=true sh scripts/kick-post.sh` prints the command without running it.
+
+Fix pass: `actions/checkout` takes `ref: ${{ github.ref }}`, so each run checks out `main` as it is when the run
+starts. Runs queue behind each other (the concurrency group), and a run checks out the commit it was queued with
+by default: a cron run created while a kick's run was still posting would have checked out `main` from before
+that post's marker and posted the same slot a second time. `by_hand=true` (with `date`, and `slot` on a regular
+date) skips the publish step, runs `node scripts/publish.mjs mark` and commits the marker as "Posted … by hand".
+The Monday token refresh runs with `always()`, so a Monday whose post failed still refreshes; without a `GH_PAT`
+secret it can't store the new token and says so ("Go live" step 5).
 
 ## The Desktop copy
 
@@ -805,7 +885,10 @@ whether the source is Instagram's own words or someone reporting them.
   2025 capped some accounts at three; the announced and current limit is five. Meta's developer reference for the
   caption field still says "30 hashtags" (Inro read it in August 2026); that page is out of date, and we follow
   Instagram's five. **Rule: exactly five, every regular post.** (Re-checked by the integrator on October 20, 2026
-  with two more searches: every current source says five.)
+  with two more searches: every current source says five; and again in the fix pass the same day: Later's guide,
+  updated April 21, 2026, describes a "hard 5-hashtag limit on posts and Reels as of December 2025" that "applies
+  whether hashtags are in your caption or comments", and calls hashtags "classification signals, not traffic
+  sources" ([Later](https://later.com/blog/instagram-hashtags/), secondary).)
 - **In the caption, not a comment.** Instagram's search guidance, as quoted by Storycut and by several SEO guides:
   "For a post to be found in Search, put keywords and hashtags in the caption, not the comments." Whether
   first-comment tags count toward the five: the Help Center, as Inro quotes it, says "If you include more than 5
@@ -870,10 +953,17 @@ whether the source is Instagram's own words or someone reporting them.
   owners", tagged #coffeebusiness #salonbusiness; now #franchisee #qsr).
 - **Never a tag and its plural in one set** (#restaurantowner with #restaurantowners): they reach the same people,
   so one of the five would be wasted (`pluralPair`, enforced by `verify`; the picker produced one such pair while
-  re-picking under the first-line rule).
+  re-picking under the first-line rule). *Fix pass:* nor two tags for one audience
+  (`hashtagRules.sameAudience`: #restaurantowner, #restaurantowners and #restaurateur are one; November 8's myth
+  had #restaurantowner with #restaurateur and was re-picked).
+- **Royalty and ad-fund posts are for franchise owners only** (*fix pass*; `hashtagRules.industryFit` said so,
+  nothing enforced it): a post whose keyword, card or first line names royalties or the ad fund must have
+  `audiences: ["franchise"]`, and its two industry tags then both come from the franchise pool. October 28's
+  royalty post carried #coffeeshopbusiness, a tag mostly for independent shops that pay no royalty; it is now
+  #profitmargin #multiunitfranchisee #franchiseowner #franchiselife #businessowner.
 - **Rotation:** no identical set within 14 days; consecutive posts share at most two tags; every industry group
   and the bookkeeping group appear every Monday-to-Sunday week. Over October 21 to November 30 the 80 unpublished
-  posts use all 49 pool tags, none more than 15 times (the broad and bookkeeping tags most, #bookkeeping 15,
+  posts use all 49 pool tags, none more than 14 times (the broad and bookkeeping tags most, #bookkeeping and
   #businessowner 14; the narrowest topic tags least).
 - **Never:** a tag outside the pools (so nothing made up or misspelled), the denylist (vendor and competitor
   brand tags such as #quickbooks, #toast, #square, #gusto, #restaurant365; the banned product word; generic or
@@ -888,9 +978,14 @@ whether the source is Instagram's own words or someone reporting them.
   characters; the card's hook and term say the topic in words too.
 - **For non-followers:** tips and myths may end the caption with one question worth replying to or sending to a
   partner (never "follow for more"); feature Reels show the app moving, which also answers the "majority text"
-  caution. **Flag for the founder:** owner-math, tip and myth cards are mostly text by design; if their reach to
-  non-followers lags the feature Reels in Insights, that is the likely reason, and the music re-posts and more
-  feature Reels are the levers.
+  caution. *Fix pass:* every Reel rendered since carries a quiet audio bed Rhea owns (`render/audio.mjs`), since
+  Instagram names "reels that are muted" among those it shows less, and every card keeps its text out of the
+  bottom fifth (the handle, the caption's first lines and the audio line sit there) and off the right edge from
+  the steps down (the like, comment, share and audio buttons), so nothing a viewer needs is under Instagram's own
+  overlay. **Flag for the founder:** owner-math, tip and myth cards are mostly text by design ("majority text"
+  is the other caution); if their reach to non-followers lags the feature Reels in Insights, that is the likely
+  reason, and more feature slots, more motion or a voiceover are the levers. A music re-post of the same video
+  may count as "already been posted on Instagram": change it enough to be a new Reel, or replace the original.
 
 | Pool | Tags (judged tier: **broad**, mid, *niche*) |
 | --- | --- |
@@ -1033,7 +1128,8 @@ Merged into "Commands" near the top.
   headline and caption, two weeks later, so the grid never shows the same card twice in a row. More recordings
   replace second-pass slots when time allows. *As built:* eight of the ten second-pass slots got new recordings
   (statements, bills, year-end, connections and the file drop, payroll as paid, sales tax, the guided demo,
-  budgets), so the month covers the product as it is now; overview-stores and month-close return once each.
+  budgets), so the month covers the product as it is now; overview-stores and (since the fix pass) synopsis
+  return once each.
 - **A phone-shaped window for feature Reels:** a 9:16 Reel watched on a phone shows a phone-width screen
   legibly; Rhea's pages fit a phone; the geometry matches the founder's other feature Reels.
 - **Deterministic screenshots instead of Playwright's video:** crisp 2× frames, the same frame every time
@@ -1057,6 +1153,12 @@ Merged into "Commands" near the top.
 - **The Desktop copy is a side effect of `render`, with its own `.copied` list under `@runonrhea/`:** the same
   mechanism as `push-month.sh` in the founder's other app, kept apart from that app's list and folders; a
   deleted file stays deleted.
+- **Fix-pass decisions (October 20, 2026):** the 17 first-run owner-math Reels keep their videos (silent, the
+  old layout), as the run was to continue untouched, and only their captions changed; every other unposted Reel
+  was re-rendered with the audio bed and the overlay-safe layout. Replacing four posts and moving two kept every
+  slot's type and theme, so the rotation and the grid are unchanged. The by-hand marker goes through the
+  workflow because that is the one path that cannot land on the wrong branch. `memorial/*.md` is ignored by
+  default (privacy first; reversible).
 - **Workflow renamed "Post @RunonRhea":** "Post Owner math" would misdescribe tips and features; the name
   appears only in this repo (kick-post.sh and the docs).
 - **Integration decisions (October 20, 2026):** industry hashtags follow the caption's first line, because with
@@ -1065,3 +1167,100 @@ Merged into "Commands" near the top.
   the memorial copies follow the founder's updated files byte for byte; November 19 moved to the balance sheet and
   November 21's caption says plainly that Connect with Gusto is off; the app was not started because no recording
   needed redoing.
+
+# Fix pass (October 20, 2026)
+
+The review of the branch found 18 problems; each was checked against the code and the app first. What changed,
+by finding (verify, the tests and the dry runs below cover each one):
+
+**What the posts say**
+
+- **November 9, 6 PM (compare with the bookkeeper):** the caption said a P&L or trial balance shows every
+  account's difference. In the app a trial balance alone compares nothing (`src/server/difference-report.ts`,
+  "information only" in `src/core/bookkeeper/compare.ts`) and the general ledger is the source it calls best. Now:
+  "Drop their QuickBooks Online general ledger (best) or P&L on Import: each account Rhea posts shows its
+  difference to the cent." Caption only. (`verify`'s QuickBooks status rule now also lets "QuickBooks Online
+  general ledger" through, as it did reports, exports and P&L: reading them is built; the push is sandbox.)
+- **November 2, 7 AM (tips are a payable):** the cost of a $9,000 tip month ignored the FICA tip credit
+  (Form 8846, IRC section 45B; the July 2025 tax law extended it from food and beverage to salons, barbershops
+  and spas, per [Citrin Cooperman](https://www.citrincooperman.com/In-Focus-Resource-Center/OBBBA-Expands-FICA-Tip-Credit-Beyond-Restaurants),
+  secondary). The post is now `taxAdjacent`, and its caption says "before any
+  FICA tip credit" and "ask your CPA whether you qualify". Caption only: it is a first-run Reel, whose video
+  stays as rendered, so its hook still says "costs you $922.50" (the cost before any credit). **Founder's call:**
+  re-render it with a hook such as "Before any tip credit, $9,000 in tips costs $922.50." if the caption is not
+  enough.
+- **November 15, 6 PM (bills):** the Reel showed the Pay from Rhea card ("Payments are sent by Stripe"), which is
+  test mode. Re-recorded on a paid bill: the Bills page, accounts payable by LLC, the Paid tab, one paid bill with
+  its lines and its payment matched to its statement line; Pay from Rhea is never on screen.
+- **November 23, 6 PM (sales tax):** the recording showed the app's own line "so your return takes ten minutes
+  instead of an hour", a figure nothing backs. Re-recorded to stop above that card (the by-month and by-store
+  tables only). **Suggestion for the Rhea app, not this branch:** reword `SALES_TAX_PROMISE` in
+  `src/core/sales-tax/settings.ts` (also on Setup → Sales tax) without the time figure.
+- The recorder now refuses any frame that shows text a post may not show (`NEVER_IN_VIEW` in
+  `render/record-feature.mjs`: Pay from Rhea and its Stripe line, "instead of an hour", "saves you"), plus each
+  scene file's own `avoid` list; `npm run record -- --all --check-view` plays every recording against the app and
+  checks every frame without writing anything (all 18 passed on October 20).
+- **Tips said "Daily tip" and "A tip for multi-store owners, daily"** while tips post every two to four days.
+  Now "Owner tip" and "Tips for multi-store owners" (`brand.json` `kickers`, `endCardLines`); every tip Reel
+  re-rendered. ("Owner math, every weekday" is true through November 30; keep it true when drafting December.)
+- **November 19, 7 AM (card fees on tax and tips):** it sent a wage-law question (taking card fees out of tips;
+  California forbids it) to the CPA. The sentence is gone from the card and the caption; the takeaway is now
+  "That's $4,384.80 a year in fees on money you only pass through." No longer `taxAdjacent` (it states no tax rule).
+- **October 28, 7 AM (royalty and ad fund):** franchise owners only, enforced (see "Hashtags and discovery").
+  Captions only.
+- **Topics repeated within days.** Replaced: November 4, 6 PM (a third "match card deposits" in ten days) by a tip
+  on counting inventory monthly; November 12, 6 PM (a group P&L hiding a store, a day before the Overview Reel and
+  two weeks after the same myth) by a tip on checking each LLC's cash before payroll; November 29, 6 PM (month
+  close again, the morning after a closing tip, with screens showing August's months under a "November closes"
+  headline) by the synopsis's second pass, "Monday morning: what to do first, store by store", whose screens show
+  a Monday's synopsis; November 30, 6 PM (a third "a closed month is fixed by reversal") by a myth on utility
+  bills. Moved: the bill-approval tip from November 20 to November 24 (nine days after the bills Reel, its line
+  about the owner's limit reworded) and the business-card tip from November 24 to November 20. Reworded: November
+  14's myth no longer repeats "match each deposit to the days it pays". Themes stay with their slots. "Every
+  month" now says to keep one topic per week when drafting.
+
+**How the Reels look and sound**
+
+- **Silent Reels.** Every Reel rendered since carries a quiet audio bed written by `render/audio.mjs` (a soft
+  F major 7, D minor 9, B-flat major 7, C 6 pad with a light mallet line at 76 beats a minute; original audio, no
+  samples, no licensed music; -28 dB RMS, about -25 LUFS; `brand.json` `audioBed`). `npm run probe` fails a Reel
+  that should carry it and measures muted, and lists the silent ones. **Not changed:** the 17 first-run owner-math
+  Reels from October 21 to November 12 keep their silent videos, because the run was to continue untouched; to
+  give them the bed, re-render them (`npm run render -- --month 2026-10 --type owner-math --force`; posted ones
+  are never touched) after deciding that their look may change too (they would take the new layout).
+- **Text under Instagram's overlays.** The card column now ends by 1536 px (the bottom fifth stays clear) instead
+  of 1810, and the steps, the big line and the takeaway keep the right 78 px of the column empty (the column ends
+  at x 930), clear of the buttons; to fit, the spacing tightens, then the type (body type no smaller than 38 px).
+  Every tip, myth and new owner-math card re-rendered and checked (`render --check` prints each card's bottom,
+  right edge and hook top). The first-run owner-math Reels keep theirs.
+- **Feature covers cut by the profile grid.** The grid shows a 1080×1440 crop from y 240; feature headlines
+  started at y 218. They now start at y 252 (`.f-head` 72 px), the window moved to (247, 594) at 586×1270 (the
+  recordings' aspect), and the MYTH pill moved below the line too. All 20 feature Reels recomposed.
+
+**How it posts**
+
+- **The by-hand memorial marker.** The documented `git push` went to `twice-daily`, which the job never reads,
+  and a push from `main` would be refused (the bot's markers are newer). Now: `by_hand` on the workflow writes the
+  marker on `main` (the documented one line); a local `mark` refuses unless the clone is on an up-to-date `main`
+  and prints `git push origin main`; on a memorial date `mark` records the memorial post whatever slot is named;
+  "Go live" step 1 ends with `git switch main && git pull`, and "Every month" step 8 says to get December onto
+  `main`.
+- **A second post of the same slot.** Found while fixing the above: a run that queued behind another checked out
+  the commit it was queued with, from before that run's marker, and could post the same slot again (a 7:05 kick
+  and the 14:07 UTC cron are two minutes apart). The checkout now takes `ref: ${{ github.ref }}`.
+- **Launch agents and `~/Desktop`.** The agents ran `/Users/alex/Desktop/rhea-social/scripts/kick-post.sh`;
+  macOS keeps launchd jobs out of `~/Desktop`. Their command is now written out in the plist, nothing in it
+  points at `~/Desktop`, and a test runs it against a fake `gh`. Not tested with a loaded agent (loading agents is
+  the founder's step): "Go live" step 4 says to check both logs after the first `kickstart`.
+- **Evening kicks never retried a missed morning post or memorial carousel.** Every kick is now `slot=auto`.
+- **The token runs out in mid-December without GH_PAT.** "Go live" step 5; the refresh step now runs with
+  `always()`. Whether Instagram keeps the old token valid after a refresh is not documented: unverified.
+- **Memorial copies going stale.** `verify` (so every render) and `npm run memorial:check` compare
+  `posts/memorial/<date>/` with `memorial/<date>/` and name the files that differ; `npm run memorial:sync` copies
+  them over. Tests use made-up files only.
+- **`memorial/kathy.md` was neither ignored nor committed**, and Pages serves every committed file publicly even
+  though the repo is private. `.gitignore` now keeps `memorial/*.md` out too (the existing lines stay; nothing in
+  `memorial/` was touched). **Founder's call:** if you ever want that note in the repo, remove the line knowingly:
+  it would be public at `alexgateley.github.io/rhea-social/memorial/kathy.md`. One-time setup step 1 now says the
+  repo is private and Pages publishes every committed file regardless.
+

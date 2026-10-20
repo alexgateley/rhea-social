@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-04",
+  "slot": "evening",
+  "type": "tip",
+  "slug": "count-inventory-monthly",
+  "theme": "sage",
+  "hook": "Food bought isn't food used.",
+  "title": "Count inventory monthly",
+  "action": "Every month-end",
+  "thumbOffsetMs": 14100,
+  "captionFirstLine": "Inventory counts and food cost for restaurant and coffee shop owners: COGS needs a month-end count.",
+  "hashtags": [
+    "#foodcost",
+    "#franchising",
+    "#restaurantmanagement",
+    "#coffeebusiness",
+    "#accountingtips"
+  ],
+  "cardHash": "e9b9007ea460c410c95991acad57aee830090687",
+  "durationSec": 24,
+  "frames": 576,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "tip",
+    "resultSize": 144,
+    "resultLines": 2,
+    "scale": 0.98,
+    "gap": 0.5,
+    "contentBottom": 1534,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T21:00:37.318Z",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  },
+  "chromium": "155.0.8059.85"
+}

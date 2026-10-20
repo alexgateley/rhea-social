@@ -24,7 +24,8 @@
 //
 // owner-math, tip and myth: Chromium (Playwright) loads render/template.html, window.setPost() fills
 // it, and the clock --t is stepped at 24 fps with one PNG screenshot per frame; ffmpeg encodes them
-// to H.264 with a silent AAC track (Instagram wants audio).
+// to H.264 with an AAC track: the quiet audio bed from render/audio.mjs (original audio Rhea owns;
+// Instagram shows muted Reels to fewer people), or silence when brand.json audioBed.enabled is false.
 // feature: the template draws the frame with a transparent window; ffmpeg lays the recording
 // (render/features/<id>/recording.mp4, scaled to 600×1300) under it from 1.0 s, holding its first
 // frame before and its last frame under the end card. Same codec settings.
@@ -37,6 +38,7 @@ import { timing, cardHash, fileHash, typeOf, slotOf, readRecording, FEATURES_DIR
 import { ROOT, loadBrand, captionText, rebuildIndexes, describe, isMemorialDate } from './lib.mjs';
 import { planPost } from './plan.mjs';
 import { checkReel } from './probe.mjs';
+import { writeBed } from './audio.mjs';
 
 const root = ROOT;
 const args = process.argv.slice(2);
@@ -90,8 +92,11 @@ function run(cmd, cmdArgs) {
   });
 }
 
-const ENCODE = ['-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-profile:v', 'high', '-level', '4.1', '-crf', '20', '-movflags', '+faststart', '-c:a', 'aac', '-b:a', '64k'];
+const ENCODE = ['-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-profile:v', 'high', '-level', '4.1', '-crf', '20', '-movflags', '+faststart', '-c:a', 'aac', '-b:a', '96k'];
 const SILENCE = ['-f', 'lavfi', '-i', 'anullsrc=channel_layout=stereo:sample_rate=48000'];
+const bedOn = brand.audioBed?.enabled !== false;
+/** The audio input for one Reel: the bed, written for exactly its length, or silence. */
+const audioInput = (tmp, seconds) => (bedOn ? ['-i', writeBed(path.join(tmp, 'bed.wav'), seconds, { level: brand.audioBed?.levelDb ?? -28 })] : SILENCE);
 
 /** The cover from the finished Reel at a time (features, and covers whose offset moved). */
 async function coverFromReel(mp4, ms, out) {
@@ -143,7 +148,7 @@ async function renderPost(browser, post, plan) {
     await run(ffmpeg, [
       '-y', '-loglevel', 'error',
       '-framerate', String(t.fps), '-i', path.join(tmp, 'frame-%05d.png'),
-      ...SILENCE, '-shortest', ...ENCODE, mp4,
+      ...audioInput(tmp, t.duration), '-shortest', ...ENCODE, mp4,
     ]);
   } else {
     await page.close();
@@ -156,7 +161,7 @@ async function renderPost(browser, post, plan) {
       '-y', '-loglevel', 'error',
       '-framerate', String(t.fps), '-i', path.join(tmp, 'frame-%05d.png'),
       '-i', recFile,
-      ...SILENCE,
+      ...audioInput(tmp, t.duration),
       '-filter_complex',
       `[1:v]fps=${t.fps},scale=${win.w}:${win.h}:flags=lanczos,setsar=1,`
         + `tpad=start_duration=${RECORDING_AT}:start_mode=clone:stop_duration=${hold}:stop_mode=clone[rec];`
@@ -176,13 +181,14 @@ async function renderPost(browser, post, plan) {
     layout: report,
     ...(recordingInfo ? { recording: recordingInfo } : {}),
     renderedAt: new Date().toISOString(),
+    audio: bedOn ? { bed: 'render/audio.mjs', levelDb: brand.audioBed?.levelDb ?? -28 } : { bed: 'silence' },
     chromium: browser.version(),
   });
   // The same specs as the Reels Instagram already accepted (render/probe.mjs)
   const problems = checkReel(folder);
   if (problems.length) throw new Error(`${plan.folder}: the Reel does not match the accepted spec: ${problems.join('; ')}`);
   const size = fs.statSync(mp4).size;
-  console.log(`${plan.folder}: ${t.frames} frames (${t.duration.toFixed(2)} s) in ${Math.round((Date.now() - started) / 1000)} s, reel.mp4 ${(size / 1e6).toFixed(1)} MB${type === 'feature' ? `, headline ${report.headlineSize}px` : `, big line ${report.resultSize}px, scale ${report.scale}, bottom ${report.contentBottom}px`}`);
+  console.log(`${plan.folder}: ${t.frames} frames (${t.duration.toFixed(2)} s) in ${Math.round((Date.now() - started) / 1000)} s, reel.mp4 ${(size / 1e6).toFixed(1)} MB${type === 'feature' ? `, headline ${report.headlineSize}px` : `, big line ${report.resultSize}px, scale ${report.scale}, gap ${report.gap}, bottom ${report.contentBottom}px`}`);
 }
 
 /** meta.json: what the publisher, the Desktop copy and the next render read. Keeps fields it does not set. */
@@ -257,8 +263,8 @@ async function checkPosts(browser) {
       const thumbOk = typeOf(post) !== 'feature' || (t.thumbOffsetMs >= t.thumbRange[0] && t.thumbOffsetMs < t.thumbRange[1]);
       if (!thumbOk) bad++;
       console.log(`${ok && thumbOk ? 'ok  ' : 'FAIL'} ${describe(brand, post)}: ${t.duration.toFixed(1)} s, cover ${t.thumbOffsetMs} ms${thumbOk ? '' : ` (outside the recording, ${t.thumbRange.join('–')} ms)`}, ${typeOf(post) === 'feature'
-        ? `headline ${report.headlineSize}px × ${report.headlineLines}, sub ${report.subSize}px × ${report.subLines}, bottom ${report.contentBottom}/${report.bottomLimit}`
-        : `big line ${report.resultSize}px${report.resultLines ? ` × ${report.resultLines}` : ''}, scale ${report.scale}, bottom ${report.contentBottom}/${report.bottomLimit}`}${ok ? '' : `\n     ${overflowMessage(post, report)}`}`);
+        ? `headline ${report.headlineSize}px × ${report.headlineLines}, sub ${report.subSize}px × ${report.subLines}, top ${report.headTop}, bottom ${report.contentBottom}/${report.bottomLimit}`
+        : `big line ${report.resultSize}px${report.resultLines ? ` × ${report.resultLines}` : ''}, scale ${report.scale}, gap ${report.gap}, bottom ${report.contentBottom}/${report.bottomLimit}, right ${report.rightEdge}, hook top ${report.hookTop}`}${ok ? '' : `\n     ${overflowMessage(post, report)}`}`);
     } catch (e) { bad++; console.log(`FAIL ${describe(brand, post)}: ${e.message}`); }
   }
   return bad;

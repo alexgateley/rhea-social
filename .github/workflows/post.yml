@@ -30,6 +30,10 @@ on:
         description: 'Only log what would be posted'
         type: boolean
         default: false
+      by_hand:
+        description: 'I posted this date by hand: only record it (needs date; slot morning or evening, or any slot on a memorial date), so the job never posts it'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -41,7 +45,12 @@ jobs:
       group: post-runonrhea
       cancel-in-progress: false
     steps:
+      # ref: the branch as it is when this step runs, not the commit the run was queued with. Runs queue
+      # behind each other (concurrency below), so a run created while another was posting would
+      # otherwise check out main from before that post's marker and post the same slot again.
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
 
       - uses: actions/setup-node@v4
         with:
@@ -74,7 +83,7 @@ jobs:
       # a run to one slot; schedule runs have no inputs and look at both. PAGES_BASE_URL, the time zone
       # and the hours come from brand.json.
       - name: Publish what is due
-        if: steps.creds.outputs.ready == 'true'
+        if: steps.creds.outputs.ready == 'true' && inputs.by_hand != true
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
@@ -83,16 +92,30 @@ jobs:
           DRY_RUN: ${{ inputs.dry_run }}
         run: node scripts/publish.mjs
 
+      # A post the founder put up by hand (the memorial carousel from his phone, say): write its marker
+      # here, on main, so no later run posts it. On a memorial date any slot records the memorial post.
+      # Calls nothing on Instagram and needs no credentials.
+      - name: Record a post made by hand
+        if: inputs.by_hand == true
+        env:
+          POST_DATE: ${{ inputs.date }}
+          SLOT: ${{ inputs.slot }}
+        run: |
+          if [ -z "$POST_DATE" ]; then echo "::error::by_hand needs the date of the post"; exit 1; fi
+          node scripts/publish.mjs mark --date "$POST_DATE" --slot "$SLOT" --note "recorded by hand from the workflow"
+
       # Media of posts that went out more than 30 days ago leaves the Pages site (captions and meta
       # stay); never a post without a marker, never posts/memorial/ or render/features/
       - name: Prune old media
-        if: always() && steps.creds.outputs.ready == 'true' && inputs.dry_run != true
+        if: always() && steps.creds.outputs.ready == 'true' && inputs.dry_run != true && inputs.by_hand != true
         run: node scripts/prune.mjs
 
       # Runs even when a post failed partway: a marker already written must be saved or the next run
       # would post that slot again. The prune's deletions go in the same commit and push.
       - name: Record what was posted
-        if: always() && steps.creds.outputs.ready == 'true'
+        if: always() && (steps.creds.outputs.ready == 'true' || inputs.by_hand == true)
+        env:
+          BY_HAND: ${{ inputs.by_hand }}
         run: |
           git config user.name "rhea-social-bot"
           git config user.email "rhea-social-bot@users.noreply.github.com"
@@ -105,6 +128,7 @@ jobs:
           pruned=$(git diff --cached --name-only --diff-filter=D -- posts | wc -l | tr -d ' ')
           if git diff --cached --quiet; then echo "Nothing new to record"; exit 0; fi
           if [ -n "$posted" ]; then msg="Posted $posted"; else msg="Pruned media posted more than 30 days ago"; fi
+          if [ -n "$posted" ] && [ "$BY_HAND" = "true" ]; then msg="$msg by hand"; fi
           if [ -n "$posted" ] && [ "$pruned" != "0" ]; then msg="$msg; pruned $pruned old media files"; fi
           git commit -q -m "$msg"
           for i in 1 2 3 4 5; do
@@ -118,8 +142,9 @@ jobs:
       # token, which needs a fine-grained personal access token (GH_PAT) with "Secrets: write" on this
       # repo. A second refresh the same morning is refused by Instagram (token under 24 hours old) and
       # only logged.
+      # always(): a Monday whose post failed must still refresh, or the token's 60 days run out quietly
       - name: Refresh the Instagram token (Monday mornings)
-        if: steps.creds.outputs.ready == 'true' && inputs.dry_run != true
+        if: always() && steps.creds.outputs.ready == 'true' && inputs.dry_run != true
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           GH_TOKEN: ${{ secrets.GH_PAT }}
@@ -132,6 +157,6 @@ jobs:
             gh secret set IG_ACCESS_TOKEN --repo "$GITHUB_REPOSITORY" < new-token.txt
             echo "Stored the refreshed token"
           elif [ -s new-token.txt ]; then
-            echo "::warning::Token refreshed but GH_PAT is not set, so it could not be stored. Add GH_PAT or regenerate the token before it expires."
+            echo "::warning::Token refreshed but GH_PAT is not set, so it could not be stored. The stored IG_ACCESS_TOKEN still expires 60 days after it was generated: add GH_PAT (sh scripts/setup-secrets.sh) or regenerate the token in the Meta dashboard before then."
           fi
           rm -f new-token.txt

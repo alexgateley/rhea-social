@@ -24,14 +24,21 @@
   "height": 1920,
   "layout": {
     "type": "tip",
-    "resultSize": 150,
+    "resultSize": 142,
     "resultLines": 1,
     "scale": 1,
-    "contentBottom": 1640,
-    "bottomLimit": 1810,
+    "gap": 0.65,
+    "contentBottom": 1528,
+    "bottomLimit": 1536,
     "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-20T19:06:35.508Z",
-  "chromium": "155.0.8059.85"
+  "renderedAt": "2026-10-20T21:18:10.302Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
 }

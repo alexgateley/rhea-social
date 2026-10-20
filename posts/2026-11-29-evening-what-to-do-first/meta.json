@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-29",
+  "slot": "evening",
+  "type": "feature",
+  "slug": "what-to-do-first",
+  "theme": "sage-wash",
+  "headline": "Monday morning: what to do first, store by store",
+  "recording": {
+    "id": "synopsis",
+    "sha1": "e73488ee5de52d11cd4f9284e8f32b624833343f",
+    "frames": 365,
+    "fps": 24
+  },
+  "thumbOffsetMs": 5800,
+  "captionFirstLine": "Daily flash report for franchise and restaurant owners: what needs you first on Monday morning.",
+  "hashtags": [
+    "#restauranttech",
+    "#multiunitfranchisee",
+    "#restaurantowners",
+    "#smallbusinessbookkeeping",
+    "#smallbusinesstips"
+  ],
+  "cardHash": "1f3752a1180a74a03ae96fafee8dab8fc9072e8f",
+  "durationSec": 18.417,
+  "frames": 442,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "feature",
+    "headlineSize": 76,
+    "headlineLines": 2,
+    "subSize": 34,
+    "subLines": 2,
+    "contentBottom": 508,
+    "bottomLimit": 510,
+    "overflow": false,
+    "window": {
+      "x": 247,
+      "y": 594,
+      "w": 586,
+      "h": 1270,
+      "r": 46
+    },
+    "headTop": 244
+  },
+  "renderedAt": "2026-10-20T21:15:39.660Z",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  },
+  "chromium": "155.0.8059.85"
+}

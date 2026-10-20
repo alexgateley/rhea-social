@@ -6,11 +6,12 @@
 //   npm test
 import { after, test } from 'node:test';
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createPublisher, limitHashtags, localParts, markerName } from './lib/publisher.mjs';
+import { BY_HAND_WORKFLOW, checkMarkBranch, createPublisher, limitHashtags, localParts, markerName } from './lib/publisher.mjs';
 
 const realRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const realBrand = JSON.parse(fs.readFileSync(path.join(realRoot, 'brand.json'), 'utf8'));
@@ -333,11 +334,77 @@ test('mark: a by-hand marker stops the job, is never overwritten, and only memor
   pub.mark({ date: '2026-10-21', slot: 'evening' });
   assert.equal(readMarker(root, '2026-10-21', 'evening').folder, '2026-10-21-evening-overview-stores');
   assert.match(logs.join('\n'), /git add published\/2026-10-21-evening\.json/);
+  assert.match(logs.join('\n'), /&& git push origin main/); // never a bare push: it would go to the current branch
 
   const job = await run(root, { at: '2026-10-25T15:00:00Z' });
   assert.equal(job.calls.length, 0);
   const evening = await run(root, { at: '2026-10-22T02:00:00Z' });
   assert.equal(evening.calls.length, 0);
+});
+
+test('mark on a memorial date records the memorial post whatever slot is named, so the carousel never posts twice', async () => {
+  for (const slot of ['morning', 'evening', 'auto', undefined]) {
+    const root = makeRepo({ posts: [{ date: '2026-10-25', slot: 'morning' }] });
+    const logs = [];
+    const pub = createPublisher({ root, fetch: failingFetch, now: () => new Date('2026-10-25T13:00:00Z'), env: {}, log: (m) => logs.push(m) });
+    const r = pub.mark({ date: '2026-10-25', slot });
+    assert.equal(r.slot, 'memorial');
+    assert.deepEqual(fs.readdirSync(path.join(root, 'published')), ['2026-10-25-memorial.json']);
+    assert.match(logs.join('\n'), /memorial date/);
+    for (const at of ['2026-10-25T14:07:00Z', '2026-10-26T01:07:00Z']) {
+      const job = await run(root, { at });
+      assert.equal(job.calls.length, 0, `${slot}: a run at ${at} must post nothing`);
+    }
+  }
+  const root = makeRepo();
+  const pub = createPublisher({ root, fetch: failingFetch, env: {}, log: () => {} });
+  assert.throws(() => pub.mark({ date: '2026-10-26', slot: 'auto' }), /auto works only on a memorial date/);
+  // In the workflow (by_hand) the marker is committed by the job itself: no push instructions
+  const logs = [];
+  createPublisher({ root, fetch: failingFetch, env: { GITHUB_ACTIONS: 'true' }, log: (m) => logs.push(m) }).mark({ date: '2027-04-20' });
+  assert.ok(fs.existsSync(marker(root, '2027-04-20', 'memorial')));
+  assert.doesNotMatch(logs.join('\n'), /git push/);
+});
+
+test('a local mark refuses a clone that is not on main, or is behind origin/main', () => {
+  const fake = ({ branch = 'main', fetchOk = true, behind = '0' } = {}) => {
+    const calls = [];
+    const git = (args) => {
+      calls.push(args.join(' '));
+      if (args[0] === 'rev-parse') return { status: 0, stdout: `${branch}\n`, stderr: '' };
+      if (args[0] === 'fetch') return fetchOk ? { status: 0, stdout: '', stderr: '' } : { status: 128, stdout: '', stderr: 'fatal: unable to access' };
+      if (args[0] === 'rev-list') return { status: 0, stdout: `${behind}\n`, stderr: '' };
+      return { status: 1, stdout: '', stderr: 'unexpected' };
+    };
+    return { git, calls };
+  };
+  // twice-daily (where go-live leaves the clone): refused, with the fix
+  const a = checkMarkBranch(fake({ branch: 'twice-daily' }).git);
+  assert.equal(a.ok, false);
+  assert.match(a.reason, /on "twice-daily", but the job reads main only/);
+  assert.equal(a.fix, 'git switch main && git pull --rebase origin main');
+  // main behind origin/main (the bot's own marker commits): refused, pull first
+  const f = fake({ behind: '2' });
+  const b = checkMarkBranch(f.git);
+  assert.equal(b.ok, false);
+  assert.match(b.reason, /2 commits behind origin\/main/);
+  assert.equal(b.fix, 'git pull --rebase origin main');
+  assert.deepEqual(f.calls, ['rev-parse --abbrev-ref HEAD', 'fetch --quiet origin main', 'rev-list --count HEAD..origin/main']);
+  // no network: refused (the workflow's by_hand input is the way out)
+  assert.equal(checkMarkBranch(fake({ fetchOk: false }).git).ok, false);
+  // on an up-to-date main: fine
+  assert.deepEqual(checkMarkBranch(fake().git), { ok: true });
+  assert.equal(BY_HAND_WORKFLOW('2026-10-25'), 'gh workflow run "Post @RunonRhea" --repo alexgateley/rhea-social -f date=2026-10-25 -f by_hand=true');
+});
+
+test('the mark command refuses this clone when it is not on main, and points to the workflow', () => {
+  const branch = spawnSync('git', ['-C', realRoot, 'rev-parse', '--abbrev-ref', 'HEAD'], { encoding: 'utf8' }).stdout.trim();
+  if (branch === 'main') return; // only meaningful off main; the fake-git test above covers main
+  const r = spawnSync(process.execPath, [path.join(realRoot, 'scripts/publish.mjs'), 'mark', '--date', '2026-10-25', '--slot', 'memorial'], { encoding: 'utf8', env: { ...process.env, GITHUB_ACTIONS: '' } });
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /not writing the marker: this clone is on/);
+  assert.match(r.stderr, /-f date=2026-10-25 -f by_hand=true/);
+  assert.ok(!fs.existsSync(path.join(realRoot, 'published', '2026-10-25-memorial.json')));
 });
 
 test('the live repo keeps its morning markers and indexes valid for the new publisher', () => {

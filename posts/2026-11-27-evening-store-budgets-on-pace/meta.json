@@ -5,7 +5,12 @@
   "slug": "store-budgets-on-pace",
   "theme": "sage-wash",
   "headline": "Is each store on pace for its budget?",
-  "recording": "budgets",
+  "recording": {
+    "id": "budgets",
+    "sha1": "44c7244fd1e6d080cd26e2676cd29666413a6802",
+    "frames": 288,
+    "fps": 24
+  },
   "thumbOffsetMs": 11700,
   "captionFirstLine": "Store sales budgets for multi-unit franchise and coffee shop owners: on pace or off, mid-month.",
   "hashtags": [
@@ -28,16 +33,21 @@
     "subSize": 34,
     "subLines": 1,
     "contentBottom": 464,
-    "bottomLimit": 476,
+    "bottomLimit": 510,
     "overflow": false,
     "window": {
-      "x": 240,
-      "y": 560,
-      "w": 600,
-      "h": 1300,
+      "x": 247,
+      "y": 594,
+      "w": 586,
+      "h": 1270,
       "r": 46
-    }
+    },
+    "headTop": 244
   },
-  "renderedAt": "2026-10-20T19:23:41.227Z",
-  "chromium": "155.0.8059.85"
+  "renderedAt": "2026-10-20T21:13:59.776Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
 }

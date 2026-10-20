@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-24",
+  "slot": "evening",
+  "type": "myth",
+  "slug": "bank-balance-is-not-profit",
+  "theme": "paper",
+  "hook": "If there's money in the bank, we're profitable.",
+  "fact": "Cash isn't profit.",
+  "thumbOffsetMs": 4200,
+  "captionFirstLine": "Cash vs profit for restaurant, coffee shop and salon owners: why the bank balance isn't what you made.",
+  "hashtags": [
+    "#cashflowmanagement",
+    "#franchiseowner",
+    "#restaurantowner",
+    "#salonownerlife",
+    "#smallbusinessowner"
+  ],
+  "cardHash": "8ac7f8e168ab42498d6a3a722a1d7de50a9dcce9",
+  "durationSec": 22.917,
+  "frames": 550,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "myth",
+    "resultSize": 132,
+    "resultLines": 2,
+    "scale": 1,
+    "contentBottom": 1501,
+    "bottomLimit": 1810,
+    "overflow": false,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T19:06:58.272Z",
+  "chromium": "155.0.8059.85"
+}

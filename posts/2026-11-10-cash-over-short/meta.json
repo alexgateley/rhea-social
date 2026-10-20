@@ -29,5 +29,8 @@
     "#restaurantindustry",
     "#coffeeshopowner",
     "#bookkeepingtips"
-  ]
+  ],
+  "type": "owner-math",
+  "cardHash": "8d6e1b096ab447f15b9d47600bd54d0d7ab4cf00",
+  "cardHashAdoptedAt": "2026-10-20T19:05:12.949Z"
 }

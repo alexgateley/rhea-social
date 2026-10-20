@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-30",
+  "slot": "evening",
+  "type": "myth",
+  "slug": "closed-month-edits",
+  "theme": "paper",
+  "hook": "A closed month can be edited later.",
+  "fact": "Fix closed months with a reversal.",
+  "thumbOffsetMs": 4200,
+  "captionFirstLine": "Closing the books for multi-store owners: why a closed month is fixed by reversal, not edits.",
+  "hashtags": [
+    "#monthendclose",
+    "#franchiselife",
+    "#coffeeshopowners",
+    "#salonownerlife",
+    "#smallbusinessowner"
+  ],
+  "cardHash": "e344f8cb39273e0ac2894a6efeb753e6f0542d12",
+  "durationSec": 22.917,
+  "frames": 550,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "myth",
+    "resultSize": 132,
+    "resultLines": 3,
+    "scale": 1,
+    "contentBottom": 1741,
+    "bottomLimit": 1810,
+    "overflow": false,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T19:25:45.211Z",
+  "chromium": "155.0.8059.85"
+}

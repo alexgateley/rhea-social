@@ -1,0 +1,8 @@
+Checking your bookkeeper's books: a month-end tool for franchise and multi-store owners.
+Compare with bookkeeper in Rhea's demo: every LLC by month, on sample data.
+Drop the bookkeeper's QuickBooks Online P&L or trial balance on Import; each account's difference shows to the cent.
+The demo has no bookkeeper's report loaded yet, so this shows where it lands.
+
+See it on sample data at demo.rheafi.com. Rhea: automated books, labor and per-store profit for multi-store owners. rheafi.com (link in bio)
+
+#franchiseaccounting #qsr #coffeeshopowners #salonowners #businessowner

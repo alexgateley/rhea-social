@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-22",
+  "slot": "morning",
+  "type": "tip",
+  "slug": "budget-each-store",
+  "theme": "sage",
+  "hook": "Is each store on pace this month?",
+  "title": "Budget sales by store",
+  "action": "Mid-month check",
+  "thumbOffsetMs": 12500,
+  "captionFirstLine": "Sales budget by store for multi-store owners: set each month's target and check pace mid-month.",
+  "hashtags": [
+    "#profitmargin",
+    "#restaurantowner",
+    "#coffeeshopowners",
+    "#accountingtips",
+    "#smallbusinesstips"
+  ],
+  "cardHash": "213d93fc75da0389bb7d0e222065f065ae9a5bba",
+  "durationSec": 22.417,
+  "frames": 538,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "tip",
+    "resultSize": 150,
+    "resultLines": 2,
+    "scale": 1,
+    "contentBottom": 1630,
+    "bottomLimit": 1810,
+    "overflow": false,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T19:20:25.507Z",
+  "chromium": "155.0.8059.85"
+}

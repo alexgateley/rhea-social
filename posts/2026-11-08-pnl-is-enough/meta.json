@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-08",
+  "slot": "morning",
+  "type": "myth",
+  "slug": "pnl-is-enough",
+  "theme": "ink",
+  "hook": "The P&L is all an owner needs to read.",
+  "fact": "Read the balance sheet too.",
+  "thumbOffsetMs": 4200,
+  "captionFirstLine": "Balance sheet basics for small business owners: what the P&L can't show about your stores.",
+  "hashtags": [
+    "#cashflowmanagement",
+    "#franchisebusiness",
+    "#restaurateur",
+    "#bookkeeping",
+    "#smallbusinessfinance"
+  ],
+  "cardHash": "09048b86b56c4586c999b353a3cb57bb9578c164",
+  "durationSec": 22.917,
+  "frames": 550,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "myth",
+    "resultSize": 132,
+    "resultLines": 3,
+    "scale": 1,
+    "contentBottom": 1693,
+    "bottomLimit": 1810,
+    "overflow": false,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T19:12:50.554Z",
+  "chromium": "155.0.8059.85"
+}

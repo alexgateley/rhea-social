@@ -29,5 +29,8 @@
     "#restaurantowners",
     "#restaurantindustry",
     "#accountingtips"
-  ]
+  ],
+  "type": "owner-math",
+  "cardHash": "5c7cb3690e826324d6e8c514608601cad488d8b1",
+  "cardHashAdoptedAt": "2026-10-20T19:05:12.947Z"
 }

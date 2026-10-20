@@ -1,0 +1,8 @@
+POS reports and bookkeeping: map every button to an account, a tip for restaurant and salon owners.
+Every POS item, discount and tender should post to a named account.
+New menu items and services often land in Other until someone notices.
+Map each new button the day it's added, and check the unmapped list weekly.
+
+Rhea: automated books, labor and per-store profit for multi-store owners. rheafi.com (link in bio)
+
+#restaurantaccounting #restaurantbusiness #coffeebusiness #salonowner #businessfinance

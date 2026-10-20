@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-30",
+  "slot": "morning",
+  "type": "owner-math",
+  "slug": "accrued-wages",
+  "theme": "sage",
+  "hook": "Payday is in December. The wages are November's.",
+  "result": {
+    "label": "November cost to book in November",
+    "value": "$13,564"
+  },
+  "thumbOffsetMs": 12500,
+  "captionFirstLine": "Accrued wages at month-end for restaurant, coffee shop and salon owners: payroll that belongs in November.",
+  "hashtags": [
+    "#payroll",
+    "#franchisee",
+    "#restaurantowners",
+    "#coffeeshopowner",
+    "#smallbusinessbookkeeping"
+  ],
+  "cardHash": "9fcbcab68fadf66ff2228fbe61e6bb3731c0b699",
+  "durationSec": 22.417,
+  "frames": 538,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "owner-math",
+    "resultSize": 210,
+    "resultLines": 1,
+    "scale": 1,
+    "contentBottom": 1781,
+    "bottomLimit": 1810,
+    "overflow": false,
+    "hookLines": 3
+  },
+  "renderedAt": "2026-10-20T19:25:40.994Z",
+  "chromium": "155.0.8059.85"
+}

@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-10",
+  "slot": "evening",
+  "type": "myth",
+  "slug": "busy-week-labor",
+  "theme": "sage",
+  "hook": "Sales are up, so labor must be fine.",
+  "fact": "Labor can rise faster than sales.",
+  "thumbOffsetMs": 4200,
+  "captionFirstLine": "Labor cost in busy weeks: why restaurant, coffee shop and salon owners still check labor %.",
+  "hashtags": [
+    "#laborcost",
+    "#franchiseowner",
+    "#restaurantowners",
+    "#salonownerlife",
+    "#smallbusinessowner"
+  ],
+  "cardHash": "3437386bf315717a78acda1a47a94a7649265a59",
+  "durationSec": 22.917,
+  "frames": 550,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "myth",
+    "resultSize": 132,
+    "resultLines": 3,
+    "scale": 1,
+    "contentBottom": 1633,
+    "bottomLimit": 1810,
+    "overflow": false,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T19:14:10.028Z",
+  "chromium": "155.0.8059.85"
+}

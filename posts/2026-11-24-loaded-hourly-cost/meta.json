@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-24",
+  "slot": "morning",
+  "type": "owner-math",
+  "slug": "loaded-hourly-cost",
+  "theme": "sage",
+  "hook": "What does a $17 hour really cost?",
+  "result": {
+    "label": "One hour, fully loaded",
+    "value": "$19.76"
+  },
+  "thumbOffsetMs": 12500,
+  "captionFirstLine": "Loaded labor cost per hour for restaurant, coffee shop and salon owners: what $17 an hour really costs.",
+  "hashtags": [
+    "#payroll",
+    "#multiunitfranchisee",
+    "#restaurantmanagement",
+    "#coffeebusiness",
+    "#businessfinance"
+  ],
+  "cardHash": "462774a2b4eadb5994febfa5d4ade9992c2b0d28",
+  "durationSec": 22.417,
+  "frames": 538,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "owner-math",
+    "resultSize": 210,
+    "resultLines": 1,
+    "scale": 1,
+    "contentBottom": 1519,
+    "bottomLimit": 1810,
+    "overflow": false,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T19:21:51.825Z",
+  "chromium": "155.0.8059.85"
+}

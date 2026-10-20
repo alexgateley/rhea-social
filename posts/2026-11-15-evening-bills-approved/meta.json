@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-15",
+  "slot": "evening",
+  "type": "feature",
+  "slug": "bills-approved",
+  "theme": "sage-wash",
+  "headline": "Bills approved before they're paid",
+  "recording": {
+    "id": "bills",
+    "sha1": "2bf21eca0a44304f3b05724ca9d4a947ac849283",
+    "frames": 352,
+    "fps": 24
+  },
+  "thumbOffsetMs": 4000,
+  "captionFirstLine": "Bill approval and accounts payable for multi-store owners: what's due, approved and paid.",
+  "hashtags": [
+    "#accountspayable",
+    "#franchising",
+    "#restaurantmanagement",
+    "#salonbusiness",
+    "#smallbusinessfinance"
+  ],
+  "cardHash": "9a527ed7c2c5ca4bf85367188d5553855e93008f",
+  "durationSec": 17.875,
+  "frames": 429,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "feature",
+    "headlineSize": 76,
+    "headlineLines": 2,
+    "subSize": 34,
+    "subLines": 2,
+    "contentBottom": 508,
+    "bottomLimit": 476,
+    "overflow": false,
+    "window": {
+      "x": 240,
+      "y": 560,
+      "w": 600,
+      "h": 1300,
+      "r": 46
+    }
+  },
+  "renderedAt": "2026-10-20T19:16:32.948Z",
+  "chromium": "155.0.8059.85"
+}

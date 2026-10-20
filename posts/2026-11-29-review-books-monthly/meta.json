@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-29",
+  "slot": "morning",
+  "type": "tip",
+  "slug": "review-books-monthly",
+  "theme": "ink",
+  "hook": "When did you last read your bookkeeper's P&L?",
+  "title": "Review the books monthly",
+  "action": "Monthly, together",
+  "thumbOffsetMs": 14100,
+  "captionFirstLine": "Working with your bookkeeper: compare the books monthly, a tip for multi-store franchise owners.",
+  "hashtags": [
+    "#monthendclose",
+    "#franchiseowner",
+    "#restaurantmanagement",
+    "#coffeebusiness",
+    "#bookkeeping"
+  ],
+  "cardHash": "6ea616b8a3fe5797857e74c8c256fa2609e6ee1c",
+  "durationSec": 24,
+  "frames": 576,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "tip",
+    "resultSize": 150,
+    "resultLines": 2,
+    "scale": 1,
+    "contentBottom": 1736,
+    "bottomLimit": 1810,
+    "overflow": false,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T19:25:02.105Z",
+  "chromium": "155.0.8059.85"
+}

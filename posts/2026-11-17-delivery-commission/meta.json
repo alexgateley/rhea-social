@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-17",
+  "slot": "morning",
+  "type": "owner-math",
+  "slug": "delivery-commission",
+  "theme": "ink",
+  "hook": "A delivery order keeps 43.0% before labor.",
+  "result": {
+    "label": "Kept of each delivery dollar",
+    "value": "43.0%"
+  },
+  "thumbOffsetMs": 12500,
+  "captionFirstLine": "Delivery app commission math for restaurant and coffee shop owners: what you keep per order.",
+  "hashtags": [
+    "#menupricing",
+    "#restaurantowner",
+    "#coffeeshopbusiness",
+    "#bookkeeping",
+    "#smallbusinessowner"
+  ],
+  "cardHash": "dde1bb475de4b0c8c6ce63f1987ac51aa0de3414",
+  "durationSec": 22.417,
+  "frames": 538,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "owner-math",
+    "resultSize": 210,
+    "resultLines": 1,
+    "scale": 1,
+    "contentBottom": 1578,
+    "bottomLimit": 1810,
+    "overflow": false,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T19:17:27.797Z",
+  "chromium": "155.0.8059.85"
+}

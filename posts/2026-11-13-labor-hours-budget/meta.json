@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-13",
+  "slot": "morning",
+  "type": "owner-math",
+  "slug": "labor-hours-budget",
+  "theme": "ink",
+  "hook": "How many hours can you schedule next week?",
+  "result": {
+    "label": "Hours to schedule next week",
+    "value": "450 h"
+  },
+  "thumbOffsetMs": 12500,
+  "captionFirstLine": "Labor scheduling for restaurant, coffee shop and salon owners: turn a labor % target into hours.",
+  "hashtags": [
+    "#laborcost",
+    "#restaurantbusiness",
+    "#coffeeshopbusiness",
+    "#bookkeepingtips",
+    "#accountingtips"
+  ],
+  "cardHash": "80e871818733751d5f5a899ca6fc8edbfe702d49",
+  "durationSec": 22.417,
+  "frames": 538,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "owner-math",
+    "resultSize": 210,
+    "resultLines": 1,
+    "scale": 1,
+    "contentBottom": 1673,
+    "bottomLimit": 1810,
+    "overflow": false,
+    "hookLines": 3
+  },
+  "renderedAt": "2026-10-20T19:14:49.087Z",
+  "chromium": "155.0.8059.85"
+}

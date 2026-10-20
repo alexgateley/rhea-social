@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-05",
+  "slot": "evening",
+  "type": "feature",
+  "slug": "morning-synopsis",
+  "theme": "paper",
+  "headline": "Every store, summed up in sentences each morning",
+  "recording": {
+    "id": "synopsis",
+    "sha1": "e73488ee5de52d11cd4f9284e8f32b624833343f",
+    "frames": 365,
+    "fps": 24
+  },
+  "thumbOffsetMs": 4000,
+  "captionFirstLine": "Daily sales summary email for multi-store owners: every store's yesterday in plain sentences.",
+  "hashtags": [
+    "#bookkeepingsoftware",
+    "#franchiselife",
+    "#coffeeshopowners",
+    "#salonowners",
+    "#smallbusinesstips"
+  ],
+  "cardHash": "a36a38cdc44d4d4e8a9c5ed2b8676aa1cdaff266",
+  "durationSec": 18.417,
+  "frames": 442,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "feature",
+    "headlineSize": 76,
+    "headlineLines": 2,
+    "subSize": 34,
+    "subLines": 2,
+    "contentBottom": 508,
+    "bottomLimit": 476,
+    "overflow": false,
+    "window": {
+      "x": 240,
+      "y": 560,
+      "w": 600,
+      "h": 1300,
+      "r": 46
+    }
+  },
+  "renderedAt": "2026-10-20T19:11:24.698Z",
+  "chromium": "155.0.8059.85"
+}

@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-07",
+  "slot": "morning",
+  "type": "tip",
+  "slug": "reconcile-every-account",
+  "theme": "ink",
+  "hook": "Do your books match the bank statement?",
+  "title": "Reconcile every account",
+  "action": "Every month",
+  "thumbOffsetMs": 12500,
+  "captionFirstLine": "Bank reconciliation for multi-store owners: tie every bank and credit card account each month.",
+  "hashtags": [
+    "#bankreconciliation",
+    "#franchising",
+    "#restaurantmanagement",
+    "#smallbusinessbookkeeping",
+    "#bookkeepingtips"
+  ],
+  "cardHash": "11dab7132b108bdfa89d765a8418be47a46784bc",
+  "durationSec": 22.417,
+  "frames": 538,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "tip",
+    "resultSize": 150,
+    "resultLines": 1,
+    "scale": 1,
+    "contentBottom": 1534,
+    "bottomLimit": 1810,
+    "overflow": false,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T19:12:07.321Z",
+  "chromium": "155.0.8059.85"
+}

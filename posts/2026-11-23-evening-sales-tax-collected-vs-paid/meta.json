@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-23",
+  "slot": "evening",
+  "type": "feature",
+  "slug": "sales-tax-collected-vs-paid",
+  "theme": "sage-wash",
+  "headline": "Sales tax collected vs paid, by month",
+  "recording": {
+    "id": "sales-tax",
+    "sha1": "6a77e47609ac1a946efa57c0ec2214f9788942cc",
+    "frames": 299,
+    "fps": 24
+  },
+  "thumbOffsetMs": 4000,
+  "captionFirstLine": "Sales tax report for multi-store owners: collected vs paid, by LLC and month.",
+  "hashtags": [
+    "#salestax",
+    "#restaurantindustry",
+    "#salonbusiness",
+    "#smallbusinessbookkeeping",
+    "#bookkeeping"
+  ],
+  "cardHash": "c6aa937065779f59524192870fac7d54fb2b3d50",
+  "durationSec": 15.667,
+  "frames": 376,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "feature",
+    "headlineSize": 76,
+    "headlineLines": 2,
+    "subSize": 34,
+    "subLines": 2,
+    "contentBottom": 508,
+    "bottomLimit": 476,
+    "overflow": false,
+    "window": {
+      "x": 240,
+      "y": 560,
+      "w": 600,
+      "h": 1300,
+      "r": 46
+    }
+  },
+  "renderedAt": "2026-10-20T19:21:08.832Z",
+  "chromium": "155.0.8059.85"
+}

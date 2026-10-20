@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-14",
+  "slot": "evening",
+  "type": "myth",
+  "slug": "deposits-equal-sales",
+  "theme": "paper",
+  "hook": "Our deposits should equal our sales.",
+  "fact": "Deposits are sales minus fees, later.",
+  "thumbOffsetMs": 4200,
+  "captionFirstLine": "Merchant deposits vs sales for restaurant, coffee shop and salon owners: why they never match exactly.",
+  "hashtags": [
+    "#bankreconciliation",
+    "#franchiselife",
+    "#restaurantindustry",
+    "#salonownerlife",
+    "#smallbusinessbookkeeping"
+  ],
+  "cardHash": "0873cc81ee719de13ef386b42472c23b051c9a1e",
+  "durationSec": 22.917,
+  "frames": 550,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "myth",
+    "resultSize": 132,
+    "resultLines": 3,
+    "scale": 1,
+    "contentBottom": 1633,
+    "bottomLimit": 1810,
+    "overflow": false,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T19:16:02.916Z",
+  "chromium": "155.0.8059.85"
+}

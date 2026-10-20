@@ -1,0 +1,8 @@
+P&L by location for multi-store owners: read every store's profit side by side, same month.
+A group P&L can look fine while one store loses money every month.
+Put every store's month in one table: same accounts, same period.
+Start with the bottom three and ask what's different.
+
+Rhea: automated books, labor and per-store profit for multi-store owners. rheafi.com (link in bio)
+
+#profitmargin #franchisebusiness #restaurateur #salonowner #smallbusinesstips

@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-14",
+  "slot": "morning",
+  "type": "tip",
+  "slug": "collect-w9s-now",
+  "theme": "sage",
+  "hook": "January's 1099s start with November's W-9s.",
+  "title": "Collect W-9s now",
+  "action": "Before December",
+  "thumbOffsetMs": 14100,
+  "captionFirstLine": "1099 prep for small business owners: collect vendors' W-9s now, not in January.",
+  "hashtags": [
+    "#accountspayable",
+    "#qsr",
+    "#coffeeshopowner",
+    "#bookkeeping",
+    "#businessfinance"
+  ],
+  "cardHash": "a3585689350e96a241134bf95878807586d9fbec",
+  "durationSec": 24,
+  "frames": 576,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "tip",
+    "resultSize": 122,
+    "resultLines": 1,
+    "scale": 1,
+    "contentBottom": 1558,
+    "bottomLimit": 1810,
+    "overflow": false,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T19:15:30.670Z",
+  "chromium": "155.0.8059.85"
+}

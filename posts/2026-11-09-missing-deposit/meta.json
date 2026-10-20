@@ -29,5 +29,8 @@
     "#coffeeshopbusiness",
     "#accountingtips",
     "#smallbusinesstips"
-  ]
+  ],
+  "type": "owner-math",
+  "cardHash": "1f0fee8f50cf355b01748cddc1c749cbc1817aa8",
+  "cardHashAdoptedAt": "2026-10-20T19:05:12.948Z"
 }

@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-01",
+  "slot": "evening",
+  "type": "feature",
+  "slug": "data-health-check",
+  "theme": "ink",
+  "headline": "Is any store's data late this morning?",
+  "recording": {
+    "id": "data-health",
+    "sha1": "35515e48cfd553b0d6d81c4b2cec163912ca9968",
+    "frames": 345,
+    "fps": 24
+  },
+  "thumbOffsetMs": 4000,
+  "captionFirstLine": "Missing POS data for multi-store owners: see which store's sales or time cards didn't arrive.",
+  "hashtags": [
+    "#restauranttech",
+    "#franchiselife",
+    "#restaurantowners",
+    "#salonowners",
+    "#smallbusinessowner"
+  ],
+  "cardHash": "80538930b9b137ff14ca3622b8c914502b5e6517",
+  "durationSec": 17.583,
+  "frames": 422,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "feature",
+    "headlineSize": 76,
+    "headlineLines": 2,
+    "subSize": 34,
+    "subLines": 1,
+    "contentBottom": 464,
+    "bottomLimit": 476,
+    "overflow": false,
+    "window": {
+      "x": 240,
+      "y": 560,
+      "w": 600,
+      "h": 1300,
+      "r": 46
+    }
+  },
+  "renderedAt": "2026-10-20T19:09:59.128Z",
+  "chromium": "155.0.8059.85"
+}

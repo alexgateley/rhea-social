@@ -29,5 +29,8 @@
     "#qsr",
     "#smallbusinessbookkeeping",
     "#bookkeeping"
-  ]
+  ],
+  "type": "owner-math",
+  "cardHash": "f6254745afae349d27934111e48faa97ae5e1b06",
+  "cardHashAdoptedAt": "2026-10-20T19:05:12.946Z"
 }

@@ -1,0 +1,8 @@
+Missing POS data for multi-store owners: see which store's sales or time cards didn't arrive.
+Rhea's data health page on the demo company, sample data.
+One line per problem, worst first, then each store's last 14 days.
+Sales, time cards, payouts and deposits, each day marked in words.
+
+See it on sample data at demo.rheafi.com. Rhea: automated books, labor and per-store profit for multi-store owners. rheafi.com (link in bio)
+
+#restauranttech #franchiselife #restaurantowners #salonowners #smallbusinessowner

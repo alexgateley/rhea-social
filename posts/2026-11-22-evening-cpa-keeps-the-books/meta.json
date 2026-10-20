@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-22",
+  "slot": "evening",
+  "type": "myth",
+  "slug": "cpa-keeps-the-books",
+  "theme": "paper",
+  "hook": "My CPA does my bookkeeping.",
+  "fact": "Bookkeeping and tax prep differ.",
+  "thumbOffsetMs": 4200,
+  "captionFirstLine": "Bookkeeper vs CPA for small business owners: two different jobs, and what each one does.",
+  "hashtags": [
+    "#businesstips",
+    "#franchiselife",
+    "#coffeeshopowner",
+    "#salonownerlife",
+    "#bookkeepingtips"
+  ],
+  "cardHash": "c5c09e771ce28e6f68849d753ee275a0a2826cde",
+  "durationSec": 22.917,
+  "frames": 550,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "myth",
+    "resultSize": 132,
+    "resultLines": 3,
+    "scale": 1,
+    "contentBottom": 1693,
+    "bottomLimit": 1810,
+    "overflow": false,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T19:20:34.904Z",
+  "chromium": "155.0.8059.85"
+}

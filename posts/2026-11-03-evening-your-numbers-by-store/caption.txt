@@ -1,0 +1,8 @@
+Restaurant KPIs by store for franchise and coffee shop owners: labor, prime cost and average ticket.
+Your numbers in Rhea's demo, on sample data: the labor, prime cost and tickets views.
+Each has tiles, one chart and every store in a table, with the period before and the change.
+Every number says where it came from.
+
+See it on sample data at demo.rheafi.com. Rhea: automated books, labor and per-store profit for multi-store owners. rheafi.com (link in bio)
+
+#profitmargin #franchising #restaurateur #salonbusiness #accountingtips

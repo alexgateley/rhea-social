@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-26",
+  "slot": "morning",
+  "type": "owner-math",
+  "slug": "closed-day-cost",
+  "theme": "sage",
+  "hook": "What does closing for the holiday cost?",
+  "result": {
+    "label": "Profit one closed day costs",
+    "value": "$1,120"
+  },
+  "thumbOffsetMs": 12500,
+  "captionFirstLine": "Closing for a holiday: what one closed day costs restaurant, coffee shop and salon owners.",
+  "hashtags": [
+    "#profitmargin",
+    "#franchisee",
+    "#restaurateur",
+    "#coffeeshopowner",
+    "#smallbusinesstips"
+  ],
+  "cardHash": "eba143295e00051a9097269c74de76ecf3eb9b6c",
+  "durationSec": 22.417,
+  "frames": 538,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "owner-math",
+    "resultSize": 210,
+    "resultLines": 1,
+    "scale": 1,
+    "contentBottom": 1578,
+    "bottomLimit": 1810,
+    "overflow": false,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T19:23:14.220Z",
+  "chromium": "155.0.8059.85"
+}

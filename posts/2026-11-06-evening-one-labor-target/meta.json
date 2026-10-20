@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-06",
+  "slot": "evening",
+  "type": "myth",
+  "slug": "one-labor-target",
+  "theme": "paper",
+  "hook": "Every store should hit the same labor %.",
+  "fact": "Each store needs its own target.",
+  "thumbOffsetMs": 4200,
+  "captionFirstLine": "Labor percentage targets for multi-store owners: why every store shouldn't share one number.",
+  "hashtags": [
+    "#laborcost",
+    "#franchiseowner",
+    "#coffeeshopowner",
+    "#salonownerlife",
+    "#businessowner"
+  ],
+  "cardHash": "941d4f01c4e1b883f6a46a6a05a5478876afe7b8",
+  "durationSec": 22.917,
+  "frames": 550,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "myth",
+    "resultSize": 132,
+    "resultLines": 3,
+    "scale": 1,
+    "contentBottom": 1687,
+    "bottomLimit": 1810,
+    "overflow": false,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T19:12:06.475Z",
+  "chromium": "155.0.8059.85"
+}

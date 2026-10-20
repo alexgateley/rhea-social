@@ -29,5 +29,8 @@
     "#restaurantbusiness",
     "#coffeebusiness",
     "#smallbusinessfinance"
-  ]
+  ],
+  "type": "owner-math",
+  "cardHash": "e9c830cfa3c154c6b044a8a5f4adbac0d8f6836c",
+  "cardHashAdoptedAt": "2026-10-20T19:05:12.947Z"
 }

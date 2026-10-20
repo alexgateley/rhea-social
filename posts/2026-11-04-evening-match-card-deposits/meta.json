@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-04",
+  "slot": "evening",
+  "type": "tip",
+  "slug": "match-card-deposits",
+  "theme": "sage",
+  "hook": "Did every card sale reach the bank?",
+  "title": "Match card days to deposits",
+  "action": "Every card day",
+  "thumbOffsetMs": 14100,
+  "captionFirstLine": "Credit card deposits: how restaurant, coffee shop and salon owners match card sales to the bank.",
+  "hashtags": [
+    "#cashflowmanagement",
+    "#coffeeshopbusiness",
+    "#salonowner",
+    "#bookkeepingtips",
+    "#smallbusinessowner"
+  ],
+  "cardHash": "9b571459d8ec06ea4a9513bd7d9a7c555df463b5",
+  "durationSec": 24,
+  "frames": 576,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "tip",
+    "resultSize": 146,
+    "resultLines": 1,
+    "scale": 1,
+    "contentBottom": 1576,
+    "bottomLimit": 1810,
+    "overflow": false,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T19:11:22.946Z",
+  "chromium": "155.0.8059.85"
+}

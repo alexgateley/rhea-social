@@ -1,0 +1,8 @@
+Bank statement reconciliation for multi-store owners: every LLC's accounts tied to the cent.
+Statements in Rhea's demo, on sample data for four of the demo LLCs.
+Each bank and card statement's lines booked into the books, each to an account.
+Then Reconcile: the books' balance beside the statement's, until they agree to the cent.
+
+See it on sample data at demo.rheafi.com. Rhea: automated books, labor and per-store profit for multi-store owners. rheafi.com (link in bio)
+
+#bankreconciliation #franchising #restaurantmanagement #salonbusiness #businessfinance

@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-30",
+  "slot": "evening",
+  "type": "feature",
+  "slug": "card-deposits-matched",
+  "theme": "sage",
+  "headline": "Did every day's card sales reach the bank?",
+  "recording": {
+    "id": "deposits",
+    "sha1": "638bdb18818a7156f3c19c7fd03aca7466c0ac93",
+    "frames": 324,
+    "fps": 24
+  },
+  "thumbOffsetMs": 4000,
+  "captionFirstLine": "Credit card deposit reconciliation for restaurant and coffee shop owners: find the missing day.",
+  "hashtags": [
+    "#bankreconciliation",
+    "#franchisebusiness",
+    "#restaurantbusiness",
+    "#salonbusiness",
+    "#smallbusinessbookkeeping"
+  ],
+  "cardHash": "82b5741ee9a0e49dc08ad4a7b99712be925efefa",
+  "durationSec": 16.708,
+  "frames": 401,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "feature",
+    "headlineSize": 76,
+    "headlineLines": 2,
+    "subSize": 34,
+    "subLines": 2,
+    "contentBottom": 508,
+    "bottomLimit": 476,
+    "overflow": false,
+    "window": {
+      "x": 240,
+      "y": 560,
+      "w": 600,
+      "h": 1300,
+      "r": 46
+    }
+  },
+  "renderedAt": "2026-10-20T19:08:12.749Z",
+  "chromium": "155.0.8059.85"
+}

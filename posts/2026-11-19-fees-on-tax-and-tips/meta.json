@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-19",
+  "slot": "morning",
+  "type": "owner-math",
+  "slug": "fees-on-tax-and-tips",
+  "theme": "ink",
+  "hook": "You pay card fees on money that isn't yours.",
+  "result": {
+    "label": "Fees on it this month at 2.9%",
+    "value": "$365.40"
+  },
+  "thumbOffsetMs": 12500,
+  "captionFirstLine": "Credit card fees on sales tax and tips: a hidden cost for restaurant, coffee shop and salon owners.",
+  "hashtags": [
+    "#creditcardfees",
+    "#franchising",
+    "#cafeowner",
+    "#smallbusinessfinance",
+    "#accountingtips"
+  ],
+  "cardHash": "7e3c6885d1fb463f8899613f6172badea9c4ec51",
+  "durationSec": 22.417,
+  "frames": 538,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "owner-math",
+    "resultSize": 210,
+    "resultLines": 1,
+    "scale": 1,
+    "contentBottom": 1519,
+    "bottomLimit": 1810,
+    "overflow": false,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T19:18:44.905Z",
+  "chromium": "155.0.8059.85"
+}

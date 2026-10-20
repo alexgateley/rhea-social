@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-31",
+  "slot": "evening",
+  "type": "tip",
+  "slug": "labor-daily",
+  "theme": "ink",
+  "hook": "Payroll shows last week's labor. Too late.",
+  "title": "Check labor % daily",
+  "action": "Every morning",
+  "thumbOffsetMs": 14100,
+  "captionFirstLine": "Labor cost percentage, daily: why restaurant, coffee shop and salon owners shouldn't wait for payroll.",
+  "hashtags": [
+    "#laborcost",
+    "#qsr",
+    "#coffeeshopbusiness",
+    "#salonowner",
+    "#businessowner"
+  ],
+  "cardHash": "10b1b65d1406718cf9441b6be95d26a7959a657b",
+  "durationSec": 24,
+  "frames": 576,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "tip",
+    "resultSize": 146,
+    "resultLines": 1,
+    "scale": 1,
+    "contentBottom": 1629,
+    "bottomLimit": 1810,
+    "overflow": false,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T19:09:00.704Z",
+  "chromium": "155.0.8059.85"
+}

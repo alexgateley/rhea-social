@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-27",
+  "slot": "evening",
+  "type": "tip",
+  "slug": "one-chart-of-accounts",
+  "theme": "ink",
+  "hook": "Can you compare your stores line by line?",
+  "title": "One chart of accounts",
+  "action": "Every store, same list",
+  "thumbOffsetMs": 14100,
+  "captionFirstLine": "Chart of accounts tip for multi-store owners: use the same accounts at every store and LLC.",
+  "hashtags": [
+    "#restaurantaccounting",
+    "#franchising",
+    "#coffeeshopbusiness",
+    "#salonowner",
+    "#smallbusinessfinance"
+  ],
+  "cardHash": "90a5151549cbb125d27d8ca620310f43e3486441",
+  "durationSec": 24,
+  "frames": 576,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "tip",
+    "resultSize": 150,
+    "resultLines": 2,
+    "scale": 1,
+    "contentBottom": 1790,
+    "bottomLimit": 1810,
+    "overflow": false,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T19:07:41.762Z",
+  "chromium": "155.0.8059.85"
+}

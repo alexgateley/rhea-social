@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-27",
+  "slot": "evening",
+  "type": "feature",
+  "slug": "store-budgets-on-pace",
+  "theme": "sage-wash",
+  "headline": "Is each store on pace for its budget?",
+  "recording": {
+    "id": "budgets",
+    "sha1": "44c7244fd1e6d080cd26e2676cd29666413a6802",
+    "frames": 288,
+    "fps": 24
+  },
+  "thumbOffsetMs": 4000,
+  "captionFirstLine": "Store sales budgets for multi-unit franchise and coffee shop owners: on pace or off, mid-month.",
+  "hashtags": [
+    "#profitmargin",
+    "#qsr",
+    "#cafeowner",
+    "#salonbusiness",
+    "#smallbusinessowner"
+  ],
+  "cardHash": "d21af553071459d66cf5eaa7ad47f8891d151815",
+  "durationSec": 15.208,
+  "frames": 365,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "feature",
+    "headlineSize": 76,
+    "headlineLines": 2,
+    "subSize": 34,
+    "subLines": 1,
+    "contentBottom": 464,
+    "bottomLimit": 476,
+    "overflow": false,
+    "window": {
+      "x": 240,
+      "y": 560,
+      "w": 600,
+      "h": 1300,
+      "r": 46
+    }
+  },
+  "renderedAt": "2026-10-20T19:23:41.227Z",
+  "chromium": "155.0.8059.85"
+}

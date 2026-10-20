@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-02",
+  "slot": "evening",
+  "type": "myth",
+  "slug": "pos-report-is-not-a-pnl",
+  "theme": "sage-wash",
+  "hook": "My POS report tells me how we're doing.",
+  "fact": "The POS sees sales, not costs.",
+  "thumbOffsetMs": 4200,
+  "captionFirstLine": "POS sales report vs P&L: what restaurant, coffee shop and salon owners' register reports leave out.",
+  "hashtags": [
+    "#restaurantaccounting",
+    "#franchiseowner",
+    "#salonownerlife",
+    "#businessfinance",
+    "#smallbusinesstips"
+  ],
+  "cardHash": "ecc55378a185acec195f0def4bf3880261fba9bf",
+  "durationSec": 22.917,
+  "frames": 550,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "myth",
+    "resultSize": 132,
+    "resultLines": 2,
+    "scale": 1,
+    "contentBottom": 1501,
+    "bottomLimit": 1810,
+    "overflow": false,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T19:10:40.535Z",
+  "chromium": "155.0.8059.85"
+}

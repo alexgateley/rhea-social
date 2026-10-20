@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-24",
+  "slot": "evening",
+  "type": "tip",
+  "slug": "personal-off-the-business-card",
+  "theme": "paper",
+  "hook": "Is your personal spending on the business card?",
+  "title": "Keep personal off business",
+  "action": "Separate cards",
+  "thumbOffsetMs": 14100,
+  "captionFirstLine": "Owner draws and personal spending: keep them off the business card, a tip for small business owners.",
+  "hashtags": [
+    "#cashflowmanagement",
+    "#franchisebusiness",
+    "#coffeeshopbusiness",
+    "#salonowner",
+    "#smallbusinessowner"
+  ],
+  "cardHash": "6ed24b09fb3fe9af2ffcdde0cf84139adfb94d27",
+  "durationSec": 24,
+  "frames": 576,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "tip",
+    "resultSize": 140,
+    "resultLines": 1,
+    "scale": 1,
+    "contentBottom": 1724,
+    "bottomLimit": 1810,
+    "overflow": false,
+    "hookLines": 3
+  },
+  "renderedAt": "2026-10-20T19:21:54.966Z",
+  "chromium": "155.0.8059.85"
+}

@@ -29,5 +29,8 @@
     "#qsr",
     "#bookkeeping",
     "#businessfinance"
-  ]
+  ],
+  "type": "owner-math",
+  "cardHash": "02c05bfb101dd00cbd4b5f59213ef97dcb8f1901",
+  "cardHashAdoptedAt": "2026-10-20T19:05:12.947Z"
 }

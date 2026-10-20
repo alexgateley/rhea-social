@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-29",
+  "slot": "evening",
+  "type": "feature",
+  "slug": "closing-november",
+  "theme": "sage-wash",
+  "headline": "November closes. Is every store's checklist done?",
+  "recording": {
+    "id": "month-close",
+    "sha1": "946e304038fac6edfd3041d0163fbac5cc971efc",
+    "frames": 346,
+    "fps": 24
+  },
+  "thumbOffsetMs": 4000,
+  "captionFirstLine": "Closing November for multi-store owners: each LLC's month-end checklist, in one place.",
+  "hashtags": [
+    "#monthendclose",
+    "#multiunitfranchisee",
+    "#restaurantbusiness",
+    "#salonowners",
+    "#smallbusinesstips"
+  ],
+  "cardHash": "44ff9959903d99ec7b52235fa507afb9b97429a5",
+  "durationSec": 17.625,
+  "frames": 423,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "feature",
+    "headlineSize": 76,
+    "headlineLines": 2,
+    "subSize": 34,
+    "subLines": 2,
+    "contentBottom": 508,
+    "bottomLimit": 476,
+    "overflow": false,
+    "window": {
+      "x": 240,
+      "y": 560,
+      "w": 600,
+      "h": 1300,
+      "r": 46
+    }
+  },
+  "renderedAt": "2026-10-20T19:25:05.821Z",
+  "chromium": "155.0.8059.85"
+}

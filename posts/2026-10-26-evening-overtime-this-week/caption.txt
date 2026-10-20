@@ -1,0 +1,8 @@
+Overtime tracking for multi-store restaurant and salon owners: who's near 40 hours this week.
+The Labor page in Rhea's demo, on sample data: everyone at or near 40 hours this workweek.
+Names and hours from the time clock, never pay, so a manager can trim a shift in time.
+Below, every store's hours and labor % for the period.
+
+See it on sample data at demo.rheafi.com. Rhea: automated books, labor and per-store profit for multi-store owners. rheafi.com (link in bio)
+
+#laborcost #coffeebusiness #salonbusiness #businessfinance #smallbusinesstips

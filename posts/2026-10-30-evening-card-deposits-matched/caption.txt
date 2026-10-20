@@ -1,0 +1,8 @@
+Credit card deposit reconciliation for restaurant and coffee shop owners: find the missing day.
+Rhea's Deposits page on the demo company's sample data.
+Every card day is matched to the payout or bank deposit that paid it.
+A day whose money never arrived shows first; each deposit below shows its variance.
+
+See it on sample data at demo.rheafi.com. Rhea: automated books, labor and per-store profit for multi-store owners. rheafi.com (link in bio)
+
+#bankreconciliation #franchisebusiness #restaurantbusiness #salonbusiness #smallbusinessbookkeeping

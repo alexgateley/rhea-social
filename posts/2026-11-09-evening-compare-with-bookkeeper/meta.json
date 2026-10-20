@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-09",
+  "slot": "evening",
+  "type": "feature",
+  "slug": "compare-with-bookkeeper",
+  "theme": "sage",
+  "headline": "Check your books against your bookkeeper's, to the cent",
+  "recording": {
+    "id": "compare-bookkeeper",
+    "sha1": "e26071138c74359115eddbfac71e8eee6b606255",
+    "frames": 346,
+    "fps": 24
+  },
+  "thumbOffsetMs": 4000,
+  "captionFirstLine": "Checking your bookkeeper's books: a month-end tool for franchise and multi-store owners.",
+  "hashtags": [
+    "#franchiseaccounting",
+    "#qsr",
+    "#coffeeshopowners",
+    "#salonowners",
+    "#businessowner"
+  ],
+  "cardHash": "7fee58f85b729057e1d4abbf1d2fa49c7dbb567c",
+  "durationSec": 17.625,
+  "frames": 423,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "feature",
+    "headlineSize": 70,
+    "headlineLines": 2,
+    "subSize": 34,
+    "subLines": 2,
+    "contentBottom": 495,
+    "bottomLimit": 476,
+    "overflow": false,
+    "window": {
+      "x": 240,
+      "y": 560,
+      "w": 600,
+      "h": 1300,
+      "r": 46
+    }
+  },
+  "renderedAt": "2026-10-20T19:13:25.597Z",
+  "chromium": "155.0.8059.85"
+}

@@ -29,5 +29,8 @@
     "#cafeowner",
     "#bookkeeping",
     "#businessfinance"
-  ]
+  ],
+  "type": "owner-math",
+  "cardHash": "0a96494c681730b3e1835ca763db563fbbedbf39",
+  "cardHashAdoptedAt": "2026-10-20T19:05:12.946Z"
 }

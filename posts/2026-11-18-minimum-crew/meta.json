@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-18",
+  "slot": "morning",
+  "type": "owner-math",
+  "slug": "minimum-crew",
+  "theme": "sage",
+  "hook": "Why do slow stores always run high labor?",
+  "result": {
+    "label": "Same crew on a $1,800 day",
+    "value": "32.0%"
+  },
+  "thumbOffsetMs": 12500,
+  "captionFirstLine": "Minimum crew labor cost for restaurant, coffee shop and franchise owners: why slow stores run hot.",
+  "hashtags": [
+    "#laborcost",
+    "#franchiselife",
+    "#restaurantindustry",
+    "#coffeeshopowners",
+    "#smallbusinessbookkeeping"
+  ],
+  "cardHash": "3b25d37722c866cd5e09180e9be36b1a61f9c8e1",
+  "durationSec": 22.417,
+  "frames": 538,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "owner-math",
+    "resultSize": 210,
+    "resultLines": 1,
+    "scale": 1,
+    "contentBottom": 1578,
+    "bottomLimit": 1810,
+    "overflow": false,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T19:18:05.445Z",
+  "chromium": "155.0.8059.85"
+}

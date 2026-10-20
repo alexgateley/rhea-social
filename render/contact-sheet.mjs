@@ -31,15 +31,16 @@ export async function makeContactSheet({ month, browser, root = ROOT, postsDir, 
   const bySlot = new Map(posts.map((p) => [`${p.date}|${slotOf(p)}`, p]));
   const first = `${month}-01`;
   const dates = posts.map((p) => p.date).sort();
+  // From the month's first post (a run that starts mid-month skips the empty weeks) to its last day
   const last = contentFile && dates.length ? dates.at(-1) : new Date(Date.UTC(+month.slice(0, 4), +month.slice(5, 7), 0)).toISOString().slice(0, 10);
-  const start = contentFile && dates.length ? dates[0] : first;
+  const start = dates.length && dates[0] > first ? dates[0] : first;
   let d = addDays(start, -((dayOf(start) + 6) % 7)); // back to Monday
 
   const tile = (date, slot) => {
     const label = slot === 'morning' ? (brand.slots?.morning?.label || '7AM') : (brand.slots?.evening?.label || '6PM');
     if (date < start || date > last) return '<div class="tile out"></div>';
     if (isMemorialDate(brand, date)) {
-      return `<div class="tile memo"><div class="ph">${slot === 'morning' ? 'Memorial post<br><small>carousel, 7 AM</small>' : 'nothing<br><small>memorial day</small>'}</div><div class="cap"><b>${label}</b></div></div>`;
+      return `<div class="tile memo"><div class="ph">${slot === 'morning' ? '<span>Memorial post</span><small>carousel, 7 AM</small>' : '<span>nothing</span><small>memorial day</small>'}</div><div class="cap"><b>${label}</b></div></div>`;
     }
     const p = bySlot.get(`${date}|${slot}`);
     if (!p) return `<div class="tile none"><div class="ph">no post</div><div class="cap"><b>${label}</b></div></div>`;
@@ -69,7 +70,7 @@ export async function makeContactSheet({ month, browser, root = ROOT, postsDir, 
     .pair { display: flex; gap: 6px; }
     .tile { position: relative; width: 147px; }
     .tile img, .tile .ph { display: block; width: 147px; height: 261px; border-radius: 6px; }
-    .tile .ph { background: #d8d4cc; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 14px; color: #545961; }
+    .tile .ph { background: #d8d4cc; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-size: 14px; color: #545961; }
     .tile.memo .ph { background: #0e1116; color: #f5f2ed; }
     .tile.out { visibility: hidden; height: 1px; }
     .cap { font-size: 11.5px; line-height: 1.3; margin-top: 4px; word-break: break-all; }

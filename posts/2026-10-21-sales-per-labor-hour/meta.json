@@ -29,5 +29,8 @@
     "#restaurantbusiness",
     "#bookkeepingtips",
     "#businessfinance"
-  ]
+  ],
+  "type": "owner-math",
+  "cardHash": "8ea5eb464079450c47f08c157c52a349dfba3a98",
+  "cardHashAdoptedAt": "2026-10-20T19:05:12.945Z"
 }

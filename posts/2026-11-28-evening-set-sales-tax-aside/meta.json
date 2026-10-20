@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-28",
+  "slot": "evening",
+  "type": "tip",
+  "slug": "set-sales-tax-aside",
+  "theme": "paper",
+  "hook": "Is the sales tax you collected still there?",
+  "title": "Set sales tax aside",
+  "action": "Every week",
+  "thumbOffsetMs": 14100,
+  "captionFirstLine": "Sales tax tip for restaurant, coffee shop and salon owners: set collected tax aside every week.",
+  "hashtags": [
+    "#salestax",
+    "#coffeeshopbusiness",
+    "#salonowner",
+    "#bookkeepingtips",
+    "#businessowner"
+  ],
+  "cardHash": "42a21e307d9439be1a04ee76064f27ef6a4feba7",
+  "durationSec": 24,
+  "frames": 576,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "tip",
+    "resultSize": 150,
+    "resultLines": 1,
+    "scale": 1,
+    "contentBottom": 1640,
+    "bottomLimit": 1810,
+    "overflow": false,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T19:24:31.666Z",
+  "chromium": "155.0.8059.85"
+}

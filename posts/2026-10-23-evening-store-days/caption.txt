@@ -1,0 +1,8 @@
+Daily labor cost by store for restaurant and franchise owners: see which days ran over target.
+Store 106 in Rhea's demo company runs high labor on purpose, in sample data.
+Each day: net sales from the POS and labor % from the time clock, against the store's target line.
+Below it, the store's own P&L for the period.
+
+See it on sample data at demo.rheafi.com. Rhea: automated books, labor and per-store profit for multi-store owners. rheafi.com (link in bio)
+
+#laborcost #multiunitfranchisee #restaurantowners #salonowners #bookkeeping

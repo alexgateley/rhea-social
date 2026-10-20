@@ -1,0 +1,37 @@
+{
+  "id": "balance-sheet",
+  "title": "Balance sheet: one LLC's month, cash to equity",
+  "fps": 24,
+  "frames": 361,
+  "durationSec": 15.042,
+  "width": 860,
+  "height": 1864,
+  "viewport": {
+    "width": 430,
+    "height": 932,
+    "deviceScaleFactor": 2
+  },
+  "signIn": "viewer",
+  "scenes": [
+    {
+      "path": "/ledger/balance-sheet?llc=entity-101",
+      "note": "Store 101's LLC: assets, liabilities and equity at month end, built from Rhea's ledger and the opening balances",
+      "startFrame": 0,
+      "endFrame": 361,
+      "startSec": 0,
+      "endSec": 15.042,
+      "reelSec": [
+        1,
+        16.042
+      ]
+    }
+  ],
+  "note": "Reel time = recording time + 1.0 s (render/timing.mjs RECORDING_AT). Pick a feature post's thumbOffsetMs inside a scene's reelSec.",
+  "recordedAt": "2026-10-20T18:59:40.477Z",
+  "app": {
+    "url": "http://localhost:3600",
+    "commit": "9bc6e96",
+    "data": "demo seed (npm run seed:demo), sample data only"
+  },
+  "chromium": "155.0.8059.85"
+}

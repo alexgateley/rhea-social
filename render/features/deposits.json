@@ -1,0 +1,61 @@
+{
+  "id": "deposits",
+  "title": "Deposits: card sales matched to the bank, the missing ones first",
+  "signIn": "viewer",
+  "facts": "FACTS.md 'Deposits and cash' first row: /deposits, src/core/reconciliation/; the planted chargeback and missing deposit (demoAnomalies)",
+  "scenes": [
+    {
+      "path": "/deposits?range=lastmonth",
+      "note": "September: 495 deposits matched to the card sales they settle, one with a variance (−$43.17), one card day with no deposit ($2,886.00 missing), then the exceptions filter",
+      "settle": 0.8,
+      "moves": [
+        {
+          "hold": 1.8
+        },
+        {
+          "scroll": {
+            "text": "Matched",
+            "offset": 70
+          },
+          "over": 1.4
+        },
+        {
+          "hold": 1.6
+        },
+        {
+          "scroll": {
+            "text": "Card sales with no deposit",
+            "offset": 60
+          },
+          "over": 1.4
+        },
+        {
+          "hold": 2.0
+        },
+        {
+          "scroll": {
+            "text": "Bank deposits",
+            "offset": 60
+          },
+          "over": 1.4
+        },
+        {
+          "hold": 0.8
+        }
+      ],
+      "tap": {
+        "role": "link",
+        "text": "Exceptions"
+      }
+    },
+    {
+      "note": "The exception: a deposit that arrived short of the card sales it settles",
+      "settle": 0.8,
+      "moves": [
+        {
+          "hold": 2.6
+        }
+      ]
+    }
+  ]
+}

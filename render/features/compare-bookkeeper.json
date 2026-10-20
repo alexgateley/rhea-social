@@ -1,0 +1,58 @@
+{
+  "id": "compare-bookkeeper",
+  "title": "Compare with your bookkeeper: where their reports land, and the month's steps",
+  "signIn": "viewer",
+  "facts": "FACTS.md 'The books' Compare with the bookkeeper row: /ledger/compare, /ledger/compare/[legalEntityId]/[month], docs/bookkeeper-compare.md; the demo seed saves no bookkeeper report, so the page shows the steps, not a difference report",
+  "scenes": [
+    {
+      "path": "/ledger/compare",
+      "note": "No reports from the bookkeeper yet: the steps (drop their QuickBooks exports on Import, map their accounts once, explain every difference, then close)",
+      "settle": 0.8,
+      "moves": [
+        {
+          "hold": 2.2
+        },
+        {
+          "scroll": {
+            "text": "No reports from the bookkeeper yet",
+            "offset": 60
+          },
+          "over": 1.2
+        },
+        {
+          "hold": 2.4
+        }
+      ]
+    },
+    {
+      "path": "/ledger/compare/entity-101/2026-09",
+      "note": "One LLC's September: the five steps, then the clearing accounts at month end tied to the trial balance",
+      "settle": 0.8,
+      "moves": [
+        {
+          "hold": 1.6
+        },
+        {
+          "scroll": {
+            "text": "This month",
+            "offset": 60
+          },
+          "over": 1.4
+        },
+        {
+          "hold": 1.8
+        },
+        {
+          "scroll": {
+            "text": "Clearing accounts at month end",
+            "offset": 60
+          },
+          "over": 2.0
+        },
+        {
+          "hold": 1.8
+        }
+      ]
+    }
+  ]
+}

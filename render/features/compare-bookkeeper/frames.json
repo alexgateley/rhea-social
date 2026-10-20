@@ -1,0 +1,49 @@
+{
+  "id": "compare-bookkeeper",
+  "title": "Compare with your bookkeeper: where their reports land, and the month's steps",
+  "fps": 24,
+  "frames": 346,
+  "durationSec": 14.417,
+  "width": 860,
+  "height": 1864,
+  "viewport": {
+    "width": 430,
+    "height": 932,
+    "deviceScaleFactor": 2
+  },
+  "signIn": "viewer",
+  "scenes": [
+    {
+      "path": "/ledger/compare",
+      "note": "No reports from the bookkeeper yet: the steps (drop their QuickBooks exports on Import, map their accounts once, explain every difference, then close)",
+      "startFrame": 0,
+      "endFrame": 140,
+      "startSec": 0,
+      "endSec": 5.833,
+      "reelSec": [
+        1,
+        6.833
+      ]
+    },
+    {
+      "path": "/ledger/compare/entity-101/2026-09",
+      "note": "One LLC's September: the five steps, then the clearing accounts at month end tied to the trial balance",
+      "startFrame": 140,
+      "endFrame": 346,
+      "startSec": 5.833,
+      "endSec": 14.417,
+      "reelSec": [
+        6.833,
+        15.417
+      ]
+    }
+  ],
+  "note": "Reel time = recording time + 1.0 s (render/timing.mjs RECORDING_AT). Pick a feature post's thumbOffsetMs inside a scene's reelSec.",
+  "recordedAt": "2026-10-20T18:42:28.224Z",
+  "app": {
+    "url": "http://localhost:3600",
+    "commit": "9bc6e96",
+    "data": "demo seed (npm run seed:demo), sample data only"
+  },
+  "chromium": "155.0.8059.85"
+}

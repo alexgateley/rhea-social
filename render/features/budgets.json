@@ -1,0 +1,50 @@
+{
+  "id": "budgets",
+  "title": "Budgets: each store's month against its sales budget",
+  "signIn": "viewer",
+  "facts": "FACTS.md 'The books' budgets row: /setup/budgets, src/core/budgets/; every demo store has a year of budgets",
+  "scenes": [
+    {
+      "path": "/setup/budgets",
+      "note": "Budgets: the switch, then the year of monthly budgets by store",
+      "settle": 0.8,
+      "moves": [
+        {
+          "hold": 2
+        },
+        {
+          "scroll": {
+            "text": "Sales budgets for",
+            "exact": false,
+            "offset": 60
+          },
+          "over": 2
+        },
+        {
+          "hold": 2
+        }
+      ]
+    },
+    {
+      "path": "/?range=mtd",
+      "note": "The Overview, month to date: the morning synopsis says which stores are on pace for their budgets",
+      "settle": 1,
+      "moves": [
+        {
+          "hold": 1.4
+        },
+        {
+          "scroll": {
+            "text": "on pace to finish",
+            "exact": false,
+            "offset": 300
+          },
+          "over": 2.0
+        },
+        {
+          "hold": 2.6
+        }
+      ]
+    }
+  ]
+}

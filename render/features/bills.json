@@ -1,0 +1,60 @@
+{
+  "id": "bills",
+  "title": "Bills: approved before they are paid, matched to the statement line that paid them",
+  "signIn": "viewer",
+  "facts": "FACTS.md 'Bills and money out' first row: /bills, src/core/bills/, src/server/bills.ts; Pay from Rhea is test mode and is not shown or claimed",
+  "scenes": [
+    {
+      "path": "/bills",
+      "note": "Bills: to approve, due, paid",
+      "settle": 0.8,
+      "moves": [
+        {
+          "hold": 1.8
+        },
+        {
+          "scroll": {
+            "text": "Accounts Payable",
+            "offset": 60
+          },
+          "over": 1.8
+        },
+        {
+          "hold": 2
+        },
+        {
+          "scroll": {
+            "role": "heading",
+            "text": "Bills",
+            "exact": true,
+            "offset": 50
+          },
+          "over": 1.6
+        },
+        {
+          "hold": 1
+        }
+      ],
+      "tap": {
+        "selector": "tbody a[href^=\"/bills/\"]",
+        "nth": 0
+      }
+    },
+    {
+      "note": "One bill: vendor, lines coded to accounts, who approved it, and the payment matched to the bank line",
+      "settle": 0.8,
+      "moves": [
+        {
+          "hold": 2
+        },
+        {
+          "scroll": 700,
+          "over": 2
+        },
+        {
+          "hold": 2
+        }
+      ]
+    }
+  ]
+}

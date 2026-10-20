@@ -1,0 +1,60 @@
+{
+  "id": "overview-stores",
+  "title": "Overview: the whole group, then every store side by side",
+  "signIn": "viewer",
+  "facts": "FACTS.md 'Seeing the numbers' Overview row: src/components/overview/, src/lib/ui/period.ts",
+  "scenes": [
+    {
+      "path": "/?range=30d",
+      "note": "Group overview for the last 30 days: the daily synopsis's first line, then the four tiles (net revenue, labor %, prime cost %, net income), the net income by store chart and the stores table with labor % flagged over 30% and 33%",
+      "settle": 0.8,
+      "moves": [
+        {
+          "hold": 1.6
+        },
+        {
+          "scroll": {
+            "text": "Net revenue",
+            "offset": 70
+          },
+          "over": 1.8
+        },
+        {
+          "hold": 2.0
+        },
+        {
+          "scroll": {
+            "text": "Net income by store",
+            "offset": 60
+          },
+          "over": 1.4
+        },
+        {
+          "hold": 1.6
+        },
+        {
+          "scroll": {
+            "role": "heading",
+            "text": "Stores",
+            "exact": true,
+            "offset": 50
+          },
+          "over": 1.6
+        },
+        {
+          "hold": 1.2
+        },
+        {
+          "scroll": {
+            "text": "Store 106 – Lone Star Pkwy",
+            "offset": 420
+          },
+          "over": 2.0
+        },
+        {
+          "hold": 1.8
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "id": "bills",
+  "title": "Bills: approved before they are paid, matched to the statement line that paid them",
+  "fps": 24,
+  "frames": 352,
+  "durationSec": 14.667,
+  "width": 860,
+  "height": 1864,
+  "viewport": {
+    "width": 430,
+    "height": 932,
+    "deviceScaleFactor": 2
+  },
+  "signIn": "viewer",
+  "scenes": [
+    {
+      "path": "/bills",
+      "note": "Bills: to approve, due, paid",
+      "startFrame": 0,
+      "endFrame": 208,
+      "startSec": 0,
+      "endSec": 8.667,
+      "reelSec": [
+        1,
+        9.667
+      ]
+    },
+    {
+      "path": "/bills/bil_136565a7-d3d1-4bb0-b117-de15e1e3b645",
+      "note": "One bill: vendor, lines coded to accounts, who approved it, and the payment matched to the bank line",
+      "startFrame": 208,
+      "endFrame": 352,
+      "startSec": 8.667,
+      "endSec": 14.667,
+      "reelSec": [
+        9.667,
+        15.667
+      ]
+    }
+  ],
+  "note": "Reel time = recording time + 1.0 s (render/timing.mjs RECORDING_AT). Pick a feature post's thumbOffsetMs inside a scene's reelSec.",
+  "recordedAt": "2026-10-20T18:58:13.479Z",
+  "app": {
+    "url": "http://localhost:3600",
+    "commit": "9bc6e96",
+    "data": "demo seed (npm run seed:demo), sample data only"
+  },
+  "chromium": "155.0.8059.85"
+}

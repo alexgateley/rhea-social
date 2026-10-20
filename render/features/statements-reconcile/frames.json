@@ -1,0 +1,61 @@
+{
+  "id": "statements-reconcile",
+  "title": "Statements: bank and card lines in the books, then the reconciliation",
+  "fps": 24,
+  "frames": 381,
+  "durationSec": 15.875,
+  "width": 860,
+  "height": 1864,
+  "viewport": {
+    "width": 430,
+    "height": 932,
+    "deviceScaleFactor": 2
+  },
+  "signIn": "viewer",
+  "scenes": [
+    {
+      "path": "/statements",
+      "note": "Statements: the Accounts card (the four money LLCs), then tap Store 101's checking account",
+      "startFrame": 0,
+      "endFrame": 122,
+      "startSec": 0,
+      "endSec": 5.083,
+      "reelSec": [
+        1,
+        6.083
+      ]
+    },
+    {
+      "path": "/statements?account=fa_2f4d6d0c-9cbc-4bf3-ad59-9742e8615b48",
+      "note": "The account's register: each statement line with the account it was booked to",
+      "startFrame": 122,
+      "endFrame": 242,
+      "startSec": 5.083,
+      "endSec": 10.083,
+      "reelSec": [
+        6.083,
+        11.083
+      ]
+    },
+    {
+      "path": "/statements/reconcile?llc=entity-101",
+      "note": "Reconcile accounts: Rhea's balance beside the statement's, to the cent",
+      "startFrame": 242,
+      "endFrame": 381,
+      "startSec": 10.083,
+      "endSec": 15.875,
+      "reelSec": [
+        11.083,
+        16.875
+      ]
+    }
+  ],
+  "note": "Reel time = recording time + 1.0 s (render/timing.mjs RECORDING_AT). Pick a feature post's thumbOffsetMs inside a scene's reelSec.",
+  "recordedAt": "2026-10-20T18:57:55.450Z",
+  "app": {
+    "url": "http://localhost:3600",
+    "commit": "9bc6e96",
+    "data": "demo seed (npm run seed:demo), sample data only"
+  },
+  "chromium": "155.0.8059.85"
+}

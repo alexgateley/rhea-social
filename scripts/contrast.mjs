@@ -5,7 +5,8 @@
 //   node scripts/contrast.mjs
 //
 // Text pairs must reach 4.5:1 (body) or 3:1 (large text: the hook and the result). The accent is
-// decorative (hook rule, progress bar, takeaway border), so its ratio is reported, not required.
+// decorative (hook rule, progress bar, takeaway border, feature window ring), so its ratio is
+// reported, not required. The demo note is held to 4.5:1 although its 28px type counts as large.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -25,15 +26,26 @@ export const contrast = (a, b) => {
   return (l1 + 0.05) / (l2 + 0.05);
 };
 
-/** The pairs each theme is judged on: [label, foreground key, background key, minimum, kind]. */
+/**
+ * The pairs each theme is judged on: [label, foreground key, background key, minimum, kind]. Every
+ * color pair render/template.html draws is one of these, for all four card types:
+ *   owner-math  hook; term, kicker, result label (heading); formula, step labels (muted); step values, result (type); takeaway on wash
+ *   tip         as owner math; the title and lines in type, the line numbers in heading
+ *   myth        the "MYTH" pill outlined in heading; the myth in hook, then muted once struck; the "FACT" pill
+ *               (background color on heading); the fact and the why lines in type
+ *   feature     headline in hook; sub in muted; the demo note (background color on a type pill); the end
+ *               card's call to action in type; the window ring in accent (decorative)
+ */
 export const PAIRS = [
-  ['hook on background', 'hook', 'bg', 3, 'large text'],
-  ['result and step values on background', 'type', 'bg', 3, 'large text'],
-  ['formula and step labels (muted) on background', 'muted', 'bg', 4.5, 'body'],
-  ['kicker, term and result label (heading) on background', 'heading', 'bg', 4.5, 'body'],
+  ['hook, feature headline on background', 'hook', 'bg', 3, 'large text'],
+  ['result, step values, tip and myth lines, end card call to action (type) on background', 'type', 'bg', 3, 'large text'],
+  ['formula, step labels, feature sub, struck myth (muted) on background', 'muted', 'bg', 4.5, 'body'],
+  ['kicker, term, result label, tip numbers, MYTH pill (heading) on background', 'heading', 'bg', 4.5, 'body'],
+  ['FACT pill: background color on heading', 'bg', 'heading', 4.5, 'body'],
+  ['demo note: background color on a type pill', 'bg', 'type', 4.5, 'body'],
   ['takeaway text on its wash', 'type', 'wash', 4.5, 'body'],
   ['mark bars on mark tile', 'markFg', 'markBg', 3, 'graphic'],
-  ['accent (rule, bar, border) on background', 'accent', 'bg', 0, 'decorative'],
+  ['accent (rule, bar, border, window ring) on background', 'accent', 'bg', 0, 'decorative'],
 ];
 
 export function checkThemes(themes) {

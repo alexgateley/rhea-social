@@ -1,0 +1,85 @@
+{
+  "id": "demo-tour",
+  "title": "The demo: a guided tour of a 15-store group on sample data",
+  "fps": 24,
+  "frames": 338,
+  "durationSec": 14.083,
+  "width": 860,
+  "height": 1864,
+  "viewport": {
+    "width": 430,
+    "height": 932,
+    "deviceScaleFactor": 2
+  },
+  "signIn": "viewer",
+  "scenes": [
+    {
+      "path": "/demo",
+      "note": "Try Rhea: look around the made-up group, or start a blank practice company",
+      "startFrame": 0,
+      "endFrame": 62,
+      "startSec": 0,
+      "endSec": 2.583,
+      "reelSec": [
+        1,
+        3.583
+      ]
+    },
+    {
+      "path": "/?range=30d",
+      "note": "The Overview; tap the i button to take the tour",
+      "startFrame": 62,
+      "endFrame": 98,
+      "startSec": 2.583,
+      "endSec": 4.083,
+      "reelSec": [
+        3.583,
+        5.083
+      ]
+    },
+    {
+      "path": "/",
+      "note": "Tour step 1: Welcome to the demo",
+      "startFrame": 98,
+      "endFrame": 182,
+      "startSec": 4.083,
+      "endSec": 7.583,
+      "reelSec": [
+        5.083,
+        8.583
+      ]
+    },
+    {
+      "path": "/stores/store-106",
+      "note": "Tour step 2: Every store, side by side",
+      "startFrame": 182,
+      "endFrame": 266,
+      "startSec": 7.583,
+      "endSec": 11.083,
+      "reelSec": [
+        8.583,
+        12.083
+      ]
+    },
+    {
+      "path": "/stores/store-106",
+      "note": "Tour step 3: Sales and labor, day by day (store 106)",
+      "startFrame": 266,
+      "endFrame": 338,
+      "startSec": 11.083,
+      "endSec": 14.083,
+      "reelSec": [
+        12.083,
+        15.083
+      ]
+    }
+  ],
+  "note": "Reel time = recording time + 1.0 s (render/timing.mjs RECORDING_AT). Pick a feature post's thumbOffsetMs inside a scene's reelSec.",
+  "recordedAt": "2026-10-20T18:59:12.625Z",
+  "app": {
+    "url": "http://localhost:3600",
+    "commit": "9bc6e96",
+    "data": "demo seed (npm run seed:demo), sample data only"
+  },
+  "chromium": "155.0.8059.85"
+}

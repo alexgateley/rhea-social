@@ -1,0 +1,30 @@
+{
+  "id": "month-close",
+  "title": "Month close: each LLC's month-end checklist, closed in order",
+  "signIn": "viewer",
+  "facts": "FACTS.md 'The books' Month close row: /ledger/close, /ledger/close/[legalEntityId]/[month], src/server/close-checklist.ts; the demo seed closes no month",
+  "scenes": [
+    {
+      "path": "/ledger/close",
+      "note": "Month close: corrections waiting, months closed (none in the demo), the add-only audit log, and each LLC's next month to close with what is left",
+      "settle": 0.8,
+      "moves": [
+        { "hold": 1.6 },
+        { "scroll": { "text": "Months to close", "offset": 60 }, "over": 1.6 },
+        { "hold": 1.6 }
+      ],
+      "tap": { "selector": "a:has-text(\"August 2026\")", "nth": 1 }
+    },
+    {
+      "note": "One LLC's August checklist: what is done, what to fix and where, then the close",
+      "settle": 0.8,
+      "moves": [
+        { "hold": 1.8 },
+        { "scroll": { "text": "The checklist", "offset": 60 }, "over": 1.6 },
+        { "hold": 1.4 },
+        { "scroll": { "text": "The checklist", "offset": -900 }, "over": 2.6 },
+        { "hold": 1.8 }
+      ]
+    }
+  ]
+}

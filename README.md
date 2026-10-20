@@ -389,59 +389,151 @@ files exactly as published.
 
 ## Rendering the new types
 
-`render/template.html` becomes four card types in the same frame, themes and motion rules (every motion a
-function of `--t`): `window.setPost(post, timing, brand)` picks the layout by `post.type` (`owner-math` as
-today; `tip` reuses the hook, term/formula block, step rows without values, the result block for `action` and
-the takeaway; `myth` shows the hook under a small "MYTH" label, the result block with "FACT" as its label and
-`fact` as its value, then the `why` rows). The kicker reads `brand.kickers[type]` and the end card
-`brand.endCardLines[type]`. `scripts/contrast.mjs` stays the check for every theme. `render/timing.mjs` gains
-`timing(post)` branches per type (above) and exports `cardHash(post)`: a SHA-1 of the fields that draw the card
-(type, theme, hook, term, formula, steps, result, takeaway, title, lines, action, fact, why, headline, sub,
-recording, scenes), written to `meta.json`.
+Built by builder B on October 20, 2026; where it differs from the plan, "Renderer: what changed from the plan"
+below says so and why.
 
-Render rules (`render/render.mjs`): `--month YYYY-MM` renders a content file; `--slot`, `--type` and `--only`
-narrow it. A post with a marker is left alone (as today). A post whose folder has `reel.mp4` and whose
-`meta.json` `cardHash` equals the content's is not re-rendered: only `caption.txt` (and `meta.json`'s caption
-fields) are rewritten. A folder without `cardHash` (the 18 rendered posts) adopts the current content's hash
-without re-rendering and says so, since no card field of theirs changes; `--force` re-renders anything without
-a marker. After rendering, `render` rebuilds both indexes from every content file (as `relink` does) and runs the
-Desktop copy (below) unless `--no-desktop`. `--no-verify` skips the content check for a builder's test render
-and refuses to write an index.
+`render/template.html` draws four card types in the same frame, themes and motion rules (every motion a function
+of `--t`); `window.setPost(post, timing, brand)` picks the layout by `post.type`, and the owner-math card is drawn
+exactly as before (checked frame by frame against the old template: the only differences are Chromium's own
+run-to-run noise, a handful of pixels at 1/255 that the old template also shows against itself).
 
-`render/contact-sheet.mjs --month YYYY-MM` tiles every cover of the month, both slots, into
-`render/tmp/contact-sheet-YYYY-MM.jpg` (ignored by git) for a one-look review.
+- **tip**: the hook alone, then "The tip" and the `title` (in the term and formula block), the `lines` as numbered
+  rows, the `action` very large under "Do it" (`actionLabel` and `titleLabel` may override those two labels), the
+  takeaway. The action stays on one line when it fits at 120 px or more, otherwise it wraps to two (150 to 104 px).
+- **myth**: the hook under an outlined "MYTH" pill; as the fact lands the myth slides up, turns the muted color and
+  is struck through; the `fact` very large under a filled "FACT" pill (132 to 92 px, up to three lines); the `why`
+  lines as rows; the takeaway.
+- **feature**: the `headline` (76 to 56 px, at most two lines) and `sub` (34 to 28 px, at most two lines) at the
+  top, the demo note as a pill on its own line just above the window for the whole Reel, the recording in a
+  rounded 600×1300 window at (240, 560), the bar, then the end card with the `cta` as its big line.
+- Every type: the kicker is `brand.kickers[type]`, the end card's line `brand.endCardLines[type]` (hidden on a
+  feature when it repeats the `cta`); in tips, myths and features a space before `%` or `¢` never breaks a line.
+  Nothing is ever cut: a card that would not fit is refused with the sizes it tried (`render --check` lists every
+  post's fit without rendering, so content can be fixed before a long render).
+
+`render/timing.mjs` has `timing(post)` per type (owner math and tips 22.4 / 24.0 / 25.6 s, myths 21.3 / 22.9 /
+24.5 s for 2 / 3 / 4 lines with the cover at 4 200 ms, features the recording's length + 3.2 s) and
+`cardHash(post)`, the SHA-1 of the fields that draw the card (type, theme, hook, term, formula, steps, result,
+takeaway, title, lines, action, actionLabel, fact, why, headline, sub, demoNote, cta, recording; for a feature
+also the SHA-1 of its `recording.mp4`), written to `meta.json`. The template is not in the hash: after a template
+change, re-render with `--force`.
+
+Render rules (`render/render.mjs`, decisions in `render/plan.mjs`): `--month YYYY-MM` renders a content file;
+`--slot`, `--type` and `--only` narrow it; `--jobs 2` renders two cards at once. A post with a marker in
+`published/` for its slot is never touched (no flag overrides it), and a memorial date gets nothing. A folder whose
+`meta.json` `cardHash` equals the content's is not re-rendered: only `caption.txt` and `meta.json`'s caption fields
+are rewritten (and the cover, if a feature's `thumbOffsetMs` moved). A folder rendered before `cardHash` existed
+(the 18 first-run posts) adopts the hash when the card fields its `meta.json` recorded (theme, hook, result, cover
+time) still match; if they differ, the video is kept, the caption rewritten and the difference printed, and
+`--force` re-renders it. `--force` re-renders anything else without a marker. A post whose folder sits under an
+older unposted date is moved, as `relink` does. Every Reel is checked against the specs of the Reels Instagram
+already accepted (`render/probe.mjs`: H.264 High 4.1, 1080×1920, yuv420p, 24 fps, AAC-LC stereo 48 kHz,
+`+faststart`, the length `meta.json` says, a 1080×1920 cover) before the run moves on. After rendering, `render`
+rebuilds `posts/index.json` and `posts/index-evening.json` from every content file, draws the month's contact
+sheet, and runs the Desktop copy unless `--no-desktop`. `--no-verify` skips the content check for a builder's
+test render and does not write the indexes; `--content <file> --out <dir>` renders sample posts outside `posts/`.
+
+`render/contact-sheet.mjs --month YYYY-MM` puts every cover of the month on one page, a week per row and each day's
+7 AM and 6 PM side by side, labeled with type, theme and slug, "posted" on posted slots and a plain tile for a
+memorial day (never its slides): `render/tmp/contact-sheet-YYYY-MM.jpg` (ignored by git). `render` draws it after
+every run.
 
 ### Feature Reels: recording and composing
 
-A feature Reel is a screen recording of the local app on demo data, composed into the 1080×1920 frame:
-headline and sub at the top, the recording in a rounded phone-shaped window 600×1300 at (240, 500), the demo
-note under it, the theme's background and progress bar, then the end card. The geometry is the founder's other
-feature Reels' (`feature.swift`: a 1300 px tall window in the lower frame) in Rhea's themes and type.
+A feature Reel is a screen recording of the local app on demo data, composed into the 1080×1920 frame: headline
+and sub at the top, the demo note above the window, the recording in a rounded phone-shaped window 600×1300 at
+(240, 560), the theme's background and progress bar, then the end card. The geometry follows the founder's other
+feature Reels (`feature.swift`: a 1300 px tall window in the lower frame) in Rhea's themes and type.
 
-- **Recording** (`render/record-feature.mjs --id <recording>`): Playwright with `CHROME_PATH`, viewport
-  430×932 CSS px at `deviceScaleFactor` 2 (an 860×1864 frame, the window's aspect), against
-  `FEATURE_APP_URL` (default `http://localhost:3600`). `render/features/<id>.json` holds the scenes:
-  `{ "signIn": "viewer" | "owner", "scenes": [{ "path": "/labor", "settle": 1.0, "hold": 3.0,
-  "scroll": { "to": 900, "over": 3.0 }, "click": "<selector>", "note": "..." }] }`. Every frame is a
-  deterministic PNG screenshot at 24 fps: per frame the script sets the scroll position from the scene's eased
-  curve, takes a screenshot, and advances; a click waits for the page to settle and continues (a cut, not a
-  blur). It signs in once ("Enter the demo" for the viewer, the owner's form otherwise; credentials only from
-  `FEATURE_VIEWER_EMAIL`/`FEATURE_VIEWER_PASSWORD` or `FEATURE_OWNER_EMAIL`/`FEATURE_OWNER_PASSWORD`, never in a
-  file), dismisses the tour (Escape on the first page), hides the cursor, and refuses any `path` on a short
-  blocklist (`/admin`, `/setup/people`, `/setup/billing`, `/account`). Frames go to `render/tmp/features/<id>/`
-  and are encoded once to `render/features/<id>/recording.mp4` (H.264, 24 fps, 860×1864) with `frames.json`
-  (scene boundaries in frames) so composing never needs the app again. Recordings are committed (one per
-  feature, about 3–8 MB; they are inputs, so never pruned).
-- **Composing** (`render.mjs` for `type: "feature"`): the template draws the static frame (headline, sub, demo
-  note, window mask, bar) per `--t` as for the other types, and ffmpeg overlays the recording scaled to
-  600×1300 inside the rounded mask from 1.0 s, then the end card, with the same silent AAC track, `-crf 20`,
-  `+faststart` as today. The cover is the frame at `thumbOffsetMs`.
-- **Running the app** for a recording session: `FACTS.md` "Running the app locally for recording" (port 3600,
-  `DATABASE_DIR=.data/e2e-social`, demo data, the viewer's throwaway credentials; stop it and delete the folder
-  afterwards; never `.data/pglite`).
+- **Recording** (`npm run record -- --id <recording>`; `--id a,b,c` or `--all` records several in one sign-in;
+  `--dry-run` checks the scene files only): Playwright with `CHROME_PATH`, viewport 430×932 CSS px at
+  `deviceScaleFactor` 2 (an 860×1864 frame, the window's aspect), against `FEATURE_APP_URL` (default
+  `http://localhost:3600`, and only localhost is accepted). `render/features/<id>.json` holds the scenes:
+  `{ "signIn": "viewer", "scenes": [{ "path": "/labor", "settle": 0.8, "start": <target>, "moves": [{ "hold": 1.4 },
+  { "scroll": { "text": "Labor by store", "offset": 60 }, "over": 1.6 }, { "scrollX": { "text": "Sales", "to": 900 },
+  "over": 2.2 }], "tap": { "role": "link", "text": "Exceptions" }, "escape": false, "note": "..." }] }` (the file's
+  header in `render/record-feature.mjs` has every option). Every frame is a deterministic PNG screenshot at 24 fps:
+  per frame the script sets the scroll position from the move's eased curve and takes a screenshot; a hold is one
+  screenshot repeated; a tap shows a ring on the element for half a second, then clicks it, and the next scene
+  starts on the page it opens (a cut). It signs in once per run ("Look around the demo company", the read-only demo
+  viewer, which needs no credentials in the recorder; or the demo owner from `FEATURE_OWNER_EMAIL` /
+  `FEATURE_OWNER_PASSWORD`, never a file), marks the demo tour done and presses Escape on each page (a scene with
+  `"escape": false` keeps an open tour card), hides the caret, scrollbars and focus rings, and refuses: any `path`
+  on the blocklist (`/admin`, `/setup/people`, `/setup/billing`, `/account`), any page showing an email address,
+  and any page showing the two-letter word for artificial intelligence or naming Claude or Anthropic (posts never
+  say either). Frames go to `render/tmp/features/<id>/` and are encoded once to `render/features/<id>/recording.mp4`
+  (H.264, 24 fps, 860×1864, CRF 16, no audio) with `frames.json` (each scene's frames and its time in the Reel,
+  `reelSec`), so composing never needs the app again. Recordings are committed (0.4 to 3 MB each; they are inputs,
+  never pruned).
+- **Composing** (`render.mjs` for `type: "feature"`): the template draws every frame with the window transparent
+  (Chromium's `omitBackground`), and ffmpeg lays the recording, scaled to 600×1300 with Lanczos, under it: its first
+  frame waits in the window from 0 s, it plays from 1.0 s, and its last frame stays under the end card as it fades
+  in. Same codec settings as the cards (libx264 High 4.1, CRF 20, yuv420p, silent AAC 64k, `+faststart`). The cover
+  is the composed Reel's frame at `thumbOffsetMs` (pick it inside one of the recording's holds: `frames.json`
+  lists each scene's `reelSec`).
+- **Running the app** for a recording session (what worked on October 20, 2026; `FACTS.md` has the background):
+  in `/Users/alex/Desktop/rhea`, `npm ci`, then `BETTER_AUTH_SECRET=<32+ throwaway characters> npm run build`
+  (`next build` refuses to prerender without it); seed `DATABASE_DIR=.data/e2e-social` with `npm run seed:demo` and
+  throwaway `DEMO_OWNER_PASSWORD`, `DEMO_VIEWER_EMAIL=visitor@demo.rheafi.com` and `DEMO_VIEWER_PASSWORD`; start
+  `npx next start -H localhost -p 3600` with the same `DATABASE_DIR`, `DEMO_VIEWER_*`, a throwaway
+  `BETTER_AUTH_SECRET`, `APP_URL=http://localhost:3600` and **`RHEA_ENV=demo`** (the "Look around the demo company"
+  button and the viewer's exemption from the second sign-in step exist only on the demo service; with `RHEA_ENV`
+  unset the button does not show). Keep every value out of files and chat. The button allows 10 entries an hour
+  per client, which is why the recorder signs in once per run; restart the app to reset it. Afterwards stop the
+  app and `rm -rf .data/e2e-social`; never touch `.data/pglite`.
+- **labor-overtime needs a full workweek**: the Labor page's "Overtime this week" is the workweek of the data's last
+  day, and the seed ends the data yesterday, so on a Monday or Tuesday the panel says "Nobody is close to 40
+  hours". Record it from a seed made Thursday to Saturday, or seed with the clock moved (a preload that shifts
+  `Date` to, say, Saturday 17:00 UTC, for the seed process only). The committed recording was made from data
+  ending Friday 2026-10-16 and shows "3 in overtime · 11 close" with first names, stores and hours.
 
 Every feature post carries `demoNote` on screen for its whole length and `claims` with evidence; its headline
 and caption say "sample data" or "demo" at least once.
+
+The recordings (`render/features/`, made October 20, 2026 on the demo seed; `frames.json` holds each scene):
+
+| Recording | Screens | Length |
+| --- | --- | --- |
+| overview-stores | Overview, last 30 days: synopsis, the four tiles, net income by store, the stores table to 106 and 111 in red | 15.0 s |
+| store-days | Store 106: tiles (labor above 33%), daily sales and labor % with the target line, the store P&L | 13.2 s |
+| labor-overtime | Labor: tiles, "Overtime this week" (3 in overtime, 11 close), labor by store, labor % by day in red | 14.4 s |
+| ledger-entry | Ledger entries, tap a daily sales entry: its 13 lines to Total · Balanced | 13.0 s |
+| deposits | Deposits, last month: 495 matched, 1 variance, the $2,886 card day with no deposit, tap Exceptions | 13.5 s |
+| data-health | Data health: "Nothing needs a look", the stores-by-day grid, scrolled sideways to the latest days | 14.4 s |
+| your-numbers | Your numbers: Labor, tap Prime cost, tap Tickets | 15.7 s |
+| synopsis | Earlier synopses: "Do first", then the watch lines | 15.2 s |
+| month-close | Month close: tiles, months to close, tap Sunrise Bagel 102 LLC's August: its checklist and the close | 14.4 s |
+| compare-bookkeeper | Compare: no reports yet and the steps; Sunrise Bagel 101 LLC's September: the five steps, clearing accounts | 14.4 s |
+| statements-reconcile | Statements: the accounts, tap checking 2214: its register; Reconcile accounts for October | 15.9 s |
+| bills | Bills: past-due note, accounts payable by LLC, tap a bill waiting for approval | 14.7 s |
+| year-end | Year-end package, Sunrise Bagel 101 LLC 2026: the verdict, "not a tax return", what is in the package | 14.6 s |
+| labor-payroll | Labor, then Labor → Payroll: no payroll as paid yet, how Rhea keeps it from counting twice | 12.2 s |
+| sales-tax | Sales tax, Sunrise Bagel 101 LLC: collected vs paid by month, by store, "Rhea never files" | 12.5 s |
+| demo-tour | /demo ("Try Rhea"), then the guided tour's first three cards | 14.1 s |
+| budgets | Setup → Budgets (read-only), then the Overview's synopsis line on a store's pace to its budget | 12.0 s |
+| balance-sheet | Balance sheet, Sunrise Bagel 101 LLC, September: assets, liabilities, equity, "Equals assets" | 15.0 s |
+
+Not recorded: `connections-import`. On the local app, Connections shows developer setup steps (environment
+variable names, "Connect with Shopify cannot start") and Import names Claude, so neither screen can go in a post
+as it is; `balance-sheet` is recorded as a replacement.
+
+### Renderer: what changed from the plan, and why
+
+- **The window sits at y 560, not 500, and the demo note is a pill above it, not under it.** Under the window the
+  note would sit behind Instagram's caption and buttons for the whole Reel; above it, it is always visible and
+  never covers the app's own header.
+- **The recorder's scene format** is a list of moves (holds, scrolls to a pixel or to an element, sideways scrolls)
+  and taps, with `start` and `escape` options, instead of one hold and one scroll per scene: real screens needed
+  it. It signs in once per run because the demo button allows 10 entries an hour.
+- **Recordings refuse more than the blocklist**: email addresses and the words posts never say.
+- **`--force` never overrides a marker** (it did in the first run's renderer); a posted Reel is changed by nothing.
+- **A first-run folder whose card no longer matches the content keeps its video** unless `--force`, so a theme or
+  hook edit to the 18 rendered posts can't silently re-render them.
+- **The owner-math end card's line now comes from `brand.endCardLines`** like every type's. The 18 first-run Reels
+  keep "Owner math, every weekday" (adopted, not re-rendered); new owner-math Reels show whatever
+  `endCardLines["owner-math"]` says.
+- **Two contrast pairs added** (`scripts/contrast.mjs`): the FACT pill and the demo note draw the background color
+  on a filled pill; both pass in all four themes (5.74:1 lowest).
 
 ## Index, markers and the publisher
 

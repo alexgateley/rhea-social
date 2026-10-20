@@ -1,0 +1,32 @@
+{
+  "id": "sales-tax",
+  "title": "Sales tax: collected by the POS vs paid per the bank, by month",
+  "signIn": "viewer",
+  "facts": "FACTS.md 'Seeing the numbers' sales tax row: /ledger/sales-tax, src/core/sales-tax/; Rhea never files",
+  "scenes": [
+    {
+      "path": "/ledger/sales-tax?llc=entity-101",
+      "note": "Store 101's LLC: collected vs paid by month, tied to 2210",
+      "settle": 1,
+      "moves": [
+        {
+          "hold": 2.8
+        },
+        {
+          "scroll": 800,
+          "over": 2.4
+        },
+        {
+          "hold": 2.4
+        },
+        {
+          "scroll": 1600,
+          "over": 2.4
+        },
+        {
+          "hold": 2.4
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "id": "labor-payroll",
+  "title": "Labor daily from the time clock, then payroll as paid",
+  "fps": 24,
+  "frames": 292,
+  "durationSec": 12.167,
+  "width": 860,
+  "height": 1864,
+  "viewport": {
+    "width": 430,
+    "height": 932,
+    "deviceScaleFactor": 2
+  },
+  "signIn": "viewer",
+  "scenes": [
+    {
+      "path": "/labor?range=30d",
+      "note": "Labor: hours and labor % by store for the last 30 days",
+      "startFrame": 0,
+      "endFrame": 129,
+      "startSec": 0,
+      "endSec": 5.375,
+      "reelSec": [
+        1,
+        6.375
+      ]
+    },
+    {
+      "path": "/labor/payroll",
+      "note": "Payroll as paid: none saved in the demo yet, so labor is the time-clock estimate; how a payroll summary replaces it without counting twice",
+      "startFrame": 129,
+      "endFrame": 292,
+      "startSec": 5.375,
+      "endSec": 12.167,
+      "reelSec": [
+        6.375,
+        13.167
+      ]
+    }
+  ],
+  "note": "Reel time = recording time + 1.0 s (render/timing.mjs RECORDING_AT). Pick a feature post's thumbOffsetMs inside a scene's reelSec.",
+  "recordedAt": "2026-10-20T18:58:40.912Z",
+  "app": {
+    "url": "http://localhost:3600",
+    "commit": "9bc6e96",
+    "data": "demo seed (npm run seed:demo), sample data only"
+  },
+  "chromium": "155.0.8059.85"
+}

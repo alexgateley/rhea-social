@@ -2,15 +2,28 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Owner math</title>
+<title>RunonRhea card</title>
 <!--
-  One Owner math Reel, 1080×1920. render/render.mjs loads this file, calls window.setPost(post,
-  timing, brand) once, then steps the CSS custom property --t (seconds) on <html> and screenshots
-  each frame. Every bit of motion below is a pure function of --t: no transitions, no keyframes, no
-  timers, so a frame renders the same every time.
+  One @RunonRhea Reel, 1080×1920, in one of four card types (post.type):
+
+    owner-math  hook, term and formula, 3–5 worked steps, the result very large, the takeaway (the first run)
+    tip         hook, "The tip" and its title, 3–5 numbered lines, the action very large, the takeaway
+    myth        "MYTH" and the myth (struck through when the fact lands), "FACT" and the fact very
+                large, 2–4 lines on why, the takeaway
+    feature     headline, sub and the demo note over a phone-shaped window; render.mjs lays the
+                screen recording under the window (this page is transparent there), then the end card
+
+  render/render.mjs loads this file, calls window.setPost(post, timing, brand) once, then steps the
+  CSS custom property --t (seconds) on <html> and screenshots each frame. Every bit of motion below
+  is a pure function of --t: no transitions, no keyframes, no timers, so a frame renders the same
+  every time. The owner-math card is drawn exactly as it was for the first run; the other types
+  add classes and move nodes, never change its rules.
 
   Fonts: Inter Tight from node_modules/@fontsource/inter-tight (installed by npm; no network).
-  Colors: one of the four themes in brand.json (paper, ink, sage-wash, sage), chosen per post.
+  Colors: one of the four themes in brand.json (paper, ink, sage-wash, sage), chosen per post;
+  every pair used here is checked by scripts/contrast.mjs.
+  Instagram's overlays: the top ~170 px (the Reels header) carries only the kicker and the mark; the
+  feature's demo note and headline sit above the window, clear of the caption and the buttons.
 -->
 <style>
   @font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 400; font-display: block; src: url("../node_modules/@fontsource/inter-tight/files/inter-tight-latin-400-normal.woff2") format("woff2"); }
@@ -40,6 +53,12 @@
     --hook-move-at: 2.6;
     --hook-move-for: 0.6;
     --result-size: 210px;
+
+    /* feature: where the screen recording shows (render.mjs reads the same numbers from setPost's report) */
+    --win-x: 240px; --win-y: 560px; --win-w: 600px; --win-h: 1300px; --win-r: 46px;
+    --headline-size: 72px;
+    --sub-size: 34px;
+    --strike-at: 3.7;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -193,10 +212,131 @@
   .end-handle { font-size: 56px; font-weight: 700; letter-spacing: -0.02em; color: var(--type); }
   .end-handle span { color: var(--muted); font-weight: 500; }
   .end-sub { font-size: 34px; font-weight: 500; color: var(--heading); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* ---------------------------------------------------------------------------------------------
+     Added for the two-slot run (October 20, 2026). Nothing below applies to an owner-math card.
+     --------------------------------------------------------------------------------------------- */
+
+  /* A big line that may wrap (tip: the action; myth: the fact), sized by setPost to fit */
+  .result-value.wrap {
+    white-space: normal;
+    text-wrap: balance;
+    line-height: 1.0;
+    letter-spacing: -0.035em;
+    max-width: 936px;
+  }
+
+  /* tip: "The tip" over the title, then numbered lines */
+  .formula.title { color: var(--type); font-weight: 600; letter-spacing: -0.015em; }
+  .step.line { justify-content: flex-start; gap: 30px; }
+  .line-num {
+    flex: 0 0 auto;
+    min-width: 0.9em;
+    font-size: calc(44px * var(--scale));
+    font-weight: 700;
+    line-height: 1.22;
+    color: var(--heading);
+  }
+  .line-text {
+    flex: 1 1 auto;
+    font-size: calc(44px * var(--scale));
+    font-weight: 500;
+    line-height: 1.22;
+    color: var(--type);
+    letter-spacing: -0.01em;
+  }
+  /* myth: the why lines read as plain rows */
+  .step.why .line-text { color: var(--type); }
+
+  /* myth: the labels are pills, outlined for the myth and filled for the fact */
+  .myth-label {
+    display: none;
+    margin-bottom: 26px;
+    padding: 8px 22px 7px;
+    border: 3px solid var(--heading);
+    border-radius: 999px;
+    font-size: 30px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--heading);
+    width: fit-content;
+  }
+  .type-myth .myth-label { display: block; }
+  .type-myth .result-label {
+    display: block; width: fit-content;
+    padding: 9px 24px 8px;
+    border-radius: 999px;
+    background: var(--heading);
+    color: var(--bg);
+    font-weight: 700; letter-spacing: 0.16em;
+    margin-bottom: 18px;
+  }
+  /* the myth is struck through as the fact lands, and steps back to the muted color */
+  .type-myth .hook {
+    --sp: clamp(0, calc((var(--t) - var(--strike-at)) / 0.5), 1);
+    color: color-mix(in srgb, var(--muted) calc(var(--sp) * 100%), var(--hook));
+    text-decoration-line: line-through;
+    text-decoration-thickness: 7px;
+    text-decoration-color: color-mix(in srgb, var(--heading) calc(var(--sp) * 100%), transparent);
+  }
+
+  /* Hide what a type does not use */
+  .type-tip .step-value { display: none; }
+  .type-feature .hook-wrap, .type-feature .term-block, .type-feature .steps,
+  .type-feature .result, .type-feature .takeaway { display: none; }
+  .feature-only { display: none; }
+  .type-feature .feature-only { display: block; }
+
+  /* feature: transparent where the recording goes; the background is the window's own shadow */
+  html.type-feature, .type-feature body { background: transparent; }
+  .window-hole {
+    position: absolute; z-index: -1;
+    left: var(--win-x); top: var(--win-y); width: var(--win-w); height: var(--win-h);
+    border-radius: var(--win-r);
+    box-shadow:
+      0 0 0 5px var(--accent),
+      0 26px 70px 0 rgba(14, 17, 22, 0.22),
+      0 0 0 3000px var(--bg);
+  }
+  .f-head { margin-top: 38px; }
+  .f-headline {
+    font-size: var(--headline-size);
+    font-weight: 700;
+    line-height: 1.07;
+    letter-spacing: -0.022em;
+    text-wrap: balance;
+    color: var(--hook);
+  }
+  .f-sub {
+    margin-top: 14px;
+    font-size: var(--sub-size);
+    font-weight: 500;
+    line-height: 1.28;
+    letter-spacing: -0.008em;
+    text-wrap: balance;
+    color: var(--muted);
+  }
+  /* The demo note sits just above the window for the whole Reel, clear of the app's own header */
+  .demo-note {
+    position: absolute; left: 0; right: 0;
+    top: calc(var(--win-y) - 66px);
+    text-align: center;
+  }
+  .demo-note span {
+    display: inline-block;
+    padding: 10px 26px 11px;
+    border-radius: 999px;
+    background: var(--type);
+    color: var(--bg);
+    font-size: 28px; font-weight: 600; letter-spacing: 0.01em;
+    white-space: nowrap;
+  }
+  .end-cta { display: none; }
+  .type-feature .end-cta { display: block; font-size: 46px; font-weight: 700; letter-spacing: -0.015em; color: var(--type); }
 </style>
 </head>
 <body>
 <div class="frame" id="frame">
+  <div class="window-hole feature-only" id="window"></div>
+
   <div class="top">
     <div class="kicker" id="kicker">RUNONRHEA · OWNER MATH</div>
     <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
@@ -207,8 +347,15 @@
     </svg>
   </div>
 
+  <div class="f-head feature-only in" id="f-head">
+    <h1 class="f-headline" id="f-headline"></h1>
+    <p class="f-sub" id="f-sub"></p>
+  </div>
+  <div class="demo-note feature-only in" id="demo-note"><span id="demo-note-text">Demo company · made-up numbers</span></div>
+
   <div class="hook-wrap" id="hook-wrap">
     <div class="in" id="hook-in">
+      <div class="myth-label" id="myth-label">Myth</div>
       <h1 class="hook" id="hook"></h1>
       <div class="hook-rule"></div>
     </div>
@@ -236,6 +383,7 @@
       <rect class="mark-bar" x="17" y="42" width="30" height="5" rx="0.75"/>
     </svg>
     <div class="end-handle" id="end-handle">RunonRhea <span>· rheafi.com</span></div>
+    <div class="end-cta" id="end-cta"></div>
     <div class="end-sub" id="end-sub">Owner math, every weekday</div>
   </div>
 
@@ -247,10 +395,19 @@
   const BOTTOM_LIMIT = FRAME_H - 14 - 96; // progress bar plus breathing room
   const RESULT_MAX = 210, RESULT_MIN = 180;
   const SCALE_MIN = 0.955; // keeps 44px body type at or above 42px; the result never shrinks below 180px
+  // A big line that wraps (tip action, myth fact): its size range and how many lines it may take
+  const WRAP = { tip: { max: 150, min: 104, lines: 2, oneLineMin: 120 }, myth: { max: 132, min: 92, lines: 3 } };
+  // feature: the window (must match the CSS variables above), and the headline's fit
+  const WIN = { x: 240, y: 560, w: 600, h: 1300, r: 46 };
+  const HEAD_LIMIT = WIN.y - 66 - 18; // the headline block ends above the demo note
+  const HEADLINE = { max: 76, min: 56, lines: 2 }, SUB = { max: 34, min: 28, lines: 2 };
 
   const $ = (id) => document.getElementById(id);
   const root = document.documentElement;
   const setVar = (el, name, v) => el.style.setProperty(name, String(v));
+  const lineCount = (el, sizePx, lineHeight) => Math.round(el.getBoundingClientRect().height / (sizePx * lineHeight));
+  /** Keeps "labor %" and "25 ¢" on one line (tip, myth and feature text; owner-math cards are drawn as first rendered). */
+  const keep = (s) => String(s ?? '').replace(/ ([%¢])/g, '\u00a0$1');
 
   /** Sets the clock. render.mjs calls this (or sets --t itself) once per frame. */
   window.setT = (t) => setVar(root, '--t', t);
@@ -260,6 +417,11 @@
    * layout report the renderer checks before it starts taking frames.
    */
   window.setPost = async function setPost(post, timing, brand) {
+    const type = post.type || 'owner-math';
+    if (!['owner-math', 'tip', 'myth', 'feature'].includes(type)) throw new Error(`unknown type "${type}"`);
+    root.classList.add(`type-${type}`);
+    document.body.classList.add(`type-${type}`);
+
     // Theme: one of brand.json's themes, named by post.theme (paper when unset)
     const theme = brand?.themes?.[post.theme || 'paper'];
     if (post.theme && !theme) throw new Error(`unknown theme "${post.theme}"`);
@@ -268,64 +430,121 @@
       for (const [k, v] of Object.entries(map)) if (theme[k]) setVar(root, v, theme[k]);
     }
     if (brand?.handle) {
-      $('kicker').textContent = `${brand.handle.toUpperCase()} · ${(brand.series || 'Owner math').toUpperCase()}`;
+      const kicker = brand.kickers?.[type] || (type === 'owner-math' ? brand.series : null) || 'Owner math';
+      $('kicker').textContent = `${brand.handle.toUpperCase()} · ${kicker.toUpperCase()}`;
       $('end-handle').innerHTML = '';
       $('end-handle').append(brand.handle, ' ');
       const s = document.createElement('span'); s.textContent = `· ${brand.site || 'rheafi.com'}`;
       $('end-handle').append(s);
     }
+    // The end card's line under the handle. The first run's owner-math cards were drawn with
+    // "Owner math, every weekday" (the template's text) before brand.endCardLines existed.
+    const endLine = brand?.endCardLines?.[type];
+    if (endLine) $('end-sub').textContent = endLine;
 
-    $('hook').textContent = post.hook;
-    $('term').textContent = post.term;
-    $('formula').textContent = post.formula;
-    $('result-label').textContent = post.result.label;
-    $('result-value').textContent = post.result.value;
-    $('takeaway').textContent = post.takeaway;
+    await Promise.all(['400', '500', '600', '700', '800'].map((w) => document.fonts.load(`${w} 40px "Inter Tight"`)));
+    await document.fonts.ready;
 
+    if (type === 'feature') return setFeature(post, timing, brand);
+
+    // ---- owner-math, tip, myth: the card column ----
+    const tx = type === 'owner-math' ? (s) => s : keep;
+    $('hook').textContent = tx(post.hook);
+    $('takeaway').textContent = tx(post.takeaway);
     const steps = $('steps');
     steps.innerHTML = '';
-    post.steps.forEach((s, k) => {
-      const row = document.createElement('div');
-      row.className = 'step in';
-      setVar(row, '--in', timing.stepsAt[k]);
-      const label = document.createElement('div'); label.className = 'step-label'; label.textContent = s.label;
-      const value = document.createElement('div'); value.className = 'step-value'; value.textContent = s.value;
-      row.append(label, value);
-      steps.append(row);
-    });
+    const row = (k, cls) => {
+      const r = document.createElement('div');
+      r.className = `step in ${cls}`;
+      setVar(r, '--in', timing.stepsAt[k]);
+      steps.append(r);
+      return r;
+    };
+    const textCell = (cls, text) => { const d = document.createElement('div'); d.className = cls; d.textContent = text; return d; };
+
+    if (type === 'owner-math') {
+      $('term').textContent = post.term;
+      $('formula').textContent = post.formula;
+      $('result-label').textContent = post.result.label;
+      $('result-value').textContent = post.result.value;
+      post.steps.forEach((s, k) => row(k, '').append(textCell('step-label', s.label), textCell('step-value', s.value)));
+    } else if (type === 'tip') {
+      $('term').textContent = post.titleLabel || 'The tip';
+      $('formula').textContent = keep(post.title);
+      $('formula').classList.add('title');
+      $('result-label').textContent = post.actionLabel || 'Do it';
+      $('result-value').textContent = keep(post.action);
+      $('result-value').classList.add('wrap');
+      post.lines.forEach((text, k) => row(k, 'line').append(textCell('line-num', String(k + 1)), textCell('line-text', keep(text))));
+    } else if (type === 'myth') {
+      $('myth-label').textContent = 'Myth';
+      $('term-block').style.display = 'none';
+      $('result-label').textContent = 'Fact';
+      $('result-value').textContent = keep(post.fact);
+      $('result-value').classList.add('wrap');
+      // The fact sits right under the myth, then the why lines, then the takeaway
+      $('frame').insertBefore($('result'), $('steps'));
+      post.why.forEach((text, k) => row(k, 'line why').append(textCell('line-text', keep(text))));
+      setVar(root, '--strike-at', timing.strikeAt);
+    }
 
     setVar(root, '--dur', timing.duration);
     setVar($('hook-in'), '--in', timing.hookAt);
-    setVar($('term-block'), '--in', timing.termAt);
+    if (timing.termAt != null) setVar($('term-block'), '--in', timing.termAt);
     setVar($('result-label'), '--in', timing.resultAt);
     setVar($('result-value'), '--in', timing.resultAt);
     setVar($('result-value'), '--fade', 0.6);
     setVar($('takeaway'), '--in', timing.takeawayAt);
     setVar($('end'), '--in', timing.endAt);
-    setVar(root, '--hook-move-at', timing.termAt - 0.4);
+    setVar(root, '--hook-move-at', timing.hookMoveAt ?? timing.termAt - 0.4);
 
-    // Fonts first, so measurements below are final
-    await Promise.all(['400', '500', '600', '700', '800'].map((w) => document.fonts.load(`${w} 40px "Inter Tight"`)));
-    await document.fonts.ready;
-
-    // Fit the result to the column width (never below RESULT_MIN), then the whole column to the frame
     const column = $('frame').clientWidth - 144;
     const rv = $('result-value');
-    let resultSize = RESULT_MAX;
-    setVar(root, '--result-size', `${resultSize}px`);
-    while (rv.scrollWidth > column && resultSize > RESULT_MIN) {
-      resultSize -= 2;
-      setVar(root, '--result-size', `${resultSize}px`);
-    }
-    let scale = 1;
     const bottom = () => $('takeaway').getBoundingClientRect().bottom;
     setVar(root, '--t', 1000); // everything laid out at its final place
-    while (bottom() > BOTTOM_LIMIT && scale > SCALE_MIN) {
-      scale = Math.round((scale - 0.005) * 1000) / 1000;
-      setVar(root, '--scale', scale);
+    let resultSize, scale = 1, resultLines = 1;
+    if (type === 'owner-math') {
+      // Fit the result to the column width (never below RESULT_MIN), then the whole column to the frame
+      resultSize = RESULT_MAX;
+      setVar(root, '--result-size', `${resultSize}px`);
+      while (rv.scrollWidth > column && resultSize > RESULT_MIN) {
+        resultSize -= 2;
+        setVar(root, '--result-size', `${resultSize}px`);
+      }
+      while (bottom() > BOTTOM_LIMIT && scale > SCALE_MIN) {
+        scale = Math.round((scale - 0.005) * 1000) / 1000;
+        setVar(root, '--scale', scale);
+      }
+    } else {
+      // The big line wraps: the largest size at which no word is cut and it takes at most
+      // WRAP.lines lines and the column fits the frame; then the shared scale, as owner math
+      const w = WRAP[type];
+      const fits = (maxLines) => {
+        resultLines = lineCount(rv, resultSize, 1.0);
+        return rv.scrollWidth <= column + 1 && resultLines <= maxLines && bottom() <= BOTTOM_LIMIT;
+      };
+      const search = (from, to, maxLines) => {
+        for (resultSize = from; resultSize >= to; resultSize -= 2) {
+          setVar(root, '--result-size', `${resultSize}px`);
+          if (fits(maxLines)) return true;
+        }
+        return false;
+      };
+      // A short action reads best on one line ("Every Monday"): take one line down to oneLineMin,
+      // otherwise the largest size that wraps to at most w.lines
+      if (!(w.oneLineMin && search(w.max, w.oneLineMin, 1)) && !search(w.max, w.min, w.lines)) {
+        resultSize = w.min;
+        setVar(root, '--result-size', `${resultSize}px`);
+      }
+      while (bottom() > BOTTOM_LIMIT && scale > SCALE_MIN) {
+        scale = Math.round((scale - 0.005) * 1000) / 1000;
+        setVar(root, '--scale', scale);
+      }
+      resultLines = lineCount(rv, resultSize, 1.0);
     }
     const contentBottom = bottom();
-    const overflow = contentBottom > BOTTOM_LIMIT || rv.scrollWidth > column
+    const overflow = contentBottom > BOTTOM_LIMIT || rv.scrollWidth > column + 1
+      || (type !== 'owner-math' && resultLines > WRAP[type].lines)
       || [...document.querySelectorAll('.step-value')].some((v) => v.scrollWidth > v.clientWidth + 1);
 
     // While the hook is alone, it sits in the middle of the frame: measure how far that is
@@ -335,10 +554,47 @@
 
     setVar(root, '--t', 0);
     return {
-      resultSize, scale, contentBottom: Math.round(contentBottom), bottomLimit: BOTTOM_LIMIT, overflow,
+      type, resultSize, resultLines, scale, contentBottom: Math.round(contentBottom), bottomLimit: BOTTOM_LIMIT, overflow,
       hookLines: Math.round($('hook').getBoundingClientRect().height / (88 * scale * 1.07)),
     };
   };
+
+  /** feature: headline and sub fitted above the window, the demo note on its top edge, the end card. */
+  function setFeature(post, timing, brand) {
+    $('f-headline').textContent = keep(post.headline);
+    $('f-sub').textContent = keep(post.sub || '');
+    $('f-sub').style.display = post.sub ? '' : 'none';
+    $('demo-note-text').textContent = post.demoNote || brand?.product?.demoNote || 'Demo company · made-up numbers';
+    // The call to action is the end card's big line; the type's end line under it only when it says something else
+    $('end-cta').textContent = post.cta || '';
+    if (post.cta && $('end-sub').textContent.trim().toLowerCase() === post.cta.trim().toLowerCase()) $('end-sub').style.display = 'none';
+    setVar(root, '--dur', timing.duration);
+    setVar($('f-head'), '--in', 0);
+    setVar($('f-head'), '--fade', 0.4);
+    setVar($('demo-note'), '--in', 0);
+    setVar($('demo-note'), '--fade', 0.4);
+    setVar($('end'), '--in', timing.endAt);
+    for (const [k, v] of Object.entries({ '--win-x': WIN.x, '--win-y': WIN.y, '--win-w': WIN.w, '--win-h': WIN.h, '--win-r': WIN.r })) setVar(root, k, `${v}px`);
+
+    setVar(root, '--t', 1000);
+    const head = $('f-headline'), sub = $('f-sub');
+    let headlineSize = HEADLINE.max, subSize = SUB.max;
+    const apply = () => { setVar(root, '--headline-size', `${headlineSize}px`); setVar(root, '--sub-size', `${subSize}px`); };
+    const headBottom = () => (post.sub ? sub : head).getBoundingClientRect().bottom;
+    const headLines = () => lineCount(head, headlineSize, 1.07);
+    const subLines = () => (post.sub ? lineCount(sub, subSize, 1.28) : 0);
+    apply();
+    while ((headLines() > HEADLINE.lines || headBottom() > HEAD_LIMIT) && headlineSize > HEADLINE.min) { headlineSize -= 2; apply(); }
+    while ((subLines() > SUB.lines || headBottom() > HEAD_LIMIT) && subSize > SUB.min) { subSize -= 1; apply(); }
+    const note = $('demo-note-text').getBoundingClientRect();
+    const overflow = headLines() > HEADLINE.lines || subLines() > SUB.lines || headBottom() > HEAD_LIMIT
+      || head.scrollWidth > head.clientWidth + 1 || note.width > 1080 - 144;
+    setVar(root, '--t', 0);
+    return {
+      type: 'feature', headlineSize, headlineLines: headLines(), subSize, subLines: subLines(),
+      contentBottom: Math.round(headBottom()), bottomLimit: HEAD_LIMIT, overflow, window: { ...WIN },
+    };
+  }
 </script>
 </body>
 </html>

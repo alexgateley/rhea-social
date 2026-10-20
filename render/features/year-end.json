@@ -1,0 +1,55 @@
+{
+  "id": "year-end",
+  "title": "Year-end: one LLC's year as a package for the CPA",
+  "signIn": "viewer",
+  "facts": "FACTS.md 'Seeing the numbers' year-end package row: /ledger/year-end, src/core/year-end/; Rhea is not tax software and never files",
+  "scenes": [
+    {
+      "path": "/ledger/year-end?llc=entity-101&year=2026",
+      "note": "The package for Store 101's LLC, year to date: the verdict and what is left to finish, the line that it is not a tax return, then what is in the package",
+      "settle": 1,
+      "moves": [
+        {
+          "hold": 2.6
+        },
+        {
+          "scroll": {
+            "text": "Prepared by Rhea from your books",
+            "exact": false,
+            "offset": 300
+          },
+          "over": 2.0
+        },
+        {
+          "hold": 2.0
+        },
+        {
+          "scroll": {
+            "role": "heading",
+            "text": "What's in the package",
+            "exact": true,
+            "offset": 60
+          },
+          "over": 2.2
+        },
+        {
+          "hold": 2.0
+        },
+        {
+          "scroll": {
+            "text": "Clearing rollforwards",
+            "offset": 120
+          },
+          "over": 2.0
+        },
+        {
+          "hold": 1.8
+        }
+      ],
+      "start": {
+        "text": "Partial",
+        "offset": 24
+      }
+    }
+  ]
+}

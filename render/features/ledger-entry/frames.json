@@ -1,0 +1,49 @@
+{
+  "id": "ledger-entry",
+  "title": "Rhea's ledger: one store's day as one balanced journal entry",
+  "fps": 24,
+  "frames": 313,
+  "durationSec": 13.042,
+  "width": 860,
+  "height": 1864,
+  "viewport": {
+    "width": 430,
+    "height": 932,
+    "deviceScaleFactor": 2
+  },
+  "signIn": "viewer",
+  "scenes": [
+    {
+      "path": "/ledger",
+      "note": "The ledger's entries, every one balanced; tap a store's daily sales entry",
+      "startFrame": 0,
+      "endFrame": 102,
+      "startSec": 0,
+      "endSec": 4.25,
+      "reelSec": [
+        1,
+        5.25
+      ]
+    },
+    {
+      "path": "/ledger/je_35505ddded79a46b8c36",
+      "note": "Daily sales for Store 101: card clearing, cash, delivery, gift cards, discounts and refunds on the debit side; food, beverage and other sales, sales tax collected, tips payable on the credit side; total balanced; the source reference",
+      "startFrame": 102,
+      "endFrame": 313,
+      "startSec": 4.25,
+      "endSec": 13.042,
+      "reelSec": [
+        5.25,
+        14.042
+      ]
+    }
+  ],
+  "note": "Reel time = recording time + 1.0 s (render/timing.mjs RECORDING_AT). Pick a feature post's thumbOffsetMs inside a scene's reelSec.",
+  "recordedAt": "2026-10-20T18:43:31.628Z",
+  "app": {
+    "url": "http://localhost:3600",
+    "commit": "9bc6e96",
+    "data": "demo seed (npm run seed:demo), sample data only"
+  },
+  "chromium": "155.0.8059.85"
+}

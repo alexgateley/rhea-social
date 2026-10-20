@@ -14,13 +14,20 @@
   "width": 1080,
   "height": 1920,
   "layout": {
+    "type": "owner-math",
     "resultSize": 210,
-    "scale": 1,
-    "contentBottom": 1782,
+    "resultLines": 1,
+    "scale": 0.96,
+    "gap": 0.5,
+    "contentBottom": 1525,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
     "hookLines": 3
   },
-  "renderedAt": "2026-10-17T01:35:24.115Z",
-  "chromium": "141.0.7390.37",
+  "renderedAt": "2026-10-20T22:19:56.538Z",
+  "chromium": "155.0.8059.85",
   "slot": "morning",
   "captionFirstLine": "Overtime cost for restaurant, salon and coffee shop owners: what 10 overtime hours really cost.",
   "hashtags": [
@@ -32,5 +39,9 @@
   ],
   "type": "owner-math",
   "cardHash": "734c5c3a333eccc3988e11036afe1b6ca6470a6b",
-  "cardHashAdoptedAt": "2026-10-20T19:05:12.945Z"
+  "cardHashAdoptedAt": "2026-10-20T19:05:12.945Z",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
 }

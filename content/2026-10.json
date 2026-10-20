@@ -771,7 +771,7 @@
       "audiences": ["franchise", "restaurant", "coffee", "salon"],
       "hook": "$14,000 of gift cards sold isn't sales.",
       "term": "Gift card liability",
-      "formula": "Sold − redeemed = owed to customers",
+      "formula": "Sold − redeemed = owed to guests",
       "inputs": {
         "Gift cards sold in December": "$14,000",
         "Redeemed in December": "$3,100",
@@ -793,7 +793,7 @@
         }
       ],
       "result": {
-        "label": "Owed to customers on December 31",
+        "label": "Owed to guests on December 31",
         "value": "$10,900"
       },
       "takeaway": "Still owed after January: $4,700. December looks rich and January poor unless the liability is booked.",

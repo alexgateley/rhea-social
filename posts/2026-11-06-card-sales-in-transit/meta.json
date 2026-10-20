@@ -14,13 +14,20 @@
   "width": 1080,
   "height": 1920,
   "layout": {
+    "type": "owner-math",
     "resultSize": 210,
+    "resultLines": 1,
     "scale": 1,
-    "contentBottom": 1673,
+    "gap": 0.5,
+    "contentBottom": 1523,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
     "hookLines": 3
   },
-  "renderedAt": "2026-10-17T01:46:50.729Z",
-  "chromium": "141.0.7390.37",
+  "renderedAt": "2026-10-20T22:26:15.037Z",
+  "chromium": "155.0.8059.85",
   "slot": "morning",
   "captionFirstLine": "Card settlement timing for restaurant and franchise owners: weekend sales reach the bank on Monday.",
   "hashtags": [
@@ -32,5 +39,9 @@
   ],
   "type": "owner-math",
   "cardHash": "5c7cb3690e826324d6e8c514608601cad488d8b1",
-  "cardHashAdoptedAt": "2026-10-20T19:05:12.947Z"
+  "cardHashAdoptedAt": "2026-10-20T19:05:12.947Z",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
 }

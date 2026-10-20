@@ -14,13 +14,20 @@
   "width": 1080,
   "height": 1920,
   "layout": {
+    "type": "owner-math",
     "resultSize": 210,
+    "resultLines": 1,
     "scale": 1,
-    "contentBottom": 1687,
+    "gap": 0.65,
+    "contentBottom": 1531,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-17T01:39:22.932Z",
-  "chromium": "141.0.7390.37",
+  "renderedAt": "2026-10-20T22:22:13.273Z",
+  "chromium": "155.0.8059.85",
   "slot": "morning",
   "captionFirstLine": "Franchise royalty and ad fund math for multi-unit owners: what 8% of sales takes from a month.",
   "hashtags": [
@@ -32,5 +39,9 @@
   ],
   "type": "owner-math",
   "cardHash": "6d82ce6d6a274cc6c7f0e68914b0902c5a689136",
-  "cardHashAdoptedAt": "2026-10-20T19:05:12.946Z"
+  "cardHashAdoptedAt": "2026-10-20T19:05:12.946Z",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
 }

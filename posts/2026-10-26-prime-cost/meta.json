@@ -14,13 +14,20 @@
   "width": 1080,
   "height": 1920,
   "layout": {
+    "type": "owner-math",
     "resultSize": 210,
+    "resultLines": 1,
     "scale": 1,
-    "contentBottom": 1578,
+    "gap": 0.75,
+    "contentBottom": 1530,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-17T01:37:23.618Z",
-  "chromium": "141.0.7390.37",
+  "renderedAt": "2026-10-20T22:21:03.728Z",
+  "chromium": "155.0.8059.85",
   "slot": "morning",
   "captionFirstLine": "Prime cost for restaurant owners and franchise operators: food plus labor as a share of sales.",
   "hashtags": [
@@ -32,5 +39,9 @@
   ],
   "type": "owner-math",
   "cardHash": "7930d7c63ddc44ae277b87d8b60a71eda7bf6578",
-  "cardHashAdoptedAt": "2026-10-20T19:05:12.946Z"
+  "cardHashAdoptedAt": "2026-10-20T19:05:12.946Z",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
 }

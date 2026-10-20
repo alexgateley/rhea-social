@@ -14,13 +14,20 @@
   "width": 1080,
   "height": 1920,
   "layout": {
+    "type": "owner-math",
     "resultSize": 210,
+    "resultLines": 1,
     "scale": 1,
-    "contentBottom": 1631,
+    "gap": 0.6,
+    "contentBottom": 1521,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-17T01:50:01.604Z",
-  "chromium": "141.0.7390.37",
+  "renderedAt": "2026-10-20T22:27:56.280Z",
+  "chromium": "155.0.8059.85",
   "slot": "morning",
   "captionFirstLine": "Average ticket and transaction count for restaurant, coffee shop and salon owners: the cheaper sales lever.",
   "hashtags": [
@@ -32,5 +39,9 @@
   ],
   "type": "owner-math",
   "cardHash": "499d67b4f6f4e0cdc1757e1354ce47830daa0464",
-  "cardHashAdoptedAt": "2026-10-20T19:05:12.949Z"
+  "cardHashAdoptedAt": "2026-10-20T19:05:12.949Z",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
 }

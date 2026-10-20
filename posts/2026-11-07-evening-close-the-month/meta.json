@@ -5,20 +5,15 @@
   "slug": "close-the-month",
   "theme": "sage-wash",
   "headline": "Close each store's month with a checklist",
-  "recording": {
-    "id": "month-close",
-    "sha1": "946e304038fac6edfd3041d0163fbac5cc971efc",
-    "frames": 346,
-    "fps": 24
-  },
-  "thumbOffsetMs": 4000,
+  "recording": "month-close",
+  "thumbOffsetMs": 7200,
   "captionFirstLine": "Month-end close for multi-store franchise owners: a checklist per LLC, then close the month.",
   "hashtags": [
     "#monthendclose",
-    "#restaurantowner",
+    "#franchising",
     "#cafeowner",
-    "#salonbusiness",
-    "#smallbusinessowner"
+    "#salonowner",
+    "#smallbusinessfinance"
   ],
   "cardHash": "b8a8279273d2154d096e21e52cdbfcbc91e0fc89",
   "durationSec": 17.625,

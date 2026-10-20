@@ -1,0 +1,9 @@
+Balance sheet per LLC for multi-unit franchise owners: what each store's company owns and owes.
+Ledger, Balance sheet in Rhea's demo, on sample data: one LLC at the end of September.
+Each bank and card account sits beside its statement balance, with the difference to the books.
+Sales tax, tips, gift cards and wages not yet paid show as what the LLC owes, not as profit.
+Liabilities plus equity equal assets, checked on the page.
+
+See it on sample data at demo.rheafi.com. Rhea: automated books, labor and per-store profit for multi-store owners. rheafi.com (link in bio)
+
+#bookkeepingsoftware #multiunitfranchisee #salonownerlife #bookkeeping #accountingtips

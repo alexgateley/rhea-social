@@ -5,20 +5,15 @@
   "slug": "morning-synopsis",
   "theme": "paper",
   "headline": "Every store, summed up in sentences each morning",
-  "recording": {
-    "id": "synopsis",
-    "sha1": "e73488ee5de52d11cd4f9284e8f32b624833343f",
-    "frames": 365,
-    "fps": 24
-  },
-  "thumbOffsetMs": 4000,
+  "recording": "synopsis",
+  "thumbOffsetMs": 2200,
   "captionFirstLine": "Daily sales summary email for multi-store owners: every store's yesterday in plain sentences.",
   "hashtags": [
     "#bookkeepingsoftware",
     "#franchiselife",
-    "#coffeeshopowners",
-    "#salonowners",
-    "#smallbusinesstips"
+    "#restaurantbusiness",
+    "#coffeeshopowner",
+    "#bookkeepingtips"
   ],
   "cardHash": "a36a38cdc44d4d4e8a9c5ed2b8676aa1cdaff266",
   "durationSec": 18.417,

@@ -81,8 +81,6 @@
       "date": "2026-10-20",
       "slug": "loaded-labor",
       "theme": "sage-wash",
-      "keyword": "fully loaded labor cost",
-      "audiences": ["franchise", "restaurant", "coffee", "salon"],
       "hook": "Your labor number is missing 7.65%.",
       "term": "Fully loaded labor %",
       "formula": "(Wages + employer payroll tax) ÷ net sales",
@@ -114,8 +112,8 @@
         "value": "31.5%"
       },
       "takeaway": "Compare targets on loaded labor: the 7.65% is Social Security and Medicare; benefits add more.",
-      "caption": "Fully loaded labor cost for restaurant, coffee shop and salon owners: wages plus employer payroll tax.\nWages $9,600 + 7.65% employer payroll tax = $10,334.40.\nOn $32,800 of net sales that is 31.5% labor, not 29.3%.\nBenefits and workers' comp come on top.",
-      "hashtags": ["#payroll", "#cafeowner", "#salonownerlife", "#bookkeeping", "#accountingtips"],
+      "caption": "Fully loaded labor cost for small business owners: adding employer payroll tax to wages.\nWages $9,600 + 7.65% employer payroll tax = $10,334.40.\nOn $32,800 of net sales that is 31.5% labor, not 29.3%.\nBenefits and workers' comp come on top.",
+      "hashtags": ["#restaurantmanagement", "#profitmargin", "#smallbusinessfinance", "#salonowner", "#RunonRhea"],
       "thumbOffsetMs": 14100
     },
     {
@@ -179,8 +177,8 @@
       ],
       "cta": "Try the demo: demo.rheafi.com",
       "caption": "Multi-store dashboard for franchise and restaurant owners: every store's labor % and profit side by side.\nRhea's Overview on the demo company: 15 bagel stores of sample data.\nEach row is one store: net revenue, labor %, COGS and net income for the same period.\nLabor % turns amber or red when a store runs over its own target.",
-      "hashtags": ["#restauranttech", "#coffeebusiness", "#salonbusiness", "#smallbusinessbookkeeping", "#businessowner"],
-      "thumbOffsetMs": 4000
+      "hashtags": ["#restauranttech", "#franchisee", "#qsr", "#smallbusinessbookkeeping", "#businessowner"],
+      "thumbOffsetMs": 15100
     },
     {
       "date": "2026-10-22",
@@ -222,7 +220,7 @@
       },
       "takeaway": "The premium alone is $5,597.80 a year if it repeats weekly. Flag anyone past 32 hours by Thursday.",
       "caption": "Overtime cost for restaurant, salon and coffee shop owners: what 10 overtime hours really cost.\n10 overtime hours × $20 × 1.5 = $300, or $322.95 with 7.65% employer tax.\nThe same hours at straight time cost $215.30. The premium is $107.65 a week.\nEvery week for a year: $5,597.80 from one person.",
-      "hashtags": ["#payroll", "#franchisee", "#qsr", "#smallbusinessowner", "#smallbusinesstips"],
+      "hashtags": ["#payroll", "#coffeebusiness", "#salonowners", "#smallbusinessowner", "#smallbusinesstips"],
       "thumbOffsetMs": 14100
     },
     {
@@ -244,7 +242,7 @@
       "action": "One LLC, one account",
       "takeaway": "Clean bank lines make every month-end shorter, for you and your bookkeeper.",
       "caption": "One bank account per LLC: a bookkeeping tip for multi-store franchise, restaurant and salon owners.\nGive each store's LLC its own operating account, and let its deposits land there.\nPay shared costs from one account and bill the others back in writing.\nMixed accounts turn every month-end into a sorting job.\nHow many of your stores share an account?",
-      "hashtags": ["#businesstips", "#franchiselife", "#coffeeshopbusiness", "#salonowner", "#smallbusinessfinance"],
+      "hashtags": ["#businesstips", "#franchiselife", "#restaurantindustry", "#salonbusiness", "#smallbusinessfinance"],
       "thumbOffsetMs": 14100
     },
     {
@@ -281,7 +279,7 @@
       },
       "takeaway": "Price and target on COGS, not food cost: 3.5 points is $4,900 a month in cups and bags.",
       "caption": "Food cost vs COGS for restaurant and coffee shop owners: why paper and packaging count.\nFood $39,200 ÷ net sales $140,000 = 28.0% food cost.\nAdd $4,900 of paper and packaging: COGS is $44,100, or 31.5%.\nPrice and set targets on COGS.",
-      "hashtags": ["#foodcost", "#franchising", "#restaurantindustry", "#coffeeshopowners", "#accountingtips"],
+      "hashtags": ["#foodcost", "#franchising", "#restaurantowners", "#coffeeshopbusiness", "#accountingtips"],
       "thumbOffsetMs": 12500
     },
     {
@@ -308,8 +306,8 @@
       ],
       "cta": "Try the demo: demo.rheafi.com",
       "caption": "Daily labor cost by store for restaurant and franchise owners: see which days ran over target.\nStore 106 in Rhea's demo company runs high labor on purpose, in sample data.\nEach day: net sales from the POS and labor % from the time clock, against the store's target line.\nBelow it, the store's own P&L for the period.",
-      "hashtags": ["#laborcost", "#multiunitfranchisee", "#restaurantowners", "#salonowners", "#bookkeeping"],
-      "thumbOffsetMs": 4000
+      "hashtags": ["#laborcost", "#multiunitfranchisee", "#restaurantmanagement", "#restaurateur", "#bookkeeping"],
+      "thumbOffsetMs": 5700
     },
     {
       "date": "2026-10-24",
@@ -330,7 +328,7 @@
       "action": "Net, not gross",
       "takeaway": "Same wages, different denominator, different story. Make every store's labor % use net sales.",
       "caption": "Net sales vs gross sales: which one restaurant, coffee shop and salon owners should divide by.\nGross sales include discounts and comps you never collected.\nRegister totals also hold sales tax and tips, which aren't yours.\nLabor %, food cost and prime cost all divide by net sales, at every store.",
-      "hashtags": ["#laborcost", "#restaurantmanagement", "#restaurateur", "#coffeeshopowner", "#businessowner"],
+      "hashtags": ["#laborcost", "#franchiseowner", "#coffeeshopowners", "#salonowner", "#businessowner"],
       "thumbOffsetMs": 14100
     },
     {
@@ -350,7 +348,7 @@
       ],
       "takeaway": "Profit is on the P&L. The bank balance is a timing question.",
       "caption": "Cash vs profit for restaurant, coffee shop and salon owners: why the bank balance isn't what you made.\nThe bank balance holds money that isn't yours yet: sales tax, tips, gift card balances.\nBills and payroll for the same month often clear later.\nProfit is on the P&L; the bank shows timing.\nWho on your team reads the bank balance as profit?",
-      "hashtags": ["#cashflowmanagement", "#franchiseowner", "#restaurantowner", "#salonownerlife", "#smallbusinessowner"],
+      "hashtags": ["#cashflowmanagement", "#restaurantowner", "#coffeeshopowner", "#salonownerlife", "#smallbusinessowner"],
       "thumbOffsetMs": 4200
     },
     {
@@ -388,7 +386,7 @@
       },
       "takeaway": "Rule of thumb: prime cost under 60%. These 3.5 points are $4,900 a month, every month.",
       "caption": "Prime cost for restaurant owners and franchise operators: food plus labor as a share of sales.\nCOGS $44,100 + fully loaded labor $44,800 = $88,900 prime cost.\nOn $140,000 of net sales that is 63.5%.\nRule of thumb: keep it under 60%. The gap here is $4,900 a month.",
-      "hashtags": ["#primecost", "#franchisebusiness", "#restaurantbusiness", "#cafeowner", "#bookkeepingtips"],
+      "hashtags": ["#primecost", "#franchisebusiness", "#restaurantbusiness", "#bookkeepingtips", "#businessfinance"],
       "thumbOffsetMs": 12500
     },
     {
@@ -415,8 +413,8 @@
       ],
       "cta": "Try the demo: demo.rheafi.com",
       "caption": "Overtime tracking for multi-store restaurant and salon owners: who's near 40 hours this week.\nThe Labor page in Rhea's demo, on sample data: everyone at or near 40 hours this workweek.\nNames and hours from the time clock, never pay, so a manager can trim a shift in time.\nBelow, every store's hours and labor % for the period.",
-      "hashtags": ["#laborcost", "#coffeebusiness", "#salonbusiness", "#businessfinance", "#smallbusinesstips"],
-      "thumbOffsetMs": 4000
+      "hashtags": ["#laborcost", "#qsr", "#salonbusiness", "#smallbusinessbookkeeping", "#smallbusinesstips"],
+      "thumbOffsetMs": 5100
     },
     {
       "date": "2026-10-27",
@@ -457,7 +455,7 @@
       },
       "takeaway": "Rule of thumb: occupancy under 10% of sales. Below $119,000 a month this lease breaks it.",
       "caption": "Rent as a percentage of sales for restaurant, coffee shop and salon owners: occupancy cost explained.\nRent and CAM $11,900 ÷ net sales $140,000 = 8.5%.\nThe same rent on a $100,000 month is 11.9%.\nRule of thumb: keep occupancy under 10%. That line sits at $119,000 a month here.",
-      "hashtags": ["#profitmargin", "#franchisee", "#qsr", "#smallbusinessbookkeeping", "#bookkeeping"],
+      "hashtags": ["#profitmargin", "#franchisee", "#cafeowner", "#salonowners", "#bookkeeping"],
       "thumbOffsetMs": 14100
     },
     {
@@ -479,7 +477,7 @@
       "action": "Every store, same list",
       "takeaway": "When one store says Supplies and another says Paper goods, nobody can compare them.",
       "caption": "Chart of accounts tip for multi-store owners: use the same accounts at every store and LLC.\nGive every store and LLC the same account names, numbers and order.\nThen food cost, labor and rent compare across stores line by line.\nWhen one store says Supplies and another says Paper goods, nobody can.",
-      "hashtags": ["#restaurantaccounting", "#franchising", "#coffeeshopbusiness", "#salonowner", "#smallbusinessfinance"],
+      "hashtags": ["#restaurantaccounting", "#restaurantindustry", "#coffeebusiness", "#smallbusinessfinance", "#accountingtips"],
       "thumbOffsetMs": 14100
     },
     {
@@ -521,7 +519,7 @@
       },
       "takeaway": "Fees are figured on sales before any cost. Budget labor and COGS on the 92% you keep.",
       "caption": "Franchise royalty and ad fund math for multi-unit owners: what 8% of sales takes from a month.\n6% royalty + 2% ad fund on a $120,000 month = $9,600.\nThat is $320 a day, and $115,200 over twelve months like this.\nFranchise fees come off sales before any cost.",
-      "hashtags": ["#profitmargin", "#multiunitfranchisee", "#restaurantindustry", "#coffeeshopowners", "#accountingtips"],
+      "hashtags": ["#profitmargin", "#multiunitfranchisee", "#franchiselife", "#coffeeshopbusiness", "#businessowner"],
       "thumbOffsetMs": 14100,
       "hashtagHints": ["#multiunitfranchisee"]
     },
@@ -549,8 +547,8 @@
       ],
       "cta": "Try the demo: demo.rheafi.com",
       "caption": "Daily sales journal entry for restaurant and franchise owners: how one store's day reaches the books.\nIn Rhea's demo, on sample data: one store's day as a journal entry.\nSales and discounts, sales tax owed, tips owed to staff, card sales waiting to be paid out, cash.\nDebits equal credits, every day, every store.",
-      "hashtags": ["#bookkeepingsoftware", "#franchiselife", "#restaurantowners", "#salonowners", "#businessowner"],
-      "thumbOffsetMs": 4000
+      "hashtags": ["#bookkeepingsoftware", "#franchising", "#restaurantowners", "#restaurantmanagement", "#smallbusinessowner"],
+      "thumbOffsetMs": 12900
     },
     {
       "date": "2026-10-29",
@@ -591,7 +589,7 @@
       },
       "takeaway": "Know each store's break-even day. After it, 38¢ of every dollar is profit.",
       "caption": "Break-even point for restaurant, coffee shop and salon owners: the sales per day where a store starts earning.\nFixed costs $38,500 ÷ 38% contribution margin = $101,316 a month to break even.\nThat is $3,377 a day. At $4,667 a day, the store breaks even on day 22.\nAfter that, 38¢ of every sales dollar is profit.",
-      "hashtags": ["#breakeven", "#franchiseowner", "#restaurantmanagement", "#coffeeshopowner", "#smallbusinessowner"],
+      "hashtags": ["#profitmargin", "#restaurateur", "#coffeeshopowner", "#salonowner", "#smallbusinesstips"],
       "thumbOffsetMs": 14100
     },
     {
@@ -611,7 +609,7 @@
       ],
       "takeaway": "Read the group total, then every store's month beside it.",
       "caption": "Store-level P&L for multi-store owners: why one group P&L hides the store that loses money.\nA group P&L adds the strong stores and the weak ones together.\nOne store losing money every month can hide inside a profitable total.\nRead each store's P&L beside the others, same month, same accounts.",
-      "hashtags": ["#profitmargin", "#restaurantowner", "#salonownerlife", "#bookkeepingtips", "#smallbusinesstips"],
+      "hashtags": ["#profitmargin", "#franchiseowner", "#restaurantowner", "#coffeeshopowners", "#bookkeeping"],
       "thumbOffsetMs": 4200
     },
     {
@@ -648,7 +646,7 @@
       },
       "takeaway": "Book tax to a liability the day it's collected; the deposit looks 8.25% bigger than your sales.",
       "caption": "Sales tax bookkeeping for small business owners: why collected tax is a liability, not revenue.\n$108,250 rang through the registers at 8.25% tax.\nNet sales are $100,000; the other $8,250 belongs to the state.\nBook it as a liability on the day, not as sales.",
-      "hashtags": ["#salestax", "#restaurateur", "#cafeowner", "#bookkeeping", "#businessfinance"],
+      "hashtags": ["#salestax", "#restaurantbusiness", "#salonownerlife", "#bookkeepingtips", "#businessfinance"],
       "thumbOffsetMs": 12500
     },
     {
@@ -671,14 +669,8 @@
       ],
       "cta": "Try the demo: demo.rheafi.com",
       "caption": "Credit card deposit reconciliation for restaurant and coffee shop owners: find the missing day.\nRhea's Deposits page on the demo company's sample data.\nEvery card day is matched to the payout or bank deposit that paid it.\nA day whose money never arrived shows first; each deposit below shows its variance.",
-      "hashtags": [
-        "#bankreconciliation",
-        "#franchisebusiness",
-        "#restaurantbusiness",
-        "#salonbusiness",
-        "#smallbusinessbookkeeping"
-      ],
-      "thumbOffsetMs": 4000
+      "hashtags": ["#bankreconciliation", "#franchisebusiness", "#restaurantindustry", "#cafeowner", "#smallbusinessbookkeeping"],
+      "thumbOffsetMs": 8200
     },
     {
       "date": "2026-10-31",
@@ -697,7 +689,7 @@
       ],
       "takeaway": "Books closed monthly answer questions while they still matter.",
       "caption": "Monthly bookkeeping for small business owners: why catching up at year-end is the slow way.\nA year-end catch-up finds problems after the year is over.\nA missing deposit or a wrong bill is easy to trace within weeks, hard after months.\nClose every month, and the numbers are useful while you can still act.",
-      "hashtags": ["#monthendclose", "#franchising", "#coffeebusiness", "#smallbusinessfinance", "#accountingtips"],
+      "hashtags": ["#monthendclose", "#qsr", "#salonbusiness", "#accountingtips", "#businessowner"],
       "thumbOffsetMs": 4200
     },
     {
@@ -719,7 +711,7 @@
       "action": "Every morning",
       "takeaway": "A daily look turns a payroll surprise into a one-shift fix.",
       "caption": "Labor cost percentage, daily: why restaurant, coffee shop and salon owners shouldn't wait for payroll.\nPayroll arrives days after the shifts, when the hours are already spent.\nEach morning, read yesterday's labor % for every store against its own target.\nA daily look turns a payroll surprise into a one-shift fix.\nWhen do you see labor % today?",
-      "hashtags": ["#laborcost", "#qsr", "#coffeeshopbusiness", "#salonowner", "#businessowner"],
+      "hashtags": ["#laborcost", "#franchising", "#coffeebusiness", "#salonowners", "#smallbusinessfinance"],
       "thumbOffsetMs": 14100
     },
     {
@@ -761,7 +753,13 @@
       },
       "takeaway": "Tips go to a payable account the day they're collected; only the taxes and fees hit your P&L.",
       "caption": "Tip accounting for restaurant, coffee shop and salon owners: tips are a payable, not sales.\n$9,000 in card tips is $0 of revenue: it is owed to the team.\nWhat it costs you: 7.65% employer tax ($688.50) and the 2.6% card fee ($234.00).\nThat is $922.50 to pass $9,000 through.",
-      "hashtags": ["#restaurantaccounting", "#multiunitfranchisee", "#restaurantmanagement", "#coffeeshopowner", "#bookkeeping"],
+      "hashtags": [
+        "#restaurantaccounting",
+        "#multiunitfranchisee",
+        "#restaurantbusiness",
+        "#coffeeshopbusiness",
+        "#smallbusinessbookkeeping"
+      ],
       "thumbOffsetMs": 14100
     },
     {
@@ -799,7 +797,7 @@
       },
       "takeaway": "Still owed after January: $4,700. December looks rich and January poor unless the liability is booked.",
       "caption": "Gift card accounting for coffee shop, salon and restaurant owners: a liability until redeemed.\n$14,000 of gift cards sold in December, $3,100 redeemed.\nOn December 31 you owe gift card holders $10,900; after January's $6,200, still $4,700.\nSales happen when the card is used, not when it is sold.",
-      "hashtags": ["#restaurantaccounting", "#restaurantowner", "#cafeowner", "#smallbusinessbookkeeping", "#businessowner"],
+      "hashtags": ["#restaurantaccounting", "#restaurantowner", "#cafeowner", "#salonowner", "#businessowner"],
       "thumbOffsetMs": 12500
     },
     {
@@ -841,7 +839,7 @@
       },
       "takeaway": "Small tickets make the 10¢ matter: check the effective rate on the statement, not the quoted one.",
       "caption": "Credit card processing fees for small business owners: the effective rate on small tickets.\n2.6% of $40,000 = $1,040, plus 10¢ × 1,900 transactions = $190.\n$1,230 in fees on $40,000 is an effective rate of 3.1%.\nAt a $21.05 average ticket, the dime is 15.4% of the fee.",
-      "hashtags": ["#creditcardfees", "#franchisebusiness", "#restaurantbusiness", "#coffeebusiness", "#smallbusinessfinance"],
+      "hashtags": ["#creditcardfees", "#franchisebusiness", "#salonbusiness", "#bookkeeping", "#smallbusinessfinance"],
       "thumbOffsetMs": 14100
     },
     {
@@ -879,7 +877,7 @@
       },
       "takeaway": "Across 12 stores: $43,200 a year. Pull each statement's effective rate quarterly and negotiate on group volume.",
       "caption": "Card processing rates for multi-unit restaurant and franchise owners: 2.9% vs 2.3% on $600,000 a year.\n2.9% of $600,000 = $17,400. 2.3% = $13,800.\nSix tenths of a point is $3,600 per store per year, $300 a month.\nAcross 12 stores: $43,200.",
-      "hashtags": ["#creditcardfees", "#franchisee", "#qsr", "#bookkeeping", "#businessfinance"],
+      "hashtags": ["#creditcardfees", "#franchisee", "#qsr", "#businessfinance", "#smallbusinesstips"],
       "thumbOffsetMs": 12500
     },
     {
@@ -916,7 +914,13 @@
       },
       "takeaway": "Across 12 stores that's $136,800 not yet in the bank. Reconcile card sales to payouts by day.",
       "caption": "Card settlement timing for restaurant and franchise owners: weekend sales reach the bank on Monday.\nWith next-business-day funding, Friday, Saturday and Sunday card sales all land on Monday (Tuesday after a holiday).\nAt $3,800 a day that is $11,400 in transit on Sunday night, per store; $136,800 across 12.\nAveraged over the week, every card sale waits 1.4 days.",
-      "hashtags": ["#cashflowmanagement", "#multiunitfranchisee", "#restaurantowners", "#restaurantindustry", "#accountingtips"],
+      "hashtags": [
+        "#cashflowmanagement",
+        "#multiunitfranchisee",
+        "#restaurantowners",
+        "#smallbusinessbookkeeping",
+        "#businessowner"
+      ],
       "thumbOffsetMs": 12500
     },
     {
@@ -954,7 +958,7 @@
       },
       "takeaway": "Match every deposit to its sales day within the week, while the drawer and the shift are fresh.",
       "caption": "Missing deposit math for restaurant, coffee shop and salon owners: what one lost deposit costs.\nA $2,875 deposit that shows up 30 days late costs $21.27 of interest at 9%.\nOne that never shows up costs $2,875, which at a 10% margin takes $28,750 of sales to earn back.\nMatch deposits to sales days every week.",
-      "hashtags": ["#cashflowmanagement", "#franchisee", "#coffeeshopbusiness", "#accountingtips", "#smallbusinesstips"],
+      "hashtags": ["#cashflowmanagement", "#qsr", "#coffeebusiness", "#businessfinance", "#smallbusinessowner"],
       "thumbOffsetMs": 12500
     },
     {
@@ -992,7 +996,13 @@
       },
       "takeaway": "Rule of thumb: under 0.3%, drifting both ways, is counting. The same shift always short is a conversation.",
       "caption": "Cash over and short for restaurant, coffee shop and salon owners: how much drawer variance is normal.\nCash sales 18% × $140,000 = $25,200 a month, $840 a day.\n0.3% of that is $2.52 a day, $75.60 a month.\nRule of thumb: that much, drifting over and short, is counting noise. One shift always short is not.",
-      "hashtags": ["#restaurantaccounting", "#franchiselife", "#restaurantindustry", "#coffeeshopowner", "#bookkeepingtips"],
+      "hashtags": [
+        "#restaurantaccounting",
+        "#franchisee",
+        "#restaurantindustry",
+        "#coffeeshopbusiness",
+        "#smallbusinessbookkeeping"
+      ],
       "thumbOffsetMs": 12500
     },
     {
@@ -1031,7 +1041,7 @@
       },
       "takeaway": "Ticket size moves with a question at the register; traffic needs a marketing budget. Start cheap.",
       "caption": "Average ticket and transaction count for restaurant, coffee shop and salon owners: the cheaper sales lever.\n$12.40 × 380 transactions = $4,712 a day.\n50¢ more per ticket adds $190 a day; 15 more transactions add $186.\nThe 50¢ is $69,350 a year, and it costs a question at the register.",
-      "hashtags": ["#menupricing", "#multiunitfranchisee", "#cafeowner", "#smallbusinessbookkeeping", "#bookkeeping"],
+      "hashtags": ["#menupricing", "#franchising", "#restaurantmanagement", "#salonowner", "#bookkeepingtips"],
       "thumbOffsetMs": 12500
     },
     {
@@ -1068,7 +1078,7 @@
       },
       "takeaway": "At a 24.8% margin, one labor point moves profit 4%. Watch labor weekly, not when the P&L lands.",
       "caption": "Four-wall profit for franchise and multi-unit restaurant owners: what one labor point adds.\n$1,400,000 × 24.8% = $347,200 of four-wall profit.\nOne labor point is $14,000, taking profit to $361,200: 4.0% more.\nAt this margin, profit moves about four times faster than labor.",
-      "hashtags": ["#laborcost", "#restaurantowner", "#coffeebusiness", "#smallbusinessfinance", "#businessowner"],
+      "hashtags": ["#laborcost", "#franchiseowner", "#restaurantbusiness", "#smallbusinessowner", "#smallbusinesstips"],
       "thumbOffsetMs": 12500
     }
   ]

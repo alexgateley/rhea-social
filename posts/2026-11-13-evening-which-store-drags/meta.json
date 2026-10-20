@@ -5,20 +5,15 @@
   "slug": "which-store-drags",
   "theme": "sage-wash",
   "headline": "Which store is dragging the group this month?",
-  "recording": {
-    "id": "overview-stores",
-    "sha1": "69312e9d1ca6a22f4ac71494f7b027405105fcfd",
-    "frames": 359,
-    "fps": 24
-  },
-  "thumbOffsetMs": 4000,
+  "recording": "overview-stores",
+  "thumbOffsetMs": 15100,
   "captionFirstLine": "Restaurant group dashboard for multi-unit franchise owners: find the store pulling profit down.",
   "hashtags": [
     "#franchiseaccounting",
-    "#franchisee",
-    "#coffeeshopowners",
-    "#salonowners",
-    "#smallbusinessowner"
+    "#franchiselife",
+    "#restaurateur",
+    "#bookkeeping",
+    "#accountingtips"
   ],
   "cardHash": "9a9ac4c8fe40958b3a07a7575f9da7ec82445521",
   "durationSec": 18.167,

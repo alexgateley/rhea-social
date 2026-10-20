@@ -5,18 +5,13 @@
   "slug": "compare-with-bookkeeper",
   "theme": "sage",
   "headline": "Check your books against your bookkeeper's, to the cent",
-  "recording": {
-    "id": "compare-bookkeeper",
-    "sha1": "e26071138c74359115eddbfac71e8eee6b606255",
-    "frames": 346,
-    "fps": 24
-  },
-  "thumbOffsetMs": 4000,
+  "recording": "compare-bookkeeper",
+  "thumbOffsetMs": 10700,
   "captionFirstLine": "Checking your bookkeeper's books: a month-end tool for franchise and multi-store owners.",
   "hashtags": [
     "#franchiseaccounting",
-    "#qsr",
-    "#coffeeshopowners",
+    "#franchiselife",
+    "#coffeeshopowner",
     "#salonowners",
     "#businessowner"
   ],

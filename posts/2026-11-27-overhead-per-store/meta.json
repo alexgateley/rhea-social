@@ -13,10 +13,10 @@
   "captionFirstLine": "Overhead per store for multi-unit franchise owners: what's left after the office and area manager.",
   "hashtags": [
     "#restaurantaccounting",
-    "#franchising",
-    "#restaurantowner",
-    "#smallbusinessbookkeeping",
-    "#smallbusinessfinance"
+    "#franchisebusiness",
+    "#coffeeshopowner",
+    "#businessfinance",
+    "#businessowner"
   ],
   "cardHash": "542ea7bd2245e8f3ccf2ba32de87f9c7c301fe2e",
   "durationSec": 22.417,
@@ -34,6 +34,6 @@
     "overflow": false,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-20T19:23:51.446Z",
+  "renderedAt": "2026-10-20T19:49:36.204Z",
   "chromium": "155.0.8059.85"
 }

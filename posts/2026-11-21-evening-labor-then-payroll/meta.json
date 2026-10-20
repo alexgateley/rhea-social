@@ -5,20 +5,15 @@
   "slug": "labor-then-payroll",
   "theme": "sage-wash",
   "headline": "Time-clock labor daily, then payroll as paid",
-  "recording": {
-    "id": "labor-payroll",
-    "sha1": "57285497683823ed63d17e9bca13308f9ff287fe",
-    "frames": 292,
-    "fps": 24
-  },
-  "thumbOffsetMs": 4000,
+  "recording": "labor-payroll",
+  "thumbOffsetMs": 11900,
   "captionFirstLine": "Labor cost tracking for restaurant, coffee shop and salon owners: daily estimate, then payroll as paid.",
   "hashtags": [
     "#payroll",
-    "#franchisee",
-    "#restaurantbusiness",
-    "#salonowners",
-    "#smallbusinessbookkeeping"
+    "#franchiseowner",
+    "#restaurateur",
+    "#salonbusiness",
+    "#smallbusinessowner"
   ],
   "cardHash": "df139d5d40fc790695e8e6ad99fc01660cbf1f92",
   "durationSec": 15.375,

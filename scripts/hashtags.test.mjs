@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createPicker } from './hashtags.mjs';
+import { createPicker, industryRule, namedIndustries, pluralPair } from './hashtags.mjs';
 import { addDays, daysBetween } from './schedule.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -79,4 +79,52 @@ test('keeps hints and is deterministic', () => {
 test('refuses a post with no topic tag', () => {
   const { pick } = createPicker(brand);
   assert.throws(() => pick({ date: '2026-12-01', type: 'tip', slug: 'x', hashtags: [] }, []), /topic tag/);
+});
+
+test('the first line names the industries in the order it names them', () => {
+  assert.deepEqual(namedIndustries('Restaurant group dashboard for multi-unit franchise owners: find the store.'), ['restaurant', 'franchise']);
+  assert.deepEqual(namedIndustries('Net sales vs gross for restaurant, coffee shop and salon owners.'), ['restaurant', 'coffee', 'salon']);
+  assert.deepEqual(namedIndustries('A tip for multi-store owners: one bank account per LLC.'), []);
+  assert.deepEqual(namedIndustries('Labor for quick-service and cafe owners.'), ['restaurant', 'coffee']);
+});
+
+test('industry tags follow the first line (franchise always allowed)', () => {
+  const all = ['franchise', 'restaurant', 'coffee', 'salon'];
+  const first = 'Multi-store dashboard for franchise and restaurant owners: every store side by side.';
+  assert.equal(industryRule(first, all, ['franchise', 'restaurant']), null);
+  assert.match(industryRule(first, all, ['coffee', 'salon']), /two of the industries/);
+  assert.match(industryRule(first, all, ['franchise', 'restaurant', 'salon']), /salon industry tags/);
+  // Names only franchise owners: a franchise tag, the second industry from any group
+  assert.equal(industryRule('Month-end close for multi-store franchise owners: a checklist.', all, ['franchise', 'salon']), null);
+  assert.match(industryRule('Month-end close for multi-store franchise owners: a checklist.', all, ['coffee', 'salon']), /a franchise tag/);
+  // Names restaurant, coffee and salon: two of them, plus franchise if wanted
+  assert.equal(industryRule('Tips are not sales for restaurant, coffee shop and salon owners.', all, ['franchise', 'coffee', 'salon']), null);
+  assert.match(industryRule('Tips are not sales for restaurant, coffee shop and salon owners.', all, ['franchise', 'coffee']), /two of the industries/);
+  // Names no industry: free
+  assert.equal(industryRule('A tip for multi-store owners: one bank account per LLC.', all, ['coffee', 'salon']), null);
+  // An industry the post is not for does not count as named
+  assert.equal(industryRule('Food cost for restaurant and salon owners.', ['franchise', 'restaurant', 'coffee'], ['restaurant', 'franchise']), null);
+});
+
+test('never a tag and its plural in one set', () => {
+  assert.deepEqual(pluralPair(['#restaurantowner', '#Restaurantowners', '#laborcost']), ['#restaurantowner', '#restaurantowners']);
+  assert.equal(pluralPair(['#salonowner', '#salonbusiness']), null);
+  const { composes } = createPicker(brand);
+  const p = { date: '2026-12-01', type: 'owner-math', slug: 'x', caption: 'Labor cost for multi-store owners: what it is.' };
+  assert.equal(composes(['#laborcost', '#restaurantowner', '#restaurantowners', '#bookkeeping', '#smallbusinessowner'], p), false);
+  for (const q of run(sequence())) assert.equal(pluralPair(q.hashtags), null, q.hashtags.join(' '));
+});
+
+test('every unpublished post in content/ keeps the first-line rule and has no plural pair', () => {
+  const brandAll = Object.keys(pools.industry);
+  for (const f of fs.readdirSync(path.join(root, 'content')).filter((x) => /^\d{4}-\d{2}\.json$/.test(x))) {
+    for (const p of JSON.parse(fs.readFileSync(path.join(root, 'content', f), 'utf8')).posts) {
+      const marker = path.join(root, 'published', `${p.date}${p.slot === 'evening' ? '-evening' : ''}.json`);
+      if (fs.existsSync(marker)) continue;
+      const groups = p.hashtags.map((t) => groupOf.get(lower(t))).filter(Boolean);
+      assert.equal(industryRule(p.caption.split('\n')[0], p.audiences ?? brandAll, groups), null, `${p.date} ${p.slug}: ${p.hashtags.join(' ')}`);
+      assert.equal(pluralPair(p.hashtags), null, `${p.date} ${p.slug}`);
+      assert.ok(!p.hashtags.map(lower).includes('#breakeven'), `${p.slug}: #breakeven is retired`);
+    }
+  }
 });

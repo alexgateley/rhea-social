@@ -5,20 +5,15 @@
   "slug": "sales-tax-collected-vs-paid",
   "theme": "sage-wash",
   "headline": "Sales tax collected vs paid, by month",
-  "recording": {
-    "id": "sales-tax",
-    "sha1": "6a77e47609ac1a946efa57c0ec2214f9788942cc",
-    "frames": 299,
-    "fps": 24
-  },
-  "thumbOffsetMs": 4000,
+  "recording": "sales-tax",
+  "thumbOffsetMs": 7400,
   "captionFirstLine": "Sales tax report for multi-store owners: collected vs paid, by LLC and month.",
   "hashtags": [
     "#salestax",
-    "#restaurantindustry",
-    "#salonbusiness",
-    "#smallbusinessbookkeeping",
-    "#bookkeeping"
+    "#multiunitfranchisee",
+    "#salonownerlife",
+    "#businessfinance",
+    "#smallbusinesstips"
   ],
   "cardHash": "c6aa937065779f59524192870fac7d54fb2b3d50",
   "durationSec": 15.667,

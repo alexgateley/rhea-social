@@ -5,19 +5,14 @@
   "slug": "store-days",
   "theme": "sage-wash",
   "headline": "One store's sales and labor, day by day",
-  "recording": {
-    "id": "store-days",
-    "sha1": "32ee28854672bab718b62236db772c1630555e4e",
-    "frames": 316,
-    "fps": 24
-  },
-  "thumbOffsetMs": 4000,
+  "recording": "store-days",
+  "thumbOffsetMs": 5700,
   "captionFirstLine": "Daily labor cost by store for restaurant and franchise owners: see which days ran over target.",
   "hashtags": [
     "#laborcost",
     "#multiunitfranchisee",
-    "#restaurantowners",
-    "#salonowners",
+    "#restaurantmanagement",
+    "#restaurateur",
     "#bookkeeping"
   ],
   "cardHash": "da44be99a2568be43946cdbba559e197c08ec03e",

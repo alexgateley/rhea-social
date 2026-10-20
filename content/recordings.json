@@ -63,7 +63,7 @@
     },
     "statements-reconcile": {
       "seconds": 15.4,
-      "status": "to record: copy \"spec\" to render/features/statements-reconcile.json, then npm run record -- --id statements-reconcile",
+      "status": "recorded (render/features/statements-reconcile.json, by builder B)",
       "screens": [
         "/statements?account=<Store 101 checking>: the Accounts card, then the account's register with every line booked to an account",
         "/statements/reconcile?llc=entity-101: each account's balance in Rhea beside its statement's, the months marked reconciled"
@@ -146,7 +146,7 @@
     },
     "bills": {
       "seconds": 14.2,
-      "status": "to record: copy \"spec\" to render/features/bills.json, then npm run record -- --id bills",
+      "status": "recorded (render/features/bills.json, by builder B)",
       "screens": [
         "/bills: what to approve, what is due, what was paid (the money LLCs' sample bills)",
         "scroll to Accounts Payable (aging)",
@@ -218,7 +218,7 @@
     },
     "year-end": {
       "seconds": 14.6,
-      "status": "to record: copy \"spec\" to render/features/year-end.json, then npm run record -- --id year-end",
+      "status": "recorded (render/features/year-end.json, by builder B)",
       "screens": [
         "/ledger/year-end?llc=entity-101&year=2026: the completeness verdict, the sections (trial balance with tax lines, P&L by month and store, schedules), \"What Rhea doesn't know\", the downloads"
       ],
@@ -271,14 +271,14 @@
     },
     "connections-import": {
       "seconds": 14.4,
-      "status": "to record: copy \"spec\" to render/features/connections-import.json, then npm run record -- --id connections-import",
+      "status": "not recorded: on the local app, Connections shows developer setup steps (environment variable names, 'Connect with Shopify cannot start') and Import names Claude, so neither screen can go in a post as it is; record it from the demo service once those screens read as the demo does",
       "screens": [
         "/connections: the cards (QuickBooks Online, Square, Clover, Toast, Shopify POS, 7shifts, Gusto) as the demo shows them: test accounts, never a real store's",
         "/import: the drop zone for any POS, time clock, processor or bank file, and the preview step"
       ],
       "evidence": ["src/integrations/square/", "src/integrations/toast/", "src/server/smart-import.ts"],
-      "notes": "Show no connect button being pressed and no file being dropped (the viewer is read-only). The Gusto card says it is off; the posts do not mention Gusto.",
-      "usedBy": ["2026-11-19 6PM connect-or-drop-a-file"],
+      "notes": "Show no connect button being pressed and no file being dropped (the viewer is read-only). The Gusto card says it is off; the posts do not mention Gusto. 2026-11-19 6 PM carries balance-sheet instead (integrator, October 20, 2026).",
+      "usedBy": [],
       "spec": {
         "id": "connections-import",
         "title": "Connections: each POS connected, or its export dropped on Import",
@@ -340,13 +340,13 @@
     },
     "labor-payroll": {
       "seconds": 13.4,
-      "status": "to record: copy \"spec\" to render/features/labor-payroll.json, then npm run record -- --id labor-payroll",
+      "status": "recorded (render/features/labor-payroll.json, by builder B)",
       "screens": [
         "/labor: each store's hours and labor % from the time clock",
         "/labor/payroll: \"Add payroll as paid\" (any provider's summary; a file listing people is refused) and \"How Rhea keeps it from counting twice\""
       ],
       "evidence": ["src/core/labor/", "src/core/payroll/"],
-      "notes": "The demo has no payroll summary saved, so /labor/payroll shows its empty state and the explanation; the posts say \"drop your provider's summary\", not that one is there.",
+      "notes": "The demo has no payroll summary saved, so /labor/payroll shows its empty state and the explanation; the posts say \"drop your provider's summary\", not that one is there. The Template card's small print says 'Using Gusto? Connect it on Connections'; Connect with Gusto is off, so the post's caption says so.",
       "usedBy": ["2026-11-21 6PM labor-then-payroll"],
       "spec": {
         "id": "labor-payroll",
@@ -400,7 +400,7 @@
     },
     "sales-tax": {
       "seconds": 14.6,
-      "status": "to record: copy \"spec\" to render/features/sales-tax.json, then npm run record -- --id sales-tax",
+      "status": "recorded (render/features/sales-tax.json, by builder B)",
       "screens": [
         "/ledger/sales-tax?llc=entity-101: sales tax the POS collected by month beside what the bank statements show was paid (Texas Comptroller lines in the demo statements)"
       ],
@@ -449,7 +449,7 @@
     },
     "demo-tour": {
       "seconds": 13.8,
-      "status": "to record: copy \"spec\" to render/features/demo-tour.json, then npm run record -- --id demo-tour",
+      "status": "recorded (render/features/demo-tour.json, by builder B)",
       "screens": [
         "/demo: \"Try Rhea\", look around a made-up 15-store group or start a blank company",
         "/: tap Take the tour (the i button in the phone top bar); the tour card \"Welcome to the demo\"; Next; \"Every store, side by side\"; Next; \"Sales and labor, day by day\""
@@ -524,7 +524,7 @@
     },
     "budgets": {
       "seconds": 13.6,
-      "status": "to record: copy \"spec\" to render/features/budgets.json, then npm run record -- --id budgets",
+      "status": "recorded (render/features/budgets.json, by builder B)",
       "screens": [
         "/setup/budgets: the budgets switch and a year of monthly sales budgets per store (read-only for the viewer)",
         "/?range=mtd: the Overview with each store's pace against its budget"
@@ -587,6 +587,16 @@
           }
         ]
       }
+    },
+    "balance-sheet": {
+      "seconds": 15,
+      "status": "recorded (render/features/balance-sheet.json, by builder B, as the replacement for connections-import)",
+      "screens": [
+        "/ledger/balance-sheet?llc=entity-101: Sunrise Bagel 101 LLC at September 30 beside August 31; each bank and card account's statement balance and the difference to the books; liabilities (sales tax, tips, gift cards, accrued wages, loans); equity; 'Equals assets'"
+      ],
+      "evidence": ["src/core/reports/balance-sheet.ts", "src/server/opening-balances.ts"],
+      "notes": "One of the four money LLCs (101, 103, 105, 108), which have opening balances and statements. 2991 Statement Lines Needing a Home shows a small amount waiting for a home, as the demo has it.",
+      "usedBy": ["2026-11-19 6PM balance-sheet-per-llc"]
     }
   }
 }

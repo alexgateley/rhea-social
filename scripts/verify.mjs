@@ -35,6 +35,7 @@ import { checkThemes } from './contrast.mjs';
 import { COMPUTE } from './compute.mjs';
 import { createSchedule, addDays, daysBetween, isIsoDate, weekday } from './schedule.mjs';
 import { timing, cardHash } from '../render/timing.mjs';
+import { industryRule, pluralPair } from './hashtags.mjs';
 
 // VERIFY_ROOT points the check at another copy of the repo (scripts/verify.test.mjs uses a temporary one)
 const root = process.env.VERIFY_ROOT ? path.resolve(process.env.VERIFY_ROOT) : path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -277,6 +278,8 @@ function checkHashtagSet(p, say) {
   for (const h of p.hashtagHints ?? []) if (!tags.map(lower).includes(lower(h))) say(`hashtagHints lists ${h}, which is not in hashtags`);
   if (tags.length !== want) say(`has ${tags.length} hashtags (exactly ${want}; Instagram allows up to 5)`);
   if (new Set(tags.map(lower)).size !== tags.length) say('repeats a hashtag');
+  const pair = pluralPair(tags);
+  if (pair) say(`has both #${pair[0].slice(1)} and #${pair[1].slice(1)}: one tag and its plural reach the same people, so one of the five is wasted`);
   const type = typeOf(p);
   const topic = topicPool(type);
   const audiences = p.audiences ?? INDUSTRY;
@@ -300,6 +303,11 @@ function checkHashtagSet(p, say) {
   }
   if (topicCount < 1) say(`needs at least one topic tag from the ${type} pool`);
   if (industryCount < 2 || industryGroups.size < 2) say('needs industry tags from at least two different industry groups');
+  if (Array.isArray(audiences)) {
+    const groups = tags.map((t) => groupOfTag.get(lower(t))).filter((g) => g && g !== 'bookkeeping' && g !== 'broad');
+    const wrong = industryRule(String(p.caption ?? '').split('\n')[0], audiences, groups);
+    if (wrong) say(`hashtags: ${wrong}`);
+  }
   if (bookOrBroad < 1) say('needs a bookkeeping or broad-owner tag');
   if (broad < 1) say('needs at least one broad tag (hashtagPools.tiers.broad) in the mix');
   if (niche < 1) say('needs at least one niche tag (hashtagPools.tiers.niche) in the mix');

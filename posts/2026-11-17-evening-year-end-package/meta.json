@@ -5,20 +5,15 @@
   "slug": "year-end-package",
   "theme": "sage-wash",
   "headline": "Hand your CPA one year-end package per LLC",
-  "recording": {
-    "id": "year-end",
-    "sha1": "8b33125baf2abfbc89c86cc7292fd00d27dfbbe8",
-    "frames": 350,
-    "fps": 24
-  },
-  "thumbOffsetMs": 4000,
+  "recording": "year-end",
+  "thumbOffsetMs": 10800,
   "captionFirstLine": "Year-end bookkeeping package for small business owners with several LLCs: one per LLC for your CPA.",
   "hashtags": [
     "#accountingsoftware",
-    "#franchisee",
-    "#restaurantbusiness",
-    "#salonowners",
-    "#businessfinance"
+    "#franchising",
+    "#restaurateur",
+    "#salonbusiness",
+    "#bookkeepingtips"
   ],
   "cardHash": "74d978938a46026006fff8dc3f6225e443079ed9",
   "durationSec": 17.792,

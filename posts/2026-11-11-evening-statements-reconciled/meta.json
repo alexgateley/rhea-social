@@ -5,20 +5,15 @@
   "slug": "statements-reconciled",
   "theme": "paper",
   "headline": "Bank and card statements, in the books and reconciled",
-  "recording": {
-    "id": "statements-reconcile",
-    "sha1": "5e79921b40463c2c2eb27909284da6b19b17ac80",
-    "frames": 381,
-    "fps": 24
-  },
-  "thumbOffsetMs": 4000,
+  "recording": "statements-reconcile",
+  "thumbOffsetMs": 15700,
   "captionFirstLine": "Bank statement reconciliation for multi-store owners: every LLC's accounts tied to the cent.",
   "hashtags": [
     "#bankreconciliation",
-    "#franchising",
-    "#restaurantmanagement",
-    "#salonbusiness",
-    "#businessfinance"
+    "#multiunitfranchisee",
+    "#cafeowner",
+    "#smallbusinessfinance",
+    "#businessowner"
   ],
   "cardHash": "e3588d73d681cfc604baf298c5c493d2dc23dac7",
   "durationSec": 19.083,

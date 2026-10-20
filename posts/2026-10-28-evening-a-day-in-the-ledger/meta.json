@@ -5,20 +5,15 @@
   "slug": "a-day-in-the-ledger",
   "theme": "sage-wash",
   "headline": "Every store's day becomes a balanced journal entry",
-  "recording": {
-    "id": "ledger-entry",
-    "sha1": "5418deba7083943441acacfd38a449fc9cbb1e25",
-    "frames": 313,
-    "fps": 24
-  },
-  "thumbOffsetMs": 4000,
+  "recording": "ledger-entry",
+  "thumbOffsetMs": 12900,
   "captionFirstLine": "Daily sales journal entry for restaurant and franchise owners: how one store's day reaches the books.",
   "hashtags": [
     "#bookkeepingsoftware",
-    "#franchiselife",
+    "#franchising",
     "#restaurantowners",
-    "#salonowners",
-    "#businessowner"
+    "#restaurantmanagement",
+    "#smallbusinessowner"
   ],
   "cardHash": "c029200f726429d67edc99106f830aa00a35685f",
   "durationSec": 16.25,

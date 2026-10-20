@@ -5,19 +5,14 @@
   "slug": "closing-november",
   "theme": "sage-wash",
   "headline": "November closes. Is every store's checklist done?",
-  "recording": {
-    "id": "month-close",
-    "sha1": "946e304038fac6edfd3041d0163fbac5cc971efc",
-    "frames": 346,
-    "fps": 24
-  },
-  "thumbOffsetMs": 4000,
+  "recording": "month-close",
+  "thumbOffsetMs": 14600,
   "captionFirstLine": "Closing November for multi-store owners: each LLC's month-end checklist, in one place.",
   "hashtags": [
     "#monthendclose",
     "#multiunitfranchisee",
-    "#restaurantbusiness",
-    "#salonowners",
+    "#restaurantowners",
+    "#coffeebusiness",
     "#smallbusinesstips"
   ],
   "cardHash": "44ff9959903d99ec7b52235fa507afb9b97429a5",

@@ -9,7 +9,8 @@
 // hashtagPools.topic) in "hashtags", and list the industries it is true for in "audiences" (default:
 // all four). The picker never adds a topic tag of its own. Tags in "hashtagHints" are kept too (for example #multiunitfranchisee on a royalty post).
 // The picker adds the rest so that each set has two industry tags from two different groups the post
-// fits, a bookkeeping or broad-owner tag, at least one broad and one niche tag, never repeats a set
+// fits (and, when the caption's first line names industries, the ones it names: industryRule), a
+// bookkeeping or broad-owner tag, at least one broad and one niche tag, never repeats a set
 // within 14 days, shares at most two tags with the post before it, and covers every industry group
 // and the bookkeeping group each week; among the sets that keep the rules it takes the one whose tags
 // were used least recently. Published posts are never touched. Deterministic: same input, same tags.
@@ -25,6 +26,46 @@ const slotOf = (p) => p.slot || 'morning';
 const typeOf = (p) => p.type || 'owner-math';
 const orderKey = (p) => `${p.date}|${slotOf(p) === 'morning' ? 0 : 1}`;
 const mondayOf = (iso) => addDays(iso, -((weekday(iso) + 6) % 7));
+
+// The industries a caption's first line names, in the order it names them (brand.json
+// hashtagRules.industryFromFirstLine): the words search reads and the industry tags should say the same
+// audience.
+const NAMED = [
+  ['franchise', /\bfranchise(e|es)?\b|\bfranchising\b|\bmulti-unit\b/i],
+  ['restaurant', /\brestaurants?\b|\bquick[- ]service\b|\bQSR\b/i],
+  ['coffee', /\bcoffee\b|\bcaf(e|é)s?\b/i],
+  ['salon', /\bsalons?\b/i],
+];
+/** Two tags that differ only by a final "s" (#salonowner, #salonowners) reach the same people: one slot wasted. */
+export function pluralPair(tags) {
+  const l = tags.map((t) => String(t).toLowerCase());
+  for (const t of l) if (l.includes(`${t}s`)) return [t, `${t}s`];
+  return null;
+}
+
+export function namedIndustries(text) {
+  return NAMED.map(([g, re]) => [g, String(text ?? '').search(re)]).filter(([, at]) => at >= 0).sort((a, b) => a[1] - b[1]).map(([g]) => g);
+}
+
+/**
+ * The first-line rule for a post's industry tags. `groups` are the industry groups of its industry tags.
+ * Returns null when the tags keep it, otherwise what is wrong.
+ */
+export function industryRule(firstLine, audiences, groups) {
+  const named = namedIndustries(firstLine).filter((g) => audiences.includes(g));
+  if (!named.length) return null;
+  const have = new Set(groups);
+  const need = Math.min(2, named.length);
+  if (named.filter((g) => have.has(g)).length < need) {
+    return `its industry tags should include ${need === 1 ? `a ${named[0]} tag` : `two of the industries its first line names (${named.join(', ')})`}`;
+  }
+  const allowed = new Set([...named, 'franchise'].filter((g) => audiences.includes(g)));
+  if (allowed.size >= 2) {
+    const off = [...have].filter((g) => !allowed.has(g));
+    if (off.length) return `has ${off.join(' and ')} industry tags, but its first line names ${named.join(', ')} (industry tags follow the first line; franchise is always allowed)`;
+  }
+  return null;
+}
 
 export function createPicker(brand) {
   const pools = brand.hashtagPools;
@@ -52,8 +93,11 @@ export function createPicker(brand) {
       if (!audiences.includes(g)) return false;
       industry++; groups.add(g);
     }
+    const industryGroups = tags.map((t) => groupOf.get(lower(t))).filter((g) => g && g !== 'bookkeeping' && g !== 'broad');
+    if (pluralPair(tags)) return false;
     return topicCount >= 1 && industry >= 2 && groups.size >= 2 && bookOrBroad >= 1
-      && tags.some((t) => broadTier.has(lower(t))) && tags.some((t) => nicheTier.has(lower(t)));
+      && tags.some((t) => broadTier.has(lower(t))) && tags.some((t) => nicheTier.has(lower(t)))
+      && industryRule(String(p.caption ?? '').split('\n')[0], audiences, industryGroups) === null;
   }
 
   /** Every way to choose k items from list, in order. */

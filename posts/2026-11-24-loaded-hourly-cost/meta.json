@@ -13,10 +13,10 @@
   "captionFirstLine": "Loaded labor cost per hour for restaurant, coffee shop and salon owners: what $17 an hour really costs.",
   "hashtags": [
     "#payroll",
-    "#multiunitfranchisee",
-    "#restaurantmanagement",
-    "#coffeebusiness",
-    "#businessfinance"
+    "#franchiselife",
+    "#qsr",
+    "#coffeeshopowners",
+    "#businessowner"
   ],
   "cardHash": "462774a2b4eadb5994febfa5d4ade9992c2b0d28",
   "durationSec": 22.417,
@@ -34,6 +34,6 @@
     "overflow": false,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-20T19:21:51.825Z",
+  "renderedAt": "2026-10-20T19:48:15.631Z",
   "chromium": "155.0.8059.85"
 }

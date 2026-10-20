@@ -13,10 +13,10 @@
   "captionFirstLine": "Discount rate for restaurant, coffee shop and salon owners: what promos and staff discounts cost a day.",
   "hashtags": [
     "#profitmargin",
-    "#multiunitfranchisee",
-    "#coffeebusiness",
-    "#accountingtips",
-    "#smallbusinesstips"
+    "#restaurantmanagement",
+    "#coffeeshopowners",
+    "#salonowner",
+    "#bookkeeping"
   ],
   "cardHash": "4f4104e0f1bbf416181b40ffe226494168a78e14",
   "durationSec": 22.417,
@@ -34,6 +34,6 @@
     "overflow": false,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-20T19:16:47.320Z",
+  "renderedAt": "2026-10-20T19:46:20.104Z",
   "chromium": "155.0.8059.85"
 }

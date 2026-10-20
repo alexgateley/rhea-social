@@ -13,10 +13,10 @@
   "captionFirstLine": "Minimum wage increase math for restaurant, coffee shop and salon owners: the price change that covers it.",
   "hashtags": [
     "#menupricing",
-    "#franchiseowner",
     "#restaurantowners",
-    "#coffeebusiness",
-    "#bookkeeping"
+    "#coffeeshopowners",
+    "#businessfinance",
+    "#businessowner"
   ],
   "cardHash": "06c6155bc3c47c79d87222beafbb3aeae95fcefb",
   "durationSec": 22.417,
@@ -34,6 +34,6 @@
     "overflow": false,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-20T19:19:08.461Z",
+  "renderedAt": "2026-10-20T19:47:37.535Z",
   "chromium": "155.0.8059.85"
 }

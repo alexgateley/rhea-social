@@ -5,20 +5,15 @@
   "slug": "your-numbers-by-store",
   "theme": "sage-wash",
   "headline": "Labor, prime cost and tickets, store by store",
-  "recording": {
-    "id": "your-numbers",
-    "sha1": "4fb17891ed923e5e7e5cfbfd17e9eeca7e26914e",
-    "frames": 376,
-    "fps": 24
-  },
-  "thumbOffsetMs": 4000,
+  "recording": "your-numbers",
+  "thumbOffsetMs": 1800,
   "captionFirstLine": "Restaurant KPIs by store for franchise and coffee shop owners: labor, prime cost and average ticket.",
   "hashtags": [
     "#profitmargin",
-    "#franchising",
+    "#franchiseowner",
     "#restaurateur",
-    "#salonbusiness",
-    "#accountingtips"
+    "#coffeeshopowners",
+    "#smallbusinessowner"
   ],
   "cardHash": "37c5fb36e47750d6a200190a20dbd7957b845899",
   "durationSec": 18.875,

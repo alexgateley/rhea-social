@@ -10,7 +10,7 @@
     "feature": "In the app"
   },
   "endCardLines": {
-    "owner-math": "Owner math, every weekday at 7",
+    "owner-math": "Owner math, every weekday",
     "tip": "A tip for multi-store owners, daily",
     "myth": "Myth vs fact, for multi-store owners",
     "feature": "Try the demo: demo.rheafi.com"
@@ -110,14 +110,15 @@
   "captionKeywords": ["restaurant", "coffee shop", "salon", "franchise", "multi-unit", "multi-store", "small business", "quick-service", "quick service"],
 
   "brandHashtag": "#RunonRhea",
-  "brandHashtagRule": "Not in the five from October 20, 2026: a brand tag nobody follows reaches nobody, and the five slots go to tags owners follow and search (the founder's other accounts carry no brand tag either). The handle @RunonRhea and the caption footer carry the brand. Kept here only as the account's name for the two posts that went out with it.",
+  "brandHashtagRule": "Not in the five from October 20, 2026: nobody can follow a hashtag since December 13, 2024 (Instagram removed it), so a tag reaches people only when they search it or Instagram uses it to place the post, and nobody searches #RunonRhea; the five slots go to tags owners search (the founder's other accounts carry no brand tag either). The handle @RunonRhea and the caption footer carry the brand. Kept here only as the account's name for the two posts that went out with it.",
   "hashtagRules": {
     "maxPerPost": 5,
     "exactly": 5,
-    "placement": "caption: the last line of the caption, never a comment, never the first line",
+    "placement": "caption: the last line of the caption, never a comment, never the first line (tags in a comment count toward the same five, so a comment adds nothing)",
     "composition": "5 tags = at least 1 topic tag from the post type's pool (topic) + 2 industry tags from two different industry groups the post fits (franchise, restaurant, coffee, salon; a post's audiences field lists the groups it is true for) + at least 1 bookkeeping or broad-owner tag; the fifth is any pool tag that keeps these rules. Each set mixes sizes: at least one broad tag and at least one niche tag (hashtagPools.tiers).",
     "rotation": "No identical set of five within 14 days of another post; consecutive posts (in date and slot order) share at most two tags; in every Monday-to-Sunday week the content covers, each industry group and the bookkeeping group appear at least once. A tag outside these pools is refused, so a made-up, broken, banned, misleading or vendor tag cannot ship.",
     "industryFit": "An industry tag goes only on a post that is true for that industry: no salon tags on food cost, prime cost or delivery posts; no franchise tags on posts that only make sense for an independent; royalty posts are franchise-only.",
+    "industryFromFirstLine": "The industry tags follow the caption's first line, so the words search reads and the tags tell Instagram the same audience: when the first line names industries (franchise or multi-unit, restaurant or quick-service, coffee shop or cafe, salon), the industry tags cover two of them (or the one it names), and every industry tag is one it names or a franchise tag (multi-unit franchise owners are the account's core audience). A first line that names only franchise owners lets the second industry tag come from any group the post fits. A first line that names no industry (multi-store owners) leaves the choice to the rotation. Enforced by verify (scripts/hashtags.mjs industryRule), applied by the picker.",
     "memorial": "none: the memorial carousel is posted exactly as the founder wrote it",
     "source": "README.md, 'Hashtags and discovery' (researched October 20, 2026): Instagram's @creators account, December 18, 2025, 'up to 5 hashtags in a reel or post'; Instagram's Help Center, 'You can use up to 5 tags on a post'; Instagram's advice to use 'fewer (up to 5) more targeted hashtags, rather than many generic ones'."
   },
@@ -131,7 +132,7 @@
     "bookkeeping": ["#smallbusinessbookkeeping", "#bookkeeping", "#bookkeepingtips", "#smallbusinessfinance", "#businessfinance", "#accountingtips"],
     "broad": ["#smallbusinessowner", "#businessowner", "#smallbusinesstips"],
     "topic": {
-      "owner-math": ["#laborcost", "#primecost", "#foodcost", "#profitmargin", "#breakeven", "#salestax", "#creditcardfees", "#cashflowmanagement", "#payroll", "#menupricing", "#restaurantaccounting"],
+      "owner-math": ["#laborcost", "#primecost", "#foodcost", "#profitmargin", "#salestax", "#creditcardfees", "#cashflowmanagement", "#payroll", "#menupricing", "#restaurantaccounting"],
       "tip": ["#businesstips", "#monthendclose", "#bankreconciliation", "#accountspayable", "#laborcost", "#foodcost", "#primecost", "#salestax", "#creditcardfees", "#cashflowmanagement", "#restaurantaccounting", "#profitmargin", "#payroll"],
       "myth": ["#profitmargin", "#cashflowmanagement", "#laborcost", "#foodcost", "#primecost", "#salestax", "#creditcardfees", "#monthendclose", "#restaurantaccounting", "#payroll", "#bankreconciliation", "#businesstips"],
       "feature": ["#bookkeepingsoftware", "#accountingsoftware", "#restauranttech", "#restaurantaccounting", "#franchiseaccounting", "#laborcost", "#bankreconciliation", "#monthendclose", "#salestax", "#accountspayable", "#cashflowmanagement", "#payroll", "#profitmargin"]
@@ -139,7 +140,7 @@
     "tiers": {
       "note": "Judged from what each tag describes and who uses it, not measured (see sizes). broad: general owner or industry tags with large, mixed audiences; niche: one role, one trade or one accounting topic; everything else is mid.",
       "broad": ["#smallbusinessowner", "#businessowner", "#smallbusinesstips", "#bookkeeping", "#franchising", "#restaurantindustry", "#restaurantbusiness", "#businesstips", "#payroll"],
-      "niche": ["#multiunitfranchisee", "#franchiselife", "#coffeeshopbusiness", "#coffeeshopowners", "#salonownerlife", "#salonowners", "#restaurateur", "#qsr", "#restaurantaccounting", "#franchiseaccounting", "#primecost", "#laborcost", "#foodcost", "#breakeven", "#menupricing", "#creditcardfees", "#monthendclose", "#bankreconciliation", "#accountspayable", "#smallbusinessbookkeeping", "#bookkeepingsoftware", "#restauranttech"]
+      "niche": ["#multiunitfranchisee", "#franchiselife", "#coffeeshopbusiness", "#coffeeshopowners", "#salonownerlife", "#salonowners", "#restaurateur", "#qsr", "#restaurantaccounting", "#franchiseaccounting", "#primecost", "#laborcost", "#foodcost", "#menupricing", "#creditcardfees", "#monthendclose", "#bankreconciliation", "#accountspayable", "#smallbusinessbookkeeping", "#bookkeepingsoftware", "#restauranttech"]
     },
     "retired": {
       "#RunonRhea": "brand tag with no audience (see brandHashtagRule)",
@@ -152,6 +153,7 @@
       "#overtime": "sports overtime and unrelated brands",
       "#restaurantprofit": "rarely used; #profitmargin and #restaurantaccounting carry the topic",
       "#mythvsfact": "health and fitness myths; a topic tag classifies a myth post better",
+      "#breakeven": "judged, not measured: mostly trading and betting posts (a 'breakeven' trade or bet), not store owners; the break-even post carries #profitmargin and says break-even in its first line, which is what search reads (retired by the integrator, October 20, 2026)",
       "#ownermath": "no audience (retired October 2026)",
       "#restaurantmath": "no audience (retired October 2026)"
     },

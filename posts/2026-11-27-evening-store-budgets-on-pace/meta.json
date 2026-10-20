@@ -5,19 +5,14 @@
   "slug": "store-budgets-on-pace",
   "theme": "sage-wash",
   "headline": "Is each store on pace for its budget?",
-  "recording": {
-    "id": "budgets",
-    "sha1": "44c7244fd1e6d080cd26e2676cd29666413a6802",
-    "frames": 288,
-    "fps": 24
-  },
-  "thumbOffsetMs": 4000,
+  "recording": "budgets",
+  "thumbOffsetMs": 11700,
   "captionFirstLine": "Store sales budgets for multi-unit franchise and coffee shop owners: on pace or off, mid-month.",
   "hashtags": [
     "#profitmargin",
-    "#qsr",
+    "#franchisee",
     "#cafeowner",
-    "#salonbusiness",
+    "#smallbusinessbookkeeping",
     "#smallbusinessowner"
   ],
   "cardHash": "d21af553071459d66cf5eaa7ad47f8891d151815",

@@ -5,20 +5,15 @@
   "slug": "bills-approved",
   "theme": "sage-wash",
   "headline": "Bills approved before they're paid",
-  "recording": {
-    "id": "bills",
-    "sha1": "2bf21eca0a44304f3b05724ca9d4a947ac849283",
-    "frames": 352,
-    "fps": 24
-  },
-  "thumbOffsetMs": 4000,
+  "recording": "bills",
+  "thumbOffsetMs": 5600,
   "captionFirstLine": "Bill approval and accounts payable for multi-store owners: what's due, approved and paid.",
   "hashtags": [
     "#accountspayable",
-    "#franchising",
-    "#restaurantmanagement",
-    "#salonbusiness",
-    "#smallbusinessfinance"
+    "#multiunitfranchisee",
+    "#salonownerlife",
+    "#smallbusinessfinance",
+    "#smallbusinesstips"
   ],
   "cardHash": "9a527ed7c2c5ca4bf85367188d5553855e93008f",
   "durationSec": 17.875,

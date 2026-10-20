@@ -5,19 +5,14 @@
   "slug": "overtime-this-week",
   "theme": "ink",
   "headline": "See who's heading for overtime before Friday",
-  "recording": {
-    "id": "labor-overtime",
-    "sha1": "c97ec3b8747ac2f14f97d4b548bc2dd3882bf9a9",
-    "frames": 345,
-    "fps": 24
-  },
-  "thumbOffsetMs": 4000,
+  "recording": "labor-overtime",
+  "thumbOffsetMs": 5100,
   "captionFirstLine": "Overtime tracking for multi-store restaurant and salon owners: who's near 40 hours this week.",
   "hashtags": [
     "#laborcost",
-    "#coffeebusiness",
+    "#qsr",
     "#salonbusiness",
-    "#businessfinance",
+    "#smallbusinessbookkeeping",
     "#smallbusinesstips"
   ],
   "cardHash": "80578639c07c71a0870dafb126b2244cb8517a72",

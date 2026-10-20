@@ -13,9 +13,9 @@
   "captionFirstLine": "Closing for a holiday: what one closed day costs restaurant, coffee shop and salon owners.",
   "hashtags": [
     "#profitmargin",
-    "#franchisee",
-    "#restaurateur",
-    "#coffeeshopowner",
+    "#franchiseowner",
+    "#restaurantmanagement",
+    "#coffeeshopbusiness",
     "#smallbusinesstips"
   ],
   "cardHash": "eba143295e00051a9097269c74de76ecf3eb9b6c",
@@ -34,6 +34,6 @@
     "overflow": false,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-20T19:23:14.220Z",
+  "renderedAt": "2026-10-20T19:48:54.439Z",
   "chromium": "155.0.8059.85"
 }

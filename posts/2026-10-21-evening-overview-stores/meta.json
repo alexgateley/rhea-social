@@ -5,18 +5,13 @@
   "slug": "overview-stores",
   "theme": "sage-wash",
   "headline": "Every store's labor % on one screen",
-  "recording": {
-    "id": "overview-stores",
-    "sha1": "69312e9d1ca6a22f4ac71494f7b027405105fcfd",
-    "frames": 359,
-    "fps": 24
-  },
-  "thumbOffsetMs": 4000,
+  "recording": "overview-stores",
+  "thumbOffsetMs": 15100,
   "captionFirstLine": "Multi-store dashboard for franchise and restaurant owners: every store's labor % and profit side by side.",
   "hashtags": [
     "#restauranttech",
-    "#coffeebusiness",
-    "#salonbusiness",
+    "#franchisee",
+    "#qsr",
     "#smallbusinessbookkeeping",
     "#businessowner"
   ],

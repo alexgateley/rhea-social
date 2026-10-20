@@ -260,3 +260,9 @@ then the owner's password is made up and never shown, so seed with `npm run seed
 Explicit variables win over `.env.local` (Node's `--env-file` and Next's env loader never override a set variable).
 On a laptop the second sign-in step is optional (`src/server/auth/session.ts`), and the demo viewer is excused from it.
 The viewer is read-only, which is all a recording needs.
+
+**Corrected after recording (October 20, 2026):** the recipe above is incomplete. `npm run build` and
+`next start` also need a throwaway `BETTER_AUTH_SECRET` (32+ characters; the build refuses to prerender without it),
+and the "Look around the demo company" button, with the viewer's exemption from the second sign-in step, exists only
+with `RHEA_ENV=demo`. The recipe that worked is in README.md, "Feature Reels: recording and composing", under
+"Running the app".

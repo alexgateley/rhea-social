@@ -1,40 +1,97 @@
 # Rhea · @RunonRhea
 
-Rendered Instagram Reels for [@RunonRhea](https://www.instagram.com/RunonRhea), served from GitHub
-Pages, and a GitHub Actions job that publishes them. The first run, owner math every weekday at
-7:00 AM Pacific, is `content/2026-10.json`: Friday 2026-10-16, then every weekday from 2026-10-19
-to 2026-11-12.
+Two Instagram Reels a day for [@RunonRhea](https://www.instagram.com/RunonRhea), rendered here, served from
+GitHub Pages and published by a GitHub Actions job at **7:00 AM and 6:00 PM Pacific** (`brand.json` `timezone`,
+`slots`). The first run, owner math every weekday at 7 AM, started on Friday 2026-10-16; from Wednesday
+2026-10-21 both slots post every day.
 
-**October 20, 2026: two Reels a day.** The sections down to "Why posts arrive from a launch agent"
-describe the morning owner-math run as first built and still true for it; everything new (the 6 PM
-slot, tips, myths, feature Reels of the app, memorial days, the Desktop copy, the hashtag rules) is in
-**"Two slots a day"** at the end, and what the posts may say about Rhea is in `FACTS.md`.
+**State on 2026-10-20 (branch `twice-daily`, committed locally, not pushed).** Every post from October 20 to
+November 30 is written, verified and rendered: 83 Reels in `posts/` (43 mornings, 40 evenings), plus Kathy's
+memorial carousel for October 25 in `posts/memorial/2026-10-25/`. October 16, 19 and 20 are posted (markers in
+`published/`; the branch includes main's "Posted 2026-10-20"). Nothing after November 30 is written yet. "Go live"
+below is all that is left to switch it on; "Two slots a day" further down has the design and every decision, and
+`FACTS.md` what a post may say about Rhea.
 
-Each Reel is one piece of **owner math**: a number an owner of a coffee shop, quick-service
-franchise or salon should know (labor %, prime cost, break-even per day, what sales tax and tips
-are not…), with a worked example, the result very large, and one line on what to do about it.
-Every number on a card is arithmetic on the inputs listed with the post; rules of thumb are labeled
-as rules of thumb; no industry statistics are invented. Rhea itself is described only as
-"automated books, labor and per-store profit for multi-store owners" (rheafi.com).
+| Type | When | What the Reel is | Length |
+| --- | --- | --- | --- |
+| owner math | 7 AM, weekdays | a number an owner should know, worked through from its inputs, the result very large | 22.4 to 25.6 s |
+| tip | 7 AM on weekends, and 6 PM | one habit for multi-store owners: 3 to 5 numbered lines, then the action very large | 22.4 to 25.6 s |
+| myth vs fact | 7 AM on weekends, and 6 PM | the myth struck through, the fact very large, 2 to 4 lines on why | 21.3 to 24.5 s |
+| feature | 6 PM | the app moving on the demo company, "Demo company · made-up numbers" on screen the whole time, "Try the demo: demo.rheafi.com" at the end | 15 to 19 s |
+| memorial | 7 AM on 2026-10-25, 2027-04-20, 2027-05-09 | Kathy's carousel, the only post that day (only October 25 has slides so far) | 5 slides |
+
+The 6 PM slot rotates feature, tip, feature, myth, so neighboring days differ; a day's two posts are never the
+same type (`npm run schedule -- --from 2026-10-21 --to 2026-11-30` prints every day). Every Reel and its caption
+is also copied to `~/Desktop/Instagram Reels to edit/@runonrhea/<date>/` for re-posting with Instagram music.
+
+## Go live (founder)
+
+1. **Merge to main.** `git push -u origin twice-daily`, open a pull request and merge it. Merge on October 20 if
+   you can, so October 21 starts on time (October 20 has no evening post). Until the merge, the old job on `main`
+   keeps posting weekday mornings with the first-run captions, as it did on October 20; if it posts October 21
+   first, copy that post's caption and hashtags from `main` into `content/2026-10.json` and its `caption.txt`
+   before merging, so the history matches what went out.
+2. **Wait for Pages.** Actions → "pages build and deployment" turns green (a few minutes; the push carries about
+   80 MB of Reels). Then check that
+   `https://alexgateley.github.io/rhea-social/posts/2026-10-21-sales-per-labor-hour/reel.mp4` and
+   `https://alexgateley.github.io/rhea-social/posts/memorial/2026-10-25/slide-1.jpg` open in a browser.
+3. **Dry run on GitHub.** `gh workflow run "Post @RunonRhea" --repo alexgateley/rhea-social -f dry_run=true`
+   (checks the token and logs what would post, without posting).
+4. **Install both launch agents** (only after step 1: until then GitHub's workflow is still "Post Owner math",
+   which has no `slot` input, and the kicks would fail):
+   ```
+   cp launchd/com.rhea.morning.plist launchd/com.rhea.evening.plist ~/Library/LaunchAgents/
+   launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.rhea.morning.plist
+   launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.rhea.evening.plist
+   ```
+   They kick the workflow at 7:05 and 9:05 AM and at 6:05 and 8:05 PM; the log is
+   `~/Library/Logs/rhea-runonrhea.log`. `KICK_DRY_RUN=true sh scripts/kick-post.sh morning` shows the command
+   without running it.
+5. **Fill the Desktop folder once.** In this folder, `npm run desktop`: it copies the 81 Reels from October 20 to
+   November 30 and their captions into `~/Desktop/Instagram Reels to edit/@runonrhea/<date>/`
+   (`<date> 7AM owner math <slug>.mp4` and `.txt`, `<date> 6PM feature <slug>.mp4` and `.txt`). Every later
+   `npm run render` does it on its own. Delete whatever you don't want; it is never copied back. Keep
+   `@runonrhea/.copied` (deleting it copies everything again). The memorial folder `2026-10-25/` is never touched.
+6. **Optional, five minutes:** in the Instagram app, Search → Tags, look up the niche tags (#multiunitfranchisee,
+   #salonownerlife, #coffeeshopowners, #franchiseaccounting, #restauranttech, #qsr). If one is empty, says recent
+   posts are hidden, or is mostly another industry, delete it from `brand.json` `hashtagPools`, then
+   `npm run hashtags -- --month 2026-11 --redo`, `npm run verify` and `npm run render -- --month 2026-11`
+   (captions only; no video changes).
+
+What happens next: each run posts whatever is due today and not yet posted, each slot once (a marker per date and
+slot). A run at 6 PM that finds the morning Reel still unposted posts both, a few minutes apart. Kathy's carousel
+goes out at 7 AM on October 25 and nothing else posts that day; **if you post it by hand first**, run
+`node scripts/publish.mjs mark --date 2026-10-25 --slot memorial`, then
+`git add published/2026-10-25-memorial.json && git commit -m "Posted 2026-10-25 memorial by hand" && git push`,
+and the job posts nothing that day. December needs drafting before December 1 ("Every month").
 
 ```
-brand.json                         handle, site, the four card themes, time zone, posting hour, caption footer, hashtag sets
-content/2026-10.json               a run of 20 posts (hook, term, formula, inputs, steps, result, takeaway, caption)
-scripts/verify.mjs                 recomputes every step and result from the inputs; exits non-zero on a mismatch
-scripts/contrast.mjs               WCAG contrast of every theme (verify runs it too)
-render/template.html               the 1080×1920 card in one of four themes; all motion is a function of the CSS variable --t (seconds)
-render/render.mjs                  Chromium frames at 24 fps → ffmpeg → posts/<date>-<slug>/
-render/relink.mjs                  re-dates rendered folders when the schedule moves (no re-render needed)
-posts/<date>-<slug>/reel.mp4       the Reel (H.264, silent AAC track, 22–26 s)
-posts/<date>-<slug>/cover.jpg      the frame at thumbOffsetMs, where the big number is fully shown
-posts/<date>-<slug>/caption.txt    caption lines + brand footer + hashtags
-posts/<date>-<slug>/meta.json      thumbOffsetMs, duration, frames, layout report
-posts/index.json                   date → folder
-published/<date>.json              written by the job after posting (prevents double posts)
-scripts/publish.mjs                the publisher (post, refresh, check)
-.github/workflows/post.yml         the daily job
-scripts/setup-secrets.sh           stores the Instagram credentials as repo secrets
-scripts/kick-post.sh, launchd/     the Mac launch agents (7 AM and 6 PM) that kick the job on time
+brand.json                          handle, themes, slots (7 AM, 6 PM), rotation, memorial dates, caption footers, hashtag rules and pools, pinned pricing
+FACTS.md                            what a post may say about Rhea today, each claim with the file that proves it
+content/YYYY-MM.json                every post of a month, both slots, in (date, slot) order (2026-10.json also runs to Nov 12)
+content/recordings.json             what each feature recording shows, its evidence and which posts use it
+scripts/verify.mjs                  checks every post: schedule, arithmetic, figures, words, claims, captions, hashtags, themes
+scripts/compute.mjs                 the formula behind every owner-math card (and any figure a tip or myth quotes)
+scripts/schedule.mjs                the rotation in code: which type each slot carries on any date
+scripts/hashtags.mjs                completes each post's five hashtags under brand.json's rules
+scripts/contrast.mjs                WCAG contrast of every theme (verify runs it too)
+render/template.html                the 1080×1920 card for all four types in four themes; all motion is a function of --t (seconds)
+render/render.mjs                   Chromium frames at 24 fps → ffmpeg → posts/<folder>/; then indexes, contact sheet, Desktop copy
+render/record-feature.mjs           records a feature from the local app on demo data into render/features/<id>/
+render/features/<id>.json, <id>/    the scenes and the committed recording.mp4 + frames.json of each feature
+render/probe.mjs                    checks every Reel against the specs of the Reels Instagram already accepted
+render/contact-sheet.mjs            every cover of a month on one page (render/tmp/, not committed)
+posts/<date>-<slug>/                a morning Reel: reel.mp4, cover.jpg, caption.txt, meta.json
+posts/<date>-evening-<slug>/        an evening Reel, the same four files
+posts/index.json, index-evening.json   date → folder, one per slot (what the publisher reads)
+posts/memorial/<date>/              a memorial carousel: slide-N.jpg and caption.txt, copied unchanged from memorial/<date>/
+published/<date>.json, <date>-evening.json, <date>-memorial.json   written by the job after posting (nothing posts twice)
+scripts/publish.mjs, scripts/lib/publisher.mjs   the publisher (post, mark, refresh, check)
+.github/workflows/post.yml          the job, "Post @RunonRhea"
+scripts/kick-post.sh, launchd/      the Mac launch agents (7 AM and 6 PM) that kick the job on time
+scripts/desktop-copy.mjs            copies each new Reel and caption to the Desktop folder, once
+scripts/prune.mjs                   removes media of posts posted more than 30 days ago from the Pages site
+scripts/setup-secrets.sh            stores the Instagram credentials as repo secrets
 ```
 
 ## How it mirrors icubasics-social
@@ -85,7 +142,7 @@ before anything renders or posts.
 6. **Test, then post:** Actions → "Post @RunonRhea" → Run workflow with `dry_run` checked (it
    checks the token and logs what would be posted). A run with a `date` (and a `slot`) and `dry_run`
    off posts that day right away, whatever the time of day. From the command line:
-   `gh workflow run "Post @RunonRhea" --repo alexgateley/rhea-social -f date=2026-10-20 -f slot=morning -f dry_run=false`.
+   `gh workflow run "Post @RunonRhea" --repo alexgateley/rhea-social -f date=2026-10-21 -f slot=morning -f dry_run=false` (a slot that already has a marker is never posted again).
    (The first Reel, 2026-10-16, went out this way under the workflow's first name, "Post Owner
    math".) The rest post themselves.
 7. **Launch agents (recommended):** after the workflow with the `slot` input is on `main`,
@@ -101,28 +158,32 @@ font files) and a Chromium that Playwright can find: `npx playwright install chr
 
 ## Every month
 
-1. Draft `content/YYYY-MM.json`, named for the month its first post falls in: one post per weekday,
-   in date order (the run may continue into the next month, as the first one does). Copy the shape
-   of `content/2026-10.json`: a `theme` (see below), hook of at most 9 words, a term, the formula
-   in plain words, the inputs with units, 3 to 5 worked steps, the result, a takeaway of at most
-   18 words, the caption and hashtags (see "Captions and hashtags"). `thumbOffsetMs` is 12500 for
-   3 steps, 14100 for 4, 15700 for 5 (`render/timing.mjs`). A new topic needs its formula added to
-   `COMPUTE` in `scripts/compute.mjs` (formerly in `scripts/verify.mjs`). Since October 20, 2026 the
-   month holds both slots and four types: see "Drafting a month" under "Hashtags and discovery".
-2. `npm run verify` – recomputes every step, result and quoted figure; fix anything it lists.
-3. `npm run render -- --month YYYY-MM` – renders every post (about a minute each; add
-   `--only <slug>` for one). It refuses content that does not verify and stops if a card would
-   overflow the frame.
-4. Review `posts/<date>-<slug>/cover.jpg` and a few `reel.mp4`s.
-5. Commit and push. The job picks each day up on its date.
+Two slots a day means about 60 posts a month. The content runs to November 30, 2026; draft December before
+December 1.
 
-If the dates move after rendering (a run starts earlier, a day is skipped), change them in the
-content file and run `npm run relink -- --month YYYY-MM`: the cards show no date, so the folders are
-renamed and `posts/index.json` rebuilt without re-rendering.
+1. `npm run schedule -- --from 2026-12-01 --to 2026-12-31`: the type every slot carries (owner math on weekday
+   mornings; the evening cycle feature, tip, feature, myth; a tip or a myth on weekend mornings; nothing on a
+   memorial date).
+2. Write `content/2026-12.json` in `(date, slot)` order, with the shape of `content/2026-11.json`: for each post a
+   `keyword` (the phrase owners search), `audiences`, a first caption line that leads with the keyword and names
+   who it is for, and only the topic tag in `hashtags`. A new owner-math topic gets its formula in
+   `scripts/compute.mjs`. A feature names a recording in `content/recordings.json`; the same recording returns
+   only 14 or more days later with a new headline. Every claim about Rhea needs evidence that `FACTS.md` lists
+   (re-check `FACTS.md` against the app first: the product changes fast). Schemas: "Content files and schemas".
+3. `npm run hashtags -- --month 2026-12` completes the five tags on each post.
+4. `RHEA_REPO=/Users/alex/Desktop/rhea npm run verify` (also checks every claim's file exists in the app repo).
+5. A new feature recording: start the app locally as "Feature Reels: recording and composing" says, then
+   `npm run record -- --id <id>`; stop the app and delete `.data/e2e-social` afterwards.
+6. `npm run render -- --month 2026-12` renders what is new or changed (about 40 s a card, `--jobs 2` for two at
+   once), rewrites captions, rebuilds both indexes, draws `render/tmp/contact-sheet-2026-12.jpg` and copies the
+   new Reels to the Desktop folder. It refuses content that does not verify and never touches a posted Reel.
+7. Look at the contact sheet and a few Reels; `npm run probe`; `npm test`.
+8. Commit and push. Pages serves the files; the job posts each slot on its date.
 
-A post with a marker in `published/` has already gone out: `render` and `relink` leave its folder,
-caption and video exactly as they were (`--force` overrides for `render`). The first Reel,
-2026-10-16, was posted before themes and the new captions existed and stays as published.
+If the dates move after rendering, change them in the content file and run `npm run relink -- --month YYYY-MM`:
+the cards show no date, so folders are renamed and the indexes rebuilt without re-rendering. A post with a
+marker in `published/` has gone out: `render` and `relink` leave its folder, caption and video exactly as they
+are, whatever the flags.
 
 ## Themes
 
@@ -177,14 +238,16 @@ footer, then the hashtags:
 
 ## Commands
 
-Current as of October 20, 2026 (two slots a day); the builders' new commands are also listed under
-"Commands added" below.
+Current as of October 20, 2026 (two slots a day).
 
 | Command | What it does |
 | --- | --- |
 | `npm run verify` | check every `content/*.json` (`-- --month 2026-10` for one), and the themes' contrast |
 | `node scripts/contrast.mjs` | print every theme's contrast ratios |
 | `npm run schedule -- --from 2026-10-21 --to 2026-11-30` | print the slot and type every day should carry |
+| `npm run hashtags -- --month 2026-12` | complete each post's five hashtags (`--redo` re-picks the month's unposted posts, `--dry-run` prints) |
+| `npm run render -- --month 2026-11 --check` | fit every card to the frame without rendering |
+| `npm run probe` | check every Reel in `posts/` against the specs of the Reels Instagram accepted |
 | `npm run render -- --month 2026-11` | render what is new or changed, rewrite captions, rebuild both indexes, then copy new Reels to the Desktop (`--slot`, `--type`, `--only <slug>`, `--no-desktop`, `--no-verify`, `--force`) |
 | `npm run relink -- --month 2026-10` | re-date rendered folders and rebuild the indexes after a schedule change |
 | `npm run record -- --id overview-stores` | record one feature from the local app into `render/features/<id>/` |
@@ -195,7 +258,7 @@ Current as of October 20, 2026 (two slots a day); the builders' new commands are
 | `POST_DATE=2026-10-25 npm run publish:dry` | the memorial carousel: its five slide URLs and the full caption |
 | `node scripts/publish.mjs mark --date 2026-10-25 --slot memorial` | record a post put up by hand (`--slot morning`, `evening` or `memorial`, optional `--note "..."`; also `npm run mark -- ...`), then commit and push the marker |
 | `npm run prune -- --days 30 --dry-run` | list (or, without `--dry-run`, remove) `reel.mp4` and `cover.jpg` of posts posted more than 30 days ago |
-| `npm test` | the publisher, memorial, prune, Desktop-copy and workflow tests (fake fetch, temporary folders; no network) |
+| `npm test` | every test: content, schedule, hashtags, renderer, publisher, memorial, prune, Desktop copy, workflow (fake fetch, temporary folders; no network; set `CHROME_PATH` and `FFMPEG` to run the render checks too) |
 | `npm run check` | verify the token, account and publishing quota (needs `IG_USER_ID`, `IG_ACCESS_TOKEN`) |
 | `node scripts/publish.mjs refresh` | refresh the long-lived token into `new-token.txt` |
 | `gh workflow run "Post @RunonRhea" -f dry_run=true` | run the job from the command line, logging only |
@@ -212,9 +275,11 @@ Current as of October 20, 2026 (two slots a day); the builders' new commands are
   one, delete its marker (`published/<date>.json`, `<date>-evening.json`) and run the workflow with
   that date and slot. To post early or on demand, run the workflow with that `date` and `slot` (or
   `POST_DATE=... SLOT=... node scripts/publish.mjs`).
-- A Reel plays 22.4 s (3 steps), 24.0 s (4) or 25.6 s (5): hook 0–3 s, term and formula 3–7 s,
-  one step every 1.6 s, the result holds 4.2 s, the takeaway 4.2 s, the end card 2.2 s. The cover
-  frame is taken 0.7 s after the result lands.
+- An owner-math or tip Reel plays 22.4 s (3 steps or lines), 24.0 s (4) or 25.6 s (5): hook 0–3 s, term and
+  formula (or the tip's title) 3–7 s, one step every 1.6 s, the result (or action) holds 4.2 s, the takeaway
+  4.2 s, the end card 2.2 s; the cover is 0.7 s after the result lands. A myth plays 21.3, 22.9 or 24.5 s
+  (2, 3 or 4 lines), cover at 4.2 s (the fact under the struck-through myth). A feature plays its recording's
+  length plus 3.2 s, cover inside one of the recording's holds.
 
 ## Why posts arrive from a launch agent on Alex's Mac
 
@@ -298,7 +363,7 @@ the content files; `npm run schedule -- --from 2026-10-21 --to 2026-11-30` print
 | 2026-11-16 | Mon | owner math: discount-rate | tip T11 |
 | 2026-11-17 | Tue | owner math: delivery-commission | feature: year-end (new) |
 | 2026-11-18 | Wed | owner math: minimum-crew | myth M10 |
-| 2026-11-19 | Thu | owner math: fees-on-tax-and-tips | feature: connections-import (new) |
+| 2026-11-19 | Thu | owner math: fees-on-tax-and-tips | feature: balance-sheet (new; it replaced connections-import, which could not be recorded honestly) |
 | 2026-11-20 | Fri | owner math: wage-increase-price | tip T12 |
 | 2026-11-21 | Sat | myth M11 | feature: labor-payroll (new) |
 | 2026-11-22 | Sun | tip T13 | myth M12 |
@@ -313,8 +378,9 @@ the content files; `npm run schedule -- --from 2026-10-21 --to 2026-11-30` print
 
 Written (builder A): 12 new owner-math posts, 16 tips, 15 myths and 20 feature posts on **18 distinct
 recordings** (the plan's ten, then statements and reconciliation, bills and approvals, the year-end package,
-POS connections and the file drop, labor and payroll as paid, sales tax, the guided demo with the trial, and
-budgets; overview-stores and month-close return for a second pass with new headlines). Beyond November the same
+the balance sheet, labor and payroll as paid, sales tax, the guided demo with the trial, and budgets;
+overview-stores and month-close return for a second pass with new headlines). *Integration:* the balance sheet
+took POS connections and the file drop's place on November 19 (below). Beyond November the same
 rule continues; `npm run schedule -- --from 2026-12-01 --to 2026-12-31` prints the month to draft.
 
 `content/recordings.json` lists every recording: the screens and steps, the evidence its posts cite, which posts
@@ -380,9 +446,11 @@ Captions: first line (the search sentence), then 2–4 short lines, then the foo
 
 ### Captions only: the existing owner-math posts
 
-The 18 unpublished owner-math posts (October 20, which has not gone out yet, to November 12) have new first
-lines, keywords, audiences and hashtag sets in `content/2026-10.json`; their cards and videos are unchanged (one
-caption line changed too: the gift-card post now says "you owe gift card holders", not "customers").
+The 17 unpublished owner-math posts (October 21 to November 12) have new first lines, keywords, audiences and
+hashtag sets in `content/2026-10.json`; their cards and videos are unchanged (one caption line changed too: the
+gift-card post now says "you owe gift card holders", not "customers"). *Integration:* October 20 went out from
+`main` at 11:24 AM Pacific with its first-run caption (the live job, "Posted 2026-10-20"), so its content entry,
+`caption.txt` and `meta.json` are back to exactly what was posted and it counts as history.
 `npm run relink -- --month 2026-10` rewrote their `caption.txt` and `meta.json` caption fields; `render` does the
 same whenever only caption fields change. Posts with a marker (October 16 and 19) keep caption, hashtags and
 files exactly as published.
@@ -515,7 +583,10 @@ The recordings (`render/features/`, made October 20, 2026 on the demo seed; `fra
 
 Not recorded: `connections-import`. On the local app, Connections shows developer setup steps (environment
 variable names, "Connect with Shopify cannot start") and Import names Claude, so neither screen can go in a post
-as it is; `balance-sheet` is recorded as a replacement.
+as it is; `balance-sheet` is recorded as a replacement, and the integrator gave it the November 19 evening post
+(`balance-sheet-per-llc`: new headline, caption and claims from `src/core/reports/balance-sheet.ts` and
+`src/server/opening-balances.ts`). `content/recordings.json` keeps the connections-import shot list, used by no
+post, for when those screens read as the demo does.
 
 ### Renderer: what changed from the plan, and why
 
@@ -530,8 +601,9 @@ as it is; `balance-sheet` is recorded as a replacement.
 - **A first-run folder whose card no longer matches the content keeps its video** unless `--force`, so a theme or
   hook edit to the 18 rendered posts can't silently re-render them.
 - **The owner-math end card's line now comes from `brand.endCardLines`** like every type's. The 18 first-run Reels
-  keep "Owner math, every weekday" (adopted, not re-rendered); new owner-math Reels show whatever
-  `endCardLines["owner-math"]` says.
+  keep "Owner math, every weekday" (adopted, not re-rendered); *integration:* `endCardLines["owner-math"]` is
+  "Owner math, every weekday" again (it had become "…every weekday at 7"), and the 12 November owner-math Reels
+  were re-rendered with `--force`, so every owner-math Reel ends the same way.
 - **Two contrast pairs added** (`scripts/contrast.mjs`): the FACT pill and the demo note draw the background color
   on a filled pill; both pass in all four themes (5.74:1 lowest).
 
@@ -727,18 +799,31 @@ whether the source is Instagram's own words or someone reporting them.
   post to five" because "using fewer (up to 5) more targeted hashtags, rather than many generic ones" can improve
   performance ([Social Media Today, December 18, 2025](https://www.socialmediatoday.com/news/instagram-implements-new-limits-on-hashtag-use/808309/);
   also [BetaNews, December 19, 2025](https://betanews.com/2025/12/19/instagram-puts-a-limit-on-hashtag-usage/)).
-  Instagram's Help Center now reads "You can use up to 5 tags on a post" (as quoted by Storycut; the page,
-  help.instagram.com/351460621611097, would not render here). An earlier test in November 2025 capped some
-  accounts at three; the announced and current limit is five. Meta's developer reference for the caption field
-  reportedly still says 30 (secondary); we follow Instagram's five. **Rule: exactly five, every regular post.**
+  Instagram's Help Center now reads "You can use up to 5 tags on a post" (as quoted by Storycut and by
+  [Inro, checked August 2026](https://www.inro.social/tools/instagram-hashtag-generator); the page,
+  help.instagram.com/351460621611097, would not render here, again on October 20). An earlier test in November
+  2025 capped some accounts at three; the announced and current limit is five. Meta's developer reference for the
+  caption field still says "30 hashtags" (Inro read it in August 2026); that page is out of date, and we follow
+  Instagram's five. **Rule: exactly five, every regular post.** (Re-checked by the integrator on October 20, 2026
+  with two more searches: every current source says five.)
 - **In the caption, not a comment.** Instagram's search guidance, as quoted by Storycut and by several SEO guides:
   "For a post to be found in Search, put keywords and hashtags in the caption, not the comments." Whether
-  first-comment tags count toward the five is unconfirmed either way. **Rule: the five are the caption's last
-  line** (the API posts a caption; C's publisher also cuts anything past five as a safety net).
+  first-comment tags count toward the five: the Help Center, as Inro quotes it, says "If you include more than 5
+  tags on a single photo/video, your comment won't post", so a comment adds no room (secondary; the page itself
+  would not load). **Rule: the five are the caption's last line** (the API posts a caption; C's publisher also
+  cuts anything past five as a safety net).
+- **Nobody follows hashtags any more.** Instagram removed following hashtags in December 2024: "We're removing the
+  ability to follow a hashtag on Instagram. You will still be able to use hashtags in your posts and search with a
+  hashtag to discover related posts" (Instagram, quoted by
+  [Social Media Today, November 17, 2024](https://www.socialmediatoday.com/news/instagrams-removing-option-follow-hashtags/);
+  it took effect December 13, 2024, per [Inro](https://www.inro.social/blog/instagram-removes-option-follow-hashtags)).
+  So a tag reaches people two ways only: when they search or tap it, and when Instagram uses it to tell what the
+  post is about. That is why the tags are the words owners would search, why they must agree with the caption's
+  first line (below), and why a brand tag nobody searches is a wasted slot.
 - **Hashtags classify; they don't buy reach.** Adam Mosseri: hashtags "don't improve visibility on Instagram" but
   are "a great way to let people know what a post is about and connect posts" (May 2025, quoted by
   [Social Media Today](https://www.socialmediatoday.com/news/instagram-implements-new-limits-on-hashtag-use/808309/)).
-  So a tag earns its slot only if the right people follow or search it and it truly describes the post.
+  So a tag earns its slot only if the right people search it and it truly describes the post.
 - **Captions are what search reads.** Instagram, August 2026: "Captions add relevant context, spark conversation,
   and tell search engines what your content is about"; use "descriptive and relevant keywords"; only the first two
   lines show before "more" ([Social Media Today, August 23, 2026](https://socialmediatoday.com/news/instagram-stresses-the-importance-of-captions/828554/)).
@@ -768,7 +853,7 @@ whether the source is Instagram's own words or someone reporting them.
 **What the posts do about it (`brand.json` `hashtagRules`, `hashtagPools`; enforced by `verify`, picked by
 `scripts/hashtags.mjs`)**
 
-- **No `#RunonRhea` in the five** (a change from the plan). A brand tag nobody follows reaches nobody; the handle
+- **No `#RunonRhea` in the five** (a change from the plan). A brand tag nobody searches reaches nobody; the handle
   and the caption footer carry the brand, and the founder's other accounts use no brand tag either. All five
   slots go to tags owners follow and search.
 - **The five:** at least one **topic** tag the writer picks for what the post is about (the picker never adds
@@ -776,15 +861,28 @@ whether the source is Instagram's own words or someone reporting them.
   the post is true for** (`audiences`: no salon tag on food cost, prime cost, delivery or comps; no franchise-only
   claims for independents); at least one **bookkeeping or broad-owner** tag; and the mix holds **at least one
   broad and one niche** tag. The fifth slot goes to a third industry or a second bookkeeping/broad tag.
+- **Industry tags follow the first line** (integration, `hashtagRules.industryFromFirstLine`, `industryRule` in
+  `scripts/hashtags.mjs`, enforced by `verify`): when the caption's first line names industries (franchise or
+  multi-unit, restaurant or quick-service, coffee shop or cafe, salon), the industry tags cover two of them (or
+  the one it names), and every industry tag is one it names or a franchise tag (the account's core audience). So
+  the words search reads and the tags tell Instagram the same audience. Before this, 22 of the unpublished posts
+  named one audience in the first line and tagged another (or missed the one named), among them the first feature Reel (the 15 bagel stores, "for franchise and restaurant
+  owners", tagged #coffeebusiness #salonbusiness; now #franchisee #qsr).
+- **Never a tag and its plural in one set** (#restaurantowner with #restaurantowners): they reach the same people,
+  so one of the five would be wasted (`pluralPair`, enforced by `verify`; the picker produced one such pair while
+  re-picking under the first-line rule).
 - **Rotation:** no identical set within 14 days; consecutive posts share at most two tags; every industry group
-  and the bookkeeping group appear every Monday-to-Sunday week. Over October 20 to November 30 the 81 unpublished
-  posts use all 50 pool tags, none more than 14 times.
+  and the bookkeeping group appear every Monday-to-Sunday week. Over October 21 to November 30 the 80 unpublished
+  posts use all 49 pool tags, none more than 15 times (the broad and bookkeeping tags most, #bookkeeping 15,
+  #businessowner 14; the narrowest topic tags least).
 - **Never:** a tag outside the pools (so nothing made up or misspelled), the denylist (vendor and competitor
   brand tags such as #quickbooks, #toast, #square, #gusto, #restaurant365; the banned product word; generic or
   engagement-bait tags such as #smallbusiness, #entrepreneur, #followforfollow), or a retired tag (each with its
   reason in `hashtagPools.retired`: #multiunit is mostly apartment buildings, #cashflow mostly real-estate
   investing, #giftcards consumer promos, #overtime sports, #foodbusiness home bakers, #beautybusiness solo
-  pros…). Memorial posts carry none.
+  pros, and, retired at integration, #breakeven, mostly trading and betting posts, judged, not measured; the
+  break-even post carries #profitmargin and says "break-even" in its first line, which is what search reads).
+  Memorial posts carry none.
 - **The first caption line is the search sentence:** the phrase owners type (`keyword`, within the first 60
   characters, because a Reel's caption shows about one line before "more"), then who it is for, under 125
   characters; the card's hook and term say the topic in words too.
@@ -802,7 +900,7 @@ whether the source is Instagram's own words or someone reporting them.
 | salon | #salonowner, *#salonowners*, #salonbusiness, *#salonownerlife* |
 | bookkeeping | *#smallbusinessbookkeeping*, **#bookkeeping**, #bookkeepingtips, #smallbusinessfinance, #businessfinance, #accountingtips |
 | broad owner | **#smallbusinessowner**, **#businessowner**, **#smallbusinesstips** |
-| topic: owner math | *#laborcost*, *#primecost*, *#foodcost*, #profitmargin, *#breakeven*, #salestax, *#creditcardfees*, #cashflowmanagement, **#payroll**, *#menupricing*, *#restaurantaccounting* |
+| topic: owner math | *#laborcost*, *#primecost*, *#foodcost*, #profitmargin, #salestax, *#creditcardfees*, #cashflowmanagement, **#payroll**, *#menupricing*, *#restaurantaccounting* |
 | topic: tip | **#businesstips**, *#monthendclose*, *#bankreconciliation*, *#accountspayable*, *#laborcost*, *#foodcost*, *#primecost*, #salestax, *#creditcardfees*, #cashflowmanagement, *#restaurantaccounting*, #profitmargin, **#payroll** |
 | topic: myth | #profitmargin, #cashflowmanagement, *#laborcost*, *#foodcost*, *#primecost*, #salestax, *#creditcardfees*, *#monthendclose*, *#restaurantaccounting*, **#payroll**, *#bankreconciliation*, **#businesstips** |
 | topic: feature | *#bookkeepingsoftware*, #accountingsoftware, *#restauranttech*, *#restaurantaccounting*, #franchiseaccounting, *#laborcost*, *#bankreconciliation*, *#monthendclose*, #salestax, *#accountspayable*, #cashflowmanagement, **#payroll**, #profitmargin |
@@ -818,8 +916,9 @@ says recent posts are hidden, or is mostly spam or another industry; then `npm r
 and on screen. Reels' encoding specifications were not on the page; the current ffmpeg settings are kept because
 the two published Reels prove them.
 
-Unverified and left as is: whether first-comment hashtags count toward five; the exact weights of sends, watch
-time and likes; whether on-screen text or speech is read for in-app search; any tag's current size.
+Unverified and left as is: the exact weights of sends, watch time and likes (2026 coverage repeats watch time,
+sends per reach and likes per reach, e.g. [eclincher](https://www.eclincher.com/articles/how-the-instagram-algorithm-works-in-2026),
+without a primary source); whether on-screen text or speech is read for in-app search; any tag's current size.
 
 ### Drafting a month (content, builder A's tools)
 
@@ -869,28 +968,48 @@ Contracts between them, fixed here: `meta.json` fields `slot`, `type`, `cardHash
 and the two indexes; marker names; `brand.json` keys as written; the recording id as the only link between a
 feature post and B's files; `DESKTOP_REELS_DIR` and `FEATURE_*` environment names.
 
-Integration (after all three): `npm run verify`; `npm run render -- --month 2026-10 --no-desktop` and
-`-- --month 2026-11 --no-desktop` (about a minute a card, so an hour or two in all); review covers and the
-contact sheets; `npm test`; `POST_DATE=2026-10-21 SLOT=evening npm run publish:dry`,
-`POST_DATE=2026-10-25 npm run publish:dry` (the carousel, dry) and `POST_DATE=2026-10-26 npm run publish:dry`;
-`DESKTOP_REELS_DIR=/tmp/<folder> npm run desktop` and look at the names; commit. The founder then pushes,
-installs the two launch agents, runs `npm run desktop` once for the real folder, and may post today's missed
-morning Reel with `gh workflow run "Post @RunonRhea" -f date=2026-10-20 -f slot=morning -f dry_run=false`.
+Integration (after all three), done on October 20, 2026 by the integrator:
+
+- **Wired and checked:** `npm run verify` passes (also with `RHEA_REPO`, so every claim's file exists in the app
+  repo); `npm test` passes 93 of 93 with `CHROME_PATH` and `FFMPEG` set (nothing skipped); `npm run probe`: all 83
+  Reels match the specs of the Reels Instagram accepted (H.264 High 4.1, 1080×1920, yuv420p, 24 fps, AAC-LC
+  48 kHz stereo, fast start). The 20 first-run Reels and covers are byte-identical to `main`; October 16, 19 and 20
+  keep their published captions.
+- **Main's "Posted 2026-10-20" merged in:** the live job posted October 20 from `main` at 11:24 AM Pacific with the
+  first-run caption, so that post is history here too (see "Captions only").
+- **Memorial copies:** the founder updated slides 4 and 5 and the caption in `memorial/2026-10-25/` at 12:11–12:13;
+  `posts/memorial/2026-10-25/` holds byte-identical copies of the new files and `posts/memorial/index.json` their
+  checksums (`memorial/` itself untouched). The dry run shows the five slides and the new caption.
+- **November 19, 6 PM:** `balance-sheet-per-llc` on the balance-sheet recording (connections-import could not be
+  recorded honestly); rendered.
+- **November 21, 6 PM** (`labor-then-payroll`): the payroll page's own small print says "Using Gusto? Connect it on
+  Connections" while Connect with Gusto is off, so the caption now says "Connect with Gusto is built but switched
+  off for now; the summary file works with any provider" (claim: `docs/gusto-setup.md`).
+- **Covers:** every feature Reel's cover moved into a still moment of its recording (builder B's list from
+  `frames.json`; only `cover.jpg` changed).
+- **End card:** owner math says "Owner math, every weekday" on every Reel (12 November Reels re-rendered).
+- **Hashtags:** the first-line rule, the plural rule and #breakeven retired ("Hashtags and discovery"); all 80
+  unposted posts re-picked; captions rewritten, no video changed.
+- **Looked at:** frames of tips, myths, new owner math and feature Reels at hook, cover, takeaway and end card, and
+  both contact sheets: nothing cut off, the demo note on screen for a feature's whole length, the end cards right.
+- **Dry runs** (`POST_DATE=... SLOT=... npm run publish:dry`): 2026-10-20 morning, 10-21, 10-24 (Saturday),
+  10-26, 11-01 (Sunday, the day daylight saving ends), 11-02, 11-19 evening and 11-30 each name the right folder,
+  cover and caption with five hashtags; 2026-10-25 shows the five slides and the caption, and its evening slot
+  posts nothing; 2027-04-20 logs "no memorial post prepared; nothing posts today". The morning index still maps
+  October 16 to November 12 to exactly the folders `main` has. A clock simulation against a temporary copy with a
+  fake API showed the crons across the change of time: on November 1 (PST) the 14:07 UTC run (6:07 AM) posts
+  nothing and the 15:07 UTC run (7:07 AM) posts the morning; 01:07 UTC (5:07 PM) nothing, 02:07 UTC (6:07 PM) the
+  evening; on October 25 the 7 AM run posts the carousel once and the 6 PM run nothing.
+- **Desktop copy** against a temporary folder only: 162 files (81 Reels and their captions) in 41 day folders
+  named `<date> 7AM owner math <slug>.mp4` / `<date> 6PM feature <slug>.mp4` and `.txt`; a second run added
+  nothing; a deleted video and a deleted day folder were not recreated; a stand-in `2026-10-25/` folder and the
+  shared `.copied` one level up were left exactly as they were. The real Desktop folder was not written to.
+- **The app** was not started: every recording was already made (builder B), and none needed redoing.
+  `/Users/alex/Desktop/rhea/.data/e2e-social` does not exist and nothing listens on port 3600.
 
 ## Commands added
 
-| Command | What it does |
-| --- | --- |
-| `npm run schedule -- --from 2026-10-21 --to 2026-11-30` | print the slot and type every day should carry |
-| `npm run render -- --month 2026-11 [--slot evening] [--type tip] [--only <slug>] [--no-desktop] [--no-verify] [--force]` | render what is new or changed; rewrite captions; rebuild both indexes; copy to the Desktop |
-| `npm run record -- --id overview-stores` | record one feature from the local app into `render/features/<id>/` |
-| `npm run contact-sheet -- --month 2026-11` | every cover of the month on one page in `render/tmp/` |
-| `npm run desktop` | copy new Reels and captions to the Desktop folder (`DESKTOP_REELS_DIR` overrides it) |
-| `npm run prune -- --days 30 [--dry-run]` | remove media of posts posted more than 30 days ago |
-| `SLOT=evening npm run publish:dry`, `POST_DATE=... SLOT=... npm run publish:dry` | what the publisher would post |
-| `node scripts/publish.mjs mark --date 2026-10-25 --slot memorial` | record a post the founder put up by hand |
-| `npm test` | the publisher, memorial, prune, Desktop-copy and workflow tests (fake fetch, temporary folders) |
-| `gh workflow run "Post @RunonRhea" -f date=2026-10-21 -f slot=evening -f dry_run=false` | post one day and slot now |
+Merged into "Commands" near the top.
 
 ## Decisions and why
 
@@ -940,3 +1059,9 @@ morning Reel with `gh workflow run "Post @RunonRhea" -f date=2026-10-20 -f slot=
   deleted file stays deleted.
 - **Workflow renamed "Post @RunonRhea":** "Post Owner math" would misdescribe tips and features; the name
   appears only in this repo (kick-post.sh and the docs).
+- **Integration decisions (October 20, 2026):** industry hashtags follow the caption's first line, because with
+  hashtag following gone a tag only helps when it says what the words say; a tag and its plural never share a
+  set; #breakeven retired as misleading for this audience; the posted October 20 Reel restored to what went out;
+  the memorial copies follow the founder's updated files byte for byte; November 19 moved to the balance sheet and
+  November 21's caption says plainly that Connect with Gusto is off; the app was not started because no recording
+  needed redoing.

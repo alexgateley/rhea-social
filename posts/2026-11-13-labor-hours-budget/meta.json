@@ -13,10 +13,10 @@
   "captionFirstLine": "Labor scheduling for restaurant, coffee shop and salon owners: turn a labor % target into hours.",
   "hashtags": [
     "#laborcost",
-    "#restaurantbusiness",
-    "#coffeeshopbusiness",
-    "#bookkeepingtips",
-    "#accountingtips"
+    "#franchisebusiness",
+    "#restaurantowner",
+    "#coffeebusiness",
+    "#businessowner"
   ],
   "cardHash": "80e871818733751d5f5a899ca6fc8edbfe702d49",
   "durationSec": 22.417,
@@ -34,6 +34,6 @@
     "overflow": false,
     "hookLines": 3
   },
-  "renderedAt": "2026-10-20T19:14:49.087Z",
+  "renderedAt": "2026-10-20T19:46:20.331Z",
   "chromium": "155.0.8059.85"
 }

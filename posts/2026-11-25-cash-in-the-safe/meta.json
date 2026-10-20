@@ -13,10 +13,10 @@
   "captionFirstLine": "Cash handling for restaurant, coffee shop and salon owners: how much cash waits in the safe.",
   "hashtags": [
     "#cashflowmanagement",
-    "#franchiseowner",
-    "#restaurantowners",
-    "#salonowners",
-    "#businessowner"
+    "#franchising",
+    "#restaurateur",
+    "#coffeebusiness",
+    "#accountingtips"
   ],
   "cardHash": "329db91c1c4a1e7e2dcc4a3438fa84cda8a9a65d",
   "durationSec": 22.417,
@@ -34,6 +34,6 @@
     "overflow": false,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-20T19:22:33.761Z",
+  "renderedAt": "2026-10-20T19:48:54.518Z",
   "chromium": "155.0.8059.85"
 }

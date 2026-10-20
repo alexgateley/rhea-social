@@ -1,0 +1,61 @@
+{
+  "id": "your-numbers",
+  "title": "Your numbers: labor, prime cost and tickets by store, with the change",
+  "fps": 24,
+  "frames": 376,
+  "durationSec": 15.667,
+  "width": 860,
+  "height": 1864,
+  "viewport": {
+    "width": 430,
+    "height": 932,
+    "deviceScaleFactor": 2
+  },
+  "signIn": "viewer",
+  "scenes": [
+    {
+      "path": "/numbers?view=labor",
+      "note": "Labor view: tiles with the period before and the change, the chart, the by-store table",
+      "startFrame": 0,
+      "endFrame": 170,
+      "startSec": 0,
+      "endSec": 7.083,
+      "reelSec": [
+        1,
+        8.083
+      ]
+    },
+    {
+      "path": "/numbers?view=tickets",
+      "note": "Prime cost view",
+      "startFrame": 170,
+      "endFrame": 328,
+      "startSec": 7.083,
+      "endSec": 13.667,
+      "reelSec": [
+        8.083,
+        14.667
+      ]
+    },
+    {
+      "path": "/numbers?view=tickets",
+      "note": "Tickets view",
+      "startFrame": 328,
+      "endFrame": 376,
+      "startSec": 13.667,
+      "endSec": 15.667,
+      "reelSec": [
+        14.667,
+        16.667
+      ]
+    }
+  ],
+  "note": "Reel time = recording time + 1.0 s (render/timing.mjs RECORDING_AT). Pick a feature post's thumbOffsetMs inside a scene's reelSec.",
+  "recordedAt": "2026-10-20T18:44:52.329Z",
+  "app": {
+    "url": "http://localhost:3600",
+    "commit": "9bc6e96",
+    "data": "demo seed (npm run seed:demo), sample data only"
+  },
+  "chromium": "155.0.8059.85"
+}

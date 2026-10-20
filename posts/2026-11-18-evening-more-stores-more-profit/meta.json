@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-18",
+  "slot": "evening",
+  "type": "myth",
+  "slug": "more-stores-more-profit",
+  "theme": "paper",
+  "hook": "Another store means more profit.",
+  "fact": "Each store must cover its overhead.",
+  "thumbOffsetMs": 4200,
+  "captionFirstLine": "Multi-unit growth for franchise owners: why adding a store doesn't always add profit.",
+  "hashtags": [
+    "#profitmargin",
+    "#franchisee",
+    "#coffeeshopowner",
+    "#salonowners",
+    "#smallbusinessowner"
+  ],
+  "cardHash": "6ac452971c65d8e231c9e3370551ec9dea2787e8",
+  "durationSec": 22.917,
+  "frames": 550,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "myth",
+    "resultSize": 116,
+    "resultLines": 3,
+    "scale": 1,
+    "gap": 0.55,
+    "contentBottom": 1531,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 319,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T21:08:00.020Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
+}

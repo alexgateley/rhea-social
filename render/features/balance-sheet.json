@@ -1,0 +1,39 @@
+{
+  "id": "balance-sheet",
+  "title": "Balance sheet: one LLC's month, cash to equity",
+  "signIn": "viewer",
+  "facts": "FACTS.md 'The books' balance sheet row: /ledger/balance-sheet, src/core/reports/balance-sheet.ts, opening balances typed on Setup (src/server/opening-balances.ts); the four money LLCs (101, 103, 105, 108) have opening balances",
+  "scenes": [
+    {
+      "path": "/ledger/balance-sheet?llc=entity-101",
+      "note": "Store 101's LLC: assets, liabilities and equity at month end, built from Rhea's ledger and the opening balances",
+      "settle": 1.0,
+      "moves": [
+        {
+          "hold": 2.2
+        },
+        {
+          "scroll": 700,
+          "over": 2.2
+        },
+        {
+          "hold": 2.0
+        },
+        {
+          "scroll": 1500,
+          "over": 2.4
+        },
+        {
+          "hold": 2.0
+        },
+        {
+          "scroll": 2300,
+          "over": 2.2
+        },
+        {
+          "hold": 2.0
+        }
+      ]
+    }
+  ]
+}

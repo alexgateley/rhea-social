@@ -1,0 +1,22 @@
+{
+  "id": "synopsis",
+  "title": "The daily synopsis: what to look at first this morning",
+  "signIn": "viewer",
+  "facts": "FACTS.md 'Seeing the numbers' Daily synopsis row: /synopsis, src/core/synopsis/",
+  "scenes": [
+    {
+      "path": "/synopsis",
+      "note": "The morning's synopsis: the one thing to do first, then the lines to watch (labor against target, overtime pace, a card day not paid out, budgets, bills due, months that can't close yet)",
+      "settle": 0.8,
+      "moves": [
+        { "hold": 2.4 },
+        { "scroll": { "text": "Do first:", "offset": 60, "exact": false }, "over": 1.4 },
+        { "hold": 2.0 },
+        { "scroll": 1300, "over": 3.4 },
+        { "hold": 1.8 },
+        { "scroll": 2300, "over": 2.6 },
+        { "hold": 1.6 }
+      ]
+    }
+  ]
+}

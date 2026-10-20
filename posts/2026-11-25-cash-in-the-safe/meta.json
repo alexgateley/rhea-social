@@ -1,0 +1,46 @@
+{
+  "date": "2026-11-25",
+  "slot": "morning",
+  "type": "owner-math",
+  "slug": "cash-in-the-safe",
+  "theme": "ink",
+  "hook": "How much cash sits in your safes tonight?",
+  "result": {
+    "label": "In 12 safes on deposit day",
+    "value": "$16,200"
+  },
+  "thumbOffsetMs": 12500,
+  "captionFirstLine": "Cash handling for restaurant, coffee shop and salon owners: how much cash waits in the safe.",
+  "hashtags": [
+    "#cashflowmanagement",
+    "#franchising",
+    "#restaurateur",
+    "#coffeebusiness",
+    "#accountingtips"
+  ],
+  "cardHash": "329db91c1c4a1e7e2dcc4a3438fa84cda8a9a65d",
+  "durationSec": 22.417,
+  "frames": 538,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "owner-math",
+    "resultSize": 210,
+    "resultLines": 1,
+    "scale": 1,
+    "gap": 0.85,
+    "contentBottom": 1518,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T21:12:42.218Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
+}

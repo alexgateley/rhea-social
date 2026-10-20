@@ -1,0 +1,49 @@
+{
+  "id": "deposits",
+  "title": "Deposits: card sales matched to the bank, the missing ones first",
+  "fps": 24,
+  "frames": 324,
+  "durationSec": 13.5,
+  "width": 860,
+  "height": 1864,
+  "viewport": {
+    "width": 430,
+    "height": 932,
+    "deviceScaleFactor": 2
+  },
+  "signIn": "viewer",
+  "scenes": [
+    {
+      "path": "/deposits?range=lastmonth",
+      "note": "September: 495 deposits matched to the card sales they settle, one with a variance (−$43.17), one card day with no deposit ($2,886.00 missing), then the exceptions filter",
+      "startFrame": 0,
+      "endFrame": 262,
+      "startSec": 0,
+      "endSec": 10.917,
+      "reelSec": [
+        1,
+        11.917
+      ]
+    },
+    {
+      "path": "/deposits?range=lastmonth&status=exceptions",
+      "note": "The exception: a deposit that arrived short of the card sales it settles",
+      "startFrame": 262,
+      "endFrame": 324,
+      "startSec": 10.917,
+      "endSec": 13.5,
+      "reelSec": [
+        11.917,
+        14.5
+      ]
+    }
+  ],
+  "note": "Reel time = recording time + 1.0 s (render/timing.mjs RECORDING_AT). Pick a feature post's thumbOffsetMs inside a scene's reelSec.",
+  "recordedAt": "2026-10-20T18:42:58.960Z",
+  "app": {
+    "url": "http://localhost:3600",
+    "commit": "9bc6e96",
+    "data": "demo seed (npm run seed:demo), sample data only"
+  },
+  "chromium": "155.0.8059.85"
+}

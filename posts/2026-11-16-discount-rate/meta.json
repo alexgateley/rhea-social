@@ -1,0 +1,46 @@
+{
+  "date": "2026-11-16",
+  "slot": "morning",
+  "type": "owner-math",
+  "slug": "discount-rate",
+  "theme": "sage",
+  "hook": "Your discounts cost $140 a day.",
+  "result": {
+    "label": "Discount rate",
+    "value": "3.5%"
+  },
+  "thumbOffsetMs": 12500,
+  "captionFirstLine": "Discount rate for restaurant, coffee shop and salon owners: what promos and staff discounts cost a day.",
+  "hashtags": [
+    "#profitmargin",
+    "#restaurantmanagement",
+    "#coffeeshopowners",
+    "#salonowner",
+    "#bookkeeping"
+  ],
+  "cardHash": "4f4104e0f1bbf416181b40ffe226494168a78e14",
+  "durationSec": 22.417,
+  "frames": 538,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "owner-math",
+    "resultSize": 210,
+    "resultLines": 1,
+    "scale": 1,
+    "gap": 0.85,
+    "contentBottom": 1518,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T21:06:11.324Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
+}

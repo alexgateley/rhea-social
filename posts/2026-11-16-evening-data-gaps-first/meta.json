@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-16",
+  "slot": "evening",
+  "type": "tip",
+  "slug": "data-gaps-first",
+  "theme": "paper",
+  "hook": "One missing day makes labor % lie.",
+  "title": "Check the data first",
+  "action": "Data first",
+  "thumbOffsetMs": 14100,
+  "captionFirstLine": "Daily sales reports for multi-store owners: check every store's data is in before reading the numbers.",
+  "hashtags": [
+    "#businesstips",
+    "#franchiselife",
+    "#restaurantbusiness",
+    "#businessfinance",
+    "#accountingtips"
+  ],
+  "cardHash": "c284dcceb3caf84d2b41d89b3ca73212d9f55b13",
+  "durationSec": 24,
+  "frames": 576,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "tip",
+    "resultSize": 148,
+    "resultLines": 1,
+    "scale": 1,
+    "gap": 0.65,
+    "contentBottom": 1534,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T21:06:38.728Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
+}

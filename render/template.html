@@ -2,15 +2,36 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Owner math</title>
+<title>RunonRhea card</title>
 <!--
-  One Owner math Reel, 1080×1920. render/render.mjs loads this file, calls window.setPost(post,
-  timing, brand) once, then steps the CSS custom property --t (seconds) on <html> and screenshots
-  each frame. Every bit of motion below is a pure function of --t: no transitions, no keyframes, no
-  timers, so a frame renders the same every time.
+  One @RunonRhea Reel, 1080×1920, in one of four card types (post.type):
+
+    owner-math  hook, term and formula, 3–5 worked steps, the result very large, the takeaway (the first run)
+    tip         hook, "The tip" and its title, 3–5 numbered lines, the action very large, the takeaway
+    myth        "MYTH" and the myth (struck through when the fact lands), "FACT" and the fact very
+                large, 2–4 lines on why, the takeaway
+    feature     headline, sub and the demo note over a phone-shaped window; render.mjs lays the
+                screen recording under the window (this page is transparent there), then the end card
+
+  render/render.mjs loads this file, calls window.setPost(post, timing, brand) once, then steps the
+  CSS custom property --t (seconds) on <html> and screenshots each frame. Every bit of motion below
+  is a pure function of --t: no transitions, no keyframes, no timers, so a frame renders the same
+  every time. The other types add classes and move nodes on the owner-math card's rules.
+
+  Instagram's overlays (fix pass, October 20, 2026): the card column ends by BOTTOM_LIMIT, 1536 px
+  (the bottom fifth stays clear for the handle, the caption's first lines and the audio line), and
+  everything from the steps down keeps the right --rail (78 px) clear for the like, comment, share and
+  audio buttons; the spacing (--gap) and then the type (--scale) tighten until a card fits. The 17
+  first-run owner-math Reels (October 16 to November 12) were drawn before this, ending by 1810 px,
+  and keep their videos. A feature's headline starts below y 240, where the profile grid's 3:4 crop
+  begins, and its window sits at (247, 594), 586 by 1270.
 
   Fonts: Inter Tight from node_modules/@fontsource/inter-tight (installed by npm; no network).
-  Colors: one of the four themes in brand.json (paper, ink, sage-wash, sage), chosen per post.
+  Colors: one of the four themes in brand.json (paper, ink, sage-wash, sage), chosen per post;
+  every pair used here is checked by scripts/contrast.mjs.
+  Instagram's overlays: the top ~170 px (the Reels header) carries only the kicker and the mark; the
+  feature's demo note and headline sit above the window, clear of the caption and the buttons; the
+  hook and the headline start below y 240 so the profile grid's 3:4 crop keeps them whole.
 -->
 <style>
   @font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 400; font-display: block; src: url("../node_modules/@fontsource/inter-tight/files/inter-tight-latin-400-normal.woff2") format("woff2"); }
@@ -40,6 +61,14 @@
     --hook-move-at: 2.6;
     --hook-move-for: 0.6;
     --result-size: 210px;
+    --gap: 1;          /* vertical spacing between blocks; setPost tightens it before the type */
+    --rail: 78px;      /* kept clear on the right from the steps down: Instagram's buttons */
+
+    /* feature: where the screen recording shows (render.mjs reads the same numbers from setPost's report) */
+    --win-x: 247px; --win-y: 594px; --win-w: 586px; --win-h: 1270px; --win-r: 46px;
+    --headline-size: 72px;
+    --sub-size: 34px;
+    --strike-at: 3.7;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -98,11 +127,11 @@
   }
   .hook-rule {
     width: 120px; height: 8px; background: var(--accent); border-radius: 4px;
-    margin-top: 36px;
+    margin-top: calc(36px * var(--gap));
   }
 
   /* Term and formula */
-  .term-block { margin-top: 44px; }
+  .term-block { margin-top: calc(44px * var(--gap)); }
   .term {
     font-size: 32px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
     color: var(--heading);
@@ -117,10 +146,10 @@
   }
 
   /* Worked steps */
-  .steps { margin-top: 40px; }
+  .steps { margin-top: calc(40px * var(--gap)); margin-right: var(--rail); }
   .step {
     display: flex; align-items: baseline; justify-content: space-between; gap: 40px;
-    padding: 22px 0;
+    padding: calc(22px * var(--gap)) 0;
     border-top: 2px solid var(--line); /* on the step itself, so it appears with the step */
   }
   .step:last-child { border-bottom: 2px solid var(--line); }
@@ -144,7 +173,7 @@
   }
 
   /* The result */
-  .result { margin-top: 48px; }
+  .result { margin-top: calc(48px * var(--gap)); margin-right: var(--rail); }
   .result-label {
     font-size: 32px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
     color: var(--heading);
@@ -165,8 +194,9 @@
 
   /* The takeaway */
   .takeaway {
-    margin-top: 44px;
-    padding: 30px 36px 30px 40px;
+    margin-top: calc(44px * var(--gap));
+    margin-right: var(--rail);
+    padding: calc(30px * var(--gap)) 36px calc(30px * var(--gap)) 40px;
     background: var(--wash);
     border-left: 8px solid var(--accent);
     border-radius: 0 20px 20px 0;
@@ -193,10 +223,133 @@
   .end-handle { font-size: 56px; font-weight: 700; letter-spacing: -0.02em; color: var(--type); }
   .end-handle span { color: var(--muted); font-weight: 500; }
   .end-sub { font-size: 34px; font-weight: 500; color: var(--heading); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* ---------------------------------------------------------------------------------------------
+     Added for the two-slot run (October 20, 2026). Nothing below applies to an owner-math card.
+     --------------------------------------------------------------------------------------------- */
+
+  /* A big line that may wrap (tip: the action; myth: the fact), sized by setPost to fit */
+  .result-value.wrap {
+    white-space: normal;
+    text-wrap: balance;
+    line-height: 1.0;
+    letter-spacing: -0.035em;
+    max-width: 858px;
+  }
+
+  /* tip: "The tip" over the title, then numbered lines */
+  .formula.title { color: var(--type); font-weight: 600; letter-spacing: -0.015em; }
+  .step.line { justify-content: flex-start; gap: 30px; }
+  .line-num {
+    flex: 0 0 auto;
+    min-width: 0.9em;
+    font-size: calc(44px * var(--scale));
+    font-weight: 700;
+    line-height: 1.22;
+    color: var(--heading);
+  }
+  .line-text {
+    flex: 1 1 auto;
+    font-size: calc(44px * var(--scale));
+    font-weight: 500;
+    line-height: 1.22;
+    color: var(--type);
+    letter-spacing: -0.01em;
+  }
+  /* myth: the why lines read as plain rows */
+  .step.why .line-text { color: var(--type); }
+
+  /* myth: the labels are pills, outlined for the myth and filled for the fact */
+  .myth-label {
+    display: none;
+    margin-bottom: calc(26px * var(--gap));
+    padding: 8px 22px 7px;
+    border: 3px solid var(--heading);
+    border-radius: 999px;
+    font-size: 30px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--heading);
+    width: fit-content;
+  }
+  .type-myth .myth-label { display: block; }
+  /* the MYTH pill starts below y 240, where the profile grid's 3:4 crop begins */
+  .type-myth .hook-wrap { margin-top: 76px; }
+  .type-myth .result-label {
+    display: block; width: fit-content;
+    padding: 9px 24px 8px;
+    border-radius: 999px;
+    background: var(--heading);
+    color: var(--bg);
+    font-weight: 700; letter-spacing: 0.16em;
+    margin-bottom: 18px;
+  }
+  /* the myth is struck through as the fact lands, and steps back to the muted color */
+  .type-myth .hook {
+    --sp: clamp(0, calc((var(--t) - var(--strike-at)) / 0.5), 1);
+    color: color-mix(in srgb, var(--muted) calc(var(--sp) * 100%), var(--hook));
+    text-decoration-line: line-through;
+    text-decoration-thickness: 7px;
+    text-decoration-color: color-mix(in srgb, var(--heading) calc(var(--sp) * 100%), transparent);
+  }
+
+  /* Hide what a type does not use */
+  .type-tip .step-value { display: none; }
+  .type-feature .hook-wrap, .type-feature .term-block, .type-feature .steps,
+  .type-feature .result, .type-feature .takeaway { display: none; }
+  .feature-only { display: none; }
+  .type-feature .feature-only { display: block; }
+
+  /* feature: transparent where the recording goes; the background is the window's own shadow */
+  html.type-feature, .type-feature body { background: transparent; }
+  .window-hole {
+    position: absolute; z-index: -1;
+    left: var(--win-x); top: var(--win-y); width: var(--win-w); height: var(--win-h);
+    border-radius: var(--win-r);
+    box-shadow:
+      0 0 0 5px var(--accent),
+      0 26px 70px 0 rgba(14, 17, 22, 0.22),
+      0 0 0 3000px var(--bg);
+  }
+  .f-head { margin-top: 72px; } /* the headline's first line starts below y 240 (the grid's 3:4 crop) */
+  .f-headline {
+    font-size: var(--headline-size);
+    font-weight: 700;
+    line-height: 1.07;
+    letter-spacing: -0.022em;
+    text-wrap: balance;
+    color: var(--hook);
+  }
+  .f-sub {
+    margin-top: 14px;
+    font-size: var(--sub-size);
+    font-weight: 500;
+    line-height: 1.28;
+    letter-spacing: -0.008em;
+    text-wrap: balance;
+    color: var(--muted);
+  }
+  /* The demo note sits just above the window for the whole Reel, clear of the app's own header */
+  .demo-note {
+    position: absolute; left: 0; right: 0;
+    top: calc(var(--win-y) - 66px);
+    text-align: center;
+  }
+  .demo-note span {
+    display: inline-block;
+    padding: 10px 26px 11px;
+    border-radius: 999px;
+    background: var(--type);
+    color: var(--bg);
+    font-size: 28px; font-weight: 600; letter-spacing: 0.01em;
+    white-space: nowrap;
+  }
+  .end-cta { display: none; }
+  .type-feature .end-cta { display: block; font-size: 46px; font-weight: 700; letter-spacing: -0.015em; color: var(--type); }
 </style>
 </head>
 <body>
 <div class="frame" id="frame">
+  <div class="window-hole feature-only" id="window"></div>
+
   <div class="top">
     <div class="kicker" id="kicker">RUNONRHEA · OWNER MATH</div>
     <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
@@ -207,8 +360,15 @@
     </svg>
   </div>
 
+  <div class="f-head feature-only in" id="f-head">
+    <h1 class="f-headline" id="f-headline"></h1>
+    <p class="f-sub" id="f-sub"></p>
+  </div>
+  <div class="demo-note feature-only in" id="demo-note"><span id="demo-note-text">Demo company · made-up numbers</span></div>
+
   <div class="hook-wrap" id="hook-wrap">
     <div class="in" id="hook-in">
+      <div class="myth-label" id="myth-label">Myth</div>
       <h1 class="hook" id="hook"></h1>
       <div class="hook-rule"></div>
     </div>
@@ -236,6 +396,7 @@
       <rect class="mark-bar" x="17" y="42" width="30" height="5" rx="0.75"/>
     </svg>
     <div class="end-handle" id="end-handle">RunonRhea <span>· rheafi.com</span></div>
+    <div class="end-cta" id="end-cta"></div>
     <div class="end-sub" id="end-sub">Owner math, every weekday</div>
   </div>
 
@@ -244,13 +405,27 @@
 
 <script>
   const FRAME_H = 1920;
-  const BOTTOM_LIMIT = FRAME_H - 14 - 96; // progress bar plus breathing room
+  // The card column ends by the top of the bottom fifth: Instagram draws the handle, the caption's first
+  // lines and the audio line over the bottom of a Reel (the first run's cards ended by 1810)
+  const BOTTOM_LIMIT = Math.round(FRAME_H * 0.8);
   const RESULT_MAX = 210, RESULT_MIN = 180;
-  const SCALE_MIN = 0.955; // keeps 44px body type at or above 42px; the result never shrinks below 180px
+  // To fit, the spacing tightens first (--gap down to GAP_MIN), then the type (--scale down to SCALE_MIN:
+  // 44px body type stays at or above 38px, the 88px hook at or above 76px); the result never shrinks below 180px
+  const GAP_MIN = 0.5, SCALE_MIN = 0.86;
+  // A big line that wraps (tip action, myth fact): its size range and how many lines it may take
+  const WRAP = { tip: { max: 150, min: 104, lines: 2, oneLineMin: 120 }, myth: { max: 132, min: 92, lines: 3 } };
+  // feature: the window (must match the CSS variables above), and the headline's fit
+  // 586×1270 keeps the recordings' 860×1864 aspect; 594 puts the headline below the grid's 3:4 crop
+  const WIN = { x: 247, y: 594, w: 586, h: 1270, r: 46 };
+  const HEAD_LIMIT = WIN.y - 66 - 18; // the headline block ends above the demo note
+  const HEADLINE = { max: 76, min: 56, lines: 2 }, SUB = { max: 34, min: 28, lines: 2 };
 
   const $ = (id) => document.getElementById(id);
   const root = document.documentElement;
   const setVar = (el, name, v) => el.style.setProperty(name, String(v));
+  const lineCount = (el, sizePx, lineHeight) => Math.round(el.getBoundingClientRect().height / (sizePx * lineHeight));
+  /** Keeps "labor %" and "25 ¢" on one line (tip, myth and feature text; owner-math cards are drawn as first rendered). */
+  const keep = (s) => String(s ?? '').replace(/ ([%¢])/g, '\u00a0$1');
 
   /** Sets the clock. render.mjs calls this (or sets --t itself) once per frame. */
   window.setT = (t) => setVar(root, '--t', t);
@@ -260,6 +435,11 @@
    * layout report the renderer checks before it starts taking frames.
    */
   window.setPost = async function setPost(post, timing, brand) {
+    const type = post.type || 'owner-math';
+    if (!['owner-math', 'tip', 'myth', 'feature'].includes(type)) throw new Error(`unknown type "${type}"`);
+    root.classList.add(`type-${type}`);
+    document.body.classList.add(`type-${type}`);
+
     // Theme: one of brand.json's themes, named by post.theme (paper when unset)
     const theme = brand?.themes?.[post.theme || 'paper'];
     if (post.theme && !theme) throw new Error(`unknown theme "${post.theme}"`);
@@ -268,77 +448,186 @@
       for (const [k, v] of Object.entries(map)) if (theme[k]) setVar(root, v, theme[k]);
     }
     if (brand?.handle) {
-      $('kicker').textContent = `${brand.handle.toUpperCase()} · ${(brand.series || 'Owner math').toUpperCase()}`;
+      const kicker = brand.kickers?.[type] || (type === 'owner-math' ? brand.series : null) || 'Owner math';
+      $('kicker').textContent = `${brand.handle.toUpperCase()} · ${kicker.toUpperCase()}`;
       $('end-handle').innerHTML = '';
       $('end-handle').append(brand.handle, ' ');
       const s = document.createElement('span'); s.textContent = `· ${brand.site || 'rheafi.com'}`;
       $('end-handle').append(s);
     }
+    // The end card's line under the handle. The first run's owner-math cards were drawn with
+    // "Owner math, every weekday" (the template's text) before brand.endCardLines existed.
+    const endLine = brand?.endCardLines?.[type];
+    if (endLine) $('end-sub').textContent = endLine;
 
-    $('hook').textContent = post.hook;
-    $('term').textContent = post.term;
-    $('formula').textContent = post.formula;
-    $('result-label').textContent = post.result.label;
-    $('result-value').textContent = post.result.value;
-    $('takeaway').textContent = post.takeaway;
+    await Promise.all(['400', '500', '600', '700', '800'].map((w) => document.fonts.load(`${w} 40px "Inter Tight"`)));
+    await document.fonts.ready;
 
+    if (type === 'feature') return setFeature(post, timing, brand);
+
+    // ---- owner-math, tip, myth: the card column ----
+    const tx = type === 'owner-math' ? (s) => s : keep;
+    $('hook').textContent = tx(post.hook);
+    $('takeaway').textContent = tx(post.takeaway);
     const steps = $('steps');
     steps.innerHTML = '';
-    post.steps.forEach((s, k) => {
-      const row = document.createElement('div');
-      row.className = 'step in';
-      setVar(row, '--in', timing.stepsAt[k]);
-      const label = document.createElement('div'); label.className = 'step-label'; label.textContent = s.label;
-      const value = document.createElement('div'); value.className = 'step-value'; value.textContent = s.value;
-      row.append(label, value);
-      steps.append(row);
-    });
+    const row = (k, cls) => {
+      const r = document.createElement('div');
+      r.className = `step in ${cls}`;
+      setVar(r, '--in', timing.stepsAt[k]);
+      steps.append(r);
+      return r;
+    };
+    const textCell = (cls, text) => { const d = document.createElement('div'); d.className = cls; d.textContent = text; return d; };
+
+    if (type === 'owner-math') {
+      $('term').textContent = post.term;
+      $('formula').textContent = post.formula;
+      $('result-label').textContent = post.result.label;
+      $('result-value').textContent = post.result.value;
+      post.steps.forEach((s, k) => row(k, '').append(textCell('step-label', s.label), textCell('step-value', s.value)));
+    } else if (type === 'tip') {
+      $('term').textContent = post.titleLabel || 'The tip';
+      $('formula').textContent = keep(post.title);
+      $('formula').classList.add('title');
+      $('result-label').textContent = post.actionLabel || 'Do it';
+      $('result-value').textContent = keep(post.action);
+      $('result-value').classList.add('wrap');
+      post.lines.forEach((text, k) => row(k, 'line').append(textCell('line-num', String(k + 1)), textCell('line-text', keep(text))));
+    } else if (type === 'myth') {
+      $('myth-label').textContent = 'Myth';
+      $('term-block').style.display = 'none';
+      $('result-label').textContent = 'Fact';
+      $('result-value').textContent = keep(post.fact);
+      $('result-value').classList.add('wrap');
+      // The fact sits right under the myth, then the why lines, then the takeaway
+      $('frame').insertBefore($('result'), $('steps'));
+      post.why.forEach((text, k) => row(k, 'line why').append(textCell('line-text', keep(text))));
+      setVar(root, '--strike-at', timing.strikeAt);
+    }
 
     setVar(root, '--dur', timing.duration);
     setVar($('hook-in'), '--in', timing.hookAt);
-    setVar($('term-block'), '--in', timing.termAt);
+    if (timing.termAt != null) setVar($('term-block'), '--in', timing.termAt);
     setVar($('result-label'), '--in', timing.resultAt);
     setVar($('result-value'), '--in', timing.resultAt);
     setVar($('result-value'), '--fade', 0.6);
     setVar($('takeaway'), '--in', timing.takeawayAt);
     setVar($('end'), '--in', timing.endAt);
-    setVar(root, '--hook-move-at', timing.termAt - 0.4);
+    setVar(root, '--hook-move-at', timing.hookMoveAt ?? timing.termAt - 0.4);
 
-    // Fonts first, so measurements below are final
-    await Promise.all(['400', '500', '600', '700', '800'].map((w) => document.fonts.load(`${w} 40px "Inter Tight"`)));
-    await document.fonts.ready;
-
-    // Fit the result to the column width (never below RESULT_MIN), then the whole column to the frame
-    const column = $('frame').clientWidth - 144;
     const rv = $('result-value');
-    let resultSize = RESULT_MAX;
-    setVar(root, '--result-size', `${resultSize}px`);
-    while (rv.scrollWidth > column && resultSize > RESULT_MIN) {
-      resultSize -= 2;
-      setVar(root, '--result-size', `${resultSize}px`);
-    }
-    let scale = 1;
+    const column = $('result').clientWidth; // the column less the right rail
     const bottom = () => $('takeaway').getBoundingClientRect().bottom;
     setVar(root, '--t', 1000); // everything laid out at its final place
-    while (bottom() > BOTTOM_LIMIT && scale > SCALE_MIN) {
-      scale = Math.round((scale - 0.005) * 1000) / 1000;
-      setVar(root, '--scale', scale);
+    let resultSize, scale = 1, gap = 1, resultLines = 1;
+    // The ways to make room, in order: tighter spacing, then smaller type
+    const levels = [];
+    for (let g = 100; g >= GAP_MIN * 100; g -= 5) levels.push({ gap: g / 100, scale: 1 });
+    for (let k = 995; k >= SCALE_MIN * 1000; k -= 5) levels.push({ gap: GAP_MIN, scale: k / 1000 });
+    const apply = (l) => { gap = l.gap; scale = l.scale; setVar(root, '--gap', gap); setVar(root, '--scale', scale); };
+    if (type === 'owner-math') {
+      // Fit the result to the column width (never below RESULT_MIN), then the whole column to the frame
+      resultSize = RESULT_MAX;
+      setVar(root, '--result-size', `${resultSize}px`);
+      while (rv.scrollWidth > column && resultSize > RESULT_MIN) {
+        resultSize -= 2;
+        setVar(root, '--result-size', `${resultSize}px`);
+      }
+      for (const l of levels) { apply(l); if (bottom() <= BOTTOM_LIMIT) break; }
+    } else {
+      // The big line wraps: at each level, the largest size at which no word is cut, it takes at most
+      // WRAP.lines lines and the column fits the frame
+      const w = WRAP[type];
+      const fits = (maxLines) => {
+        resultLines = lineCount(rv, resultSize, 1.0);
+        return rv.scrollWidth <= column + 1 && resultLines <= maxLines && bottom() <= BOTTOM_LIMIT;
+      };
+      const search = (from, to, maxLines) => {
+        for (resultSize = from; resultSize >= to; resultSize -= 2) {
+          setVar(root, '--result-size', `${resultSize}px`);
+          if (fits(maxLines)) return true;
+        }
+        return false;
+      };
+      // A short action reads best on one line ("Every Monday"): take one line down to oneLineMin,
+      // otherwise the largest size that wraps to at most w.lines. The big line is the card's point, so it
+      // stays within 85% of its largest size while the spacing and type tighten; only if nothing fits that
+      // way does it go down to its smallest size
+      const tryLevel = (l, floor) => {
+        apply(l);
+        return (w.oneLineMin && search(w.max, Math.max(w.oneLineMin, floor), 1)) || search(w.max, floor, w.lines);
+      };
+      let found = false;
+      for (const floor of [Math.round(w.max * 0.85), w.min]) {
+        for (const l of levels) if (tryLevel(l, floor)) { found = true; break; }
+        if (found) break;
+      }
+      if (!found) { resultSize = w.min; setVar(root, '--result-size', `${resultSize}px`); }
+      resultLines = lineCount(rv, resultSize, 1.0);
     }
     const contentBottom = bottom();
-    const overflow = contentBottom > BOTTOM_LIMIT || rv.scrollWidth > column
+    const overflow = contentBottom > BOTTOM_LIMIT || rv.scrollWidth > column + 1
+      || (type !== 'owner-math' && resultLines > WRAP[type].lines)
       || [...document.querySelectorAll('.step-value')].some((v) => v.scrollWidth > v.clientWidth + 1);
 
     // While the hook is alone, it sits in the middle of the frame: measure how far that is
     const hookBox = $('hook-in').getBoundingClientRect();
     const hookCenter = hookBox.top + hookBox.height / 2;
     setVar(root, '--hook-shift', `${Math.round(FRAME_H * 0.46 - hookCenter)}px`);
+    // Where everything rests: the right edge of the lower blocks (clear of the buttons) and the hook's top
+    const rightEdge = Math.round(Math.max(...[...document.querySelectorAll('.step, .result, .takeaway')].map((e) => e.getBoundingClientRect().right)));
+    const hookTop = Math.round($('hook').getBoundingClientRect().top);
 
     setVar(root, '--t', 0);
     return {
-      resultSize, scale, contentBottom: Math.round(contentBottom), bottomLimit: BOTTOM_LIMIT, overflow,
+      type, resultSize, resultLines, scale, gap, contentBottom: Math.round(contentBottom), bottomLimit: BOTTOM_LIMIT, overflow,
+      rightEdge, hookTop,
       hookLines: Math.round($('hook').getBoundingClientRect().height / (88 * scale * 1.07)),
     };
   };
+
+  /** feature: headline and sub fitted above the window, the demo note on its top edge, the end card. */
+  function setFeature(post, timing, brand) {
+    $('f-headline').textContent = keep(post.headline);
+    $('f-sub').textContent = keep(post.sub || '');
+    $('f-sub').style.display = post.sub ? '' : 'none';
+    $('demo-note-text').textContent = post.demoNote || brand?.product?.demoNote || 'Demo company · made-up numbers';
+    // The call to action is the end card's big line; the type's end line under it only when it says something else
+    $('end-cta').textContent = post.cta || '';
+    if (post.cta && $('end-sub').textContent.trim().toLowerCase() === post.cta.trim().toLowerCase()) $('end-sub').style.display = 'none';
+    setVar(root, '--dur', timing.duration);
+    setVar($('f-head'), '--in', 0);
+    setVar($('f-head'), '--fade', 0.4);
+    setVar($('demo-note'), '--in', 0);
+    setVar($('demo-note'), '--fade', 0.4);
+    setVar($('end'), '--in', timing.endAt);
+    for (const [k, v] of Object.entries({ '--win-x': WIN.x, '--win-y': WIN.y, '--win-w': WIN.w, '--win-h': WIN.h, '--win-r': WIN.r })) setVar(root, k, `${v}px`);
+
+    setVar(root, '--t', 1000);
+    const head = $('f-headline'), sub = $('f-sub');
+    let headlineSize = HEADLINE.max, subSize = SUB.max;
+    const apply = () => { setVar(root, '--headline-size', `${headlineSize}px`); setVar(root, '--sub-size', `${subSize}px`); };
+    const headBottom = () => (post.sub ? sub : head).getBoundingClientRect().bottom;
+    const headLines = () => lineCount(head, headlineSize, 1.07);
+    const subLines = () => (post.sub ? lineCount(sub, subSize, 1.28) : 0);
+    apply();
+    while ((headLines() > HEADLINE.lines || headBottom() > HEAD_LIMIT) && headlineSize > HEADLINE.min) { headlineSize -= 2; apply(); }
+    while ((subLines() > SUB.lines || headBottom() > HEAD_LIMIT) && subSize > SUB.min) { subSize -= 1; apply(); }
+    const note = $('demo-note-text').getBoundingClientRect();
+    const overflow = headLines() > HEADLINE.lines || subLines() > SUB.lines || headBottom() > HEAD_LIMIT
+      || head.scrollWidth > head.clientWidth + 1 || note.width > 1080 - 144;
+    // Measured where everything rests (t = 1000), not mid-fade
+    const report = {
+      type: 'feature', headlineSize, headlineLines: headLines(), subSize, subLines: subLines(),
+      contentBottom: Math.round(headBottom()), bottomLimit: HEAD_LIMIT, overflow, window: { ...WIN },
+      headTop: Math.round(head.getBoundingClientRect().top),
+    };
+    setVar(root, '--t', 0);
+    return {
+      ...report,
+    };
+  }
 </script>
 </body>
 </html>

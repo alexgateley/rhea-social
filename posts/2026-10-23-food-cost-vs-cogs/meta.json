@@ -20,5 +20,17 @@
     "hookLines": 2
   },
   "renderedAt": "2026-10-17T01:36:21.696Z",
-  "chromium": "141.0.7390.37"
+  "chromium": "141.0.7390.37",
+  "slot": "morning",
+  "captionFirstLine": "Food cost vs COGS for restaurant and coffee shop owners: why paper and packaging count.",
+  "hashtags": [
+    "#foodcost",
+    "#franchising",
+    "#restaurantowners",
+    "#coffeeshopbusiness",
+    "#accountingtips"
+  ],
+  "type": "owner-math",
+  "cardHash": "af5751c617b668f315ecd7e6bf606eedebaf4a54",
+  "cardHashAdoptedAt": "2026-10-20T19:05:12.945Z"
 }

@@ -1,0 +1,37 @@
+{
+  "id": "labor-overtime",
+  "title": "Labor: hours, overtime and labor % by store and by day",
+  "fps": 24,
+  "frames": 345,
+  "durationSec": 14.375,
+  "width": 860,
+  "height": 1864,
+  "viewport": {
+    "width": 430,
+    "height": 932,
+    "deviceScaleFactor": 2
+  },
+  "signIn": "viewer",
+  "scenes": [
+    {
+      "path": "/labor",
+      "note": "Labor for the last 30 days, then this workweek's overtime watch (first names, store and hours so far, never pay; who is in overtime and who is close), overtime hours by store, labor % by day with the stores over target in red",
+      "startFrame": 0,
+      "endFrame": 345,
+      "startSec": 0,
+      "endSec": 14.375,
+      "reelSec": [
+        1,
+        15.375
+      ]
+    }
+  ],
+  "note": "Reel time = recording time + 1.0 s (render/timing.mjs RECORDING_AT). Pick a feature post's thumbOffsetMs inside a scene's reelSec.",
+  "recordedAt": "2026-10-20T19:02:05.767Z",
+  "app": {
+    "url": "http://localhost:3600",
+    "commit": "9bc6e96",
+    "data": "demo seed (npm run seed:demo), sample data only"
+  },
+  "chromium": "155.0.8059.85"
+}

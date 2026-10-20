@@ -20,5 +20,17 @@
     "hookLines": 2
   },
   "renderedAt": "2026-10-17T01:45:33.202Z",
-  "chromium": "141.0.7390.37"
+  "chromium": "141.0.7390.37",
+  "slot": "morning",
+  "captionFirstLine": "Card processing rates for multi-unit restaurant and franchise owners: 2.9% vs 2.3% on $600,000 a year.",
+  "hashtags": [
+    "#creditcardfees",
+    "#franchisee",
+    "#qsr",
+    "#businessfinance",
+    "#smallbusinesstips"
+  ],
+  "type": "owner-math",
+  "cardHash": "02c05bfb101dd00cbd4b5f59213ef97dcb8f1901",
+  "cardHashAdoptedAt": "2026-10-20T19:05:12.947Z"
 }

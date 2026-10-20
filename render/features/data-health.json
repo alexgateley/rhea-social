@@ -1,0 +1,24 @@
+{
+  "id": "data-health",
+  "title": "Data health: every store's last 14 days, in words",
+  "signIn": "viewer",
+  "facts": "FACTS.md 'Seeing the numbers' Data health row: /health, src/core/health/, src/server/data-health.ts",
+  "scenes": [
+    {
+      "path": "/health",
+      "note": "Data health: nothing needs a look; per store and day whether sales, time cards and payouts are in",
+      "settle": 0.8,
+      "moves": [
+        { "hold": 2.0 },
+        { "scroll": { "text": "Stores by day", "offset": 60 }, "over": 1.6 },
+        { "hold": 1.8 },
+        { "scroll": { "text": "Store 101 – Maple Ave", "offset": 60 }, "over": 1.2 },
+        { "hold": 0.8 },
+        { "scrollX": { "text": "Sales", "nth": 0, "to": 900 }, "over": 2.2 },
+        { "hold": 1.0 },
+        { "scroll": { "text": "Store 104 – Bluebonnet Ln", "offset": 60 }, "over": 2.2 },
+        { "hold": 1.6 }
+      ]
+    }
+  ]
+}

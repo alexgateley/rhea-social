@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-28",
+  "slot": "morning",
+  "type": "myth",
+  "slug": "midnight-sales",
+  "theme": "sage",
+  "hook": "Sales after midnight belong to tomorrow.",
+  "fact": "They belong to the business day.",
+  "thumbOffsetMs": 4200,
+  "captionFirstLine": "Business day vs calendar day for restaurant and franchise owners open past midnight.",
+  "hashtags": [
+    "#laborcost",
+    "#franchiselife",
+    "#restaurantowner",
+    "#bookkeeping",
+    "#accountingtips"
+  ],
+  "cardHash": "452ee6f785ef10ee126c4a54a7efdb0dd5ee1591",
+  "durationSec": 22.917,
+  "frames": 550,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "myth",
+    "resultSize": 112,
+    "resultLines": 2,
+    "scale": 1,
+    "gap": 1,
+    "contentBottom": 1473,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 331,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T21:14:46.773Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
+}

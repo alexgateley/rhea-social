@@ -1,0 +1,1423 @@
+{
+  "month": "2026-11",
+  "notes": "November 2026, both slots: owner math on weekday mornings from November 13 (the first run's owner math to November 12 is in 2026-10.json), tips and myths on weekend mornings, and the 6 PM rotation feature, tip, feature, myth (scripts/schedule.mjs). Feature Reels show the demo company (sample data) from the recordings in content/recordings.json; the second half of the month adds new recordings (statements, bills, year-end, connections, payroll, sales tax, the demo tour, budgets) and two second passes. Every figure is recomputed by scripts/verify.mjs; every claim names its evidence in FACTS.md.",
+  "posts": [
+    {
+      "date": "2026-11-01",
+      "slot": "morning",
+      "type": "tip",
+      "slug": "month-end-checklist",
+      "theme": "paper",
+      "keyword": "month-end close checklist",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "October's done. Are its books?",
+      "title": "A month-end checklist",
+      "lines": [
+        "Sales in for every day, every store.",
+        "Time cards in for every sales day.",
+        "Every bank and card account reconciled.",
+        "Every bill coded and approved.",
+        "No POS item left without an account."
+      ],
+      "action": "Before you close",
+      "takeaway": "Close the month when the list is done. Change it later only with a correcting entry.",
+      "caption": "Month-end close checklist for multi-store owners: five things to confirm before October is closed.\nSales in for every store-day, time cards in, every bank and card account reconciled.\nThen every bill coded and approved, and no POS item without an account.\nClose when the list is done; fix a closed month with a correcting entry, not an edit.",
+      "hashtags": ["#monthendclose", "#franchisee", "#restaurantmanagement", "#bookkeeping", "#smallbusinessowner"],
+      "thumbOffsetMs": 15700
+    },
+    {
+      "date": "2026-11-01",
+      "slot": "evening",
+      "type": "feature",
+      "slug": "data-health-check",
+      "theme": "ink",
+      "keyword": "missing POS data",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "headline": "Is any store's data late this morning?",
+      "sub": "Sales, time cards, payouts and deposits for 14 days, in words",
+      "demoNote": "Demo company · made-up numbers",
+      "recording": "data-health",
+      "claims": [
+        {
+          "text": "Data health shows, per store and day for 14 days, whether sales, time cards, payouts and deposits are in, in words, problems first",
+          "evidence": "src/core/health/"
+        }
+      ],
+      "cta": "Try the demo: demo.rheafi.com",
+      "caption": "Missing POS data for multi-store owners: see which store's sales or time cards didn't arrive.\nRhea's data health page on the demo company, sample data.\nOne line per problem, worst first, then each store's last 14 days.\nSales, time cards, payouts and deposits, each day marked in words.",
+      "hashtags": ["#restauranttech", "#franchiselife", "#restaurantowners", "#coffeeshopowner", "#smallbusinesstips"],
+      "thumbOffsetMs": 2000
+    },
+    {
+      "date": "2026-11-02",
+      "slot": "evening",
+      "type": "myth",
+      "slug": "pos-report-is-not-a-pnl",
+      "theme": "sage-wash",
+      "keyword": "POS sales report",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "My POS report tells me how we're doing.",
+      "fact": "The POS sees sales, not costs.",
+      "why": [
+        "Rent, utilities and payroll never touch the register.",
+        "Card fees come out after the sale.",
+        "Food and supplies are bills, not tickets."
+      ],
+      "takeaway": "Sales tell you how busy you were. The P&L tells you whether it paid.",
+      "caption": "POS sales report vs P&L: what restaurant, coffee shop and salon owners' register reports leave out.\nA POS report shows sales, discounts and tenders, nothing about what the store spent.\nRent, payroll, card fees and supply bills come from somewhere else.\nBusy and profitable are different questions; only the P&L answers the second.",
+      "hashtags": ["#restaurantaccounting", "#restaurantindustry", "#salonownerlife", "#bookkeepingtips", "#businessfinance"],
+      "thumbOffsetMs": 4200
+    },
+    {
+      "date": "2026-11-03",
+      "slot": "evening",
+      "type": "feature",
+      "slug": "your-numbers-by-store",
+      "theme": "sage-wash",
+      "keyword": "restaurant KPIs",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "headline": "Labor, prime cost and tickets, store by store",
+      "sub": "Seven views of your numbers, each with the period before and the change",
+      "demoNote": "Demo company · made-up numbers",
+      "recording": "your-numbers",
+      "claims": [
+        {
+          "text": "Your numbers has seven views: sales, labor, prime cost, tickets, discounts and leakage, cash, franchisor fees",
+          "evidence": "src/core/numbers/types.ts"
+        },
+        {
+          "text": "Each view has tiles, one chart and a by-store table with the period before and the change, and every number's source",
+          "evidence": "/numbers"
+        }
+      ],
+      "cta": "Try the demo: demo.rheafi.com",
+      "caption": "Restaurant KPIs by store for franchise and coffee shop owners: labor, prime cost and average ticket.\nYour numbers in Rhea's demo, on sample data: the labor, prime cost and tickets views.\nEach has tiles, one chart and every store in a table, with the period before and the change.\nEvery number says where it came from.",
+      "hashtags": ["#profitmargin", "#franchiseowner", "#restaurateur", "#coffeeshopowners", "#smallbusinessowner"],
+      "thumbOffsetMs": 1800
+    },
+    {
+      "date": "2026-11-04",
+      "slot": "evening",
+      "type": "tip",
+      "slug": "count-inventory-monthly",
+      "theme": "sage",
+      "keyword": "inventory count",
+      "audiences": ["franchise", "restaurant", "coffee"],
+      "hook": "Food bought isn't food used.",
+      "title": "Count inventory monthly",
+      "lines": [
+        "A big order on the 30th inflates this month.",
+        "Next month then looks cheaper than it was.",
+        "Count the same items on the last night.",
+        "Start count + purchases − end count = used."
+      ],
+      "action": "Every month-end",
+      "takeaway": "Without a count, COGS % shows when you ordered, not what you used.",
+      "caption": "Inventory counts and food cost for restaurant and coffee shop owners: COGS needs a month-end count.\nPurchases are what you bought; COGS is what you used.\nA big order on the 30th makes this month look expensive and next month cheap.\nCount the same items on the last night of every month, at every store.\nDoes every one of your stores count?",
+      "hashtags": ["#foodcost", "#franchising", "#restaurantmanagement", "#coffeebusiness", "#accountingtips"],
+      "thumbOffsetMs": 14100
+    },
+    {
+      "date": "2026-11-05",
+      "slot": "evening",
+      "type": "feature",
+      "slug": "morning-synopsis",
+      "theme": "paper",
+      "keyword": "daily sales summary email",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "headline": "Every store, summed up in sentences each morning",
+      "sub": "\"Do first\", then what changed, worst first, and one plain line per store",
+      "demoNote": "Demo company · made-up numbers",
+      "recording": "synopsis",
+      "claims": [
+        {
+          "text": "A daily synopsis on the Overview and in the owner's email: what to do first, the findings worst first, one plain line per store",
+          "evidence": "src/core/synopsis/"
+        },
+        {
+          "text": "Two levels, Basic and Trends; Trends compares each number with the store's usual and its sister stores",
+          "evidence": "src/core/synopsis/"
+        },
+        {
+          "text": "The owner's morning email: one line per store, worst first",
+          "evidence": "src/server/owner-email.ts"
+        }
+      ],
+      "cta": "Try the demo: demo.rheafi.com",
+      "caption": "Daily sales summary email for multi-store owners: every store's yesterday in plain sentences.\nThe synopsis page in Rhea's demo, on sample data: each morning's summary, newest first.\nIt also opens the owner's morning email, with one line per store, worst first.\nRead it with coffee; open the app only for what needs you.",
+      "hashtags": ["#bookkeepingsoftware", "#franchiselife", "#restaurantbusiness", "#coffeeshopowner", "#bookkeepingtips"],
+      "thumbOffsetMs": 2200
+    },
+    {
+      "date": "2026-11-06",
+      "slot": "evening",
+      "type": "myth",
+      "slug": "one-labor-target",
+      "theme": "paper",
+      "keyword": "labor percentage targets",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "Every store should hit the same labor %.",
+      "fact": "Each store needs its own target.",
+      "why": [
+        "A slow store still needs a minimum crew.",
+        "Wages differ by city and by tenure.",
+        "Sales volume moves the percentage, not just schedules."
+      ],
+      "takeaway": "Set each store's labor target from its own sales and crew, then hold it.",
+      "caption": "Labor percentage targets for multi-store owners: why every store shouldn't share one number.\nA low-volume store needs the same minimum crew as a busy one.\nWages differ by city, and sales volume moves the percentage.\nGive each store its own labor % target, then hold each store to it.",
+      "hashtags": ["#laborcost", "#restaurantmanagement", "#coffeeshopbusiness", "#salonownerlife", "#smallbusinessowner"],
+      "thumbOffsetMs": 4200
+    },
+    {
+      "date": "2026-11-07",
+      "slot": "morning",
+      "type": "tip",
+      "slug": "reconcile-every-account",
+      "theme": "ink",
+      "keyword": "bank reconciliation",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "Do your books match the bank statement?",
+      "title": "Reconcile every account",
+      "lines": [
+        "Every bank and credit card account, every month.",
+        "Book balance and statement balance agree to the cent.",
+        "Explain each difference before you close."
+      ],
+      "action": "Every month",
+      "takeaway": "An unreconciled account means the P&L above it is a guess.",
+      "caption": "Bank reconciliation for multi-store owners: tie every bank and credit card account each month.\nEvery bank and credit card account, every LLC, every month.\nThe balance in the books and the statement's balance should agree to the cent.\nUntil they do, the P&L built on them is a guess.",
+      "hashtags": ["#bankreconciliation", "#franchiseowner", "#restaurantindustry", "#bookkeeping", "#accountingtips"],
+      "thumbOffsetMs": 12500
+    },
+    {
+      "date": "2026-11-07",
+      "slot": "evening",
+      "type": "feature",
+      "slug": "close-the-month",
+      "theme": "sage-wash",
+      "keyword": "month-end close",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "headline": "Close each store's month with a checklist",
+      "sub": "Sales, time cards, statements, bills and payroll checked before a month closes",
+      "demoNote": "Demo company · made-up numbers",
+      "recording": "month-close",
+      "claims": [
+        {
+          "text": "Ledger, Month close: the months to close, each LLC-month with its checklist, and Close every ready month",
+          "evidence": "src/server/close-checklist.ts"
+        },
+        {
+          "text": "A closed month changes only by a reversing entry plus a new version, with an add-only audit log",
+          "evidence": "src/core/ledger/"
+        }
+      ],
+      "cta": "Try the demo: demo.rheafi.com",
+      "caption": "Month-end close for multi-store franchise owners: a checklist per LLC, then close the month.\nLedger, Month close in Rhea's demo: the months waiting to close, on sample data.\nEach LLC-month has its checklist: sales and time cards in, statements, bills, payroll as paid.\nOnce closed, a change is a reversing entry and a new one, never an edit.",
+      "hashtags": ["#monthendclose", "#franchising", "#cafeowner", "#salonowner", "#smallbusinessfinance"],
+      "thumbOffsetMs": 7200
+    },
+    {
+      "date": "2026-11-08",
+      "slot": "morning",
+      "type": "myth",
+      "slug": "pnl-is-enough",
+      "theme": "ink",
+      "keyword": "balance sheet",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "The P&L is all an owner needs to read.",
+      "fact": "Read the balance sheet too.",
+      "why": [
+        "It shows what each LLC owes.",
+        "Sales tax, gift cards and unpaid bills live there.",
+        "Loans and card balances too."
+      ],
+      "takeaway": "The P&L shows the month's result. The balance sheet shows what's left and what's owed.",
+      "caption": "Balance sheet basics for small business owners: what the P&L can't show about your stores.\nThe P&L shows a month's sales and costs; it can't show what each LLC owes.\nSales tax collected, gift card balances, unpaid bills, loans and card balances live on the balance sheet.\nRead both every month.",
+      "hashtags": ["#cashflowmanagement", "#restaurantowner", "#coffeeshopowners", "#salonowners", "#smallbusinesstips"],
+      "thumbOffsetMs": 4200
+    },
+    {
+      "date": "2026-11-08",
+      "slot": "evening",
+      "type": "tip",
+      "slug": "map-every-pos-button",
+      "theme": "sage-wash",
+      "keyword": "POS reports",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "Where does a new menu item's sale go?",
+      "title": "Map every POS button",
+      "lines": [
+        "Every item, discount and tender lands somewhere.",
+        "New items often land in 'Other'.",
+        "Give each new button an account the day it's added.",
+        "Check the unmapped list weekly."
+      ],
+      "action": "When you add items",
+      "takeaway": "Sales in 'Other' can't tell you what sells. Map them the day they're added.",
+      "caption": "POS reports and bookkeeping: map every button to an account, a tip for restaurant and salon owners.\nEvery POS item, discount and tender should post to a named account.\nNew menu items and services often land in Other until someone notices.\nMap each new button the day it's added, and check the unmapped list weekly.",
+      "hashtags": ["#restaurantaccounting", "#franchisebusiness", "#restaurantbusiness", "#salonbusiness", "#bookkeepingtips"],
+      "thumbOffsetMs": 14100
+    },
+    {
+      "date": "2026-11-09",
+      "slot": "evening",
+      "type": "feature",
+      "slug": "compare-with-bookkeeper",
+      "theme": "sage",
+      "keyword": "checking your bookkeeper's books",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "headline": "Check your books against your bookkeeper's, to the cent",
+      "sub": "Drop their QuickBooks Online reports and see every account's difference",
+      "demoNote": "Demo company · made-up numbers",
+      "recording": "compare-bookkeeper",
+      "claims": [
+        {
+          "text": "The bookkeeper's QuickBooks Online exports (P&L, Trial Balance, General Ledger) are saved as reference data",
+          "evidence": "src/core/bookkeeper/"
+        },
+        {
+          "text": "A difference report, account by account, to the cent, Rhea minus bookkeeper",
+          "evidence": "src/server/difference-report.ts"
+        }
+      ],
+      "cta": "Try the demo: demo.rheafi.com",
+      "caption": "Checking your bookkeeper's books: a month-end tool for franchise and multi-store owners.\nCompare with bookkeeper in Rhea's demo: every LLC by month, on sample data.\nDrop their QuickBooks Online general ledger (best) or P&L on Import: each account Rhea posts shows its difference to the cent.\nThe demo has no bookkeeper's report loaded yet, so this shows where it lands.",
+      "hashtags": ["#franchiseaccounting", "#franchiselife", "#coffeeshopowner", "#salonowners", "#businessowner"],
+      "thumbOffsetMs": 10700
+    },
+    {
+      "date": "2026-11-10",
+      "slot": "evening",
+      "type": "myth",
+      "slug": "busy-week-labor",
+      "theme": "sage",
+      "keyword": "labor cost in busy weeks",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "Sales are up, so labor must be fine.",
+      "fact": "Labor can rise faster than sales.",
+      "why": [
+        "Busy weeks bring overtime at time-and-a-half.",
+        "Extra shifts often stay after the rush.",
+        "Labor % shows it; total sales don't."
+      ],
+      "takeaway": "Check labor % in good weeks too. That's when overtime hides best.",
+      "caption": "Labor cost in busy weeks: why restaurant, coffee shop and salon owners still check labor %.\nA busy week brings extra shifts and overtime at time-and-a-half.\nShifts added for a rush often stay after it ends.\nLabor % shows whether sales grew faster than labor; total sales alone can't.",
+      "hashtags": ["#laborcost", "#restaurantowners", "#salonownerlife", "#bookkeeping", "#accountingtips"],
+      "thumbOffsetMs": 4200
+    },
+    {
+      "date": "2026-11-11",
+      "slot": "evening",
+      "type": "feature",
+      "slug": "statements-reconciled",
+      "theme": "paper",
+      "keyword": "bank statement reconciliation",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "headline": "Bank and card statements, in the books and reconciled",
+      "sub": "Each account's book balance beside its statement, until they agree to the cent",
+      "demoNote": "Demo company · made-up numbers",
+      "recording": "statements-reconcile",
+      "claims": [
+        {
+          "text": "Bank and card statements (CSV, OFX, QFX, QBO) are booked in Rhea's books, each line to an account",
+          "evidence": "src/server/statements-import.ts"
+        },
+        {
+          "text": "Bank reconciliation: each account's balance in the books beside its statement's",
+          "evidence": "src/core/statements/"
+        }
+      ],
+      "cta": "Try the demo: demo.rheafi.com",
+      "caption": "Bank statement reconciliation for multi-store owners: every LLC's accounts tied to the cent.\nStatements in Rhea's demo, on sample data for four of the demo LLCs.\nEach bank and card statement's lines booked into the books, each to an account.\nThen Reconcile: the books' balance beside the statement's, until they agree to the cent.",
+      "hashtags": ["#bankreconciliation", "#multiunitfranchisee", "#cafeowner", "#smallbusinessfinance", "#businessowner"],
+      "thumbOffsetMs": 15700
+    },
+    {
+      "date": "2026-11-12",
+      "slot": "evening",
+      "type": "tip",
+      "slug": "cash-before-payroll",
+      "theme": "paper",
+      "keyword": "cash flow by LLC",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "Can every store's LLC make this week's payroll?",
+      "title": "Check cash before payroll",
+      "lines": [
+        "List what each LLC must pay this week.",
+        "Read each account's balance before the week starts.",
+        "Subtract the sales tax and tips it still owes.",
+        "Find a short account on Monday, not payday."
+      ],
+      "action": "Before payroll",
+      "takeaway": "Profit by store is a monthly question. Cash by LLC is a weekly one.",
+      "caption": "Cash flow by LLC for multi-store owners: check every account can cover payroll before the week starts.\nWhen each store's LLC pays its own payroll, rent and bills, each account has to cover them.\nBefore the week starts, read each balance minus the sales tax and tips it still owes.\nA short account found on Monday is a fix; found on payday, it's a scramble.\nWhich of your LLCs would be short this Friday?",
+      "hashtags": ["#cashflowmanagement", "#restaurateur", "#coffeeshopowners", "#salonbusiness", "#bookkeeping"],
+      "thumbOffsetMs": 14100
+    },
+    {
+      "date": "2026-11-13",
+      "slot": "morning",
+      "type": "owner-math",
+      "slug": "labor-hours-budget",
+      "theme": "ink",
+      "keyword": "labor scheduling",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "How many hours can you schedule next week?",
+      "term": "Labor hours budget",
+      "formula": "Sales forecast × labor % target ÷ average wage",
+      "inputs": {
+        "Forecast sales next week": "$30,000",
+        "Labor % target": "27%",
+        "Average wage": "$18 an hour",
+        "Days open": "7"
+      },
+      "steps": [
+        {
+          "label": "Labor dollars: 27% × $30,000",
+          "value": "$8,100"
+        },
+        {
+          "label": "Hours: $8,100 ÷ $18 an hour",
+          "value": "450 h"
+        },
+        {
+          "label": "Per day, 7 days open",
+          "value": "64.3 h"
+        }
+      ],
+      "result": {
+        "label": "Hours to schedule next week",
+        "value": "450 h"
+      },
+      "takeaway": "Build the schedule to 450 hours, then check labor % daily, not when payroll arrives.",
+      "caption": "Labor scheduling for restaurant, coffee shop and salon owners: turn a labor % target into hours.\n27% of $30,000 of forecast sales = $8,100 of wages.\n$8,100 ÷ $18 an hour = 450 hours for the week, 64.3 a day.\nWages only: employer payroll tax and benefits come on top.",
+      "hashtags": ["#laborcost", "#franchisebusiness", "#restaurantowner", "#coffeebusiness", "#businessowner"],
+      "thumbOffsetMs": 12500
+    },
+    {
+      "date": "2026-11-13",
+      "slot": "evening",
+      "type": "feature",
+      "slug": "which-store-drags",
+      "theme": "sage-wash",
+      "keyword": "restaurant group dashboard",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "headline": "Which store is dragging the group this month?",
+      "sub": "The group's totals, then each store's numbers for the same period",
+      "demoNote": "Demo company · made-up numbers",
+      "recording": "overview-stores",
+      "claims": [
+        {
+          "text": "The group's sales, labor and profit for the period, then every store side by side",
+          "evidence": "src/components/overview/"
+        },
+        {
+          "text": "Periods: the last 7 or 30 days, month to date, last month or any month",
+          "evidence": "src/lib/ui/period.ts"
+        }
+      ],
+      "cta": "Try the demo: demo.rheafi.com",
+      "caption": "Restaurant group dashboard for multi-unit franchise owners: find the store pulling profit down.\nBack to the Overview in Rhea's demo: 15 bagel stores of sample data, last 30 days.\nThe group's totals first, then each store's net revenue, labor %, COGS and net income.\nStores 106 and 111 run high labor on purpose, so you can see what over target looks like.",
+      "hashtags": ["#franchiseaccounting", "#franchiselife", "#restaurateur", "#bookkeeping", "#accountingtips"],
+      "thumbOffsetMs": 15100
+    },
+    {
+      "date": "2026-11-14",
+      "slot": "morning",
+      "type": "tip",
+      "slug": "collect-w9s-now",
+      "theme": "sage",
+      "keyword": "1099 prep",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "taxAdjacent": true,
+      "hook": "January's 1099s start with November's W-9s.",
+      "title": "Collect W-9s now",
+      "lines": [
+        "List every vendor you paid this year.",
+        "Flag who may need a 1099.",
+        "Request missing W-9s before December.",
+        "Ask your CPA which vendors count."
+      ],
+      "action": "Before December",
+      "takeaway": "January deadlines are easier with every W-9 on file. Which vendors need a 1099? Ask your CPA.",
+      "caption": "1099 prep for small business owners: collect vendors' W-9s now, not in January.\nList every vendor your LLCs paid this year and flag who may need a 1099.\nRequest any missing W-9 now, while there's time to chase it.\nWhich vendors and payments count is your CPA's call: ask your CPA.",
+      "hashtags": ["#accountspayable", "#restaurantindustry", "#coffeeshopowner", "#salonowners", "#smallbusinessbookkeeping"],
+      "thumbOffsetMs": 14100
+    },
+    {
+      "date": "2026-11-14",
+      "slot": "evening",
+      "type": "myth",
+      "slug": "deposits-equal-sales",
+      "theme": "paper",
+      "keyword": "merchant deposits vs sales",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "Our deposits should equal our sales.",
+      "fact": "Deposits are sales minus fees, later.",
+      "why": [
+        "Processors take their fees before paying out.",
+        "Weekend sales often arrive together on Monday.",
+        "Cash, tips and refunds move the totals."
+      ],
+      "takeaway": "Expect the gap: fees, timing and refunds explain it. Anything else is a question for the processor.",
+      "caption": "Merchant deposits vs sales for restaurant, coffee shop and salon owners: why they never match exactly.\nCard deposits arrive after the sale, net of the processor's fees.\nWeekend batches often land together, and refunds and tips move the totals.\nFees, timing and refunds explain the gap; anything they don't explain is worth a call to the processor.",
+      "hashtags": ["#bankreconciliation", "#franchising", "#qsr", "#coffeeshopbusiness", "#bookkeepingtips"],
+      "thumbOffsetMs": 4200
+    },
+    {
+      "date": "2026-11-15",
+      "slot": "morning",
+      "type": "myth",
+      "slug": "comps-are-free",
+      "theme": "ink",
+      "keyword": "comps and voids",
+      "audiences": ["franchise", "restaurant", "coffee"],
+      "hook": "A comp doesn't cost anything. It's goodwill.",
+      "fact": "Every comp costs product and labor.",
+      "why": [
+        "The food, cup and labor were still paid for.",
+        "Comps without a reason code can't be reviewed.",
+        "Track comps by store and by employee."
+      ],
+      "takeaway": "Give comps on purpose, with a reason. Then read them weekly by store.",
+      "caption": "Comps and voids for restaurant and coffee shop owners: what a free item really costs a store.\nA comped item still used food, packaging and someone's time.\nComps with a reason code can be reviewed by store and by employee.\nComp on purpose, then read the list every week.",
+      "hashtags": ["#foodcost", "#franchisee", "#restaurantowners", "#cafeowner", "#smallbusinessowner"],
+      "thumbOffsetMs": 4200
+    },
+    {
+      "date": "2026-11-15",
+      "slot": "evening",
+      "type": "feature",
+      "slug": "bills-approved",
+      "theme": "sage-wash",
+      "keyword": "bill approval",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "headline": "Bills approved before they're paid",
+      "sub": "Coded, approved and matched to the statement line that paid them",
+      "demoNote": "Demo company · made-up numbers",
+      "recording": "bills",
+      "claims": [
+        {
+          "text": "Vendors' bills by email, photo or typing; approvals, with the owner above a threshold; AP aging",
+          "evidence": "src/core/bills/"
+        },
+        {
+          "text": "Payments matched to statement lines; what you owe by LLC",
+          "evidence": "src/server/bills.ts"
+        }
+      ],
+      "cta": "Try the demo: demo.rheafi.com",
+      "caption": "Bill approval and accounts payable for multi-store owners: what's due, approved and paid.\nBills in Rhea's demo, on sample data: what to approve, what is due and what was paid.\nBills come in by email, photo or typing; the owner approves anything above a set amount.\nEach payment is matched to the statement line that paid it.",
+      "hashtags": ["#accountspayable", "#multiunitfranchisee", "#salonownerlife", "#smallbusinessfinance", "#smallbusinesstips"],
+      "thumbOffsetMs": 5600
+    },
+    {
+      "date": "2026-11-16",
+      "slot": "morning",
+      "type": "owner-math",
+      "slug": "discount-rate",
+      "theme": "sage",
+      "keyword": "discount rate",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "Your discounts cost $140 a day.",
+      "term": "Discount rate",
+      "formula": "Discounts ÷ gross sales",
+      "inputs": {
+        "Gross sales this month": "$120,000",
+        "Discounts this month": "$4,200",
+        "Days in the month": "30",
+        "Months in a year": "12"
+      },
+      "steps": [
+        {
+          "label": "Discounts this month",
+          "value": "$4,200"
+        },
+        {
+          "label": "Gross sales this month",
+          "value": "$120,000"
+        },
+        {
+          "label": "Per day: $4,200 ÷ 30",
+          "value": "$140"
+        }
+      ],
+      "result": {
+        "label": "Discount rate",
+        "value": "3.5%"
+      },
+      "takeaway": "That's $140 a day, $50,400 a year at this pace. Know which codes and promos drive it.",
+      "caption": "Discount rate for restaurant, coffee shop and salon owners: what promos and staff discounts cost a day.\n$4,200 of discounts ÷ $120,000 of gross sales = 3.5%.\nThat is $140 a day, or $50,400 a year at this pace.\nRead discounts by code and by employee each week.",
+      "hashtags": ["#profitmargin", "#restaurantmanagement", "#coffeeshopowners", "#salonowner", "#bookkeeping"],
+      "thumbOffsetMs": 12500
+    },
+    {
+      "date": "2026-11-16",
+      "slot": "evening",
+      "type": "tip",
+      "slug": "data-gaps-first",
+      "theme": "paper",
+      "keyword": "daily sales reports",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "One missing day makes labor % lie.",
+      "title": "Check the data first",
+      "lines": [
+        "A store with no sales posted looks like zero.",
+        "Missing time cards make labor look cheap.",
+        "Confirm every store's day is in.",
+        "Then read the numbers."
+      ],
+      "action": "Data first",
+      "takeaway": "Before acting on a number, make sure every store's sales and time cards are in.",
+      "caption": "Daily sales reports for multi-store owners: check every store's data is in before reading the numbers.\nA store whose sales didn't import looks like a terrible day.\nMissing time cards make labor look cheap; a missing deposit looks like lost money.\nCheck every store's data is in, then read the numbers.",
+      "hashtags": ["#businesstips", "#franchiselife", "#restaurantbusiness", "#businessfinance", "#accountingtips"],
+      "thumbOffsetMs": 14100
+    },
+    {
+      "date": "2026-11-17",
+      "slot": "morning",
+      "type": "owner-math",
+      "slug": "delivery-commission",
+      "theme": "ink",
+      "keyword": "delivery app commission",
+      "audiences": ["franchise", "restaurant", "coffee"],
+      "hook": "A delivery order keeps 43.0% before labor.",
+      "term": "Delivery app margin",
+      "formula": "Sales − commission − food and packaging",
+      "inputs": {
+        "Delivery app sales this month": "$18,000",
+        "Commission rate": "25%",
+        "Food and packaging cost": "32%"
+      },
+      "steps": [
+        {
+          "label": "Commission: 25% × $18,000",
+          "value": "$4,500"
+        },
+        {
+          "label": "Food and packaging: 32%",
+          "value": "$5,760"
+        },
+        {
+          "label": "Left before labor and rent",
+          "value": "$7,740"
+        }
+      ],
+      "result": {
+        "label": "Kept of each delivery dollar",
+        "value": "43.0%"
+      },
+      "takeaway": "In-store, the same dollar keeps 68.0% before labor. Price delivery menus with the 25% in mind.",
+      "caption": "Delivery app commission math for restaurant and coffee shop owners: what you keep per order.\n$18,000 of delivery app sales at a 25% commission = $4,500.\nAfter 32% food and packaging, $7,740 is left: 43.0% of those sales.\nIn-store, the same sale keeps 68.0% before labor.",
+      "hashtags": ["#menupricing", "#franchiseowner", "#restaurantowner", "#coffeebusiness", "#businessowner"],
+      "thumbOffsetMs": 12500
+    },
+    {
+      "date": "2026-11-17",
+      "slot": "evening",
+      "type": "feature",
+      "slug": "year-end-package",
+      "theme": "sage-wash",
+      "keyword": "year-end bookkeeping package",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "taxAdjacent": true,
+      "headline": "Hand your CPA one year-end package per LLC",
+      "sub": "Trial balance with tax lines, P&L by month and store, and what's missing",
+      "demoNote": "Demo company · made-up numbers",
+      "recording": "year-end",
+      "claims": [
+        {
+          "text": "A year-end package per LLC and year: a completeness verdict, the trial balance with tax lines, the P&L by month and store, schedules",
+          "evidence": "src/core/year-end/"
+        },
+        {
+          "text": "What Rhea doesn't know, listed, and one .xlsx plus CSVs",
+          "evidence": "/ledger/year-end"
+        },
+        {
+          "text": "Rhea prepares lists, reports and files for the CPA; it never files anything",
+          "evidence": "docs/PICKUP.md"
+        }
+      ],
+      "cta": "Try the demo: demo.rheafi.com",
+      "caption": "Year-end bookkeeping package for small business owners with several LLCs: one per LLC for your CPA.\nLedger, Year-end in Rhea's demo, on sample data: one LLC's year so far.\nA completeness verdict, the trial balance with tax lines, the P&L by month and store, and what Rhea doesn't know.\nRhea prepares it and files nothing. What your return needs: ask your CPA.",
+      "hashtags": ["#accountingsoftware", "#franchising", "#restaurateur", "#salonbusiness", "#bookkeepingtips"],
+      "thumbOffsetMs": 10800
+    },
+    {
+      "date": "2026-11-18",
+      "slot": "morning",
+      "type": "owner-math",
+      "slug": "minimum-crew",
+      "theme": "sage",
+      "keyword": "minimum crew labor cost",
+      "audiences": ["franchise", "restaurant", "coffee"],
+      "hook": "Why do slow stores always run high labor?",
+      "term": "Minimum crew labor %",
+      "formula": "Crew × hours open × wage ÷ the day's sales",
+      "inputs": {
+        "Minimum crew": "3 people",
+        "Hours open": "12 h",
+        "Average wage": "$16 an hour",
+        "Busy day sales": "$3,600",
+        "Slow day sales": "$1,800"
+      },
+      "steps": [
+        {
+          "label": "Crew hours: 3 people × 12 h",
+          "value": "36 h"
+        },
+        {
+          "label": "Crew cost: 36 h × $16",
+          "value": "$576"
+        },
+        {
+          "label": "Labor % on a $3,600 day",
+          "value": "16.0%"
+        }
+      ],
+      "result": {
+        "label": "Same crew on a $1,800 day",
+        "value": "32.0%"
+      },
+      "takeaway": "Labor can't drop below the minimum crew. Slow stores need sales or shorter hours, not tighter schedules.",
+      "caption": "Minimum crew labor cost for restaurant, coffee shop and franchise owners: why slow stores run hot.\n3 people × 12 hours × $16 = $576 a day, whatever the sales.\nOn a $3,600 day that is 16.0% labor; on a $1,800 day, 32.0%.\nA slow store's fix is sales or hours open, not just the schedule.",
+      "hashtags": ["#laborcost", "#franchisebusiness", "#restaurantindustry", "#coffeeshopbusiness", "#smallbusinessbookkeeping"],
+      "thumbOffsetMs": 12500
+    },
+    {
+      "date": "2026-11-18",
+      "slot": "evening",
+      "type": "myth",
+      "slug": "more-stores-more-profit",
+      "theme": "paper",
+      "keyword": "multi-unit growth",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "Another store means more profit.",
+      "fact": "Each store must cover its overhead.",
+      "why": [
+        "More stores add managers, office time and travel.",
+        "A thin store can cost more than it earns.",
+        "Know each store's profit before buying the next."
+      ],
+      "takeaway": "Grow from stores that earn their share of overhead, not from total sales.",
+      "caption": "Multi-unit growth for franchise owners: why adding a store doesn't always add profit.\nEach new store adds area management, office hours and travel, not just sales.\nA store that earns less than its share of that overhead lowers group profit.\nKnow every store's profit after overhead before adding the next one.",
+      "hashtags": ["#profitmargin", "#franchisee", "#coffeeshopowner", "#salonowners", "#smallbusinessowner"],
+      "thumbOffsetMs": 4200
+    },
+    {
+      "date": "2026-11-19",
+      "slot": "morning",
+      "type": "owner-math",
+      "slug": "fees-on-tax-and-tips",
+      "theme": "ink",
+      "keyword": "credit card fees on sales tax",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "You pay card fees on money that isn't yours.",
+      "term": "Card fees on tax and tips",
+      "formula": "Fee rate × (sales tax + tips charged on cards)",
+      "inputs": {
+        "Card net sales this month": "$80,000",
+        "Sales tax rate": "8.25%",
+        "Card tips this month": "$6,000",
+        "Card fee rate": "2.9%",
+        "Months in a year": "12"
+      },
+      "steps": [
+        {
+          "label": "Sales tax on card sales, 8.25%",
+          "value": "$6,600"
+        },
+        {
+          "label": "Tips charged on cards",
+          "value": "$6,000"
+        },
+        {
+          "label": "Charged on, but not yours",
+          "value": "$12,600"
+        }
+      ],
+      "result": {
+        "label": "Fees on it this month at 2.9%",
+        "value": "$365.40"
+      },
+      "takeaway": "That's $4,384.80 a year in fees on money you only pass through.",
+      "caption": "Credit card fees on sales tax and tips: a hidden cost for restaurant, coffee shop and salon owners.\n$80,000 of card sales carries $6,600 of 8.25% sales tax and $6,000 of tips.\nThe processor charges 2.9% on all of it: $365.40 a month on money that isn't yours.\nThat is $4,384.80 a year, on money that goes to the state and to your team.",
+      "hashtags": ["#creditcardfees", "#qsr", "#cafeowner", "#smallbusinessfinance", "#smallbusinesstips"],
+      "thumbOffsetMs": 12500
+    },
+    {
+      "date": "2026-11-19",
+      "slot": "evening",
+      "type": "feature",
+      "slug": "balance-sheet-per-llc",
+      "theme": "sage-wash",
+      "keyword": "balance sheet",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "headline": "Each LLC's balance sheet, from its own books",
+      "sub": "Bank balances beside their statements, and what each LLC owes",
+      "demoNote": "Demo company · made-up numbers",
+      "recording": "balance-sheet",
+      "claims": [
+        {
+          "text": "A balance sheet per LLC and month from Rhea's ledger: assets, liabilities and equity, beside the month before",
+          "evidence": "src/core/reports/balance-sheet.ts"
+        },
+        {
+          "text": "Balances start from opening balances typed once on Setup",
+          "evidence": "src/server/opening-balances.ts"
+        },
+        {
+          "text": "Each bank and card account shows its statement balance and the difference to the books",
+          "evidence": "src/core/reports/balance-sheet.ts"
+        }
+      ],
+      "cta": "Try the demo: demo.rheafi.com",
+      "caption": "Balance sheet per LLC for multi-unit franchise owners: what each store's company owns and owes.\nLedger, Balance sheet in Rhea's demo, on sample data: one LLC at the end of September.\nEach bank and card account sits beside its statement balance, with the difference to the books.\nSales tax, tips, gift cards and wages not yet paid show as what the LLC owes, not as profit.\nLiabilities plus equity equal assets, checked on the page.",
+      "hashtags": ["#bookkeepingsoftware", "#multiunitfranchisee", "#salonownerlife", "#bookkeeping", "#accountingtips"],
+      "thumbOffsetMs": 15000
+    },
+    {
+      "date": "2026-11-20",
+      "slot": "morning",
+      "type": "owner-math",
+      "slug": "wage-increase-price",
+      "theme": "sage",
+      "keyword": "minimum wage increase",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "A $1 raise needs a 1.8% price increase.",
+      "term": "Price to cover a raise",
+      "formula": "Raise × hours, plus employer tax, ÷ weekly sales",
+      "inputs": {
+        "Raise per hour": "$1",
+        "Hours a week": "500 h",
+        "Employer payroll tax": "7.65%",
+        "Sales a week": "$30,000",
+        "Weeks in a year": "52"
+      },
+      "steps": [
+        {
+          "label": "$1 × 500 hours a week",
+          "value": "$500"
+        },
+        {
+          "label": "With 7.65% employer tax",
+          "value": "$538.25"
+        },
+        {
+          "label": "÷ $30,000 of weekly sales",
+          "value": "0.018"
+        }
+      ],
+      "result": {
+        "label": "Price increase that covers it",
+        "value": "1.8%"
+      },
+      "takeaway": "Per store that's $27,989 a year. Price for it before the raise, if traffic holds.",
+      "caption": "Minimum wage increase math for restaurant, coffee shop and salon owners: the price change that covers it.\nA $1 raise on 500 hours a week is $500, or $538.25 with 7.65% employer tax.\nOn $30,000 of weekly sales, prices up 1.8% cover it, if traffic holds.\nPer store, $27,989 a year.",
+      "hashtags": ["#menupricing", "#restaurantowners", "#coffeeshopowners", "#businessfinance", "#businessowner"],
+      "thumbOffsetMs": 12500
+    },
+    {
+      "date": "2026-11-20",
+      "slot": "evening",
+      "type": "tip",
+      "slug": "personal-off-the-business-card",
+      "theme": "paper",
+      "keyword": "owner draws",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "taxAdjacent": true,
+      "hook": "Is your personal spending on the business card?",
+      "title": "Keep personal off business",
+      "lines": [
+        "Personal charges on business cards blur every month.",
+        "Each one has to be found and reclassified.",
+        "Pay yourself by owner draw or payroll instead.",
+        "Ask your CPA how to pay yourself."
+      ],
+      "action": "Separate cards",
+      "takeaway": "Clean business cards make cleaner books and an easier year-end. How to pay yourself: ask your CPA.",
+      "caption": "Owner draws and personal spending: keep them off the business card, a tip for small business owners.\nPersonal charges on a business card have to be found and moved every month.\nKeep personal spending on personal cards; take money out as a draw or as pay.\nWhich way to pay yourself depends on how the LLC is taxed: ask your CPA.",
+      "hashtags": [
+        "#cashflowmanagement",
+        "#restaurantbusiness",
+        "#salonowner",
+        "#smallbusinessbookkeeping",
+        "#smallbusinessowner"
+      ],
+      "thumbOffsetMs": 14100
+    },
+    {
+      "date": "2026-11-21",
+      "slot": "morning",
+      "type": "myth",
+      "slug": "year-end-starts-in-january",
+      "theme": "ink",
+      "keyword": "year-end bookkeeping",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "taxAdjacent": true,
+      "hook": "Year-end is January's problem.",
+      "fact": "Year-end starts in November.",
+      "why": [
+        "Missing W-9s take weeks to collect.",
+        "Unreconciled months pile up by December.",
+        "Your CPA needs clean books, not a box."
+      ],
+      "takeaway": "Close October and November now, collect W-9s, and ask your CPA what else they need.",
+      "caption": "Year-end bookkeeping for small business owners: why the work starts in November, not January.\nW-9s, reconciled accounts and closed months take weeks, not days.\nStart now and December stays a normal month.\nWhat your CPA needs for your LLCs' returns is their call: ask your CPA.",
+      "hashtags": ["#monthendclose", "#franchising", "#restaurantmanagement", "#coffeebusiness", "#smallbusinessbookkeeping"],
+      "thumbOffsetMs": 4200
+    },
+    {
+      "date": "2026-11-21",
+      "slot": "evening",
+      "type": "feature",
+      "slug": "labor-then-payroll",
+      "theme": "sage-wash",
+      "keyword": "labor cost tracking",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "headline": "Time-clock labor daily, then payroll as paid",
+      "sub": "Drop any payroll provider's summary; it replaces the estimate for that pay period",
+      "demoNote": "Demo company · made-up numbers",
+      "recording": "labor-payroll",
+      "claims": [
+        {
+          "text": "Hours, overtime and labor % per store per day from the time clock",
+          "evidence": "src/core/labor/"
+        },
+        {
+          "text": "Any provider's payroll summary file (company totals, never a person's pay) replaces the time-clock estimate; a register that lists people is refused",
+          "evidence": "src/core/payroll/"
+        },
+        {
+          "text": "Connect with Gusto is off until Rhea has Gusto's developer keys",
+          "evidence": "docs/gusto-setup.md"
+        }
+      ],
+      "cta": "Try the demo: demo.rheafi.com",
+      "caption": "Labor cost tracking for restaurant, coffee shop and salon owners: daily estimate, then payroll as paid.\nLabor in Rhea's demo, on sample data: each store's hours and labor % every day from the time clock.\nWhen payroll runs, drop your provider's summary: company totals only, never a person's pay.\nIt replaces the estimate for that pay period, so nothing counts twice.\nConnect with Gusto is built but switched off for now; the summary file works with any provider.",
+      "hashtags": ["#payroll", "#franchiseowner", "#restaurateur", "#salonbusiness", "#smallbusinessowner"],
+      "thumbOffsetMs": 11900
+    },
+    {
+      "date": "2026-11-22",
+      "slot": "morning",
+      "type": "tip",
+      "slug": "budget-each-store",
+      "theme": "sage",
+      "keyword": "sales budget by store",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "Is each store on pace this month?",
+      "title": "Budget sales by store",
+      "lines": [
+        "Set each store's sales target by month.",
+        "Use the store's own history, not a group average.",
+        "Check pace mid-month, not at month-end."
+      ],
+      "action": "Mid-month check",
+      "takeaway": "A store off pace on the 15th still has two weeks to change it.",
+      "caption": "Sales budget by store for multi-store owners: set each month's target and check pace mid-month.\nGive each store a sales budget for every month, built from its own history.\nCheck pace mid-month: sales so far against the budget, with days left.\nOff pace on the 15th still leaves two weeks to act.",
+      "hashtags": ["#profitmargin", "#restaurantowner", "#coffeeshopbusiness", "#bookkeeping", "#accountingtips"],
+      "thumbOffsetMs": 12500
+    },
+    {
+      "date": "2026-11-22",
+      "slot": "evening",
+      "type": "myth",
+      "slug": "cpa-keeps-the-books",
+      "theme": "paper",
+      "keyword": "bookkeeper vs CPA",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "My CPA does my bookkeeping.",
+      "fact": "Bookkeeping and tax prep differ.",
+      "why": [
+        "Bookkeeping records every day's money all year.",
+        "Tax prep uses those records once a year.",
+        "Many firms do both; ask which you pay for."
+      ],
+      "takeaway": "Know who keeps the books monthly and who prepares the return. Then ask each the right questions.",
+      "caption": "Bookkeeper vs CPA for small business owners: two different jobs, and what each one does.\nA bookkeeper records the money every day and month; a CPA uses those books for returns and advice.\nSome firms do both, some only one.\nAsk yours which work you're paying for, monthly and at year-end.",
+      "hashtags": ["#businesstips", "#franchisebusiness", "#coffeeshopowner", "#salonowners", "#smallbusinessfinance"],
+      "thumbOffsetMs": 4200
+    },
+    {
+      "date": "2026-11-23",
+      "slot": "morning",
+      "type": "owner-math",
+      "slug": "holiday-traffic-hours",
+      "theme": "ink",
+      "keyword": "holiday staffing",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "A 20% busier week needs how many hours?",
+      "term": "Holiday staffing at your SPLH",
+      "formula": "Sales ÷ sales per labor hour",
+      "inputs": {
+        "Normal week sales": "$30,000",
+        "Holiday week lift": "20%",
+        "Sales per labor hour target": "$65"
+      },
+      "steps": [
+        {
+          "label": "Normal week: $30,000 ÷ $65",
+          "value": "461.5 h"
+        },
+        {
+          "label": "Holiday week: $30,000 + 20%",
+          "value": "$36,000"
+        },
+        {
+          "label": "Holiday hours: $36,000 ÷ $65",
+          "value": "553.8 h"
+        }
+      ],
+      "result": {
+        "label": "Extra hours to schedule",
+        "value": "92.3 h"
+      },
+      "takeaway": "Add them where the rush is, by daypart, then check SPLH held at $65.",
+      "caption": "Holiday staffing for restaurant, coffee shop and salon owners: how many hours a sales lift needs.\n$30,000 a week at $65 of sales per labor hour = 461.5 hours.\nA 20% holiday lift is $36,000: 553.8 hours at the same $65.\nThat is 92.3 more hours; put them where the rush is.",
+      "hashtags": ["#laborcost", "#franchisee", "#restaurantindustry", "#cafeowner", "#bookkeepingtips"],
+      "thumbOffsetMs": 12500
+    },
+    {
+      "date": "2026-11-23",
+      "slot": "evening",
+      "type": "feature",
+      "slug": "sales-tax-collected-vs-paid",
+      "theme": "sage-wash",
+      "keyword": "sales tax report",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "taxAdjacent": true,
+      "headline": "Sales tax collected vs paid, by month",
+      "sub": "What each LLC's POS collected beside what its bank shows it paid",
+      "demoNote": "Demo company · made-up numbers",
+      "recording": "sales-tax",
+      "claims": [
+        {
+          "text": "Sales tax your POS collected and what your bank statements show you paid, by month, tied to the sales tax liability account",
+          "evidence": "src/core/sales-tax/"
+        },
+        {
+          "text": "Filing periods per LLC, Mark filed and reminders; Rhea never files",
+          "evidence": "/ledger/sales-tax"
+        }
+      ],
+      "cta": "Try the demo: demo.rheafi.com",
+      "caption": "Sales tax report for multi-store owners: collected vs paid, by LLC and month.\nLedger, Sales tax in Rhea's demo, on sample data for one Texas LLC.\nWhat the POS collected each month beside what the bank statements show was paid.\nA report, not a filing: Rhea files nothing. Rates and due dates: ask your CPA.",
+      "hashtags": ["#salestax", "#multiunitfranchisee", "#salonownerlife", "#businessfinance", "#smallbusinesstips"],
+      "thumbOffsetMs": 7400
+    },
+    {
+      "date": "2026-11-24",
+      "slot": "morning",
+      "type": "owner-math",
+      "slug": "loaded-hourly-cost",
+      "theme": "sage",
+      "keyword": "loaded labor cost per hour",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "What does a $17 hour really cost?",
+      "term": "Loaded hourly cost",
+      "formula": "Wage + payroll tax + workers' comp + benefits",
+      "inputs": {
+        "Hourly wage": "$17",
+        "Employer payroll tax": "7.65%",
+        "Workers' comp rate": "1.5%",
+        "Benefits per hour": "$1.20"
+      },
+      "steps": [
+        {
+          "label": "Employer payroll tax, 7.65%",
+          "value": "$1.30"
+        },
+        {
+          "label": "Workers' comp at 1.5%",
+          "value": "$0.26"
+        },
+        {
+          "label": "Benefits per hour",
+          "value": "$1.20"
+        }
+      ],
+      "result": {
+        "label": "One hour, fully loaded",
+        "value": "$19.76"
+      },
+      "takeaway": "16.2% above the wage. Set targets and prices on $19.76, not $17.",
+      "caption": "Loaded labor cost per hour for restaurant, coffee shop and salon owners: what $17 an hour really costs.\n$17 wage + $1.30 payroll tax + $0.26 workers' comp + $1.20 benefits.\n= $19.76 an hour, 16.2% above the wage.\nYour workers' comp and benefits differ: use your own rates.",
+      "hashtags": ["#payroll", "#franchiselife", "#qsr", "#coffeeshopowners", "#businessowner"],
+      "thumbOffsetMs": 12500
+    },
+    {
+      "date": "2026-11-24",
+      "slot": "evening",
+      "type": "tip",
+      "slug": "approve-bills-first",
+      "theme": "paper",
+      "keyword": "accounts payable",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "Who approved that invoice before it was paid?",
+      "title": "Approve bills before paying",
+      "lines": [
+        "Every bill gets coded to an account.",
+        "Managers approve their store's bills.",
+        "Bills over your limit come to you.",
+        "Pay only what's approved."
+      ],
+      "action": "Approve, then pay",
+      "takeaway": "Write the approval limits down once. Then nobody pays a bill nobody checked.",
+      "caption": "Accounts payable for multi-store owners: set who approves which bills before anything is paid.\nCode every bill to an account and the store it belongs to.\nManagers approve their own store's bills; anything over your limit comes to you.\nPay only what's approved, and the books explain every payment.\nWhere is your approval limit set?",
+      "hashtags": ["#accountspayable", "#franchiselife", "#restaurantbusiness", "#salonowner", "#bookkeepingtips"],
+      "thumbOffsetMs": 14100
+    },
+    {
+      "date": "2026-11-25",
+      "slot": "morning",
+      "type": "owner-math",
+      "slug": "cash-in-the-safe",
+      "theme": "ink",
+      "keyword": "cash handling",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "How much cash sits in your safes tonight?",
+      "term": "Cash waiting for deposit",
+      "formula": "Cash sales a day × days between deposits",
+      "inputs": {
+        "Cash sales a day": "$450",
+        "Days between bank deposits": "3",
+        "Stores": "12"
+      },
+      "steps": [
+        {
+          "label": "Cash sales a day, one store",
+          "value": "$450"
+        },
+        {
+          "label": "In its safe after 3 days",
+          "value": "$1,350"
+        },
+        {
+          "label": "12 stores depositing daily",
+          "value": "$5,400"
+        }
+      ],
+      "result": {
+        "label": "In 12 safes on deposit day",
+        "value": "$16,200"
+      },
+      "takeaway": "Deposit daily and it falls to $5,400, and a short drawer shows up the next morning.",
+      "caption": "Cash handling for restaurant, coffee shop and salon owners: how much cash waits in the safe.\n$450 of cash sales a day, deposited every 3 days = $1,350 in each safe.\nAcross 12 stores: $16,200 that no bank statement shows yet.\nDaily deposits cut it to $5,400 and make a short drawer show up the next morning.",
+      "hashtags": ["#cashflowmanagement", "#franchising", "#restaurateur", "#coffeebusiness", "#accountingtips"],
+      "thumbOffsetMs": 12500
+    },
+    {
+      "date": "2026-11-25",
+      "slot": "evening",
+      "type": "feature",
+      "slug": "guided-demo-tour",
+      "theme": "sage-wash",
+      "keyword": "bookkeeping software demo",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "headline": "Take the guided tour of a 15-store group",
+      "sub": "Sample data and a guided tour, or start a blank practice company",
+      "demoNote": "Demo company · made-up numbers",
+      "recording": "demo-tour",
+      "claims": [
+        {
+          "text": "A guided tour in 12 steps through the 15-store demo group",
+          "evidence": "src/core/tour/steps.ts"
+        },
+        {
+          "text": "A practice company: blank, yours to set up, deleted after 2 hours",
+          "evidence": "src/server/demo-sandbox.ts"
+        },
+        {
+          "text": "A 7-day free trial and a 60-day money-back guarantee, as rheafi.com/pricing states",
+          "evidence": "rhea-site/src/lib/pricing.ts"
+        }
+      ],
+      "cta": "Try the demo: demo.rheafi.com",
+      "caption": "Bookkeeping software demo for multi-store franchise owners: a guided tour on sample data.\ndemo.rheafi.com: look around a made-up 15-store group with a guided tour, or start a blank practice company.\nPricing is public on rheafi.com, with a 7-day free trial and a 60-day money-back guarantee.\nPilots for groups of 4 or more stores are open now.",
+      "hashtags": ["#bookkeepingsoftware", "#multiunitfranchisee", "#restaurantowners", "#salonbusiness", "#bookkeeping"],
+      "hashtagHints": ["#multiunitfranchisee"],
+      "thumbOffsetMs": 6600
+    },
+    {
+      "date": "2026-11-26",
+      "slot": "morning",
+      "type": "owner-math",
+      "slug": "closed-day-cost",
+      "theme": "sage",
+      "keyword": "closing for a holiday",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "What does closing for the holiday cost?",
+      "term": "Cost of a closed day",
+      "formula": "Lost sales × margin after variable costs",
+      "inputs": {
+        "Fixed costs per month": "$21,000",
+        "Days in the month": "30",
+        "Average day's sales": "$3,200",
+        "Margin after food, paper and hourly labor": "35%"
+      },
+      "steps": [
+        {
+          "label": "Fixed costs per day, open or closed",
+          "value": "$700"
+        },
+        {
+          "label": "Sales lost on the closed day",
+          "value": "$3,200"
+        },
+        {
+          "label": "Margin on those sales",
+          "value": "35%"
+        }
+      ],
+      "result": {
+        "label": "Profit one closed day costs",
+        "value": "$1,120"
+      },
+      "takeaway": "Rent doesn't close: the other days carry the $700. Plan it into the month, then enjoy the day.",
+      "caption": "Closing for a holiday: what one closed day costs restaurant, coffee shop and salon owners.\n$21,000 of fixed costs is $700 a day, open or closed.\nClosed, the day's $3,200 of sales and its 35% margin are gone: $1,120 of profit.\nPlan it into the month, then enjoy the day.",
+      "hashtags": ["#profitmargin", "#franchiseowner", "#restaurantmanagement", "#coffeeshopbusiness", "#smallbusinesstips"],
+      "thumbOffsetMs": 12500
+    },
+    {
+      "date": "2026-11-26",
+      "slot": "evening",
+      "type": "myth",
+      "slug": "holiday-fixes-the-year",
+      "theme": "paper",
+      "keyword": "holiday sales",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "The holidays will make up for the year.",
+      "fact": "One week can't carry fifty-two.",
+      "why": [
+        "Rushes bring overtime and extra shifts.",
+        "Fixed costs run every week of the year.",
+        "A busy week can still miss its labor target."
+      ],
+      "takeaway": "Enjoy the rush, then judge the year by its months.",
+      "caption": "Holiday sales for restaurant, coffee shop and salon owners: why one big week can't fix a slow year.\nA holiday rush brings sales, and also overtime and extra shifts.\nRent and other fixed costs ran all year, not just this week.\nJudge the year month by month; the rush is one good week of it.",
+      "hashtags": ["#laborcost", "#restaurantindustry", "#salonowners", "#bookkeepingtips", "#smallbusinessfinance"],
+      "thumbOffsetMs": 4200
+    },
+    {
+      "date": "2026-11-27",
+      "slot": "morning",
+      "type": "owner-math",
+      "slug": "overhead-per-store",
+      "theme": "ink",
+      "keyword": "overhead per store",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "Your office takes 58.8% of this store's profit.",
+      "term": "Overhead per store",
+      "formula": "Group overhead ÷ stores, against four-wall profit",
+      "inputs": {
+        "Group overhead a month": "$18,000",
+        "Stores": "9",
+        "One store's four-wall profit a month": "$3,400"
+      },
+      "steps": [
+        {
+          "label": "Overhead share: $18,000 ÷ 9",
+          "value": "$2,000"
+        },
+        {
+          "label": "This store's four-wall profit",
+          "value": "$3,400"
+        },
+        {
+          "label": "Left after its share",
+          "value": "$1,400"
+        }
+      ],
+      "result": {
+        "label": "Share of its profit overhead takes",
+        "value": "58.8%"
+      },
+      "takeaway": "Every store pays for the office, area manager and books. Know which ones cover their share.",
+      "caption": "Overhead per store for multi-unit franchise owners: what's left after the office and area manager.\n$18,000 of group overhead ÷ 9 stores = $2,000 a store each month.\nA store with $3,400 of four-wall profit keeps $1,400 after its share.\nOverhead takes 58.8% of that store's profit.",
+      "hashtags": ["#restaurantaccounting", "#franchisebusiness", "#coffeeshopowner", "#businessfinance", "#businessowner"],
+      "thumbOffsetMs": 12500
+    },
+    {
+      "date": "2026-11-27",
+      "slot": "evening",
+      "type": "feature",
+      "slug": "store-budgets-on-pace",
+      "theme": "sage-wash",
+      "keyword": "store sales budgets",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "headline": "Is each store on pace for its budget?",
+      "sub": "Monthly sales budgets per store, with the pace in words",
+      "demoNote": "Demo company · made-up numbers",
+      "recording": "budgets",
+      "claims": [
+        {
+          "text": "Sales budgets per store by month, with pace words and an on/off switch",
+          "evidence": "src/core/budgets/"
+        }
+      ],
+      "cta": "Try the demo: demo.rheafi.com",
+      "caption": "Store sales budgets for multi-unit franchise and coffee shop owners: on pace or off, mid-month.\nBudgets in Rhea's demo: a year of monthly sales budgets for every store, sample data.\nEach store's month so far against its budget, with days left and the pace.\nBudgets can be switched off; the numbers stay.",
+      "hashtags": ["#profitmargin", "#franchisee", "#cafeowner", "#smallbusinessbookkeeping", "#smallbusinessowner"],
+      "thumbOffsetMs": 11700
+    },
+    {
+      "date": "2026-11-28",
+      "slot": "morning",
+      "type": "myth",
+      "slug": "midnight-sales",
+      "theme": "sage",
+      "keyword": "business day vs calendar day",
+      "audiences": ["franchise", "restaurant", "coffee"],
+      "hook": "Sales after midnight belong to tomorrow.",
+      "fact": "They belong to the business day.",
+      "why": [
+        "A 1 a.m. sale is part of tonight's shift.",
+        "Splitting it breaks labor % for both days.",
+        "Set each store's business-day end hour."
+      ],
+      "takeaway": "Match sales to the shift that made them, and late-night labor % reads true.",
+      "caption": "Business day vs calendar day for restaurant and franchise owners open past midnight.\nA store open until 2 a.m. sells to tonight's shift, not tomorrow's.\nSplit at midnight, and both days' labor % read wrong.\nSet each store's business-day end hour and report by business day.",
+      "hashtags": ["#laborcost", "#franchiselife", "#restaurantowner", "#bookkeeping", "#accountingtips"],
+      "thumbOffsetMs": 4200
+    },
+    {
+      "date": "2026-11-28",
+      "slot": "evening",
+      "type": "tip",
+      "slug": "set-sales-tax-aside",
+      "theme": "paper",
+      "keyword": "sales tax tip",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "taxAdjacent": true,
+      "hook": "Is the sales tax you collected still there?",
+      "title": "Set sales tax aside",
+      "lines": [
+        "Sales tax collected belongs to the state.",
+        "It sits in your deposits until you pay it.",
+        "Move it to a separate account weekly.",
+        "Then the filing never meets an empty account."
+      ],
+      "action": "Every week",
+      "takeaway": "Collected tax is a debt from the day it's collected. Due dates and rules: ask your CPA.",
+      "caption": "Sales tax tip for restaurant, coffee shop and salon owners: set collected tax aside every week.\nThe sales tax in your deposits is owed to the state from the day it's collected.\nMove it to a separate account every week, by LLC.\nThen the return never meets an empty account. Rates, due dates and rules: ask your CPA.",
+      "hashtags": ["#salestax", "#restaurantbusiness", "#coffeeshopowners", "#salonownerlife", "#bookkeepingtips"],
+      "thumbOffsetMs": 14100
+    },
+    {
+      "date": "2026-11-29",
+      "slot": "morning",
+      "type": "tip",
+      "slug": "review-books-monthly",
+      "theme": "ink",
+      "keyword": "working with your bookkeeper",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "When did you last read your bookkeeper's P&L?",
+      "title": "Review the books monthly",
+      "lines": [
+        "Get each LLC's P&L every month.",
+        "Compare it with your own daily numbers.",
+        "Ask about any line that moved.",
+        "Agree, then close the month."
+      ],
+      "action": "Monthly, together",
+      "takeaway": "Your bookkeeper records the month. You know why it looked that way. Close it together.",
+      "caption": "Working with your bookkeeper: compare the books monthly, a tip for multi-store franchise owners.\nAsk for each LLC's P&L every month, not just at year-end.\nCompare it with what you saw day to day, and ask about any line that moved.\nAgree on the month, then close it together.",
+      "hashtags": ["#monthendclose", "#franchising", "#qsr", "#salonowner", "#smallbusinessfinance"],
+      "thumbOffsetMs": 14100
+    },
+    {
+      "date": "2026-11-29",
+      "slot": "evening",
+      "type": "feature",
+      "slug": "what-to-do-first",
+      "theme": "sage-wash",
+      "keyword": "daily flash report",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "headline": "Monday morning: what to do first, store by store",
+      "sub": "Labor over target, overtime pace and cash below bills due, worst first",
+      "demoNote": "Demo company · made-up numbers",
+      "recording": "synopsis",
+      "claims": [
+        {
+          "text": "A daily synopsis on the Overview and in the owner's email: what to do first, then the findings, worst first",
+          "evidence": "src/core/synopsis/"
+        },
+        {
+          "text": "The owner's morning email: one line per store, worst first",
+          "evidence": "src/server/owner-email.ts"
+        }
+      ],
+      "cta": "Try the demo: demo.rheafi.com",
+      "caption": "Daily flash report for franchise and restaurant owners: what needs you first on Monday morning.\nThe synopsis in Rhea's demo, on sample data: one Monday's read of 15 stores.\nIt starts with the one thing to do first, then labor over target, overtime pace, cash below bills due.\nThe same summary opens the owner's morning email.",
+      "hashtags": [
+        "#restauranttech",
+        "#multiunitfranchisee",
+        "#restaurantowners",
+        "#smallbusinessbookkeeping",
+        "#smallbusinesstips"
+      ],
+      "thumbOffsetMs": 5800
+    },
+    {
+      "date": "2026-11-30",
+      "slot": "morning",
+      "type": "owner-math",
+      "slug": "accrued-wages",
+      "theme": "sage",
+      "keyword": "accrued wages",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "Payday is in December. The wages are November's.",
+      "term": "Accrued wages",
+      "formula": "Wages earned but not yet paid, plus employer tax",
+      "inputs": {
+        "Wages earned a day": "$1,400",
+        "Pay-period days in November, paid in December": "9",
+        "Employer payroll tax": "7.65%"
+      },
+      "steps": [
+        {
+          "label": "Wages earned a day",
+          "value": "$1,400"
+        },
+        {
+          "label": "× 9 November days paid in December",
+          "value": "$12,600"
+        },
+        {
+          "label": "Employer tax at 7.65%",
+          "value": "$963.90"
+        }
+      ],
+      "result": {
+        "label": "November cost to book in November",
+        "value": "$13,564"
+      },
+      "takeaway": "Book wages in the month they're earned, or November looks $13,564 better than it was.",
+      "caption": "Accrued wages at month-end for restaurant, coffee shop and salon owners: payroll that belongs in November.\nPayday is in December, but 9 days of the pay period fall in November.\n9 × $1,400 a day = $12,600 of wages, plus $963.90 of 7.65% employer tax.\nBook $13,564 in November, or the month looks better than it was.",
+      "hashtags": ["#payroll", "#restaurateur", "#coffeeshopbusiness", "#salonbusiness", "#businessfinance"],
+      "thumbOffsetMs": 12500
+    },
+    {
+      "date": "2026-11-30",
+      "slot": "evening",
+      "type": "myth",
+      "slug": "utility-bills-vary",
+      "theme": "paper",
+      "keyword": "utility costs",
+      "audiences": ["franchise", "restaurant", "coffee", "salon"],
+      "hook": "Utilities cost about the same every month.",
+      "fact": "Utilities follow the weather and the meter.",
+      "why": [
+        "Heating and cooling swing with the season.",
+        "Many bills cover the month before.",
+        "A leak or a failing unit shows on the bill."
+      ],
+      "takeaway": "Compare each store's bill with its own month last year, not with last month.",
+      "caption": "Utility costs for restaurant, coffee shop and salon owners: why the bill isn't the same every month.\nHeating and cooling follow the weather, so winter and summer bills run higher.\nMany utility bills cover the month before, so a cold snap shows up a month later.\nCompare each store with its own month last year; a jump the weather can't explain is worth a look.\nWhich store's bill jumped last winter?",
+      "hashtags": ["#businesstips", "#franchiseowner", "#coffeebusiness", "#salonowners", "#businessowner"],
+      "thumbOffsetMs": 4200
+    }
+  ]
+}

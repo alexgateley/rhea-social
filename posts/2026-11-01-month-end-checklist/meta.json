@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-01",
+  "slot": "morning",
+  "type": "tip",
+  "slug": "month-end-checklist",
+  "theme": "paper",
+  "hook": "October's done. Are its books?",
+  "title": "A month-end checklist",
+  "action": "Before you close",
+  "thumbOffsetMs": 15700,
+  "captionFirstLine": "Month-end close checklist for multi-store owners: five things to confirm before October is closed.",
+  "hashtags": [
+    "#monthendclose",
+    "#franchisee",
+    "#restaurantmanagement",
+    "#bookkeeping",
+    "#smallbusinessowner"
+  ],
+  "cardHash": "e50b4c66d65a01255a5e7e96412cc5518722564c",
+  "durationSec": 25.583,
+  "frames": 614,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "tip",
+    "resultSize": 128,
+    "resultLines": 2,
+    "scale": 0.985,
+    "gap": 0.5,
+    "contentBottom": 1535,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T20:59:18.945Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
+}

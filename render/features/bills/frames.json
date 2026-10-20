@@ -1,0 +1,61 @@
+{
+  "id": "bills",
+  "title": "Bills: approved before they are paid, matched to the statement line that paid them",
+  "fps": 24,
+  "frames": 345,
+  "durationSec": 14.375,
+  "width": 860,
+  "height": 1864,
+  "viewport": {
+    "width": 430,
+    "height": 932,
+    "deviceScaleFactor": 2
+  },
+  "signIn": "viewer",
+  "scenes": [
+    {
+      "path": "/bills",
+      "note": "Bills: what to approve, what is due and what was paid, then Accounts Payable by LLC; tap the Paid tab",
+      "startFrame": 0,
+      "endFrame": 189,
+      "startSec": 0,
+      "endSec": 7.875,
+      "reelSec": [
+        1,
+        8.875
+      ]
+    },
+    {
+      "path": "/bills/bil_b930d56a-b851-4cea-bd43-e8941589f3e3",
+      "note": "The paid bills; tap the first",
+      "startFrame": 189,
+      "endFrame": 239,
+      "startSec": 7.875,
+      "endSec": 9.958,
+      "reelSec": [
+        8.875,
+        10.958
+      ]
+    },
+    {
+      "path": "/bills/bil_b930d56a-b851-4cea-bd43-e8941589f3e3",
+      "note": "One paid bill: its lines coded to accounts and its payment matched to its statement line (the page's Pay from Rhea card, test mode, sits below and is never in view)",
+      "startFrame": 239,
+      "endFrame": 345,
+      "startSec": 9.958,
+      "endSec": 14.375,
+      "reelSec": [
+        10.958,
+        15.375
+      ]
+    }
+  ],
+  "note": "Reel time = recording time + 1.0 s (render/timing.mjs RECORDING_AT). Pick a feature post's thumbOffsetMs inside a scene's reelSec.",
+  "recordedAt": "2026-10-20T20:54:08.018Z",
+  "app": {
+    "url": "http://localhost:3600",
+    "commit": "9bc6e96",
+    "data": "demo seed (npm run seed:demo), sample data only"
+  },
+  "chromium": "155.0.8059.85"
+}

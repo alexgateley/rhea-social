@@ -1,0 +1,9 @@
+Labor cost tracking for restaurant, coffee shop and salon owners: daily estimate, then payroll as paid.
+Labor in Rhea's demo, on sample data: each store's hours and labor % every day from the time clock.
+When payroll runs, drop your provider's summary: company totals only, never a person's pay.
+It replaces the estimate for that pay period, so nothing counts twice.
+Connect with Gusto is built but switched off for now; the summary file works with any provider.
+
+See it on sample data at demo.rheafi.com. Rhea: automated books, labor and per-store profit for multi-store owners. rheafi.com (link in bio)
+
+#payroll #franchiseowner #restaurateur #salonbusiness #smallbusinessowner

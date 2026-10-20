@@ -1,0 +1,72 @@
+{
+  "id": "statements-reconcile",
+  "title": "Statements: bank and card lines in the books, then the reconciliation",
+  "signIn": "viewer",
+  "facts": "FACTS.md 'Data in' bank and card statements row: /statements, /statements/reconcile, src/core/statements/, src/server/statements-import.ts; the four money LLCs are stores 101, 103, 105 and 108",
+  "scenes": [
+    {
+      "path": "/statements",
+      "note": "Statements: the Accounts card (the four money LLCs), then tap Store 101's checking account",
+      "settle": 0.8,
+      "moves": [
+        {
+          "hold": 1.6
+        },
+        {
+          "scroll": {
+            "text": "Accounts",
+            "offset": 60
+          },
+          "over": 1.6
+        },
+        {
+          "hold": 1.4
+        }
+      ],
+      "tap": {
+        "selector": "a[href*=\"account=\"]",
+        "nth": 0
+      }
+    },
+    {
+      "note": "The account's register: each statement line with the account it was booked to",
+      "settle": 0.8,
+      "moves": [
+        {
+          "hold": 1.2
+        },
+        {
+          "scroll": {
+            "text": "Register",
+            "exact": false,
+            "offset": 60
+          },
+          "over": 1.8
+        },
+        {
+          "hold": 2
+        }
+      ]
+    },
+    {
+      "path": "/statements/reconcile?llc=entity-101",
+      "note": "Reconcile accounts: Rhea's balance beside the statement's, to the cent",
+      "settle": 0.8,
+      "moves": [
+        {
+          "hold": 1.8
+        },
+        {
+          "scroll": {
+            "text": "Reconcile accounts",
+            "offset": 40
+          },
+          "over": 1.6
+        },
+        {
+          "hold": 2.4
+        }
+      ]
+    }
+  ]
+}

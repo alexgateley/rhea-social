@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-22",
+  "slot": "evening",
+  "type": "tip",
+  "slug": "one-llc-one-bank",
+  "theme": "sage-wash",
+  "hook": "Do your stores share one bank account?",
+  "title": "Separate bank accounts",
+  "action": "One LLC, one account",
+  "thumbOffsetMs": 14100,
+  "captionFirstLine": "One bank account per LLC: a bookkeeping tip for multi-store franchise, restaurant and salon owners.",
+  "hashtags": [
+    "#businesstips",
+    "#franchiselife",
+    "#restaurantindustry",
+    "#salonbusiness",
+    "#smallbusinessfinance"
+  ],
+  "cardHash": "adc549a2f83ef459401d5728a55ff4137486720c",
+  "durationSec": 24,
+  "frames": 576,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "tip",
+    "resultSize": 138,
+    "resultLines": 2,
+    "scale": 0.925,
+    "gap": 0.5,
+    "contentBottom": 1534,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T21:18:10.878Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "id": "labor-payroll",
+  "title": "Labor daily from the time clock, then payroll as paid",
+  "signIn": "viewer",
+  "facts": "FACTS.md 'Labor' rows: /labor, src/core/labor/; payroll as paid: /labor/payroll, src/core/payroll/ (Connect with Gusto is off; not shown)",
+  "scenes": [
+    {
+      "path": "/labor?range=30d",
+      "note": "Labor: hours and labor % by store for the last 30 days",
+      "settle": 0.8,
+      "moves": [
+        {
+          "hold": 1.6
+        },
+        {
+          "scroll": 800,
+          "over": 2
+        },
+        {
+          "hold": 1.8
+        }
+      ]
+    },
+    {
+      "path": "/labor/payroll",
+      "note": "Payroll as paid: none saved in the demo yet, so labor is the time-clock estimate; how a payroll summary replaces it without counting twice",
+      "settle": 0.8,
+      "moves": [
+        {
+          "hold": 2.2
+        },
+        {
+          "scroll": {
+            "role": "heading",
+            "text": "How Rhea keeps it from counting twice",
+            "exact": true,
+            "offset": 60
+          },
+          "over": 2.0
+        },
+        {
+          "hold": 2.6
+        }
+      ],
+      "start": {
+        "role": "heading",
+        "text": "No payroll as paid yet",
+        "exact": true,
+        "offset": 40
+      }
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "overview-stores",
+  "title": "Overview: the whole group, then every store side by side",
+  "fps": 24,
+  "frames": 359,
+  "durationSec": 14.958,
+  "width": 860,
+  "height": 1864,
+  "viewport": {
+    "width": 430,
+    "height": 932,
+    "deviceScaleFactor": 2
+  },
+  "signIn": "viewer",
+  "scenes": [
+    {
+      "path": "/?range=30d",
+      "note": "Group overview for the last 30 days: the daily synopsis's first line, then the four tiles (net revenue, labor %, prime cost %, net income), the net income by store chart and the stores table with labor % flagged over 30% and 33%",
+      "startFrame": 0,
+      "endFrame": 359,
+      "startSec": 0,
+      "endSec": 14.958,
+      "reelSec": [
+        1,
+        15.958
+      ]
+    }
+  ],
+  "note": "Reel time = recording time + 1.0 s (render/timing.mjs RECORDING_AT). Pick a feature post's thumbOffsetMs inside a scene's reelSec.",
+  "recordedAt": "2026-10-20T18:45:27.434Z",
+  "app": {
+    "url": "http://localhost:3600",
+    "commit": "9bc6e96",
+    "data": "demo seed (npm run seed:demo), sample data only"
+  },
+  "chromium": "155.0.8059.85"
+}

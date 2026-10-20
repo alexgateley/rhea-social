@@ -1,0 +1,22 @@
+{
+  "id": "store-days",
+  "title": "One store, day by day: sales and labor % against its target, then its P&L",
+  "signIn": "viewer",
+  "facts": "FACTS.md 'Seeing the numbers' Store page row: /stores/[storeId]; store 106 runs hot labor on purpose (src/integrations/demo/stores.ts runsHotLabor)",
+  "scenes": [
+    {
+      "path": "/stores/store-106?range=30d",
+      "note": "Store 106: labor % above its 33% line, the daily net sales and labor % chart with the 30% target, then the store's profit and loss",
+      "settle": 0.8,
+      "moves": [
+        { "hold": 1.8 },
+        { "scroll": { "text": "Daily net sales and labor", "offset": 60 }, "over": 1.6 },
+        { "hold": 2.6 },
+        { "scroll": { "text": "Profit and loss", "offset": 60 }, "over": 1.8 },
+        { "hold": 1.4 },
+        { "scroll": { "text": "Total operating expenses", "offset": 520 }, "over": 2.2 },
+        { "hold": 1.8 }
+      ]
+    }
+  ]
+}

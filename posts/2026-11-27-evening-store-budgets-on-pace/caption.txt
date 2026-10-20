@@ -1,0 +1,8 @@
+Store sales budgets for multi-unit franchise and coffee shop owners: on pace or off, mid-month.
+Budgets in Rhea's demo: a year of monthly sales budgets for every store, sample data.
+Each store's month so far against its budget, with days left and the pace.
+Budgets can be switched off; the numbers stay.
+
+See it on sample data at demo.rheafi.com. Rhea: automated books, labor and per-store profit for multi-store owners. rheafi.com (link in bio)
+
+#profitmargin #franchisee #cafeowner #smallbusinessbookkeeping #smallbusinessowner

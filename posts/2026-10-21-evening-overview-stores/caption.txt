@@ -1,0 +1,8 @@
+Multi-store dashboard for franchise and restaurant owners: every store's labor % and profit side by side.
+Rhea's Overview on the demo company: 15 bagel stores of sample data.
+Each row is one store: net revenue, labor %, COGS and net income for the same period.
+Labor % turns amber or red when a store runs over its own target.
+
+See it on sample data at demo.rheafi.com. Rhea: automated books, labor and per-store profit for multi-store owners. rheafi.com (link in bio)
+
+#restauranttech #franchisee #qsr #smallbusinessbookkeeping #businessowner

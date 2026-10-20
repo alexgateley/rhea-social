@@ -1,0 +1,60 @@
+{
+  "id": "ledger-entry",
+  "title": "Rhea's ledger: one store's day as one balanced journal entry",
+  "signIn": "viewer",
+  "facts": "FACTS.md 'The books' first row: src/core/journal/, the sales identity in src/core/types.ts; /ledger/[entryId]",
+  "scenes": [
+    {
+      "path": "/ledger",
+      "note": "The ledger's entries, every one balanced; tap a store's daily sales entry",
+      "settle": 0.8,
+      "moves": [
+        {
+          "hold": 1.4
+        },
+        {
+          "scroll": {
+            "text": "Date",
+            "offset": 120
+          },
+          "over": 1.4
+        },
+        {
+          "hold": 0.9
+        }
+      ],
+      "tap": {
+        "selector": "tr:has-text(\"Daily sales · Store 101 – Maple Ave\") a"
+      }
+    },
+    {
+      "note": "Daily sales for Store 101: card clearing, cash, delivery, gift cards, discounts and refunds on the debit side; food, beverage and other sales, sales tax collected, tips payable on the credit side; total balanced; the source reference",
+      "settle": 0.6,
+      "moves": [
+        {
+          "hold": 1.6
+        },
+        {
+          "scroll": {
+            "text": "Lines",
+            "offset": 40
+          },
+          "over": 1.4
+        },
+        {
+          "hold": 1.6
+        },
+        {
+          "scroll": {
+            "text": "Balanced",
+            "offset": 720
+          },
+          "over": 2.0
+        },
+        {
+          "hold": 2.2
+        }
+      ]
+    }
+  ]
+}

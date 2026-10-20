@@ -1,0 +1,602 @@
+{
+  "note": "What each feature Reel's recording shows, how to record it, and the evidence for what its posts claim. A recording runs against the local app on demo data only (FACTS.md 'Running the app locally for recording'). Recorded ones live in render/features/<id>.json and render/features/<id>/; for the rest, copy \"spec\" to render/features/<id>.json and run npm run record -- --id <id>. verify refuses a feature post whose recording is not listed here, and warns until it is recorded.",
+  "recordings": {
+    "overview-stores": {
+      "status": "recorded (render/features/overview-stores.json, by builder B)",
+      "screens": ["/?range=30d: the group tiles, then the stores table; hold on stores 106 and 111 (labor over target)"],
+      "evidence": ["src/components/overview/", "src/lib/ui/period.ts"],
+      "usedBy": ["2026-10-21 6PM overview-stores", "2026-11-13 6PM which-store-drags"]
+    },
+    "store-days": {
+      "status": "recorded (render/features/store-days.json, by builder B)",
+      "screens": ["/stores/store-106?range=30d: daily sales and labor % with the target line, then the store P&L"],
+      "evidence": ["/stores/[storeId]", "src/core/reports/completeness.ts"],
+      "usedBy": ["2026-10-23 6PM store-days"]
+    },
+    "labor-overtime": {
+      "status": "recorded (render/features/labor-overtime.json, by builder B)",
+      "screens": ["/labor: who is heading for overtime (names and hours, never pay), then the store table"],
+      "evidence": ["src/components/overview/overtime-panel.tsx", "src/core/labor/"],
+      "usedBy": ["2026-10-26 6PM overtime-this-week"]
+    },
+    "ledger-entry": {
+      "status": "recorded (render/features/ledger-entry.json, by builder B)",
+      "screens": ["/ledger, then one Daily sales entry: its lines and Balanced"],
+      "evidence": ["src/core/journal/", "src/core/types.ts"],
+      "usedBy": ["2026-10-28 6PM a-day-in-the-ledger"]
+    },
+    "deposits": {
+      "status": "recorded (render/features/deposits.json, by builder B)",
+      "screens": ["/deposits: card days with no deposit first, then deposits with variances"],
+      "evidence": ["src/core/reconciliation/"],
+      "usedBy": ["2026-10-30 6PM card-deposits-matched"]
+    },
+    "data-health": {
+      "status": "recorded (render/features/data-health.json, by builder B)",
+      "screens": ["/health: problems first, then the 14-day grid in words"],
+      "evidence": ["src/core/health/"],
+      "usedBy": ["2026-11-01 6PM data-health-check"]
+    },
+    "your-numbers": {
+      "status": "recorded (render/features/your-numbers.json, by builder B)",
+      "screens": ["/numbers?view=labor, ?view=prime_cost, ?view=tickets: tiles, chart, the by-store table with the change"],
+      "evidence": ["src/core/numbers/types.ts", "/numbers"],
+      "usedBy": ["2026-11-03 6PM your-numbers-by-store"]
+    },
+    "synopsis": {
+      "status": "recorded (render/features/synopsis.json, by builder B)",
+      "screens": ["/synopsis: the day's synopsis, Do first, findings worst first, one line per store"],
+      "evidence": ["src/core/synopsis/", "src/server/owner-email.ts"],
+      "usedBy": ["2026-11-05 6PM morning-synopsis", "2026-11-29 6PM what-to-do-first"]
+    },
+    "month-close": {
+      "status": "recorded (render/features/month-close.json, by builder B)",
+      "screens": ["/ledger/close: Months to close; tap an LLC-month; its checklist (the seed closes no month)"],
+      "evidence": ["src/server/close-checklist.ts", "src/core/ledger/", "src/server/month-close.ts"],
+      "usedBy": ["2026-11-07 6PM close-the-month"]
+    },
+    "compare-bookkeeper": {
+      "status": "recorded (render/features/compare-bookkeeper.json, by builder B)",
+      "screens": ["/ledger/compare: every LLC by month (no bookkeeper report in the demo), then where the report lands"],
+      "evidence": ["src/core/bookkeeper/", "src/server/difference-report.ts"],
+      "usedBy": ["2026-11-09 6PM compare-with-bookkeeper"]
+    },
+    "statements-reconcile": {
+      "seconds": 15.4,
+      "status": "recorded (render/features/statements-reconcile.json, by builder B)",
+      "screens": [
+        "/statements?account=<Store 101 checking>: the Accounts card, then the account's register with every line booked to an account",
+        "/statements/reconcile?llc=entity-101: each account's balance in Rhea beside its statement's, the months marked reconciled"
+      ],
+      "evidence": ["src/server/statements-import.ts", "src/core/statements/"],
+      "notes": "The demo books its statements with merchant mappings only (no Claude reading), so no line shows \"Booked by Rhea: check it\"; the posts do not claim it. If the account link selector misses, tap the first account row by its text.",
+      "usedBy": ["2026-11-11 6PM statements-reconciled"],
+      "spec": {
+        "id": "statements-reconcile",
+        "title": "Statements: bank and card lines in the books, then the reconciliation",
+        "signIn": "viewer",
+        "facts": "FACTS.md 'Data in' bank and card statements row: /statements, /statements/reconcile, src/core/statements/, src/server/statements-import.ts; the four money LLCs are stores 101, 103, 105 and 108",
+        "scenes": [
+          {
+            "path": "/statements",
+            "note": "Statements: the Accounts card (the four money LLCs), then tap Store 101's checking account",
+            "settle": 0.8,
+            "moves": [
+              {
+                "hold": 1.6
+              },
+              {
+                "scroll": {
+                  "text": "Accounts",
+                  "offset": 60
+                },
+                "over": 1.6
+              },
+              {
+                "hold": 1.4
+              }
+            ],
+            "tap": {
+              "selector": "a[href*=\"account=\"]",
+              "nth": 0
+            }
+          },
+          {
+            "note": "The account's register: each statement line with the account it was booked to",
+            "settle": 0.8,
+            "moves": [
+              {
+                "hold": 1.2
+              },
+              {
+                "scroll": {
+                  "text": "Register",
+                  "exact": false,
+                  "offset": 60
+                },
+                "over": 1.8
+              },
+              {
+                "hold": 2
+              }
+            ]
+          },
+          {
+            "path": "/statements/reconcile?llc=entity-101",
+            "note": "Reconcile accounts: Rhea's balance beside the statement's, to the cent",
+            "settle": 0.8,
+            "moves": [
+              {
+                "hold": 1.8
+              },
+              {
+                "scroll": {
+                  "text": "Reconcile accounts",
+                  "offset": 40
+                },
+                "over": 1.6
+              },
+              {
+                "hold": 2.4
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "bills": {
+      "seconds": 14.4,
+      "status": "recorded (render/features/bills.json, the current scene file; \"spec\" below is the first plan). Re-recorded October 20, 2026 on a paid bill, so the Pay from Rhea card (test mode) is never on screen",
+      "screens": [
+        "/bills: what to approve, what is due, what was paid (the money LLCs' sample bills)",
+        "scroll to Accounts Payable (aging, by LLC), then the Bills card; tap the Paid tab",
+        "tap the first paid bill: its lines coded to accounts and its payment, matched to its statement line"
+      ],
+      "evidence": ["src/core/bills/", "src/server/bills.ts"],
+      "notes": "Never show Pay from Rhea or any payment form (test mode): the scene file's \"avoid\" list and the recorder's NEVER_IN_VIEW refuse any frame showing \"Pay from Rhea\", \"Payments are sent by Stripe\" or \"Pay by card\". A paid bill's page ends with its Payments card above Pay from Rhea; a bill waiting for approval shows Pay from Rhea on its first screen. If a bill page shows an email address the recorder stops: pick another bill.",
+      "usedBy": ["2026-11-15 6PM bills-approved"],
+      "spec": {
+        "id": "bills",
+        "title": "Bills: approved before they are paid, matched to the statement line that paid them",
+        "signIn": "viewer",
+        "facts": "FACTS.md 'Bills and money out' first row: /bills, src/core/bills/, src/server/bills.ts; Pay from Rhea is test mode and is not shown or claimed",
+        "scenes": [
+          {
+            "path": "/bills",
+            "note": "Bills: to approve, due, paid",
+            "settle": 0.8,
+            "moves": [
+              {
+                "hold": 1.8
+              },
+              {
+                "scroll": {
+                  "text": "Accounts Payable",
+                  "offset": 60
+                },
+                "over": 1.8
+              },
+              {
+                "hold": 2
+              },
+              {
+                "scroll": {
+                  "role": "heading",
+                  "text": "Bills",
+                  "exact": true,
+                  "offset": 50
+                },
+                "over": 1.6
+              },
+              {
+                "hold": 1
+              }
+            ],
+            "tap": {
+              "selector": "a[href^=\"/bills/\"]",
+              "nth": 0
+            }
+          },
+          {
+            "note": "One bill: vendor, lines coded to accounts, who approved it, and the payment matched to the bank line",
+            "settle": 0.8,
+            "moves": [
+              {
+                "hold": 2
+              },
+              {
+                "scroll": 700,
+                "over": 2
+              },
+              {
+                "hold": 2
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "year-end": {
+      "seconds": 14.6,
+      "status": "recorded (render/features/year-end.json, by builder B)",
+      "screens": [
+        "/ledger/year-end?llc=entity-101&year=2026: the completeness verdict, the sections (trial balance with tax lines, P&L by month and store, schedules), \"What Rhea doesn't know\", the downloads"
+      ],
+      "evidence": ["src/core/year-end/", "/ledger/year-end", "docs/PICKUP.md"],
+      "notes": "Year to date only (the demo has 60 days). Do not record the TurboTax TXF or TaxBandits downloads: both are untested and the posts do not mention them.",
+      "usedBy": ["2026-11-17 6PM year-end-package"],
+      "spec": {
+        "id": "year-end",
+        "title": "Year-end: one LLC's year as a package for the CPA",
+        "signIn": "viewer",
+        "facts": "FACTS.md 'Seeing the numbers' year-end package row: /ledger/year-end, src/core/year-end/; Rhea is not tax software and never files",
+        "scenes": [
+          {
+            "path": "/ledger/year-end?llc=entity-101&year=2026",
+            "note": "The package for Store 101's LLC, year to date: the verdict first",
+            "settle": 1,
+            "moves": [
+              {
+                "hold": 2.2
+              },
+              {
+                "scroll": 900,
+                "over": 2.4
+              },
+              {
+                "hold": 1.8
+              },
+              {
+                "scroll": 1900,
+                "over": 2.4
+              },
+              {
+                "hold": 1.8
+              },
+              {
+                "scroll": {
+                  "text": "What Rhea doesn't know",
+                  "exact": false,
+                  "offset": 60
+                },
+                "over": 2
+              },
+              {
+                "hold": 2
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "connections-import": {
+      "seconds": 14.4,
+      "status": "not recorded: on the local app, Connections shows developer setup steps (environment variable names, 'Connect with Shopify cannot start') and Import names Claude, so neither screen can go in a post as it is; record it from the demo service once those screens read as the demo does",
+      "screens": [
+        "/connections: the cards (QuickBooks Online, Square, Clover, Toast, Shopify POS, 7shifts, Gusto) as the demo shows them: test accounts, never a real store's",
+        "/import: the drop zone for any POS, time clock, processor or bank file, and the preview step"
+      ],
+      "evidence": ["src/integrations/square/", "src/integrations/toast/", "src/server/smart-import.ts"],
+      "notes": "Show no connect button being pressed and no file being dropped (the viewer is read-only). The Gusto card says it is off; the posts do not mention Gusto. 2026-11-19 6 PM carries balance-sheet instead (integrator, October 20, 2026).",
+      "usedBy": [],
+      "spec": {
+        "id": "connections-import",
+        "title": "Connections: each POS connected, or its export dropped on Import",
+        "signIn": "viewer",
+        "facts": "FACTS.md 'Data in': Square, Clover, Shopify sandbox; Toast export; 7shifts sandbox trial company; Files built; Gusto off",
+        "scenes": [
+          {
+            "path": "/connections",
+            "note": "Connections: the POS, time clock and processor cards",
+            "settle": 0.8,
+            "moves": [
+              {
+                "hold": 1.8
+              },
+              {
+                "scroll": {
+                  "text": "Square",
+                  "offset": 60
+                },
+                "over": 1.8
+              },
+              {
+                "hold": 1.6
+              },
+              {
+                "scroll": {
+                  "text": "Shopify POS",
+                  "offset": 60
+                },
+                "over": 2
+              },
+              {
+                "hold": 1.6
+              }
+            ]
+          },
+          {
+            "path": "/import",
+            "note": "Import files: the drop zone; nothing is saved before the preview is confirmed",
+            "settle": 0.8,
+            "moves": [
+              {
+                "hold": 2.2
+              },
+              {
+                "scroll": {
+                  "text": "Import files",
+                  "offset": 40
+                },
+                "over": 1.4
+              },
+              {
+                "hold": 2
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "labor-payroll": {
+      "seconds": 13.4,
+      "status": "recorded (render/features/labor-payroll.json, by builder B)",
+      "screens": [
+        "/labor: each store's hours and labor % from the time clock",
+        "/labor/payroll: \"Add payroll as paid\" (any provider's summary; a file listing people is refused) and \"How Rhea keeps it from counting twice\""
+      ],
+      "evidence": ["src/core/labor/", "src/core/payroll/"],
+      "notes": "The demo has no payroll summary saved, so /labor/payroll shows its empty state and the explanation; the posts say \"drop your provider's summary\", not that one is there. The Template card's small print says 'Using Gusto? Connect it on Connections'; Connect with Gusto is off, so the post's caption says so.",
+      "usedBy": ["2026-11-21 6PM labor-then-payroll"],
+      "spec": {
+        "id": "labor-payroll",
+        "title": "Labor daily from the time clock, then payroll as paid",
+        "signIn": "viewer",
+        "facts": "FACTS.md 'Labor' rows: /labor, src/core/labor/; payroll as paid: /labor/payroll, src/core/payroll/ (Connect with Gusto is off; not shown)",
+        "scenes": [
+          {
+            "path": "/labor?range=30d",
+            "note": "Labor: hours and labor % by store for the last 30 days",
+            "settle": 0.8,
+            "moves": [
+              {
+                "hold": 1.6
+              },
+              {
+                "scroll": 800,
+                "over": 2
+              },
+              {
+                "hold": 1.8
+              },
+              {
+                "scroll": 1400,
+                "over": 1.4
+              }
+            ]
+          },
+          {
+            "path": "/labor/payroll",
+            "note": "Payroll as paid: any provider's summary, company totals only, replacing the time-clock estimate",
+            "settle": 0.8,
+            "moves": [
+              {
+                "hold": 2.2
+              },
+              {
+                "scroll": {
+                  "text": "How Rhea keeps it from counting twice",
+                  "offset": 60
+                },
+                "over": 2
+              },
+              {
+                "hold": 2.4
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "sales-tax": {
+      "seconds": 12.2,
+      "status": "recorded (render/features/sales-tax.json, the current scene file; \"spec\" below is the first plan). Re-recorded October 20, 2026 to stop above the page's notes card, whose first line says a return \"takes ten minutes instead of an hour\", a savings figure posts never make",
+      "screens": [
+        "/ledger/sales-tax?llc=entity-101: sales tax the POS collected by month beside what the bank statements show was paid (Texas Comptroller lines in the demo statements)"
+      ],
+      "evidence": ["src/core/sales-tax/", "/ledger/sales-tax"],
+      "notes": "FACTS.md: filing periods come from the daily sales-tax-periods task, which the seed does not run; record the by-month table (it needs no periods). If the page shows \"No sales tax in Rhea for this LLC yet\", use entity-103, entity-105 or entity-108. Scroll no further than about 300 px: below the By store card the notes card carries SALES_TAX_PROMISE (src/core/sales-tax/settings.ts), and the recorder refuses any frame that shows it.",
+      "usedBy": ["2026-11-23 6PM sales-tax-collected-vs-paid"],
+      "spec": {
+        "id": "sales-tax",
+        "title": "Sales tax: collected by the POS vs paid per the bank, by month",
+        "signIn": "viewer",
+        "facts": "FACTS.md 'Seeing the numbers' sales tax row: /ledger/sales-tax, src/core/sales-tax/; Rhea never files",
+        "scenes": [
+          {
+            "path": "/ledger/sales-tax?llc=entity-101",
+            "note": "Store 101's LLC: collected vs paid by month, tied to 2210",
+            "settle": 1,
+            "moves": [
+              {
+                "hold": 2.4
+              },
+              {
+                "scroll": 800,
+                "over": 2.2
+              },
+              {
+                "hold": 2
+              },
+              {
+                "scroll": 1600,
+                "over": 2.2
+              },
+              {
+                "hold": 2
+              },
+              {
+                "scroll": 2400,
+                "over": 2
+              },
+              {
+                "hold": 1.8
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "demo-tour": {
+      "seconds": 13.8,
+      "status": "recorded (render/features/demo-tour.json, by builder B)",
+      "screens": [
+        "/demo: \"Try Rhea\", look around a made-up 15-store group or start a blank company",
+        "/: tap Take the tour (the i button in the phone top bar); the tour card \"Welcome to the demo\"; Next; \"Every store, side by side\"; Next; \"Sales and labor, day by day\""
+      ],
+      "evidence": ["src/core/tour/steps.ts", "src/server/demo-sandbox.ts", "rhea-site/src/lib/pricing.ts"],
+      "notes": "The recorder marks the tour done before the first page loads; tapping \"Take the tour\" starts it over on purpose, so the card shows. Do not tap \"Start a practice company\" (it creates one).",
+      "usedBy": ["2026-11-25 6PM guided-demo-tour"],
+      "spec": {
+        "id": "demo-tour",
+        "title": "The demo: a guided tour of a 15-store group on sample data",
+        "signIn": "viewer",
+        "facts": "FACTS.md 'Accounts, access, setup' demo row: src/core/tour/steps.ts (12 steps), src/server/demo-sandbox.ts (practice companies, 2 hours); pricing from rhea-site/src/lib/pricing.ts",
+        "scenes": [
+          {
+            "path": "/demo",
+            "note": "Try Rhea: look around the made-up group, or start a blank practice company",
+            "settle": 0.8,
+            "moves": [
+              {
+                "hold": 3.8
+              }
+            ]
+          },
+          {
+            "path": "/?range=30d",
+            "note": "The Overview; tap the i button to take the tour",
+            "settle": 0.8,
+            "moves": [
+              {
+                "hold": 1
+              }
+            ],
+            "tap": {
+              "selector": "button[aria-label=\"Take the tour\"]"
+            }
+          },
+          {
+            "note": "Tour step 1: Welcome to the demo",
+            "settle": 1,
+            "moves": [
+              {
+                "hold": 3
+              }
+            ],
+            "tap": {
+              "text": "Next"
+            }
+          },
+          {
+            "note": "Tour step 2: Every store, side by side",
+            "settle": 1,
+            "moves": [
+              {
+                "hold": 3
+              }
+            ],
+            "tap": {
+              "text": "Next"
+            }
+          },
+          {
+            "note": "Tour step 3: Sales and labor, day by day (store 106)",
+            "settle": 1.2,
+            "moves": [
+              {
+                "hold": 3
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "budgets": {
+      "seconds": 13.6,
+      "status": "recorded (render/features/budgets.json, by builder B)",
+      "screens": [
+        "/setup/budgets: the budgets switch and a year of monthly sales budgets per store (read-only for the viewer)",
+        "/?range=mtd: the Overview with each store's pace against its budget"
+      ],
+      "evidence": ["src/core/budgets/"],
+      "notes": "If the Overview shows no pace words month to date (early in a month), use ?range=lastmonth for the second scene.",
+      "usedBy": ["2026-11-27 6PM store-budgets-on-pace"],
+      "spec": {
+        "id": "budgets",
+        "title": "Budgets: each store's month against its sales budget",
+        "signIn": "viewer",
+        "facts": "FACTS.md 'The books' budgets row: /setup/budgets, src/core/budgets/; every demo store has a year of budgets",
+        "scenes": [
+          {
+            "path": "/setup/budgets",
+            "note": "Budgets: the switch, then the year of monthly budgets by store",
+            "settle": 0.8,
+            "moves": [
+              {
+                "hold": 2
+              },
+              {
+                "scroll": {
+                  "text": "Sales budgets for",
+                  "exact": false,
+                  "offset": 60
+                },
+                "over": 2
+              },
+              {
+                "hold": 2
+              },
+              {
+                "scroll": 1400,
+                "over": 1.6
+              }
+            ]
+          },
+          {
+            "path": "/?range=mtd",
+            "note": "The Overview, month to date: each store's pace against its budget in words",
+            "settle": 1,
+            "moves": [
+              {
+                "hold": 1.6
+              },
+              {
+                "scroll": {
+                  "role": "heading",
+                  "text": "Stores",
+                  "exact": true,
+                  "offset": 50
+                },
+                "over": 2
+              },
+              {
+                "hold": 2.4
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "balance-sheet": {
+      "seconds": 15,
+      "status": "recorded (render/features/balance-sheet.json, by builder B, as the replacement for connections-import)",
+      "screens": [
+        "/ledger/balance-sheet?llc=entity-101: Sunrise Bagel 101 LLC at September 30 beside August 31; each bank and card account's statement balance and the difference to the books; liabilities (sales tax, tips, gift cards, accrued wages, loans); equity; 'Equals assets'"
+      ],
+      "evidence": ["src/core/reports/balance-sheet.ts", "src/server/opening-balances.ts"],
+      "notes": "One of the four money LLCs (101, 103, 105, 108), which have opening balances and statements. 2991 Statement Lines Needing a Home shows a small amount waiting for a home, as the demo has it.",
+      "usedBy": ["2026-11-19 6PM balance-sheet-per-llc"]
+    }
+  }
+}

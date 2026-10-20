@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-26",
+  "slot": "evening",
+  "type": "myth",
+  "slug": "holiday-fixes-the-year",
+  "theme": "paper",
+  "hook": "The holidays will make up for the year.",
+  "fact": "One week can't carry fifty-two.",
+  "thumbOffsetMs": 4200,
+  "captionFirstLine": "Holiday sales for restaurant, coffee shop and salon owners: why one big week can't fix a slow year.",
+  "hashtags": [
+    "#laborcost",
+    "#restaurantindustry",
+    "#salonowners",
+    "#bookkeepingtips",
+    "#smallbusinessfinance"
+  ],
+  "cardHash": "62005b6b565bc10d6b14cd4ed490843feef76df1",
+  "durationSec": 22.917,
+  "frames": 550,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "myth",
+    "resultSize": 126,
+    "resultLines": 2,
+    "scale": 1,
+    "gap": 1,
+    "contentBottom": 1501,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 331,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T21:13:26.228Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
+}

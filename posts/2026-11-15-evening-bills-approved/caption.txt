@@ -1,0 +1,8 @@
+Bill approval and accounts payable for multi-store owners: what's due, approved and paid.
+Bills in Rhea's demo, on sample data: what to approve, what is due and what was paid.
+Bills come in by email, photo or typing; the owner approves anything above a set amount.
+Each payment is matched to the statement line that paid it.
+
+See it on sample data at demo.rheafi.com. Rhea: automated books, labor and per-store profit for multi-store owners. rheafi.com (link in bio)
+
+#accountspayable #multiunitfranchisee #salonownerlife #smallbusinessfinance #smallbusinesstips

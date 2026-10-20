@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-28",
+  "slot": "evening",
+  "type": "feature",
+  "slug": "a-day-in-the-ledger",
+  "theme": "sage-wash",
+  "headline": "Every store's day becomes a balanced journal entry",
+  "recording": "ledger-entry",
+  "thumbOffsetMs": 12900,
+  "captionFirstLine": "Daily sales journal entry for restaurant and franchise owners: how one store's day reaches the books.",
+  "hashtags": [
+    "#bookkeepingsoftware",
+    "#franchising",
+    "#restaurantowners",
+    "#restaurantmanagement",
+    "#smallbusinessowner"
+  ],
+  "cardHash": "c029200f726429d67edc99106f830aa00a35685f",
+  "durationSec": 16.25,
+  "frames": 390,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "feature",
+    "headlineSize": 76,
+    "headlineLines": 2,
+    "subSize": 34,
+    "subLines": 2,
+    "contentBottom": 508,
+    "bottomLimit": 510,
+    "overflow": false,
+    "window": {
+      "x": 247,
+      "y": 594,
+      "w": 586,
+      "h": 1270,
+      "r": 46
+    },
+    "headTop": 244
+  },
+  "renderedAt": "2026-10-20T21:21:30.832Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
+}

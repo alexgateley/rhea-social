@@ -1,0 +1,37 @@
+{
+  "id": "year-end",
+  "title": "Year-end: one LLC's year as a package for the CPA",
+  "fps": 24,
+  "frames": 350,
+  "durationSec": 14.583,
+  "width": 860,
+  "height": 1864,
+  "viewport": {
+    "width": 430,
+    "height": 932,
+    "deviceScaleFactor": 2
+  },
+  "signIn": "viewer",
+  "scenes": [
+    {
+      "path": "/ledger/year-end?llc=entity-101&year=2026",
+      "note": "The package for Store 101's LLC, year to date: the verdict and what is left to finish, the line that it is not a tax return, then what is in the package",
+      "startFrame": 0,
+      "endFrame": 350,
+      "startSec": 0,
+      "endSec": 14.583,
+      "reelSec": [
+        1,
+        15.583
+      ]
+    }
+  ],
+  "note": "Reel time = recording time + 1.0 s (render/timing.mjs RECORDING_AT). Pick a feature post's thumbOffsetMs inside a scene's reelSec.",
+  "recordedAt": "2026-10-20T19:00:48.012Z",
+  "app": {
+    "url": "http://localhost:3600",
+    "commit": "9bc6e96",
+    "data": "demo seed (npm run seed:demo), sample data only"
+  },
+  "chromium": "155.0.8059.85"
+}

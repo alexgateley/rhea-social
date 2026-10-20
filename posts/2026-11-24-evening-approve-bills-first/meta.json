@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-24",
+  "slot": "evening",
+  "type": "tip",
+  "slug": "approve-bills-first",
+  "theme": "paper",
+  "hook": "Who approved that invoice before it was paid?",
+  "title": "Approve bills before paying",
+  "action": "Approve, then pay",
+  "thumbOffsetMs": 14100,
+  "captionFirstLine": "Accounts payable for multi-store owners: set who approves which bills before anything is paid.",
+  "hashtags": [
+    "#accountspayable",
+    "#franchiselife",
+    "#restaurantbusiness",
+    "#salonowner",
+    "#bookkeepingtips"
+  ],
+  "cardHash": "9f94b057d8df619d31b1034334d2af9a6bcf7874",
+  "durationSec": 24,
+  "frames": 576,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "tip",
+    "resultSize": 128,
+    "resultLines": 2,
+    "scale": 0.96,
+    "gap": 0.5,
+    "contentBottom": 1533,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
+    "hookLines": 3
+  },
+  "renderedAt": "2026-10-20T21:12:02.438Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
+}

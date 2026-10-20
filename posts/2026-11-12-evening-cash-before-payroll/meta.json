@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-12",
+  "slot": "evening",
+  "type": "tip",
+  "slug": "cash-before-payroll",
+  "theme": "paper",
+  "hook": "Can every store's LLC make this week's payroll?",
+  "title": "Check cash before payroll",
+  "action": "Before payroll",
+  "thumbOffsetMs": 14100,
+  "captionFirstLine": "Cash flow by LLC for multi-store owners: check every account can cover payroll before the week starts.",
+  "hashtags": [
+    "#cashflowmanagement",
+    "#restaurateur",
+    "#coffeeshopowners",
+    "#salonbusiness",
+    "#bookkeeping"
+  ],
+  "cardHash": "e5cde0a54c1134709b1fa59c23302edcb49ff8b3",
+  "durationSec": 24,
+  "frames": 576,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "tip",
+    "resultSize": 128,
+    "resultLines": 1,
+    "scale": 1,
+    "gap": 0.5,
+    "contentBottom": 1535,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
+    "hookLines": 3
+  },
+  "renderedAt": "2026-10-20T21:17:15.279Z",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  },
+  "chromium": "155.0.8059.85"
+}

@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-21",
+  "slot": "evening",
+  "type": "feature",
+  "slug": "overview-stores",
+  "theme": "sage-wash",
+  "headline": "Every store's labor % on one screen",
+  "recording": "overview-stores",
+  "thumbOffsetMs": 15100,
+  "captionFirstLine": "Multi-store dashboard for franchise and restaurant owners: every store's labor % and profit side by side.",
+  "hashtags": [
+    "#restauranttech",
+    "#franchisee",
+    "#qsr",
+    "#smallbusinessbookkeeping",
+    "#businessowner"
+  ],
+  "cardHash": "800eb53f13aa8227dfeb2aab8c9ea11630901028",
+  "durationSec": 18.167,
+  "frames": 436,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "feature",
+    "headlineSize": 76,
+    "headlineLines": 2,
+    "subSize": 34,
+    "subLines": 2,
+    "contentBottom": 508,
+    "bottomLimit": 510,
+    "overflow": false,
+    "window": {
+      "x": 247,
+      "y": 594,
+      "w": 586,
+      "h": 1270,
+      "r": 46
+    },
+    "headTop": 244
+  },
+  "renderedAt": "2026-10-20T21:20:54.906Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
+}

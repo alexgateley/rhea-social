@@ -1,0 +1,49 @@
+{
+  "id": "month-close",
+  "title": "Month close: each LLC's month-end checklist, closed in order",
+  "fps": 24,
+  "frames": 346,
+  "durationSec": 14.417,
+  "width": 860,
+  "height": 1864,
+  "viewport": {
+    "width": 430,
+    "height": 932,
+    "deviceScaleFactor": 2
+  },
+  "signIn": "viewer",
+  "scenes": [
+    {
+      "path": "/ledger/close",
+      "note": "Month close: corrections waiting, months closed (none in the demo), the add-only audit log, and each LLC's next month to close with what is left",
+      "startFrame": 0,
+      "endFrame": 126,
+      "startSec": 0,
+      "endSec": 5.25,
+      "reelSec": [
+        1,
+        6.25
+      ]
+    },
+    {
+      "path": "/ledger/close/entity-102/2026-08",
+      "note": "One LLC's August checklist: what is done, what to fix and where, then the close",
+      "startFrame": 126,
+      "endFrame": 346,
+      "startSec": 5.25,
+      "endSec": 14.417,
+      "reelSec": [
+        6.25,
+        15.417
+      ]
+    }
+  ],
+  "note": "Reel time = recording time + 1.0 s (render/timing.mjs RECORDING_AT). Pick a feature post's thumbOffsetMs inside a scene's reelSec.",
+  "recordedAt": "2026-10-20T18:43:47.254Z",
+  "app": {
+    "url": "http://localhost:3600",
+    "commit": "9bc6e96",
+    "data": "demo seed (npm run seed:demo), sample data only"
+  },
+  "chromium": "155.0.8059.85"
+}

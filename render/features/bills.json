@@ -1,0 +1,76 @@
+{
+  "id": "bills",
+  "title": "Bills: approved before they are paid, matched to the statement line that paid them",
+  "signIn": "viewer",
+  "facts": "FACTS.md 'Bills and money out' first row: /bills, src/core/bills/, src/server/bills.ts. Pay from Rhea is test mode: it is never on screen (re-recorded October 20, 2026 on a paid bill, whose page ends with its payments before the Pay from Rhea card; the recorder refuses any frame that shows it)",
+  "avoid": [
+    "Pay from Rhea",
+    "Payments are sent by Stripe",
+    "Pay by card"
+  ],
+  "scenes": [
+    {
+      "path": "/bills",
+      "note": "Bills: what to approve, what is due and what was paid, then Accounts Payable by LLC; tap the Paid tab",
+      "settle": 0.8,
+      "moves": [
+        {
+          "hold": 1.8
+        },
+        {
+          "scroll": {
+            "text": "Accounts Payable",
+            "offset": 60
+          },
+          "over": 1.8
+        },
+        {
+          "hold": 1.8
+        },
+        {
+          "scroll": {
+            "role": "heading",
+            "text": "Bills",
+            "exact": true,
+            "offset": 50
+          },
+          "over": 1.4
+        },
+        {
+          "hold": 0.6
+        }
+      ],
+      "tap": {
+        "selector": "a[href*=\"tab=paid\"]"
+      }
+    },
+    {
+      "note": "The paid bills; tap the first",
+      "settle": 0.8,
+      "start": {
+        "role": "heading",
+        "text": "Bills",
+        "exact": true,
+        "offset": 50
+      },
+      "moves": [
+        {
+          "hold": 1.6
+        }
+      ],
+      "tap": {
+        "selector": "tbody a[href^=\"/bills/\"]",
+        "nth": 0
+      }
+    },
+    {
+      "note": "One paid bill: its lines coded to accounts and its payment matched to its statement line (the page's Pay from Rhea card, test mode, sits below and is never in view)",
+      "settle": 0.8,
+      "moves": [
+        {
+          "hold": 4.4
+        }
+      ]
+    }
+  ]
+}

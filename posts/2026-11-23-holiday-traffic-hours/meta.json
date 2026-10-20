@@ -1,0 +1,46 @@
+{
+  "date": "2026-11-23",
+  "slot": "morning",
+  "type": "owner-math",
+  "slug": "holiday-traffic-hours",
+  "theme": "ink",
+  "hook": "A 20% busier week needs how many hours?",
+  "result": {
+    "label": "Extra hours to schedule",
+    "value": "92.3 h"
+  },
+  "thumbOffsetMs": 12500,
+  "captionFirstLine": "Holiday staffing for restaurant, coffee shop and salon owners: how many hours a sales lift needs.",
+  "hashtags": [
+    "#laborcost",
+    "#franchisee",
+    "#restaurantindustry",
+    "#cafeowner",
+    "#bookkeepingtips"
+  ],
+  "cardHash": "8966e9f5f6eabe45beaea1ef8f601985e8e9535a",
+  "durationSec": 22.417,
+  "frames": 538,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "owner-math",
+    "resultSize": 210,
+    "resultLines": 1,
+    "scale": 1,
+    "gap": 0.8,
+    "contentBottom": 1532,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
+    "hookLines": 3
+  },
+  "renderedAt": "2026-10-20T21:11:12.082Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
+}

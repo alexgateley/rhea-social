@@ -1,0 +1,46 @@
+{
+  "date": "2026-11-20",
+  "slot": "morning",
+  "type": "owner-math",
+  "slug": "wage-increase-price",
+  "theme": "sage",
+  "hook": "A $1 raise needs a 1.8% price increase.",
+  "result": {
+    "label": "Price increase that covers it",
+    "value": "1.8%"
+  },
+  "thumbOffsetMs": 12500,
+  "captionFirstLine": "Minimum wage increase math for restaurant, coffee shop and salon owners: the price change that covers it.",
+  "hashtags": [
+    "#menupricing",
+    "#restaurantowners",
+    "#coffeeshopowners",
+    "#businessfinance",
+    "#businessowner"
+  ],
+  "cardHash": "06c6155bc3c47c79d87222beafbb3aeae95fcefb",
+  "durationSec": 22.417,
+  "frames": 538,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "owner-math",
+    "resultSize": 210,
+    "resultLines": 1,
+    "scale": 1,
+    "gap": 0.9,
+    "contentBottom": 1534,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T21:09:05.236Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
+}

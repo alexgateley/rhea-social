@@ -1,0 +1,49 @@
+{
+  "id": "budgets",
+  "title": "Budgets: each store's month against its sales budget",
+  "fps": 24,
+  "frames": 288,
+  "durationSec": 12,
+  "width": 860,
+  "height": 1864,
+  "viewport": {
+    "width": 430,
+    "height": 932,
+    "deviceScaleFactor": 2
+  },
+  "signIn": "viewer",
+  "scenes": [
+    {
+      "path": "/setup/budgets",
+      "note": "Budgets: the switch, then the year of monthly budgets by store",
+      "startFrame": 0,
+      "endFrame": 144,
+      "startSec": 0,
+      "endSec": 6,
+      "reelSec": [
+        1,
+        7
+      ]
+    },
+    {
+      "path": "/?range=mtd",
+      "note": "The Overview, month to date: the morning synopsis says which stores are on pace for their budgets",
+      "startFrame": 144,
+      "endFrame": 288,
+      "startSec": 6,
+      "endSec": 12,
+      "reelSec": [
+        7,
+        13
+      ]
+    }
+  ],
+  "note": "Reel time = recording time + 1.0 s (render/timing.mjs RECORDING_AT). Pick a feature post's thumbOffsetMs inside a scene's reelSec.",
+  "recordedAt": "2026-10-20T18:59:25.301Z",
+  "app": {
+    "url": "http://localhost:3600",
+    "commit": "9bc6e96",
+    "data": "demo seed (npm run seed:demo), sample data only"
+  },
+  "chromium": "155.0.8059.85"
+}

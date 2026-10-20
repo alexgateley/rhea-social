@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-15",
+  "slot": "morning",
+  "type": "myth",
+  "slug": "comps-are-free",
+  "theme": "ink",
+  "hook": "A comp doesn't cost anything. It's goodwill.",
+  "fact": "Every comp costs product and labor.",
+  "thumbOffsetMs": 4200,
+  "captionFirstLine": "Comps and voids for restaurant and coffee shop owners: what a free item really costs a store.",
+  "hashtags": [
+    "#foodcost",
+    "#franchisee",
+    "#restaurantowners",
+    "#cafeowner",
+    "#smallbusinessowner"
+  ],
+  "cardHash": "520bbdb7644c4e89a3271be53edf8011dda74bfd",
+  "durationSec": 22.917,
+  "frames": 550,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "myth",
+    "resultSize": 116,
+    "resultLines": 3,
+    "scale": 1,
+    "gap": 0.7,
+    "contentBottom": 1535,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 323,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T21:05:30.856Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
+}

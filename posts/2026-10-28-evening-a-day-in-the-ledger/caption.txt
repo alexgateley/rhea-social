@@ -1,0 +1,8 @@
+Daily sales journal entry for restaurant and franchise owners: how one store's day reaches the books.
+In Rhea's demo, on sample data: one store's day as a journal entry.
+Sales and discounts, sales tax owed, tips owed to staff, card sales waiting to be paid out, cash.
+Debits equal credits, every day, every store.
+
+See it on sample data at demo.rheafi.com. Rhea: automated books, labor and per-store profit for multi-store owners. rheafi.com (link in bio)
+
+#bookkeepingsoftware #franchising #restaurantowners #restaurantmanagement #smallbusinessowner

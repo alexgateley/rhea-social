@@ -20,5 +20,17 @@
     "hookLines": 2
   },
   "renderedAt": "2026-10-17T01:42:23.856Z",
-  "chromium": "141.0.7390.37"
+  "chromium": "141.0.7390.37",
+  "slot": "morning",
+  "captionFirstLine": "Tip accounting for restaurant, coffee shop and salon owners: tips are a payable, not sales.",
+  "hashtags": [
+    "#restaurantaccounting",
+    "#multiunitfranchisee",
+    "#restaurantbusiness",
+    "#coffeeshopbusiness",
+    "#smallbusinessbookkeeping"
+  ],
+  "type": "owner-math",
+  "cardHash": "bf10aa56c0c020c64a743a4c1073ce9471e384ed",
+  "cardHashAdoptedAt": "2026-10-20T19:05:12.946Z"
 }

@@ -20,5 +20,17 @@
     "hookLines": 2
   },
   "renderedAt": "2026-10-17T01:43:27.251Z",
-  "chromium": "141.0.7390.37"
+  "chromium": "141.0.7390.37",
+  "slot": "morning",
+  "captionFirstLine": "Gift card accounting for coffee shop, salon and restaurant owners: a liability until redeemed.",
+  "hashtags": [
+    "#restaurantaccounting",
+    "#restaurantowner",
+    "#cafeowner",
+    "#salonowner",
+    "#businessowner"
+  ],
+  "type": "owner-math",
+  "cardHash": "8e4142669711a3eeeeb577ad3c4dba0fafe5c271",
+  "cardHashAdoptedAt": "2026-10-20T19:05:12.947Z"
 }

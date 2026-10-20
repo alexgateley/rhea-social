@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-19",
+  "slot": "evening",
+  "type": "feature",
+  "slug": "balance-sheet-per-llc",
+  "theme": "sage-wash",
+  "headline": "Each LLC's balance sheet, from its own books",
+  "recording": {
+    "id": "balance-sheet",
+    "sha1": "8da76af25f52636a491003bb1e4b6b0b99a51c5d",
+    "frames": 361,
+    "fps": 24
+  },
+  "thumbOffsetMs": 15000,
+  "captionFirstLine": "Balance sheet per LLC for multi-unit franchise owners: what each store's company owns and owes.",
+  "hashtags": [
+    "#bookkeepingsoftware",
+    "#multiunitfranchisee",
+    "#salonownerlife",
+    "#bookkeeping",
+    "#accountingtips"
+  ],
+  "cardHash": "5810e169d1f718acb70228ce23856744c2306ca3",
+  "durationSec": 18.25,
+  "frames": 438,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "feature",
+    "headlineSize": 76,
+    "headlineLines": 2,
+    "subSize": 34,
+    "subLines": 2,
+    "contentBottom": 508,
+    "bottomLimit": 510,
+    "overflow": false,
+    "window": {
+      "x": 247,
+      "y": 594,
+      "w": 586,
+      "h": 1270,
+      "r": 46
+    },
+    "headTop": 244
+  },
+  "renderedAt": "2026-10-20T21:08:39.007Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
+}

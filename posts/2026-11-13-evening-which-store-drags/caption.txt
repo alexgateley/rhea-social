@@ -1,0 +1,8 @@
+Restaurant group dashboard for multi-unit franchise owners: find the store pulling profit down.
+Back to the Overview in Rhea's demo: 15 bagel stores of sample data, last 30 days.
+The group's totals first, then each store's net revenue, labor %, COGS and net income.
+Stores 106 and 111 run high labor on purpose, so you can see what over target looks like.
+
+See it on sample data at demo.rheafi.com. Rhea: automated books, labor and per-store profit for multi-store owners. rheafi.com (link in bio)
+
+#franchiseaccounting #franchiselife #restaurateur #bookkeeping #accountingtips

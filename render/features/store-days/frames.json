@@ -1,0 +1,37 @@
+{
+  "id": "store-days",
+  "title": "One store, day by day: sales and labor % against its target, then its P&L",
+  "fps": 24,
+  "frames": 316,
+  "durationSec": 13.167,
+  "width": 860,
+  "height": 1864,
+  "viewport": {
+    "width": 430,
+    "height": 932,
+    "deviceScaleFactor": 2
+  },
+  "signIn": "viewer",
+  "scenes": [
+    {
+      "path": "/stores/store-106?range=30d",
+      "note": "Store 106: labor % above its 33% line, the daily net sales and labor % chart with the 30% target, then the store's profit and loss",
+      "startFrame": 0,
+      "endFrame": 316,
+      "startSec": 0,
+      "endSec": 13.167,
+      "reelSec": [
+        1,
+        14.167
+      ]
+    }
+  ],
+  "note": "Reel time = recording time + 1.0 s (render/timing.mjs RECORDING_AT). Pick a feature post's thumbOffsetMs inside a scene's reelSec.",
+  "recordedAt": "2026-10-20T18:44:17.633Z",
+  "app": {
+    "url": "http://localhost:3600",
+    "commit": "9bc6e96",
+    "data": "demo seed (npm run seed:demo), sample data only"
+  },
+  "chromium": "155.0.8059.85"
+}

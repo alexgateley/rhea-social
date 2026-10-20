@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-21",
+  "slot": "morning",
+  "type": "myth",
+  "slug": "year-end-starts-in-january",
+  "theme": "ink",
+  "hook": "Year-end is January's problem.",
+  "fact": "Year-end starts in November.",
+  "thumbOffsetMs": 4200,
+  "captionFirstLine": "Year-end bookkeeping for small business owners: why the work starts in November, not January.",
+  "hashtags": [
+    "#monthendclose",
+    "#franchising",
+    "#restaurantmanagement",
+    "#coffeebusiness",
+    "#smallbusinessbookkeeping"
+  ],
+  "cardHash": "1fd049873ca46b5e3ed8e44fd0f471b67df621a9",
+  "durationSec": 22.917,
+  "frames": 550,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "myth",
+    "resultSize": 112,
+    "resultLines": 2,
+    "scale": 1,
+    "gap": 1,
+    "contentBottom": 1533,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 331,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T21:09:48.569Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
+}

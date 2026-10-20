@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-23",
+  "slot": "evening",
+  "type": "feature",
+  "slug": "store-days",
+  "theme": "sage-wash",
+  "headline": "One store's sales and labor, day by day",
+  "recording": "store-days",
+  "thumbOffsetMs": 5700,
+  "captionFirstLine": "Daily labor cost by store for restaurant and franchise owners: see which days ran over target.",
+  "hashtags": [
+    "#laborcost",
+    "#multiunitfranchisee",
+    "#restaurantmanagement",
+    "#restaurateur",
+    "#bookkeeping"
+  ],
+  "cardHash": "da44be99a2568be43946cdbba559e197c08ec03e",
+  "durationSec": 16.375,
+  "frames": 393,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "feature",
+    "headlineSize": 76,
+    "headlineLines": 2,
+    "subSize": 34,
+    "subLines": 1,
+    "contentBottom": 464,
+    "bottomLimit": 510,
+    "overflow": false,
+    "window": {
+      "x": 247,
+      "y": 594,
+      "w": 586,
+      "h": 1270,
+      "r": 46
+    },
+    "headTop": 244
+  },
+  "renderedAt": "2026-10-20T21:20:50.696Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
+}

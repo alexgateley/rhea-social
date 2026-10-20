@@ -20,5 +20,17 @@
     "hookLines": 2
   },
   "renderedAt": "2026-10-17T01:40:24.053Z",
-  "chromium": "141.0.7390.37"
+  "chromium": "141.0.7390.37",
+  "slot": "morning",
+  "captionFirstLine": "Break-even point for restaurant, coffee shop and salon owners: the sales per day where a store starts earning.",
+  "hashtags": [
+    "#profitmargin",
+    "#restaurateur",
+    "#coffeeshopowner",
+    "#salonowner",
+    "#smallbusinesstips"
+  ],
+  "type": "owner-math",
+  "cardHash": "a822110ddad3c462b9e44fa304159bab318dffec",
+  "cardHashAdoptedAt": "2026-10-20T19:05:12.946Z"
 }

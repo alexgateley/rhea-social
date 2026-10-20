@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-29",
+  "slot": "evening",
+  "type": "myth",
+  "slug": "one-group-pnl",
+  "theme": "sage",
+  "hook": "One P&L for the whole group is enough.",
+  "fact": "Every store needs its own P&L.",
+  "thumbOffsetMs": 4200,
+  "captionFirstLine": "Store-level P&L for multi-store owners: why one group P&L hides the store that loses money.",
+  "hashtags": [
+    "#profitmargin",
+    "#franchiseowner",
+    "#restaurantowner",
+    "#coffeeshopowners",
+    "#bookkeeping"
+  ],
+  "cardHash": "9c8dd50777be41f80b9a2800b329983e3b0f3c59",
+  "durationSec": 22.917,
+  "frames": 550,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "myth",
+    "resultSize": 114,
+    "resultLines": 3,
+    "scale": 1,
+    "gap": 0.85,
+    "contentBottom": 1533,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 327,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T21:19:44.123Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "id": "labor-overtime",
+  "title": "Labor: hours, overtime and labor % by store and by day",
+  "signIn": "viewer",
+  "facts": "FACTS.md 'Labor' rows: /labor, src/core/labor/, src/components/overview/overtime-panel.tsx",
+  "scenes": [
+    {
+      "path": "/labor",
+      "note": "Labor for the last 30 days, then this workweek's overtime watch (first names, store and hours so far, never pay; who is in overtime and who is close), overtime hours by store, labor % by day with the stores over target in red",
+      "settle": 0.8,
+      "moves": [
+        {
+          "hold": 1.4
+        },
+        {
+          "scroll": {
+            "role": "heading",
+            "text": "Overtime this week",
+            "exact": true,
+            "offset": 60
+          },
+          "over": 1.4
+        },
+        {
+          "hold": 2.6
+        },
+        {
+          "scroll": {
+            "role": "heading",
+            "text": "Labor by store",
+            "exact": true,
+            "offset": 60
+          },
+          "over": 1.6
+        },
+        {
+          "hold": 1.4
+        },
+        {
+          "scroll": {
+            "role": "heading",
+            "text": "Labor % by day",
+            "exact": true,
+            "offset": 60
+          },
+          "over": 1.6
+        },
+        {
+          "hold": 1.0
+        },
+        {
+          "scroll": {
+            "role": "heading",
+            "text": "Labor % by day",
+            "exact": true,
+            "offset": -260
+          },
+          "over": 1.8
+        },
+        {
+          "hold": 1.6
+        }
+      ]
+    }
+  ],
+  "seed": "Needs demo data whose last day is a Thursday or Friday: the Labor page's 'Overtime this week' is the workweek of the data's last day, and the seed ends data yesterday. Seed on a Friday or Saturday, or seed with the clock moved (README 'Feature Reels: recording and composing'). Recorded 2026-10-20 on data ending Friday 2026-10-16."
+}

@@ -1,0 +1,8 @@
+Business day vs calendar day for restaurant and franchise owners open past midnight.
+A store open until 2 a.m. sells to tonight's shift, not tomorrow's.
+Split at midnight, and both days' labor % read wrong.
+Set each store's business-day end hour and report by business day.
+
+Rhea: automated books, labor and per-store profit for multi-store owners. rheafi.com (link in bio)
+
+#laborcost #franchiselife #restaurantowner #bookkeeping #accountingtips

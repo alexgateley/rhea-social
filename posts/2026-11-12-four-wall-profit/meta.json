@@ -20,5 +20,17 @@
     "hookLines": 2
   },
   "renderedAt": "2026-10-17T01:51:10.356Z",
-  "chromium": "141.0.7390.37"
+  "chromium": "141.0.7390.37",
+  "slot": "morning",
+  "captionFirstLine": "Four-wall profit for franchise and multi-unit restaurant owners: what one labor point adds.",
+  "hashtags": [
+    "#laborcost",
+    "#franchiseowner",
+    "#restaurantbusiness",
+    "#smallbusinessowner",
+    "#smallbusinesstips"
+  ],
+  "type": "owner-math",
+  "cardHash": "28b295d949310457ad1f6fed296dae8ecc90e4a3",
+  "cardHashAdoptedAt": "2026-10-20T19:05:12.949Z"
 }

@@ -1,0 +1,40 @@
+{
+  "id": "your-numbers",
+  "title": "Your numbers: labor, prime cost and tickets by store, with the change",
+  "signIn": "viewer",
+  "facts": "FACTS.md 'Seeing the numbers' Your numbers row: /numbers?view=..., src/core/numbers/types.ts",
+  "scenes": [
+    {
+      "path": "/numbers?view=labor",
+      "note": "Labor view: tiles with the period before and the change, the chart, the by-store table",
+      "settle": 0.8,
+      "moves": [
+        { "hold": 1.6 },
+        { "scroll": { "text": "By store", "offset": 60 }, "over": 1.8 },
+        { "hold": 1.6 },
+        { "scroll": 0, "over": 1.2 },
+        { "hold": 0.4 }
+      ],
+      "tap": { "role": "link", "text": "Prime cost" }
+    },
+    {
+      "note": "Prime cost view",
+      "settle": 0.8,
+      "moves": [
+        { "hold": 1.8 },
+        { "scroll": { "text": "By store", "offset": 60 }, "over": 1.6 },
+        { "hold": 1.4 },
+        { "scroll": 0, "over": 1.0 },
+        { "hold": 0.3 }
+      ],
+      "tap": { "role": "link", "text": "Tickets" }
+    },
+    {
+      "note": "Tickets view",
+      "settle": 0.8,
+      "moves": [
+        { "hold": 2.0 }
+      ]
+    }
+  ]
+}

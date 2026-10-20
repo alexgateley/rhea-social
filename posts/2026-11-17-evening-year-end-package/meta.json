@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-17",
+  "slot": "evening",
+  "type": "feature",
+  "slug": "year-end-package",
+  "theme": "sage-wash",
+  "headline": "Hand your CPA one year-end package per LLC",
+  "recording": {
+    "id": "year-end",
+    "sha1": "8b33125baf2abfbc89c86cc7292fd00d27dfbbe8",
+    "frames": 350,
+    "fps": 24
+  },
+  "thumbOffsetMs": 10800,
+  "captionFirstLine": "Year-end bookkeeping package for small business owners with several LLCs: one per LLC for your CPA.",
+  "hashtags": [
+    "#accountingsoftware",
+    "#franchising",
+    "#restaurateur",
+    "#salonbusiness",
+    "#bookkeepingtips"
+  ],
+  "cardHash": "74d978938a46026006fff8dc3f6225e443079ed9",
+  "durationSec": 17.792,
+  "frames": 427,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "feature",
+    "headlineSize": 76,
+    "headlineLines": 2,
+    "subSize": 34,
+    "subLines": 2,
+    "contentBottom": 508,
+    "bottomLimit": 510,
+    "overflow": false,
+    "window": {
+      "x": 247,
+      "y": 594,
+      "w": 586,
+      "h": 1270,
+      "r": 46
+    },
+    "headTop": 244
+  },
+  "renderedAt": "2026-10-20T21:07:14.695Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
+}

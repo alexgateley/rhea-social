@@ -1,0 +1,67 @@
+{
+  "id": "demo-tour",
+  "title": "The demo: a guided tour of a 15-store group on sample data",
+  "signIn": "viewer",
+  "facts": "FACTS.md 'Accounts, access, setup' demo row: src/core/tour/steps.ts (12 steps), src/server/demo-sandbox.ts (practice companies, 2 hours); pricing from rhea-site/src/lib/pricing.ts",
+  "scenes": [
+    {
+      "path": "/demo",
+      "note": "Try Rhea: look around the made-up group, or start a blank practice company",
+      "settle": 0.8,
+      "moves": [
+        {
+          "hold": 2.6
+        }
+      ]
+    },
+    {
+      "path": "/?range=30d",
+      "note": "The Overview; tap the i button to take the tour",
+      "settle": 0.8,
+      "moves": [
+        {
+          "hold": 1
+        }
+      ],
+      "tap": {
+        "selector": "button[aria-label=\"Take the tour\"]"
+      }
+    },
+    {
+      "note": "Tour step 1: Welcome to the demo",
+      "settle": 1,
+      "moves": [
+        {
+          "hold": 3
+        }
+      ],
+      "tap": {
+        "text": "Next"
+      },
+      "escape": false
+    },
+    {
+      "note": "Tour step 2: Every store, side by side",
+      "settle": 1,
+      "moves": [
+        {
+          "hold": 3
+        }
+      ],
+      "tap": {
+        "text": "Next"
+      },
+      "escape": false
+    },
+    {
+      "note": "Tour step 3: Sales and labor, day by day (store 106)",
+      "settle": 1.2,
+      "moves": [
+        {
+          "hold": 3
+        }
+      ],
+      "escape": false
+    }
+  ]
+}

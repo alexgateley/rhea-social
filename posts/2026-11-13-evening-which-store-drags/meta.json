@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-13",
+  "slot": "evening",
+  "type": "feature",
+  "slug": "which-store-drags",
+  "theme": "sage-wash",
+  "headline": "Which store is dragging the group this month?",
+  "recording": {
+    "id": "overview-stores",
+    "sha1": "69312e9d1ca6a22f4ac71494f7b027405105fcfd",
+    "frames": 359,
+    "fps": 24
+  },
+  "thumbOffsetMs": 15100,
+  "captionFirstLine": "Restaurant group dashboard for multi-unit franchise owners: find the store pulling profit down.",
+  "hashtags": [
+    "#franchiseaccounting",
+    "#franchiselife",
+    "#restaurateur",
+    "#bookkeeping",
+    "#accountingtips"
+  ],
+  "cardHash": "9a9ac4c8fe40958b3a07a7575f9da7ec82445521",
+  "durationSec": 18.167,
+  "frames": 436,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "feature",
+    "headlineSize": 76,
+    "headlineLines": 2,
+    "subSize": 34,
+    "subLines": 2,
+    "contentBottom": 508,
+    "bottomLimit": 510,
+    "overflow": false,
+    "window": {
+      "x": 247,
+      "y": 594,
+      "w": 586,
+      "h": 1270,
+      "r": 46
+    },
+    "headTop": 244
+  },
+  "renderedAt": "2026-10-20T21:04:37.492Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
+}

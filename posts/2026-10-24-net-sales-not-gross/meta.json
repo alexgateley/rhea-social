@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-24",
+  "slot": "morning",
+  "type": "tip",
+  "slug": "net-sales-not-gross",
+  "theme": "sage",
+  "hook": "Labor % on gross sales flatters every store.",
+  "title": "Divide by net sales",
+  "action": "Net, not gross",
+  "thumbOffsetMs": 14100,
+  "captionFirstLine": "Net sales vs gross sales: which one restaurant, coffee shop and salon owners should divide by.",
+  "hashtags": [
+    "#laborcost",
+    "#franchiseowner",
+    "#coffeeshopowners",
+    "#salonowner",
+    "#businessowner"
+  ],
+  "cardHash": "c4c773c1ddd6c63ac75f3c5d9b0c3b9bce54a242",
+  "durationSec": 24,
+  "frames": 576,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "tip",
+    "resultSize": 142,
+    "resultLines": 1,
+    "scale": 1,
+    "gap": 0.65,
+    "contentBottom": 1528,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
+    "hookLines": 2
+  },
+  "renderedAt": "2026-10-20T21:18:10.302Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
+}

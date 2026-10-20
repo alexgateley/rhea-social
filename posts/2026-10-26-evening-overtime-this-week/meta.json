@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-26",
+  "slot": "evening",
+  "type": "feature",
+  "slug": "overtime-this-week",
+  "theme": "ink",
+  "headline": "See who's heading for overtime before Friday",
+  "recording": "labor-overtime",
+  "thumbOffsetMs": 5100,
+  "captionFirstLine": "Overtime tracking for multi-store restaurant and salon owners: who's near 40 hours this week.",
+  "hashtags": [
+    "#laborcost",
+    "#qsr",
+    "#salonbusiness",
+    "#smallbusinessbookkeeping",
+    "#smallbusinesstips"
+  ],
+  "cardHash": "80578639c07c71a0870dafb126b2244cb8517a72",
+  "durationSec": 17.583,
+  "frames": 422,
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "layout": {
+    "type": "feature",
+    "headlineSize": 76,
+    "headlineLines": 2,
+    "subSize": 34,
+    "subLines": 2,
+    "contentBottom": 508,
+    "bottomLimit": 510,
+    "overflow": false,
+    "window": {
+      "x": 247,
+      "y": 594,
+      "w": 586,
+      "h": 1270,
+      "r": 46
+    },
+    "headTop": 244
+  },
+  "renderedAt": "2026-10-20T21:21:31.140Z",
+  "chromium": "155.0.8059.85",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
+}

@@ -1,0 +1,8 @@
+Sales budget by store for multi-store owners: set each month's target and check pace mid-month.
+Give each store a sales budget for every month, built from its own history.
+Check pace mid-month: sales so far against the budget, with days left.
+Off pace on the 15th still leaves two weeks to act.
+
+Rhea: automated books, labor and per-store profit for multi-store owners. rheafi.com (link in bio)
+
+#profitmargin #restaurantowner #coffeeshopbusiness #bookkeeping #accountingtips

@@ -57,3 +57,15 @@ export function parseInput(value) {
   if (/¢/.test(value)) return n / 100;
   return n;
 }
+
+/**
+ * A content file as JSON with two-space indents, keeping short lists of plain strings (hashtags,
+ * audiences) on one line, as the files have always been written.
+ */
+export function stringifyContent(content) {
+  const json = JSON.stringify(content, null, 2);
+  return `${json.replace(/\[\n(\s+)("(?:[^"\\]|\\.)*"(?:,\n\s+"(?:[^"\\]|\\.)*")*)\n\s*\]/g, (whole, indent, items) => {
+    const flat = items.split(/,\n\s+/).join(', ');
+    return flat.length <= 110 ? `[${flat}]` : whole;
+  })}\n`;
+}

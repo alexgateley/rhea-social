@@ -107,7 +107,8 @@ font files) and a Chromium that Playwright can find: `npx playwright install chr
    in plain words, the inputs with units, 3 to 5 worked steps, the result, a takeaway of at most
    18 words, the caption and hashtags (see "Captions and hashtags"). `thumbOffsetMs` is 12500 for
    3 steps, 14100 for 4, 15700 for 5 (`render/timing.mjs`). A new topic needs its formula added to
-   `COMPUTE` in `scripts/verify.mjs`.
+   `COMPUTE` in `scripts/compute.mjs` (formerly in `scripts/verify.mjs`). Since October 20, 2026 the
+   month holds both slots and four types: see "Drafting a month" under "Hashtags and discovery".
 2. `npm run verify` – recomputes every step, result and quoted figure; fix anything it lists.
 3. `npm run render -- --month YYYY-MM` – renders every post (about a minute each; add
    `--only <slug>` for one). It refuses content that does not verify and stops if a card would
@@ -256,10 +257,15 @@ Pacific time stays (`brand.json` `timezone`, as the first run and the founder's 
 
 Mechanical (`scripts/schedule.mjs` prints it for any range; `verify` checks each content file against it):
 weekday mornings owner math; the evening cycle `feature, tip, feature, myth` over every non-memorial day from
-October 21; weekend mornings the type that day's evening is not, and when the evening is a feature, the type the
-previous weekend morning was not; a memorial date takes no regular post in either slot and does not advance the
-cycle. Ten feature recordings (F1–F10) run once each, then a second pass with a new headline and caption. T and M
-numbers are only a count; builder A names the slugs.
+October 21 (`brand.json` `rotation.start`); weekend mornings the type that day's evening is not, and when the
+evening is a feature, the type **the same weekend's other morning** is not (if that day is a memorial date, the type
+the previous weekend morning was not); a memorial date takes no regular post in either slot and does not advance
+the cycle. *As built (builder A):* the plan's first wording, "the type the previous weekend morning was not",
+contradicts its own table on November 7, 15, 21 and 29 and would put two tips on one weekend; the rule above is
+the one the table follows, and `scripts/schedule.test.mjs` checks the whole table. So a day's two posts differ,
+consecutive evenings differ and a weekend's two mornings differ. Ten feature recordings (F1–F10) run once each;
+the second half of November adds eight new recordings and two second passes (as built, below). The slugs are in
+the content files; `npm run schedule -- --from 2026-10-21 --to 2026-11-30` prints each slot with its slug.
 
 | Date | Day | 7 AM | 6 PM |
 | --- | --- | --- | --- |
@@ -284,34 +290,37 @@ numbers are only a count; builder A names the slugs.
 | 2026-11-08 | Sun | myth M6 | tip T8 |
 | 2026-11-09 | Mon | owner math: missing-deposit (rendered) | feature F10 compare-bookkeeper |
 | 2026-11-10 | Tue | owner math: cash-over-short (rendered) | myth M7 |
-| 2026-11-11 | Wed | owner math: ticket-times-transactions (rendered) | feature F1 overview-stores, 2nd pass |
+| 2026-11-11 | Wed | owner math: ticket-times-transactions (rendered) | feature: statements-reconcile (new) |
 | 2026-11-12 | Thu | owner math: four-wall-profit (rendered) | tip T9 |
-| 2026-11-13 | Fri | owner math: new O1 | feature F2 store-days, 2nd pass |
+| 2026-11-13 | Fri | owner math: labor-hours-budget | feature F1 overview-stores, 2nd pass |
 | 2026-11-14 | Sat | tip T10 | myth M8 |
-| 2026-11-15 | Sun | myth M9 | feature F3 labor-overtime, 2nd pass |
-| 2026-11-16 | Mon | owner math: new O2 | tip T11 |
-| 2026-11-17 | Tue | owner math: new O3 | feature F4 ledger-entry, 2nd pass |
-| 2026-11-18 | Wed | owner math: new O4 | myth M10 |
-| 2026-11-19 | Thu | owner math: new O5 | feature F5 deposits, 2nd pass |
-| 2026-11-20 | Fri | owner math: new O6 | tip T12 |
-| 2026-11-21 | Sat | myth M11 | feature F6 data-health, 2nd pass |
+| 2026-11-15 | Sun | myth M9 | feature: bills (new) |
+| 2026-11-16 | Mon | owner math: discount-rate | tip T11 |
+| 2026-11-17 | Tue | owner math: delivery-commission | feature: year-end (new) |
+| 2026-11-18 | Wed | owner math: minimum-crew | myth M10 |
+| 2026-11-19 | Thu | owner math: fees-on-tax-and-tips | feature: connections-import (new) |
+| 2026-11-20 | Fri | owner math: wage-increase-price | tip T12 |
+| 2026-11-21 | Sat | myth M11 | feature: labor-payroll (new) |
 | 2026-11-22 | Sun | tip T13 | myth M12 |
-| 2026-11-23 | Mon | owner math: new O7 | feature F7 your-numbers, 2nd pass |
-| 2026-11-24 | Tue | owner math: new O8 | tip T14 |
-| 2026-11-25 | Wed | owner math: new O9 | feature F8 synopsis, 2nd pass |
-| 2026-11-26 | Thu | owner math: new O10 (Thanksgiving: the cost of a closed day) | myth M13 |
-| 2026-11-27 | Fri | owner math: new O11 | feature F9 month-close, 2nd pass |
+| 2026-11-23 | Mon | owner math: holiday-traffic-hours | feature: sales-tax (new) |
+| 2026-11-24 | Tue | owner math: loaded-hourly-cost | tip T14 |
+| 2026-11-25 | Wed | owner math: cash-in-the-safe | feature: demo-tour (new; the guided demo and the 7-day free trial) |
+| 2026-11-26 | Thu | owner math: closed-day-cost (Thanksgiving) | myth M13 |
+| 2026-11-27 | Fri | owner math: overhead-per-store | feature: budgets (new) |
 | 2026-11-28 | Sat | myth M14 | tip T15 |
-| 2026-11-29 | Sun | tip T16 | feature F10 compare-bookkeeper, 2nd pass |
-| 2026-11-30 | Mon | owner math: new O12 | myth M15 |
+| 2026-11-29 | Sun | tip T16 | feature F9 month-close, 2nd pass (closing November) |
+| 2026-11-30 | Mon | owner math: accrued-wages | myth M15 |
 
-Totals to write: 12 new owner-math posts, 16 tips, 15 myths, 20 feature slots on 10 recordings. Beyond November
-the same rule continues; `npm run schedule -- --from 2026-12-01 --to 2026-12-31` prints the month to draft. If
-builder B records more than ten features, the second-pass slots take the new ones instead (a content change,
-not a rule change).
+Written (builder A): 12 new owner-math posts, 16 tips, 15 myths and 20 feature posts on **18 distinct
+recordings** (the plan's ten, then statements and reconciliation, bills and approvals, the year-end package,
+POS connections and the file drop, labor and payroll as paid, sales tax, the guided demo with the trial, and
+budgets; overview-stores and month-close return for a second pass with new headlines). Beyond November the same
+rule continues; `npm run schedule -- --from 2026-12-01 --to 2026-12-31` prints the month to draft.
 
-The ten feature recordings and what each shows are in `FACTS.md` ("Which demo screens show each feature"),
-with eight optional ones for a later month.
+`content/recordings.json` lists every recording: the screens and steps, the evidence its posts cite, which posts
+use it, and for each new one a scene spec in `render/features/<id>.json`'s format (copy it there and
+`npm run record -- --id <id>`; each runs 13–16 s). `verify` refuses a feature post whose recording is not in
+that file and warns until the recording exists.
 
 ## Content files and schemas
 
@@ -327,9 +336,19 @@ Every post has: `date`, `slot` (`morning` | `evening`), `type` (`owner-math` | `
 a post without `slot` or `type` is a morning owner-math post, so the existing file needs no edit to keep
 verifying), `slug` (unique across the repo), `theme` (`themeRule`), `caption`, `hashtags`, `thumbOffsetMs`.
 Any `$`, `%` or `¢` figure anywhere in a post must be one of its `inputs`, computed from them by the post's
-`COMPUTE` entry in `scripts/verify.mjs`, or one of the pinned `pricing` strings in `brand.json`: no other number
-ships. Hooks and headlines at most 9 words, takeaways at most 18, the caption's first line as in "Hashtags and
+`COMPUTE` entry (now in `scripts/compute.mjs`, which `verify` imports; an entry may list `quotes`, further
+computed figures a card shows), or one of the pinned `pricing` strings in `brand.json`: no other number ships.
+Hooks and headlines at most 9 words, takeaways at most 18, the caption's first line as in "Hashtags and
 discovery".
+
+*Added as built (builder A)*, on every post that is not yet published: `keyword` (the search phrase the caption's
+first line leads with: `verify` wants it within the first 60 characters), `audiences` (the industry groups the post
+is true for, from `franchise`, `restaurant`, `coffee`, `salon`; default all four; industry hashtags come only from
+these), optional `hashtagHints` (tags the hashtag picker must keep, e.g. `#multiunitfranchisee` on the royalty
+post), optional `taxAdjacent: true` on any type, and `claims` with evidence on **any** post whose card or caption
+names Rhea, not only features. A rendered video's card text that a newer rule would refuse (the gift-card card's
+"customers") is reported as a warning, since changing it means a new video. Published posts are history: `verify`
+rechecks only their arithmetic.
 
 **owner-math** (unchanged): `hook`, `term`, `formula`, `inputs`, `steps` (3–5 `{label, value}`), `result`
 `{label, value}`, `takeaway`. Timeline `render/timing.mjs` as today (22.4 / 24.0 / 25.6 s).
@@ -361,9 +380,11 @@ Captions: first line (the search sentence), then 2–4 short lines, then the foo
 
 ### Captions only: the existing owner-math posts
 
-The 18 unpublished owner-math posts (October 21 to November 12) get the new first lines and hashtag sets in
-`content/2026-10.json` without touching their videos: `render` (below) rewrites `caption.txt` when only caption
-fields changed, and `relink` already does. Posts with a marker (October 16 and 19) keep caption, hashtags and
+The 18 unpublished owner-math posts (October 20, which has not gone out yet, to November 12) have new first
+lines, keywords, audiences and hashtag sets in `content/2026-10.json`; their cards and videos are unchanged (one
+caption line changed too: the gift-card post now says "you owe gift card holders", not "customers").
+`npm run relink -- --month 2026-10` rewrote their `caption.txt` and `meta.json` caption fields; `render` does the
+same whenever only caption fields change. Posts with a marker (October 16 and 19) keep caption, hashtags and
 files exactly as published.
 
 ## Rendering the new types
@@ -602,58 +623,122 @@ or a bucket; not needed in 2026.
 
 ## Hashtags and discovery
 
-Researched October 20, 2026. Primary sources where they exist; the rest is labeled secondary.
+Researched October 20, 2026 (planner, then builder A again with web searches and page reads). Each point says
+whether the source is Instagram's own words or someone reporting them.
 
-- **Five hashtags, in the caption.** Instagram's statement of December 18, 2025, quoted by Social Media Today:
-  it "will gradually update the number of hashtags that you can include in a caption for a reel or post to
-  five", and "using fewer (up to 5) more targeted hashtags, rather than many generic ones" can improve
-  performance ([socialmediatoday.com](https://www.socialmediatoday.com/news/instagram-implements-new-limits-on-hashtag-use/808309/);
-  also [betanews.com, Dec 19, 2025](https://betanews.com/2025/12/19/instagram-puts-a-limit-on-hashtag-usage/)).
-  So every post has exactly five: `#RunonRhea` plus four topic and audience tags (`hashtagRules`). Whether tags
-  in a first comment count toward the five is reported both ways by secondary sources and confirmed by neither;
-  the statement says "in a caption", the API posts a caption, so they go in the caption and nowhere else.
-- **Hashtags are classification, not reach.** Adam Mosseri has said repeatedly that hashtags "don't improve
-  visibility" and are "a great way to let people know what a post is about" (reported by
-  [Social Media Today](https://www.socialmediatoday.com/news/instagram-implements-new-limits-on-hashtag-use/808309/)
-  and [Hootsuite](https://blog.hootsuite.com/social-media-updates/instagram/hashtags-dont-affect-reach/)).
-  Hence targeted tags the audience actually follows, never volume.
-- **What gets a Reel shown to non-followers.** Instagram's own "Instagram Ranking Explained" (Mosseri, May 31,
-  2023, [about.instagram.com](https://about.instagram.com/blog/announcements/instagram-ranking-explained)): Reels
-  are ranked by the predicted likelihood you reshare it, watch it through, like it, and open its audio page;
-  Reels that are low-resolution, watermarked, muted, bordered, **mostly text** or reposted may be shown less.
-  2025 coverage of Mosseri's remarks adds sends per reach, watch time and likes per reach as the three signals
-  that matter most ([SocialPilot](https://www.socialpilot.co/de/blog/instagram-reels-algorithm),
-  [ContentGrip](https://www.contentgrip.com/instagram-influencer-marketing/); secondary). Consequences here:
-  the first three seconds carry the hook; a feature Reel shows real screens moving, not a wall of text; tips and
-  myths end with something worth sending to a partner or manager; the cards keep motion and a full-frame image
-  (no borders, no watermark; the silent track is kept because Instagram wants audio, and the founder adds
-  music on re-posts).
-- **Search reads the caption, the on-screen text and the audio.** Secondary sources agree Instagram's search
-  indexes captions and alt text and, since 2025, that public posts from professional accounts can appear in
-  Google ([inro.social](https://www.inro.social/blog/instagram-seo),
-  [Kontentino](https://www.kontentino.com/q-and-a/instagram-search-seo/)); no primary page could be read. Hence
-  the first caption line is a plain search sentence (the topic in owners' words plus who it is for, under 125
-  characters so it shows before "more"), and the card's hook and term say the topic in words. The API's
-  `alt_text` field exists for image posts only ("Reels and stories are not supported", Meta's content publishing
-  page, March 24, 2025), so Reels carry their keywords in the caption and on screen; the memorial carousel's
-  slides may carry alt text if the founder wants it.
-- **Tag sizes.** No reliable public source lists current post counts for the tags used here; Instagram shows a
-  count only inside the app. `hashtagPools.sizes` says so rather than invent numbers. Before adding a tag, check
-  it under Search → Tags in the app and drop any whose page is empty or spammy.
-- **The pools** (`brand.json` `hashtagPools`): audience groups franchise, restaurant, coffee, salon,
-  bookkeeping and broad; topic pools per type. A post's five are `#RunonRhea` + 1 topic tag matching the post +
-  2 audience tags from two different groups + 1 from bookkeeping or broad; no identical set within 14 days;
-  consecutive posts share at most two tags; every audience group at least once a week; a tag outside the pools
-  is refused, so nothing banned, broken, made up or a vendor's can ship. Memorial posts: none. The old A/B sets
-  and their November 2 review are retired (only posts 1 and 2 used them).
-- **API facts kept from Meta's page** ([developers.facebook.com](https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login/content-publishing)):
-  100 API-published posts per 24 hours (one section still says 50; two a day is far under either), carousels
-  up to 20 JPEG children cropped to the first slide's aspect, no music, no scheduling, no drafts through the
-  API. Reels' encoding specifications were not on the page; the current ffmpeg settings are kept because the
-  two published Reels prove them.
+**What Instagram allows and says**
 
-Unverified and left as is: whether first-comment hashtags count toward five; the exact weights of sends,
-watch time and likes; whether on-screen text is read for in-app search.
+- **Five hashtags per reel or post.** Instagram's @creators account, December 18, 2025: "Starting today,
+  Instagram will allow up to 5 hashtags in a reel or post" (the Threads post as quoted by
+  [Storycut, checked October 3, 2026](https://www.storycut.com/blog/instagram-hashtag-limit)), and Instagram's
+  statement that it "will gradually update the number of hashtags that you can include in a caption for a reel or
+  post to five" because "using fewer (up to 5) more targeted hashtags, rather than many generic ones" can improve
+  performance ([Social Media Today, December 18, 2025](https://www.socialmediatoday.com/news/instagram-implements-new-limits-on-hashtag-use/808309/);
+  also [BetaNews, December 19, 2025](https://betanews.com/2025/12/19/instagram-puts-a-limit-on-hashtag-usage/)).
+  Instagram's Help Center now reads "You can use up to 5 tags on a post" (as quoted by Storycut; the page,
+  help.instagram.com/351460621611097, would not render here). An earlier test in November 2025 capped some
+  accounts at three; the announced and current limit is five. Meta's developer reference for the caption field
+  reportedly still says 30 (secondary); we follow Instagram's five. **Rule: exactly five, every regular post.**
+- **In the caption, not a comment.** Instagram's search guidance, as quoted by Storycut and by several SEO guides:
+  "For a post to be found in Search, put keywords and hashtags in the caption, not the comments." Whether
+  first-comment tags count toward the five is unconfirmed either way. **Rule: the five are the caption's last
+  line** (the API posts a caption; C's publisher also cuts anything past five as a safety net).
+- **Hashtags classify; they don't buy reach.** Adam Mosseri: hashtags "don't improve visibility on Instagram" but
+  are "a great way to let people know what a post is about and connect posts" (May 2025, quoted by
+  [Social Media Today](https://www.socialmediatoday.com/news/instagram-implements-new-limits-on-hashtag-use/808309/)).
+  So a tag earns its slot only if the right people follow or search it and it truly describes the post.
+- **Captions are what search reads.** Instagram, August 2026: "Captions add relevant context, spark conversation,
+  and tell search engines what your content is about"; use "descriptive and relevant keywords"; only the first two
+  lines show before "more" ([Social Media Today, August 23, 2026](https://socialmediatoday.com/news/instagram-stresses-the-importance-of-captions/828554/)).
+  Mosseri's account of Search: the text typed is "by far the most important signal", matched against usernames,
+  bios, captions, hashtags and places, then the searcher's activity, then popularity
+  ([Search Engine Journal's report of Instagram's 2021 post](https://www.searchenginejournal.com/how-instagram-ranks-search-results/417449/);
+  the original page no longer loads). Since July 10, 2025, public posts of professional accounts can also show in
+  Google and Bing ([PPC Land](https://ppc.land/instagram-content-becomes-searchable-on-google-starting-july-10/);
+  secondary). Whether in-app search reads on-screen text or speech is claimed by marketing blogs only:
+  unverified.
+- **What gets a Reel in front of people who don't follow you.** Instagram's own
+  ["Instagram Ranking Explained"](https://about.instagram.com/blog/announcements/instagram-ranking-explained)
+  (Mosseri, May 31, 2023): Reels are ranked mostly on how likely you are "to reshare a reel, watch a reel all the
+  way through, like it, and go to the audio page"; low-resolution, watermarked, muted, bordered, reposted and
+  "majority text" Reels may be shown less; "Most of the content you'll see in Explore is from people you don't
+  follow". Mosseri, January 2025: "The top three signals that matter most for ranking are watch time, likes and
+  sends", and "sends are slightly more important for unconnected content", that is, for reaching non-followers
+  ([Social Media Today, January 22, 2025](https://www.socialmediatoday.com/news/instagram-shares-algorithm-2025/738034/)).
+- **Banned and broken tags.** Instagram publishes no list; a restricted tag's page says recent posts are hidden
+  ([Ayrshare, updated 2026](https://www.ayrshare.com/avoid-using-these-instagram-banned-hashtags/); secondary).
+  Third-party "banned tag checkers" are often out of date.
+- **Tag sizes.** No reliable public source gives current post counts for these tags; generator sites show
+  estimates without a method, and Instagram shows a count only inside the app. **No size is written down here.**
+  The pools mark tags broad, mid or niche by what each describes and who uses it (`hashtagPools.tiers`, labeled
+  "judged, not measured").
+
+**What the posts do about it (`brand.json` `hashtagRules`, `hashtagPools`; enforced by `verify`, picked by
+`scripts/hashtags.mjs`)**
+
+- **No `#RunonRhea` in the five** (a change from the plan). A brand tag nobody follows reaches nobody; the handle
+  and the caption footer carry the brand, and the founder's other accounts use no brand tag either. All five
+  slots go to tags owners follow and search.
+- **The five:** at least one **topic** tag the writer picks for what the post is about (the picker never adds
+  one: a tag for a topic the post isn't about would mislead); **two industry tags from two different industries
+  the post is true for** (`audiences`: no salon tag on food cost, prime cost, delivery or comps; no franchise-only
+  claims for independents); at least one **bookkeeping or broad-owner** tag; and the mix holds **at least one
+  broad and one niche** tag. The fifth slot goes to a third industry or a second bookkeeping/broad tag.
+- **Rotation:** no identical set within 14 days; consecutive posts share at most two tags; every industry group
+  and the bookkeeping group appear every Monday-to-Sunday week. Over October 20 to November 30 the 81 unpublished
+  posts use all 50 pool tags, none more than 14 times.
+- **Never:** a tag outside the pools (so nothing made up or misspelled), the denylist (vendor and competitor
+  brand tags such as #quickbooks, #toast, #square, #gusto, #restaurant365; the banned product word; generic or
+  engagement-bait tags such as #smallbusiness, #entrepreneur, #followforfollow), or a retired tag (each with its
+  reason in `hashtagPools.retired`: #multiunit is mostly apartment buildings, #cashflow mostly real-estate
+  investing, #giftcards consumer promos, #overtime sports, #foodbusiness home bakers, #beautybusiness solo
+  pros…). Memorial posts carry none.
+- **The first caption line is the search sentence:** the phrase owners type (`keyword`, within the first 60
+  characters, because a Reel's caption shows about one line before "more"), then who it is for, under 125
+  characters; the card's hook and term say the topic in words too.
+- **For non-followers:** tips and myths may end the caption with one question worth replying to or sending to a
+  partner (never "follow for more"); feature Reels show the app moving, which also answers the "majority text"
+  caution. **Flag for the founder:** owner-math, tip and myth cards are mostly text by design; if their reach to
+  non-followers lags the feature Reels in Insights, that is the likely reason, and the music re-posts and more
+  feature Reels are the levers.
+
+| Pool | Tags (judged tier: **broad**, mid, *niche*) |
+| --- | --- |
+| franchise | #franchiseowner, #franchisee, **#franchising**, #franchisebusiness, *#multiunitfranchisee*, *#franchiselife* |
+| restaurant and quick service | #restaurantowner, #restaurantowners, #restaurantmanagement, **#restaurantbusiness**, **#restaurantindustry**, *#restaurateur*, *#qsr* |
+| coffee | #coffeeshopowner, #cafeowner, #coffeebusiness, *#coffeeshopbusiness*, *#coffeeshopowners* |
+| salon | #salonowner, *#salonowners*, #salonbusiness, *#salonownerlife* |
+| bookkeeping | *#smallbusinessbookkeeping*, **#bookkeeping**, #bookkeepingtips, #smallbusinessfinance, #businessfinance, #accountingtips |
+| broad owner | **#smallbusinessowner**, **#businessowner**, **#smallbusinesstips** |
+| topic: owner math | *#laborcost*, *#primecost*, *#foodcost*, #profitmargin, *#breakeven*, #salestax, *#creditcardfees*, #cashflowmanagement, **#payroll**, *#menupricing*, *#restaurantaccounting* |
+| topic: tip | **#businesstips**, *#monthendclose*, *#bankreconciliation*, *#accountspayable*, *#laborcost*, *#foodcost*, *#primecost*, #salestax, *#creditcardfees*, #cashflowmanagement, *#restaurantaccounting*, #profitmargin, **#payroll** |
+| topic: myth | #profitmargin, #cashflowmanagement, *#laborcost*, *#foodcost*, *#primecost*, #salestax, *#creditcardfees*, *#monthendclose*, *#restaurantaccounting*, **#payroll**, *#bankreconciliation*, **#businesstips** |
+| topic: feature | *#bookkeepingsoftware*, #accountingsoftware, *#restauranttech*, *#restaurantaccounting*, #franchiseaccounting, *#laborcost*, *#bankreconciliation*, *#monthendclose*, #salestax, *#accountspayable*, #cashflowmanagement, **#payroll**, #profitmargin |
+| memorial | none |
+
+Before adding a tag to a pool: look it up under Search, Tags in the Instagram app; drop it if the page is empty,
+says recent posts are hidden, or is mostly spam or another industry; then `npm run verify`.
+
+**API facts kept from Meta's page** ([developers.facebook.com](https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login/content-publishing)):
+100 API-published posts per 24 hours (one section still says 50; two a day is far under either), carousels up to
+20 JPEG children cropped to the first slide's aspect, no music, no scheduling, no drafts through the API, and
+`alt_text` for images only ("Reels and stories are not supported"), so Reels carry their keywords in the caption
+and on screen. Reels' encoding specifications were not on the page; the current ffmpeg settings are kept because
+the two published Reels prove them.
+
+Unverified and left as is: whether first-comment hashtags count toward five; the exact weights of sends, watch
+time and likes; whether on-screen text or speech is read for in-app search; any tag's current size.
+
+### Drafting a month (content, builder A's tools)
+
+1. `npm run schedule -- --from 2026-12-01 --to 2026-12-31`: the type each slot carries, and what is written.
+2. Write the posts in `content/YYYY-MM.json` in `(date, slot)` order, with `keyword`, `audiences`, and only the
+   topic tag(s) in `hashtags`; a new owner-math topic gets its formula in `scripts/compute.mjs`; a new feature
+   gets its recording in `content/recordings.json`.
+3. `node scripts/hashtags.mjs --month YYYY-MM` completes the five on each unpublished post (`--redo` re-picks the
+   month, `--dry-run` prints).
+4. `npm run verify` (with `RHEA_REPO=/Users/alex/Desktop/rhea` it also checks every claim's file exists), then
+   `npm test` (the schedule, hashtag and verify tests are among them).
 
 ## Builders and ownership
 
@@ -735,7 +820,9 @@ morning Reel with `gh workflow run "Post @RunonRhea" -f date=2026-10-20 -f slot=
 - **Ten recordings shown twice instead of twenty:** recording and checking a feature against the live app is
   the expensive part; the founder's other account cycles five or six features; the second pass gets a new
   headline and caption, two weeks later, so the grid never shows the same card twice in a row. More recordings
-  replace second-pass slots when time allows.
+  replace second-pass slots when time allows. *As built:* eight of the ten second-pass slots got new recordings
+  (statements, bills, year-end, connections and the file drop, payroll as paid, sales tax, the guided demo,
+  budgets), so the month covers the product as it is now; overview-stores and month-close return once each.
 - **A phone-shaped window for feature Reels:** a 9:16 Reel watched on a phone shows a phone-width screen
   legibly; Rhea's pages fit a phone; the geometry matches the founder's other feature Reels.
 - **Deterministic screenshots instead of Playwright's video:** crisp 2× frames, the same frame every time
@@ -744,7 +831,10 @@ morning Reel with `gh workflow run "Post @RunonRhea" -f date=2026-10-20 -f slot=
   motion to tune, and the grid stays one family.
 - **Hashtags: exactly five, in the caption, from pools:** Instagram's own limit and its advice ("fewer, more
   targeted"); pools make a typo or a vendor tag impossible; rotation keeps the sets from repeating; sizes are
-  not invented. The November 2 A/B review is dropped because almost nothing shipped under it.
+  not invented. The November 2 A/B review is dropped because almost nothing shipped under it. *As built:* no
+  `#RunonRhea` in the five (no audience; the slot goes to a tag owners follow), topic tags only from the writer,
+  industry tags only for industries the post is true for, and a picker (`scripts/hashtags.mjs`) so every month's
+  sets keep the rules without hand-juggling.
 - **No alt text on Reels:** the API refuses it for Reels; the keywords go in the caption's first line and on
   the card.
 - **Memorial carousel through the morning slot, with its own marker and dates in brand.json:** the founder asked

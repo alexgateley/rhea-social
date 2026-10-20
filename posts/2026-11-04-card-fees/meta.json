@@ -14,13 +14,20 @@
   "width": 1080,
   "height": 1920,
   "layout": {
+    "type": "owner-math",
     "resultSize": 210,
+    "resultLines": 1,
     "scale": 1,
-    "contentBottom": 1744,
+    "gap": 0.5,
+    "contentBottom": 1520,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-17T01:44:35.173Z",
-  "chromium": "141.0.7390.37",
+  "renderedAt": "2026-10-20T22:25:09.105Z",
+  "chromium": "155.0.8059.85",
   "slot": "morning",
   "captionFirstLine": "Credit card processing fees for small business owners: the effective rate on small tickets.",
   "hashtags": [
@@ -32,5 +39,9 @@
   ],
   "type": "owner-math",
   "cardHash": "e9c830cfa3c154c6b044a8a5f4adbac0d8f6836c",
-  "cardHashAdoptedAt": "2026-10-20T19:05:12.947Z"
+  "cardHashAdoptedAt": "2026-10-20T19:05:12.947Z",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
 }

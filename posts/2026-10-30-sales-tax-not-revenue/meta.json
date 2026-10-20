@@ -14,13 +14,20 @@
   "width": 1080,
   "height": 1920,
   "layout": {
+    "type": "owner-math",
     "resultSize": 210,
+    "resultLines": 1,
     "scale": 1,
-    "contentBottom": 1578,
+    "gap": 0.85,
+    "contentBottom": 1518,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-17T01:41:20.839Z",
-  "chromium": "141.0.7390.37",
+  "renderedAt": "2026-10-20T22:23:23.219Z",
+  "chromium": "155.0.8059.85",
   "slot": "morning",
   "captionFirstLine": "Sales tax bookkeeping for small business owners: why collected tax is a liability, not revenue.",
   "hashtags": [
@@ -32,5 +39,9 @@
   ],
   "type": "owner-math",
   "cardHash": "0a96494c681730b3e1835ca763db563fbbedbf39",
-  "cardHashAdoptedAt": "2026-10-20T19:05:12.946Z"
+  "cardHashAdoptedAt": "2026-10-20T19:05:12.946Z",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
 }

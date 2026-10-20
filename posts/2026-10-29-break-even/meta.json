@@ -14,13 +14,20 @@
   "width": 1080,
   "height": 1920,
   "layout": {
+    "type": "owner-math",
     "resultSize": 210,
+    "resultLines": 1,
     "scale": 1,
-    "contentBottom": 1680,
+    "gap": 0.55,
+    "contentBottom": 1531,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-17T01:40:24.053Z",
-  "chromium": "141.0.7390.37",
+  "renderedAt": "2026-10-20T22:22:49.383Z",
+  "chromium": "155.0.8059.85",
   "slot": "morning",
   "captionFirstLine": "Break-even point for restaurant, coffee shop and salon owners: the sales per day where a store starts earning.",
   "hashtags": [
@@ -32,5 +39,9 @@
   ],
   "type": "owner-math",
   "cardHash": "a822110ddad3c462b9e44fa304159bab318dffec",
-  "cardHashAdoptedAt": "2026-10-20T19:05:12.946Z"
+  "cardHashAdoptedAt": "2026-10-20T19:05:12.946Z",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
 }

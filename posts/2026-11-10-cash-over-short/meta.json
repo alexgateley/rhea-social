@@ -14,13 +14,20 @@
   "width": 1080,
   "height": 1920,
   "layout": {
+    "type": "owner-math",
     "resultSize": 210,
+    "resultLines": 1,
     "scale": 1,
-    "contentBottom": 1578,
+    "gap": 0.85,
+    "contentBottom": 1518,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-17T01:49:05.131Z",
-  "chromium": "141.0.7390.37",
+  "renderedAt": "2026-10-20T22:27:22.394Z",
+  "chromium": "155.0.8059.85",
   "slot": "morning",
   "captionFirstLine": "Cash over and short for restaurant, coffee shop and salon owners: how much drawer variance is normal.",
   "hashtags": [
@@ -32,5 +39,9 @@
   ],
   "type": "owner-math",
   "cardHash": "8d6e1b096ab447f15b9d47600bd54d0d7ab4cf00",
-  "cardHashAdoptedAt": "2026-10-20T19:05:12.949Z"
+  "cardHashAdoptedAt": "2026-10-20T19:05:12.949Z",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
 }

@@ -14,13 +14,20 @@
   "width": 1080,
   "height": 1920,
   "layout": {
+    "type": "owner-math",
     "resultSize": 210,
+    "resultLines": 1,
     "scale": 1,
-    "contentBottom": 1578,
+    "gap": 0.7,
+    "contentBottom": 1517,
+    "bottomLimit": 1536,
+    "overflow": false,
+    "rightEdge": 930,
+    "hookTop": 236,
     "hookLines": 2
   },
-  "renderedAt": "2026-10-17T01:45:33.202Z",
-  "chromium": "141.0.7390.37",
+  "renderedAt": "2026-10-20T22:25:41.246Z",
+  "chromium": "155.0.8059.85",
   "slot": "morning",
   "captionFirstLine": "Card processing rates for multi-unit restaurant and franchise owners: 2.9% vs 2.3% on $600,000 a year.",
   "hashtags": [
@@ -32,5 +39,9 @@
   ],
   "type": "owner-math",
   "cardHash": "02c05bfb101dd00cbd4b5f59213ef97dcb8f1901",
-  "cardHashAdoptedAt": "2026-10-20T19:05:12.947Z"
+  "cardHashAdoptedAt": "2026-10-20T19:05:12.947Z",
+  "audio": {
+    "bed": "render/audio.mjs",
+    "levelDb": -28
+  }
 }

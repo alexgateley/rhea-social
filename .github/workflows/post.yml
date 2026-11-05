@@ -156,6 +156,8 @@ jobs:
           if [ -s new-token.txt ] && [ -n "$GH_TOKEN" ]; then
             gh secret set IG_ACCESS_TOKEN --repo "$GITHUB_REPOSITORY" < new-token.txt
             echo "Stored the refreshed token"
+            rm -f new-token.txt
+            sh scripts/record-token-expiry.sh || echo "::warning::Could not record the token date"
           elif [ -s new-token.txt ]; then
             echo "::warning::Token refreshed but GH_PAT is not set, so it could not be stored. The stored IG_ACCESS_TOKEN still expires 60 days after it was generated: add GH_PAT (sh scripts/setup-secrets.sh) or regenerate the token in the Meta dashboard before then."
           fi
